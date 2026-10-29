@@ -13,9 +13,9 @@ const base = {
  publisher:'InnerAnimalMedia',priceUsd:null,minCmsSchema:'2' as const,
  release:{status:'preview' as const,sha256:null,storageKey:null},
 };
-function product(slug:string,version:string,name:string,summary:string,category:ThemeCategory,tags:string[],pages:string[],colorway:ThemeRecord['colorway'],demo=true): ThemeRecord {
+function product(slug:string,version:string,name:string,summary:string,category:ThemeCategory,tags:string[],pages:string[],colorway:ThemeRecord['colorway'],hasExistingPreview=true): ThemeRecord {
  return {...base,slug,version,name,summary,category,tags,pages,colorway,
- sku:'iam.theme.'+slug,previewUrl:demo?'https://agentsam.inneranimalmedia.com/themes/'+slug+'/demo/':null};
+ sku:'iam.theme.'+slug,previewUrl:hasExistingPreview?'https://agentsam.inneranimalmedia.com/themes/'+slug+'/demo/':null};
 }
 /**
  * Source: AgentSam SDK's original eight-theme gallery, plus Plain Jane Journal.

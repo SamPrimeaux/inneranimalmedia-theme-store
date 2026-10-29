@@ -9,6 +9,7 @@ import { mkdtemp, readdir, lstat, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, relative, sep } from 'node:path';
 import { createHash } from 'node:crypto';
+import { npmChildEnvironment } from './npm-child-environment.mjs';
 
 const product = {
   slug: 'plain-jane',
@@ -24,7 +25,7 @@ function run(bin, args, cwd = process.cwd(), capture = false) {
   return new Promise((resolve, reject) => {
     const child = spawn(bin, args, {
       cwd,
-      env: process.env,
+      env: bin === 'npm' ? npmChildEnvironment(process.env) : process.env,
       stdio: capture ? ['ignore', 'pipe', 'inherit'] : 'inherit',
     });
     let output = '';

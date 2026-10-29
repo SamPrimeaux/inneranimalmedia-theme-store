@@ -26,6 +26,46 @@ export default {
       if (method !== 'GET') return missing('method_not_allowed', 405);
       return response({ ok: true, schema: 'iam.theme-catalog.v1', products: themes.map(publicTheme) });
     }
+    // Versioned, fully functional theme-package previews served from private R2.
+    // R2 files: theme-packages/<slug>/<version>/preview/<relative-file>.
+    const demo = /^\/theme-packages\/([a-z0-9-]+)\/([0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.-]+)?)\/preview\/?(.*)$/.exec(url.pathname);
+    if (demo) {
+      if (method !== 'GET' && method !== 'HEAD') return missing('method_not_allowed', 405);
+      const [, slug, version, relative] = demo;
+      const theme = findTheme(slug);
+      if (!theme || version !== theme.version) return missing('preview_not_found');
+      const segments = relative.split('/').filter(Boolean);
+      if (segments.some(segment => segment === '..' || segment.startsWith('.') || !/^[a-zA-Z0-9._-]+$/.test(segment))) return missing('invalid_preview_path', 400);
+      const file = segments.length === 0 || relative.endsWith('/') ? [...segments, 'index.html'].join('/') : segments.join('/');
+      const keyRoot = 'theme-packages/' + slug + '/' + version + '/preview/';
+      const types: Record<string, string> = {
+        html: 'text/html; charset=utf-8', js: 'text/javascript; charset=utf-8',
+        css: 'text/css; charset=utf-8', json: 'application/json',
+        svg: 'image/svg+xml', png: 'image/png', jpg: 'image/jpeg',
+        jpeg: 'image/jpeg', webp: 'image/webp', avif: 'image/avif',
+        ico: 'image/x-icon', woff: 'font/woff', woff2: 'font/woff2',
+      };
+      try {
+        let object = await env.THEME_PACKAGES.get(keyRoot + file);
+        let contentFile = file;
+        // Support a client-side router only if the requested route is not a static file.
+        if (!object && !segments.at(-1)?.includes('.')) {
+          object = await env.THEME_PACKAGES.get(keyRoot + 'index.html');
+          contentFile = 'index.html';
+        }
+        if (!object) return missing('preview_asset_missing');
+        const ext = contentFile.split('.').at(-1)?.toLowerCase() ?? '';
+        const headers = new Headers({
+          'content-type': types[ext] ?? 'application/octet-stream',
+          'cache-control': ext === 'html' ? 'public, max-age=60' : 'public, max-age=31536000, immutable',
+          'x-content-type-options': 'nosniff',
+          'content-security-policy': "frame-ancestors 'self'",
+        });
+        return new Response(method === 'HEAD' ? null : object.body, {status: 200, headers});
+      } catch {
+        return missing('preview_storage_unavailable', 503);
+      }
+    }
     const match = /^\/api\/themes\/([^/]+)(?:\/([^/]+)\/(manifest\.json|download))?$/.exec(url.pathname);
     if (match) {
       if (method !== 'GET' && method !== 'HEAD') return missing('method_not_allowed', 405);

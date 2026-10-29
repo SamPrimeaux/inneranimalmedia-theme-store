@@ -17,3 +17,4 @@ jobs:
       - run: npm run check
       - run: npm run build
       - run: node --check bin/iam-theme.mjs
+      - run: node --check scripts/publish-theme-packages.mjs

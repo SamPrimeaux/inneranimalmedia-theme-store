@@ -7,7 +7,10 @@
     "directory": "./dist",
     "binding": "ASSETS",
     "not_found_handling": "single-page-application",
-    "run_worker_first": ["/api/*", "/theme-packages/*"]
+    "run_worker_first": [
+      "/api/*",
+      "/theme-packages/*"
+    ]
   },
   "r2_buckets": [
     {
@@ -15,5 +18,14 @@
       "bucket_name": "theme-store"
     }
   ],
-  "observability": { "enabled": true }
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "inneranimalmedia-business",
+      "database_id": "cf87b717-d4e2-4cf8-bab0-a81268e32d49"
+    }
+  ]
 }

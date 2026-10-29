@@ -1,0 +1,38 @@
+export type ThemeCategory = 'Commerce' | 'Nonprofit' | 'Editorial' | 'Services' | 'Portfolio';
+export type ReleaseState = 'preview' | 'published';
+export type ThemeRecord = {
+ slug: string; sku: string; name: string; summary: string;
+ category: ThemeCategory; tags: string[]; pages: string[];
+ colorway: 'wine' | 'violet' | 'paper'; version: string;
+ publisher: string; priceUsd: number | null; demoUrl: string | null;
+ minCmsSchema: '2';
+ release: {status: ReleaseState; sha256: string | null; storageKey: string | null};
+};
+const base = {
+ publisher:'InnerAnimalMedia',priceUsd:null,minCmsSchema:'2' as const,
+ release:{status:'preview' as const,sha256:null,storageKey:null},
+};
+function product(slug:string,version:string,name:string,summary:string,category:ThemeCategory,tags:string[],pages:string[],colorway:ThemeRecord['colorway'],demo=true): ThemeRecord {
+ return {...base,slug,version,name,summary,category,tags,pages,colorway,
+ sku:'iam.theme.'+slug,demoUrl:demo?'https://agentsam.inneranimalmedia.com/themes/'+slug+'/demo/':null};
+}
+/**
+ * Source: AgentSam SDK's original eight-theme gallery, plus Plain Jane Journal.
+ * The catalog is a product listing, NOT a tenant, site, installation or CMS registry.
+ * Versions reflect known package versions pending verified promotion.
+ */
+export const themes:ThemeRecord[]=[
+ product('cypress','2.6.12','Cypress','A welcoming community website built for events, groups, giving and stories that bring people together.','Nonprofit',['Community','Events','Groups','Giving'],['Home','Visit','Events','Groups','Mission','Give'],'paper'),
+ product('violet','2.6.13','Violet','Bold campaign storytelling with impact proof, donation moments and clear ways to participate.','Nonprofit',['Campaigns','Impact','Donations','Stories'],['Home','Campaigns','Stories','Impact','Get involved','Donate'],'violet'),
+ product('grove','2.6.12','Grove','A tactile, gallery-led home-services website built around finished projects and confident quotes.','Services',['Home services','Gallery','Projects','Quotes'],['Home','Services','Our work','About','Contact'],'paper'),
+ product('ember','2.6.12','Ember','Expressive e-commerce with bold product discovery and memorable shopping moments.','Commerce',['Products','Collections','Cart','Commerce'],['Home','Shop','Collection','Product','About','Contact'],'wine'),
+ product('forge','2.6.12','Forge','A direct local-services site designed to turn trust and proof into calls and inquiries.','Services',['Local services','Leads','Contact','Trust'],['Home','Services','Projects','Reviews','Contact'],'wine'),
+ product('harbor','2.6.12','Harbor','Measured and reassuring professional-service layouts for considered decisions.','Services',['Professional','Services','About','Trust'],['Home','Expertise','About','Insights','Contact'],'paper'),
+ product('summit','2.6.12','Summit','Quiet, compelling portfolio pages with editorial pacing and considered work galleries.','Portfolio',['Portfolio','Case studies','Gallery','Story'],['Home','Work','Project','About','Contact'],'paper'),
+ product('resolve','2.6.13','Resolve','A cinematic fashion storefront with curated collections, shoppable editorial and a striking visual rhythm.','Commerce',['Fashion','Products','Collections','Editorial'],['Home','Shop','Product','Collection','Editorial','About'],'wine'),
+ product('plain-jane','0.1.0','Plain Jane Journal','A clean editorial starter for thoughtful writing, photography and personal stories.','Editorial',['Blog','Articles','Photography','Journal'],['Journal','Article','About','Photography','Contact','404'],'paper',false),
+];
+export function findTheme(slug:string){return themes.find(theme=>theme.slug===slug)}
+export function publicTheme(theme:ThemeRecord){
+ return {...theme,downloadReady:theme.release.status==='published'&&!!theme.release.storageKey&&!!theme.release.sha256}
+}

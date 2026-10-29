@@ -1,0 +1,32 @@
+{
+  "name": "@inneranimalmedia/theme-store",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Canonical InnerAnimalMedia theme marketplace, Cloudflare Worker and R2 artifact delivery",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "dev": "vite",
+    "check": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "worker:dev": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260925.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.5.0",
+    "typescript": "~5.8.3",
+    "vite": "^6.1.0",
+    "wrangler": "^4.0.0"
+  },
+  "bin": { "iam-theme": "./bin/iam-theme.mjs" }
+}

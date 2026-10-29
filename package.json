@@ -4,14 +4,18 @@
   "private": true,
   "description": "Canonical InnerAnimalMedia theme marketplace, Cloudflare Worker and R2 artifact delivery",
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "vite",
     "check": "tsc --noEmit",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "worker:dev": "npm run build && wrangler dev",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "publish:previews": "node scripts/publish-theme-packages.mjs",
+    "deploy:cloudflare": "node scripts/publish-theme-packages.mjs --deploy"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
@@ -28,5 +32,7 @@
     "vite": "^6.1.0",
     "wrangler": "^4.0.0"
   },
-  "bin": { "iam-theme": "./bin/iam-theme.mjs" }
+  "bin": {
+    "iam-theme": "./bin/iam-theme.mjs"
+  }
 }

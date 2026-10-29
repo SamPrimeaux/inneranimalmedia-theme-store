@@ -31,7 +31,8 @@ export const themes:ThemeRecord[]=[
  product('harbor','2.6.12','Harbor','Measured and reassuring professional-service layouts for considered decisions.','Services',['Professional','Services','About','Trust'],['Home','Expertise','About','Insights','Contact'],'paper'),
  product('summit','2.6.12','Summit','Quiet, compelling portfolio pages with editorial pacing and considered work galleries.','Portfolio',['Portfolio','Case studies','Gallery','Story'],['Home','Work','Project','About','Contact'],'paper'),
  product('resolve','2.6.13','Resolve','A cinematic fashion storefront with curated collections, shoppable editorial and a striking visual rhythm.','Commerce',['Fashion','Products','Collections','Editorial'],['Home','Shop','Product','Collection','Editorial','About'],'wine'),
- {...product('plain-jane','0.1.0','Plain Jane Journal','A clean editorial starter for thoughtful writing, photography and personal stories.','Editorial',['Blog','Articles','Photography','Journal'],['Journal','Article','About','Photography','Contact','404'],'paper',false),
+ {...product('plain-jane','0.1.0','Plain Jane Journal','A clean editorial starter for thoughtful writing, photography and personal stories.','Editorial',['Blog','Articles','Photography','Journal'],['Journal','Article','About','Photography','Contact','404'],'paper',true),
+   demoUrl:'https://themes.inneranimalmedia.com/theme-packages/plain-jane/0.1.0/preview/',
    editorial:{
      eyebrow:'An editorial home for original ideas',
      headline:'A little more room for the story.',

@@ -6,12 +6,12 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    "run_worker_first": ["/api/*", "/demos/*"]
+    "run_worker_first": ["/api/*", "/theme-packages/*"]
   },
   "r2_buckets": [
     {
       "binding": "THEME_PACKAGES",
-      "bucket_name": "iam-theme-packages"
+      "bucket_name": "theme-store"
     }
   ],
   "observability": { "enabled": true }

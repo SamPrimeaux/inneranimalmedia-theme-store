@@ -26,18 +26,18 @@ export default {
       if (method !== 'GET') return missing('method_not_allowed', 405);
       return response({ ok: true, schema: 'iam.theme-catalog.v1', products: themes.map(publicTheme) });
     }
-    // Independently hosted, interactive static demos. No SDK-hosted theme URLs required.
-    // R2 files live at demos/<slug>/<version>/<relative-file>.
-    const demo = /^\/demos\/([a-z0-9-]+)\/([0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.-]+)?)\/?(.*)$/.exec(url.pathname);
+    // Versioned, fully functional theme-package previews served from private R2.
+    // R2 files: theme-packages/<slug>/<version>/preview/<relative-file>.
+    const demo = /^\/theme-packages\/([a-z0-9-]+)\/([0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.-]+)?)\/preview\/?(.*)$/.exec(url.pathname);
     if (demo) {
       if (method !== 'GET' && method !== 'HEAD') return missing('method_not_allowed', 405);
       const [, slug, version, relative] = demo;
       const theme = findTheme(slug);
-      if (!theme || version !== theme.version) return missing('demo_not_found');
+      if (!theme || version !== theme.version) return missing('preview_not_found');
       const segments = relative.split('/').filter(Boolean);
-      if (segments.some(segment => segment === '..' || segment.startsWith('.') || !/^[a-zA-Z0-9._-]+$/.test(segment))) return missing('invalid_demo_path', 400);
+      if (segments.some(segment => segment === '..' || segment.startsWith('.') || !/^[a-zA-Z0-9._-]+$/.test(segment))) return missing('invalid_preview_path', 400);
       const file = segments.length === 0 || relative.endsWith('/') ? [...segments, 'index.html'].join('/') : segments.join('/');
-      const keyRoot = 'demos/' + slug + '/' + version + '/';
+      const keyRoot = 'theme-packages/' + slug + '/' + version + '/preview/';
       const types: Record<string, string> = {
         html: 'text/html; charset=utf-8', js: 'text/javascript; charset=utf-8',
         css: 'text/css; charset=utf-8', json: 'application/json',
@@ -53,7 +53,7 @@ export default {
           object = await env.THEME_PACKAGES.get(keyRoot + 'index.html');
           contentFile = 'index.html';
         }
-        if (!object) return missing('demo_asset_missing');
+        if (!object) return missing('preview_asset_missing');
         const ext = contentFile.split('.').at(-1)?.toLowerCase() ?? '';
         const headers = new Headers({
           'content-type': types[ext] ?? 'application/octet-stream',
@@ -63,7 +63,7 @@ export default {
         });
         return new Response(method === 'HEAD' ? null : object.body, {status: 200, headers});
       } catch {
-        return missing('demo_storage_unavailable', 503);
+        return missing('preview_storage_unavailable', 503);
       }
     }
     const match = /^\/api\/themes\/([^/]+)(?:\/([^/]+)\/(manifest\.json|download))?$/.exec(url.pathname);

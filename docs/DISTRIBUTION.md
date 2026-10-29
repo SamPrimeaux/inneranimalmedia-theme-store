@@ -4,7 +4,7 @@
 
 The existing AgentSam eight-theme gallery lives in **agentsam-sdk/apps/frontend/public/site/themes/**; authored catalog data is at **agentsam-sdk/apps/theme-gallery-preview/data/catalog.json**. The standalone localhost 4324 process was independently traced to **inneranimalmedia-brand-guide/studio** (an unrelated private brand research tool). Use its visual language by deliberate design, not by importing private editor logic or content into this public storefront.
 
-Source/demo assets have to be moved to this product's R2-managed release namespace before the old SDK-hosted paths can be retired. Do **not** remove original sources until every migrated route, asset, and public reference returns success. Current demoUrl fields are temporary compatibility URLs, transparently declared as such.
+Source/demo assets have to be moved to this product's R2-managed release namespace before the old SDK-hosted paths can be retired. Do **not** remove original sources until every migrated route, asset, and public reference returns success. Current previewUrl fields are temporary compatibility URLs, transparently declared as such.
 
 ## Explicit ownership
 
@@ -62,7 +62,7 @@ A stable CLI can run `iam-theme catalog`, `iam-theme inspect resolve` and `iam-t
 
 ## Independent demo hosting (Theme Store Worker)
 
-Preview artifact key: `demos/<slug>/<version>/<relative-file>` within `THEME_PACKAGES` R2. The Worker now serves `GET/HEAD /demos/:slug/:version/*` with HTML route fallback, explicit MIME types and immutable caching for hashed assets. Only known SKU/version pairs can be requested. Uploaded demos must be reviewed; never publish secrets or site/customer data. Build with base path `/demos/<slug>/<version>/`, upload actual built files, test nested routes and interactive navigation at desktop/tablet/mobile sizes, then update the catalog demo URL.
+Preview artifact key: `theme-packages/<slug>/<version>/preview/<relative-file>` within `THEME_PACKAGES` R2. The Worker now serves `GET/HEAD /theme-packages/:slug/:version/preview/*` with HTML route fallback, explicit MIME types and immutable caching for hashed assets. Only known SKU/version pairs can be requested. Uploaded demos must be reviewed; never publish secrets or site/customer data. Build with base path `/theme-packages/<slug>/<version>/preview/`, upload actual built files, test nested routes and interactive navigation at desktop/tablet/mobile sizes, then update the catalog demo URL.
 
 The original blog running at the domain root is a separate deployment. **Do not replace the root deployment** until Plain Jane's actual compiled site is verified at its permanent demo path. The product card uses original Plain Jane SVG artwork but does not pretend that the R2 demo is already live.
 

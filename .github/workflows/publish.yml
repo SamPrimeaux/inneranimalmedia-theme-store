@@ -1,0 +1,79 @@
+name: Publish Theme Store
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: theme-store-production
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Require deploy credentials
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "Missing CLOUDFLARE_API_TOKEN"; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "Missing CLOUDFLARE_ACCOUNT_ID"; exit 1; }
+      - name: Checkout store source
+        uses: actions/checkout@v4
+        with:
+          path: theme-store
+      - name: Checkout reviewed Plain Jane package source
+        uses: actions/checkout@v4
+        with:
+          repository: SamPrimeaux/inneranimalmedia-blog-template
+          ref: e7d952618d6e0fd8b7dc76bb589286592d823b88
+          path: plain-jane
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build original journal for versioned live preview
+        working-directory: plain-jane
+        run: |
+          npm ci --no-audit --no-fund
+          npm run lint
+          npm run build -- --base /theme-packages/plain-jane/0.1.0/preview/
+          test -f dist/index.html
+          test -f dist/icons/app-logo.svg
+          test -f dist/images/cover-slow-travel.svg
+          grep -q '/theme-packages/plain-jane/0.1.0/preview/' dist/index.html
+      - name: Build and verify Theme Store
+        working-directory: theme-store
+        run: |
+          npm install --no-audit --no-fund
+          npm run check
+          npm run build
+          node --check bin/iam-theme.mjs
+      - name: Upload compiled Plain Jane preview to private R2
+        working-directory: theme-store
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="../plain-jane/dist"
+          while IFS= read -r -d '' file; do
+            rel="${file#"$root"/}"
+            case "${rel##*.}" in
+              html) mime="text/html" ;;
+              js) mime="text/javascript" ;;
+              css) mime="text/css" ;;
+              svg) mime="image/svg+xml" ;;
+              png) mime="image/png" ;;
+              webp) mime="image/webp" ;;
+              json) mime="application/json" ;;
+              *) mime="application/octet-stream" ;;
+            esac
+            npx wrangler r2 object put "theme-store/theme-packages/plain-jane/0.1.0/preview/$rel" --remote --file "$file" --content-type "$mime"
+          done < <(find "$root" -type f -print0)
+      - name: Deploy Worker with R2 binding
+        working-directory: theme-store
+        run: npx wrangler deploy
+      - name: Check live storefront and journal
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL "https://themes.inneranimalmedia.com/api/catalog" | grep -q 'plain-jane'
+          curl -fsSL "https://themes.inneranimalmedia.com/theme-packages/plain-jane/0.1.0/preview/" | grep -q '<html'
+          curl -fsSL "https://themes.inneranimalmedia.com/theme-packages/plain-jane/0.1.0/preview/about" | grep -q '<html'

@@ -36,12 +36,13 @@ See [the distribution and installation contract](docs/DISTRIBUTION.md) before en
 **Current catalog:** Resolve, Violet, and Plain Jane Journal are catalog examples in preview state. Package downloads and direct one-click installation are intentionally gated until real v2-compatible release artifacts and AgentSam's receiving flow pass verification.
 
 
-## Self-hosted preview publishing
+## Versioned theme-packages and live previews
 
-The Worker now serves interactive static live previews from the same private R2 bucket at `/live previews/<slug>/<version>/`, without depending on AgentSam SDK-hosted preview routes. Upload a reviewed, version-pinned built site under `live previews/<slug>/<version>/` and verify its root HTML, routed pages, JS, styles and images before replacing a product's temporary `previewUrl` in `src/catalog.ts`. Build live previews with their matching Vite base prefix so browser asset requests stay inside their product directory.
+Each theme-package is a product with independently maintained source and immutable versioned release artifacts. The storefront operates from this repository; customer CMS data is never stored here.
 
-**Plain Jane Journal is not yet migrated:** its original blog currently occupies `themes.inneranimalmedia.com`. Keep the deployed blog and its source-backed preview archive intact until the preview files have been uploaded to R2 and verified under `/live previews/plain-jane/0.1.0/`. Only then switch this Worker to serve the Theme Store at the root. Product listing and R2 preview readiness are intentionally separate; no misleading installation or preview success states.
+A production preview is a **real compiled, navigable website**. The Worker resolves files in private R2 at `theme-packages/<slug>/<version>/preview/<relative-file>` and serves them at `/theme-packages/<slug>/<version>/preview/`. Products are browsable even before installable ZIPs are approved; only tested releases can be downloaded or installed.
 
+Plain Jane's original source stays in `inneranimalmedia-blog-template`, not a second storefront. Its existing root deployment should be replaced only after the publication workflow uploads and checks the versioned live preview. The other eight themes retain legacy AgentSam preview URLs until their actual compiled assets move to this R2 namespace.
 
 ### Production launch / Cloudflare handoff
 

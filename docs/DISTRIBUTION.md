@@ -58,3 +58,12 @@ A stable CLI can run `iam-theme catalog`, `iam-theme inspect resolve` and `iam-t
 - [ ] Preview and public cards work without AgentSam SDK asset hosts.
 - [ ] Rollback, permissions, pricing/entitlements, and safe ZIP extraction verified.
 - [ ] Only then remove the duplicate SDK theme showroom assets (not required runtime rendering libraries).
+
+
+## Independent demo hosting (Theme Store Worker)
+
+Preview artifact key: `demos/<slug>/<version>/<relative-file>` within `THEME_PACKAGES` R2. The Worker now serves `GET/HEAD /demos/:slug/:version/*` with HTML route fallback, explicit MIME types and immutable caching for hashed assets. Only known SKU/version pairs can be requested. Uploaded demos must be reviewed; never publish secrets or site/customer data. Build with base path `/demos/<slug>/<version>/`, upload actual built files, test nested routes and interactive navigation at desktop/tablet/mobile sizes, then update the catalog demo URL.
+
+The original blog running at the domain root is a separate deployment. **Do not replace the root deployment** until Plain Jane's actual compiled site is verified at its permanent demo path. The product card uses original Plain Jane SVG artwork but does not pretend that the R2 demo is already live.
+
+The Theme Store itself remains completely operable using its own Worker, static product catalog and R2 bindings. CMS v2 is a compatibility specification for an installable artifact, *not* a runtime service dependency for browsing, previews or downloads.

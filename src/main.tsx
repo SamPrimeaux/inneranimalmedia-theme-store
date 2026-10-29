@@ -8,7 +8,7 @@ type Device = 'desktop' | 'tablet' | 'mobile';
 type View = { kind: 'gallery' } | { kind: 'detail'; slug: string };
 const categories = ['All themes', ...Array.from(new Set(themes.map((theme) => theme.category)))];
 const categoryLabels: Record<string, string> = { All: 'All themes', Commerce: 'Commerce / fashion', Nonprofit: 'Nonprofit & campaigns', Editorial: 'Editorial / journal' };
-const cardImage = (slug: string) => '/previews/' + slug + '.webp';
+const cardImage = (slug: string) => '/previews/' + slug + (slug === 'plain-jane' ? '.svg' : '.webp');
 function initialView(): View {
   const match = location.pathname.match(/^\/themes\/([a-z0-9-]+)\/?$/);
   return match ? {kind:'detail',slug:match[1]} : {kind:'gallery'};
@@ -68,7 +68,7 @@ function App() {
             <button className={'theme-art '+t.colorway} onClick={()=>navigate({kind:'detail',slug:t.slug})} aria-label={'Preview '+t.name}>
               <div className="theme-art-image" style={{backgroundImage:'url('+cardImage(t.slug)+')'}}/>
               <span className="art-fallback" aria-hidden="true"><span>{t.name.toUpperCase()}</span><strong>{t.summary.split(' ').slice(0,4).join(' ')}</strong></span>
-              <span className="art-preview"><Eye size={16}/> Preview theme</span>
+              <span className="art-preview"><Eye size={16}/> Explore theme</span>
             </button>
             <div className="card-bottom"><div className="card-names"><span className="theme-category">{t.category}</span><h3>{t.name}</h3><p>{t.summary}</p><div className="tags">{t.tags.slice(0,3).map(tag=><span key={tag}>{tag}</span>)}</div></div>
               <button className="square-arrow" aria-label={'View '+t.name} onClick={()=>navigate({kind:'detail',slug:t.slug})}><ArrowRight size={19}/></button>
@@ -89,6 +89,15 @@ function App() {
         <iframe title={selected.name+' live interactive theme demo'} src={selected.demoUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade"/>:
         <div className={'preview-missing '+selected.colorway}><h2>{selected.name}</h2><p>Interactive demo is being prepared. The package is available in the catalog for inspection.</p></div>
       }</div></div></section>
+      <section className="shell product-story">
+        <div className="story-label"><span className="eyebrow">{selected.editorial?.eyebrow ?? 'Behind the design'}</span><span>THEME NO. {String(themes.indexOf(selected) + 1).padStart(2, '0')} / {selected.category.toUpperCase()}</span></div>
+        <div className="story-layout"><div><h2>{selected.editorial?.headline ?? 'Made to explore. Built to become yours.'}</h2><p>{selected.editorial?.body ?? selected.summary + ' Begin with an existing complete website, then replace its copy, imagery and settings with your own brand through the authorized CMS workflow.'}</p></div>
+          <aside className="story-spec"><h3>What you can explore</h3><p>Navigate the actual demo, switch viewport widths and inspect the included page types before choosing a draft.</p>
+            <dl><div><dt>Design category</dt><dd>{selected.category}</dd></div><div><dt>Starter pages</dt><dd>{selected.pages.length}</dd></div><div><dt>Latest catalog version</dt><dd>{selected.version}</dd></div><div><dt>Installation</dt><dd>Private draft after verification</dd></div></dl>
+          </aside>
+        </div>
+        {selected.editorial?.notes && <div className="story-notes">{selected.editorial.notes.map((note,index)=><div key={note}><span>0{index+1}</span><p>{note}</p></div>)}</div>}
+      </section>
       <section className="shell included"><div><div className="eyebrow">Inside the theme</div><h2>Ready to make your own.</h2><p>Includes the starter layout and interaction patterns shown in the demo. Connecting content and installing to a site are separate actions.</p></div><div className="included-content"><h3>Page templates</h3><div className="page-tags">{selected.pages.map(p=><span key={p}><Check size={14}/>{p}</span>)}</div><div className="compat-note"><ShieldCheck size={20}/><div><b>CMS v2 target</b><span>Theme Store supplies the release. AgentSam handles site permissions, draft creation and editing.</span></div></div></div></section>
       <div className="sticky-detail-cta"><div><strong>{selected.name}</strong><span>by {selected.publisher}</span></div><div><button className="light-button" onClick={()=>document.getElementById('live-preview')?.scrollIntoView({behavior:'smooth'})}>View demo</button><button className="primary-button" onClick={()=>setInstallOpen(true)}>Add theme <ArrowRight size={16}/></button></div></div>
     </main> : <main className="shell no-results"><h1>Theme not found</h1><button onClick={()=>navigate({kind:'gallery'})}>Back to themes</button></main>}

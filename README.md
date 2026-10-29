@@ -28,9 +28,16 @@ Cloudflare prerequisites: create a private R2 bucket named `iam-theme-packages` 
 
 - **This repo:** `src/catalog.ts` metadata and release contracts; `src/main.tsx` theme storefront; `src/worker.ts` catalog/download API; `bin/iam-theme.mjs` CLI.
 - **AgentSam SDK / Local Studio:** authenticates user, lists authorized sites, handles add-to-draft and installation through site-scoped CMS v2 APIs; no duplicate `themeProjectStore`.
-- **`inneranimalmedia-cms`:** canonical CMS v2 schema and installation migrations; theme ZIP seed files target that schema.
+- **CMS v2 compatibility contract:** ZIP install manifests target the current CMS v2 schema. The Theme Store does not call a separate CMS repository or load another site's database to render its catalog or demos; AgentSam's receiving installer is responsible for matching the declared schema.
 - **R2:** stores immutable artifacts and previews, not Git source code or editable site data.
 
 See [the distribution and installation contract](docs/DISTRIBUTION.md) before enabling downloads or connecting the production add-to-draft handler.
 
 **Current catalog:** Resolve, Violet, and Plain Jane Journal are catalog examples in preview state. Package downloads and direct one-click installation are intentionally gated until real v2-compatible release artifacts and AgentSam's receiving flow pass verification.
+
+
+## Self-hosted demo publishing
+
+The Worker now serves interactive static demos from the same private R2 bucket at `/demos/<slug>/<version>/`, without depending on AgentSam SDK-hosted demo routes. Upload a reviewed, version-pinned built site under `demos/<slug>/<version>/` and verify its root HTML, routed pages, JS, styles and images before replacing a product's temporary `demoUrl` in `src/catalog.ts`. Build demos with their matching Vite base prefix so browser asset requests stay inside their product directory.
+
+**Plain Jane Journal is not yet migrated:** its original blog currently occupies `themes.inneranimalmedia.com`. Keep the deployed blog and its source-backed preview archive intact until the demo files have been uploaded to R2 and verified under `/demos/plain-jane/0.1.0/`. Only then switch this Worker to serve the Theme Store at the root. Product listing and R2 demo readiness are intentionally separate; no misleading installation or demo success states.

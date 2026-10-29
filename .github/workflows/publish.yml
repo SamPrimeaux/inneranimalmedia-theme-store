@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: SamPrimeaux/inneranimalmedia-blog-template
-          ref: e7d952618d6e0fd8b7dc76bb589286592d823b88
+          ref: 50945520eaf9aeb909fbd4d675a890285ba7b111
           path: plain-jane
       - uses: actions/setup-node@v4
         with:

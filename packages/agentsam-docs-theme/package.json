@@ -1,0 +1,24 @@
+{
+  "name": "@inneranimalmedia/agentsam-docs-theme",
+  "version": "2.6.13",
+  "description": "Violet docs skin tokens for AgentSam public guides (Systematic Autonomous Machinery).",
+  "exports": {
+    ".": "./tokens.css",
+    "./tokens.css": "./tokens.css",
+    "./docs-layout.css": "./docs-layout.css"
+  },
+  "files": [
+    "tokens.css",
+    "docs-layout.css",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamPrimeaux/agentsam-sdk.git",
+    "directory": "packages/agentsam-docs-theme"
+  },
+  "license": "FSL-1.1-MIT"
+}

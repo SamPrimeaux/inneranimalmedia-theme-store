@@ -19,3 +19,5 @@ jobs:
       - run: node --check bin/iam-theme.mjs
       - run: node --check scripts/publish-theme-packages.mjs
       - run: node --test tests/npm-child-environment.test.mjs
+      - name: Test imported theme source packages
+        run: find packages -path '*/test/*.test.mjs' -type f -print0 | xargs -0 node --test

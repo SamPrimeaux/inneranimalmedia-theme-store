@@ -26,6 +26,28 @@
   },
   "license": "FSL-1.1-MIT",
   "agentsam": {
+    "store": {
+      "name": "Forge",
+      "summary": "A direct local-services site designed to turn trust and proof into calls and inquiries.",
+      "category": "Services",
+      "tags": [
+        "Local services",
+        "Leads",
+        "Contact",
+        "Trust"
+      ],
+      "pages": [
+        "Home",
+        "Services",
+        "Projects",
+        "Reviews",
+        "Contact"
+      ],
+      "colorway": "wine",
+      "sortOrder": 4,
+      "cardImage": "/previews/forge.webp",
+      "legacyPreviewUrl": "https://agentsam.inneranimalmedia.com/themes/forge/demo/"
+    },
     "kind": "theme",
     "slug": "forge",
     "installable": true,

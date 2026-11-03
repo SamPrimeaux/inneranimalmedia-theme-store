@@ -20,6 +20,39 @@
   "engines": {"node": ">=22 <25"},
   "license": "UNLICENSED",
   "agentsam": {
+    "store": {
+      "name": "Plain Jane Journal",
+      "summary": "A clean editorial starter for thoughtful writing, photography and personal stories.",
+      "category": "Editorial",
+      "tags": [
+        "Blog",
+        "Articles",
+        "Photography",
+        "Journal"
+      ],
+      "pages": [
+        "Journal",
+        "Article",
+        "About",
+        "Photography",
+        "Contact",
+        "404"
+      ],
+      "colorway": "paper",
+      "sortOrder": 8,
+      "cardImage": "/previews/plain-jane.svg",
+      "previewBuild": "external",
+      "editorial": {
+        "eyebrow": "An editorial home for original ideas",
+        "headline": "A little more room for the story.",
+        "body": "Plain Jane Journal is built around generous typography, thoughtful pacing and quiet details. The original starter includes an essay index, article layouts, photography gallery and the essential supporting pages. It is the same source-led template previously hosted at this domain, now treated as a standalone product rather than the Theme Store itself.",
+        "notes": [
+          "Editorial home and individual story layouts are designed to be read, not just glanced at.",
+          "Photography pages and image galleries give visual work its own space.",
+          "Page metadata, original source assets and CMS section definitions are included in the source-backed preview archive."
+        ]
+      }
+    },
     "kind": "theme",
     "slug": "plain-jane",
     "family": "editorial-blog",

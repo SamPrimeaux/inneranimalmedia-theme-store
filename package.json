@@ -8,14 +8,16 @@
     "node": ">=22"
   },
   "scripts": {
-    "dev": "vite",
-    "check": "tsc --noEmit",
-    "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "worker:dev": "npm run build && wrangler dev",
     "deploy": "npm run build && wrangler deploy",
     "publish:previews": "node scripts/publish-theme-packages.mjs",
-    "deploy:cloudflare": "node scripts/publish-theme-packages.mjs --deploy"
+    "deploy:cloudflare": "node scripts/publish-theme-packages.mjs --deploy",
+    "catalog": "node scripts/build-catalog.mjs",
+    "dev": "npm run catalog && vite",
+    "check": "npm run catalog && tsc --noEmit",
+    "build": "npm run catalog && tsc --noEmit && vite build",
+    "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

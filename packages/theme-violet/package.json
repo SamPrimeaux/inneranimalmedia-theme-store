@@ -26,6 +26,29 @@
   },
   "license": "FSL-1.1-MIT",
   "agentsam": {
+    "store": {
+      "name": "Violet",
+      "summary": "Bold campaign storytelling with impact proof, donation moments and clear ways to participate.",
+      "category": "Nonprofit",
+      "tags": [
+        "Campaigns",
+        "Impact",
+        "Donations",
+        "Stories"
+      ],
+      "pages": [
+        "Home",
+        "Campaigns",
+        "Stories",
+        "Impact",
+        "Get involved",
+        "Donate"
+      ],
+      "colorway": "violet",
+      "sortOrder": 1,
+      "cardImage": "/previews/violet.webp",
+      "legacyPreviewUrl": "https://agentsam.inneranimalmedia.com/themes/violet/demo/"
+    },
     "kind": "theme",
     "slug": "violet",
     "installable": true,

@@ -57,3 +57,18 @@ The preview URL is not the downloadable theme-package. Production-ready installa
 If you connect `SamPrimeaux/inneranimalmedia-theme-store` directly to the existing Cloudflare Worker from **Workers & Pages → inneranimalmedia-theme-store → Settings → Builds**, set the project root to `/` and **deploy command** to `npm run deploy:cloudflare`. Ensure Node.js 22+ and the deployment environment's Cloudflare credentials can write R2 objects and edit the Worker. The command fetches an exact reviewed Plain Jane source commit (never an unpinned `main`), compiles its full website, publishes the preview tree to private `theme-store` R2, validates the root asset round trip, and only then deploys the Worker with the R2 binding.
 
 You may also run this on an authenticated workstation with `npm install && npm run deploy:cloudflare`. To upload preview assets without deploying the Worker, run `npm run publish:previews`. If any stage fails, the Worker deploy is skipped. The original root site remains unchanged until the final Wrangler deployment succeeds. This script does not mark theme-package ZIPs installable.
+
+## Adding a theme
+
+A theme lists itself. Add a folder `packages/theme-<slug>/` whose `package.json` declares
+`agentsam.slug` and an `agentsam.store` block (`name`, `summary`, `category`, `tags`, `pages`,
+`colorway`; optional `sortOrder`, `cardImage`, `priceUsd`). That is the only place those facts live:
+
+- `npm run catalog` generates `src/catalog.generated.json` from every package that declares `agentsam.store`
+  (it runs automatically in `dev`, `check` and `build`). The version always comes from `package.json#version`.
+- The package exports `materializePrebuild(target, { basePath })` from `src/node.js`. `npm run publish:previews`
+  materializes each package at `/theme-packages/<slug>/<version>/preview/` and uploads it to R2. Versioned keys
+  are immutable, so an unchanged preview is skipped, and any failure stops the run before deploy.
+- `/api/catalog` marks a theme previewable only when its preview exists in R2.
+
+Do not edit `src/catalog.generated.json` or add themes to `src/catalog.ts`.

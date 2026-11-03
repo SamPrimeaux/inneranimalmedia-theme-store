@@ -8,8 +8,10 @@ import { spawn } from 'node:child_process';
 import { mkdtemp, readdir, lstat, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, relative, sep } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 import { npmChildEnvironment } from './npm-child-environment.mjs';
+import { buildCatalog } from './build-catalog.mjs';
 
 const product = {
   slug: 'plain-jane',
@@ -18,7 +20,14 @@ const product = {
   commit: 'c0bb3267265d0c30ea502d451cb46610d4651c7c',
 };
 const prefix = '/theme-packages/' + product.slug + '/' + product.version + '/preview/';
-const bucket = 'theme-store';
+const wranglerConfig = JSON.parse(await readFile('wrangler.jsonc', 'utf8'));
+const bucket = wranglerConfig.r2_buckets?.find(entry => entry.binding === 'THEME_PACKAGES')?.bucket_name;
+if (!bucket) throw new Error('wrangler.jsonc has no THEME_PACKAGES R2 binding');
+const sha256 = (data) => createHash('sha256').update(data).digest('hex');
+async function pool(items, size, task) {
+  const queue = [...items];
+  await Promise.all(Array.from({length: size}, async () => { while (queue.length) await task(queue.shift()); }));
+}
 const deploy = process.argv.includes('--deploy');
 
 function run(bin, args, cwd = process.cwd(), capture = false) {
@@ -98,6 +107,37 @@ try {
     throw new Error('R2 HTML round-trip SHA-256 mismatch');
   }
   console.log('Verified R2 preview index and path:', prefix);
+
+  // Every other theme publishes its own preview from its own package: each package
+  // ships materializePrebuild(target, {basePath}). Versioned keys are immutable, so a
+  // preview whose index.html already matches in R2 is skipped. Any failure aborts the
+  // run before deploy, leaving the live store untouched.
+  const catalog = await buildCatalog(join(process.cwd(), 'packages'));
+  for (const theme of catalog) {
+    if (theme.previewBuild === 'external') continue; // built from its own source repo above
+    const themePrefix = '/theme-packages/' + theme.slug + '/' + theme.version + '/preview/';
+    const entry = await import(pathToFileURL(join(process.cwd(), 'packages', 'theme-' + theme.slug, 'src', 'node.js')).href);
+    const out = join(root, 'pkg-' + theme.slug);
+    entry.materializePrebuild(out, { basePath: themePrefix });
+    const index = await readFile(join(out, 'index.html'));
+    const remoteIndex = join(root, 'remote-' + theme.slug + '.html');
+    let unchanged = false;
+    try {
+      await run('npx', ['wrangler', 'r2', 'object', 'get', bucket + themePrefix + 'index.html', '--remote', '--file', remoteIndex], process.cwd(), true);
+      unchanged = sha256(await readFile(remoteIndex)) === sha256(index);
+    } catch { /* not published yet */ }
+    if (unchanged) { console.log('Unchanged, skipping:', themePrefix); continue; }
+    const themeFiles = await walk(out);
+    console.log('Uploading ' + themeFiles.length + ' files for ' + theme.slug + '@' + theme.version);
+    await pool(themeFiles, 6, async (file) => {
+      const path = relative(out, file).split(sep).join('/');
+      if (path.startsWith('../') || path.startsWith('/')) throw new Error('Invalid object path');
+      await run('npx', ['wrangler', 'r2', 'object', 'put', bucket + themePrefix + path, '--remote', '--file', file, '--content-type', mediaType(file)]);
+    });
+    await run('npx', ['wrangler', 'r2', 'object', 'get', bucket + themePrefix + 'index.html', '--remote', '--file', remoteIndex], process.cwd(), true);
+    if (sha256(await readFile(remoteIndex)) !== sha256(index)) throw new Error('R2 round-trip mismatch for ' + theme.slug);
+    console.log('Verified R2 preview:', themePrefix);
+  }
 
   if (deploy) {
     await run('npx', ['wrangler', 'deploy']);

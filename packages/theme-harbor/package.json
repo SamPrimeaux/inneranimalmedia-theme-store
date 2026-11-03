@@ -26,6 +26,28 @@
   },
   "license": "FSL-1.1-MIT",
   "agentsam": {
+    "store": {
+      "name": "Harbor",
+      "summary": "Measured and reassuring professional-service layouts for considered decisions.",
+      "category": "Services",
+      "tags": [
+        "Professional",
+        "Services",
+        "About",
+        "Trust"
+      ],
+      "pages": [
+        "Home",
+        "Expertise",
+        "About",
+        "Insights",
+        "Contact"
+      ],
+      "colorway": "paper",
+      "sortOrder": 5,
+      "cardImage": "/previews/harbor.webp",
+      "legacyPreviewUrl": "https://agentsam.inneranimalmedia.com/themes/harbor/demo/"
+    },
     "kind": "theme",
     "slug": "harbor",
     "installable": true,

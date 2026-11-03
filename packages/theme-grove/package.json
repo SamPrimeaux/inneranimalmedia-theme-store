@@ -26,6 +26,28 @@
   },
   "license": "FSL-1.1-MIT",
   "agentsam": {
+    "store": {
+      "name": "Grove",
+      "summary": "A tactile, gallery-led home-services website built around finished projects and confident quotes.",
+      "category": "Services",
+      "tags": [
+        "Home services",
+        "Gallery",
+        "Projects",
+        "Quotes"
+      ],
+      "pages": [
+        "Home",
+        "Services",
+        "Our work",
+        "About",
+        "Contact"
+      ],
+      "colorway": "paper",
+      "sortOrder": 2,
+      "cardImage": "/previews/grove.webp",
+      "legacyPreviewUrl": "https://agentsam.inneranimalmedia.com/themes/grove/demo/"
+    },
     "kind": "theme",
     "slug": "grove",
     "installable": true,

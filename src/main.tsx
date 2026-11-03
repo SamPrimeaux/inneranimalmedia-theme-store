@@ -1,19 +1,18 @@
 import React, { useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ArrowLeft, ArrowRight, Check, ChevronDown, ExternalLink, Eye, Filter, Globe, Menu, Monitor, Search, ShieldCheck, Smartphone, Tablet, X } from 'lucide-react';
-import { themes, type ThemeRecord } from './catalog';
+import type { ThemeRecord } from './catalog';
 import './styles.css';
 
 type Device = 'desktop' | 'tablet' | 'mobile';
 type View = { kind: 'gallery' } | { kind: 'detail'; slug: string };
-const categories = ['All themes', ...Array.from(new Set(themes.map((theme) => theme.category)))];
 const categoryLabels: Record<string, string> = { All: 'All themes', Commerce: 'Commerce / fashion', Nonprofit: 'Nonprofit & campaigns', Editorial: 'Editorial / journal' };
-const cardImage = (slug: string) => '/previews/' + slug + (slug === 'plain-jane' ? '.svg' : '.webp');
 function initialView(): View {
   const match = location.pathname.match(/^\/themes\/([a-z0-9-]+)\/?$/);
   return match ? {kind:'detail',slug:match[1]} : {kind:'gallery'};
 }
-function App() {
+function App({ themes }: { themes: ThemeRecord[] }) {
+  const categories = useMemo(() => ['All themes', ...Array.from(new Set(themes.map((theme) => theme.category)))], [themes]);
   const [view,setView] = useState<View>(initialView);
   const [query,setQuery] = useState('');
   const [category,setCategory] = useState('All themes');
@@ -22,7 +21,7 @@ function App() {
   const [installOpen,setInstallOpen] = useState(false);
   const [expanded,setExpanded] = useState(false);
   const filtered = useMemo(() => themes.filter(t => (category==='All themes'||t.category===category) &&
-    [t.name,t.summary,t.category,...t.tags].join(' ').toLowerCase().includes(query.toLowerCase())),[category,query]);
+    [t.name,t.summary,t.category,...t.tags].join(' ').toLowerCase().includes(query.toLowerCase())),[themes,category,query]);
   const selected = view.kind === 'detail' ? themes.find(t=>t.slug===view.slug) : undefined;
   function navigate(next:View) {
     setView(next);setInstallOpen(false);setDevice('desktop');setMobileMenu(false);
@@ -66,7 +65,7 @@ function App() {
         <div className="theme-grid">
           {filtered.map(t=><article key={t.slug} className="theme-card">
             <button className={'theme-art '+t.colorway} onClick={()=>navigate({kind:'detail',slug:t.slug})} aria-label={'Preview '+t.name}>
-              <div className="theme-art-image" style={{backgroundImage:'url('+cardImage(t.slug)+')'}}/>
+              <div className="theme-art-image" style={{backgroundImage:'url('+t.cardImage+')'}}/>
               <span className="art-fallback" aria-hidden="true"><span>{t.name.toUpperCase()}</span><strong>{t.summary.split(' ').slice(0,4).join(' ')}</strong></span>
               <span className="art-preview"><Eye size={16}/> Explore theme</span>
             </button>
@@ -107,4 +106,17 @@ function App() {
     </div>}
   </div>;
 }
-createRoot(document.getElementById('root')!).render(<React.StrictMode><App/></React.StrictMode>);
+/** The catalog is served by the Worker (`/api/catalog`), generated from the packages. */
+function Root() {
+  const [themes, setThemes] = useState<ThemeRecord[] | null>(null);
+  const [error, setError] = useState(false);
+  React.useEffect(() => {
+    fetch('/api/catalog').then(r => r.json() as Promise<{ products?: ThemeRecord[] }>).then(j => {
+      if (!j.products) throw new Error('bad catalog'); setThemes(j.products);
+    }).catch(() => setError(true));
+  }, []);
+  if (error) return <main className="shell no-results"><h1>Catalog unavailable</h1><button onClick={() => location.reload()}>Try again</button></main>;
+  if (!themes) return <main className="shell no-results"><p>Loading themes…</p></main>;
+  return <App themes={themes}/>;
+}
+createRoot(document.getElementById('root')!).render(<React.StrictMode><Root/></React.StrictMode>);

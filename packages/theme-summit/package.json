@@ -26,6 +26,28 @@
   },
   "license": "FSL-1.1-MIT",
   "agentsam": {
+    "store": {
+      "name": "Summit",
+      "summary": "Quiet, compelling portfolio pages with editorial pacing and considered work galleries.",
+      "category": "Portfolio",
+      "tags": [
+        "Portfolio",
+        "Case studies",
+        "Gallery",
+        "Story"
+      ],
+      "pages": [
+        "Home",
+        "Work",
+        "Project",
+        "About",
+        "Contact"
+      ],
+      "colorway": "paper",
+      "sortOrder": 6,
+      "cardImage": "/previews/summit.webp",
+      "legacyPreviewUrl": "https://agentsam.inneranimalmedia.com/themes/summit/demo/"
+    },
     "kind": "theme",
     "slug": "summit",
     "installable": true,

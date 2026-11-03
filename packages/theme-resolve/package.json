@@ -34,6 +34,29 @@
   },
   "license": "FSL-1.1-MIT",
   "agentsam": {
+    "store": {
+      "name": "Resolve",
+      "summary": "A cinematic fashion storefront with curated collections, shoppable editorial and a striking visual rhythm.",
+      "category": "Commerce",
+      "tags": [
+        "Fashion",
+        "Products",
+        "Collections",
+        "Editorial"
+      ],
+      "pages": [
+        "Home",
+        "Shop",
+        "Product",
+        "Collection",
+        "Editorial",
+        "About"
+      ],
+      "colorway": "wine",
+      "sortOrder": 7,
+      "cardImage": "/previews/resolve.webp",
+      "legacyPreviewUrl": "https://agentsam.inneranimalmedia.com/themes/resolve/demo/"
+    },
     "kind": "theme",
     "slug": "resolve",
     "installable": true,

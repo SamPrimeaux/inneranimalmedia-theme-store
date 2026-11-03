@@ -15,6 +15,16 @@ function missing(message: string, status = 404): Response {
   return response({ ok: false, error: message }, status);
 }
 const strictSlug = /^[a-z0-9-]+$/;
+
+// A theme is previewable when its versioned preview is actually in R2; otherwise
+// fall back to the package's declared legacy URL, else null. Never typed by hand.
+async function resolvePreview(env: Env, origin: string, theme: { slug: string; version: string; legacyPreviewUrl?: string }): Promise<string | null> {
+  const root = 'theme-packages/' + theme.slug + '/' + theme.version + '/preview/';
+  try {
+    if (await env.THEME_PACKAGES.head(root + 'index.html')) return origin + '/' + root;
+  } catch { /* storage hiccup: fall through to the declared fallback */ }
+  return theme.legacyPreviewUrl ?? null;
+}
 const strictVersion = /^[0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.-]+)?$/;
 const digest = /^[0-9a-f]{64}$/;
 
@@ -24,7 +34,8 @@ export default {
     const method = request.method.toUpperCase();
     if (url.pathname === '/api/catalog') {
       if (method !== 'GET') return missing('method_not_allowed', 405);
-      return response({ ok: true, schema: 'iam.theme-catalog.v1', products: themes.map(publicTheme) });
+      const products = await Promise.all(themes.map(async theme => publicTheme(theme, await resolvePreview(env, url.origin, theme))));
+      return response({ ok: true, schema: 'iam.theme-catalog.v1', products });
     }
     // Versioned, fully functional theme-package previews served from private R2.
     // R2 files: theme-packages/<slug>/<version>/preview/<relative-file>.
@@ -73,7 +84,7 @@ export default {
       if (!strictSlug.test(slug)) return missing('invalid_theme');
       const theme = findTheme(slug);
       if (!theme) return missing('theme_not_found');
-      if (!version || !operation) return response({ ok: true, product: publicTheme(theme) });
+      if (!version || !operation) return response({ ok: true, product: publicTheme(theme, await resolvePreview(env, url.origin, theme)) });
       if (!strictVersion.test(version) || version !== theme.version) return missing('release_not_found');
       if (
         theme.release.status !== 'published' ||

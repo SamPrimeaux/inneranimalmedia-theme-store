@@ -26,6 +26,29 @@
   },
   "license": "FSL-1.1-MIT",
   "agentsam": {
+    "store": {
+      "name": "Cypress",
+      "summary": "A welcoming community website built for events, groups, giving and stories that bring people together.",
+      "category": "Nonprofit",
+      "tags": [
+        "Community",
+        "Events",
+        "Groups",
+        "Giving"
+      ],
+      "pages": [
+        "Home",
+        "Visit",
+        "Events",
+        "Groups",
+        "Mission",
+        "Give"
+      ],
+      "colorway": "paper",
+      "sortOrder": 0,
+      "cardImage": "/previews/cypress.webp",
+      "legacyPreviewUrl": "https://agentsam.inneranimalmedia.com/themes/cypress/demo/"
+    },
     "kind": "theme",
     "slug": "cypress",
     "installable": true,

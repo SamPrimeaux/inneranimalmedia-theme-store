@@ -51,6 +51,11 @@ export async function buildCatalog(packagesDir) {
     if (!CATEGORIES.includes(category)) fail(dir, 'agentsam.store.category must be one of ' + CATEGORIES.join(', '));
     const colorway = requireString(dir, store, 'colorway');
     if (!COLORWAYS.includes(colorway)) fail(dir, 'agentsam.store.colorway must be one of ' + COLORWAYS.join(', '));
+    const release = store.release;
+    if (release?.status === 'published' && (
+      !/^[a-f0-9]{64}$/.test(release.sha256 || '') ||
+      release.storageKey !== 'releases/' + slug + '/' + pkg.version + '/' + release.sha256 + '.zip'
+    )) fail(dir, 'published release must reference its immutable sha256 zip key');
     records.push({
       slug,
       sku: 'iam.theme.' + slug,
@@ -69,7 +74,13 @@ export async function buildCatalog(packagesDir) {
       previewBuild: store.previewBuild === 'external' ? 'external' : 'package',
       ...(typeof store.legacyPreviewUrl === 'string' ? { legacyPreviewUrl: store.legacyPreviewUrl } : {}),
       ...(store.editorial ? { editorial: store.editorial } : {}),
-      release: { status: 'preview', sha256: null, storageKey: null },
+      // Only immutable, checksum-addressed releases declared by the source
+      // package may be downloaded. No external catalog overrides this.
+      release: pkg.agentsam?.store?.release?.status === 'published'
+        ? { status: 'published',
+            sha256: pkg.agentsam.store.release.sha256,
+            storageKey: pkg.agentsam.store.release.storageKey }
+        : { status: 'preview', sha256: null, storageKey: null },
     });
   }
   const seen = new Set();

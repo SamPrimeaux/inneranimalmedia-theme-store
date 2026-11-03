@@ -11,13 +11,24 @@
     "./prebuild": "./prebuild.json",
     "./site/*": "./site/*"
   },
-  "files": ["src", "scripts", "site", "source", "prebuild.json", "README.md", "agentsam.package.json", "provenance.json"],
+  "files": [
+    "src",
+    "scripts",
+    "site",
+    "source",
+    "prebuild.json",
+    "README.md",
+    "agentsam.package.json",
+    "provenance.json"
+  ],
   "scripts": {
     "build": "cd source && npm run lint && npx vite build --base /themes/plain-jane/demo/ --outDir ../site --emptyOutDir && npx tsx ../scripts/export-cms-manifest.mts",
     "test": "node --test test/*.test.mjs",
     "pack:check": "npm pack --dry-run --json"
   },
-  "engines": {"node": ">=22 <25"},
+  "engines": {
+    "node": ">=22 <25"
+  },
   "license": "UNLICENSED",
   "agentsam": {
     "store": {
@@ -51,16 +62,23 @@
           "Photography pages and image galleries give visual work its own space.",
           "Page metadata, original source assets and CMS section definitions are included in the source-backed preview archive."
         ]
+      },
+      "priceUsd": 0,
+      "delivery": "verified-package",
+      "release": {
+        "status": "published",
+        "sha256": "c5a1c9c26050c706652d6aad2d1aa184c5b91350975dfc9fa3fe717c1ae90203",
+        "storageKey": "releases/plain-jane/0.1.0/c5a1c9c26050c706652d6aad2d1aa184c5b91350975dfc9fa3fe717c1ae90203.zip"
       }
     },
     "kind": "theme",
     "slug": "plain-jane",
     "family": "editorial-blog",
-    "installable": false,
+    "installable": true,
     "portable": true,
     "prebuildRoot": "site",
     "canonicalId": "plain-jane",
-    "normalization": "local_preview_ready",
+    "normalization": "site_package_available",
     "sourceRepository": "SamPrimeaux/inneranimalmedia-blog-template"
   }
 }

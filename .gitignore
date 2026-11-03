@@ -7,3 +7,8 @@ dist/
 *.log
 coverage/
 src/catalog.generated.json
+
+.releases/
+
+# Local build artifacts, never commit customer-install ZIP files
+/.releases/

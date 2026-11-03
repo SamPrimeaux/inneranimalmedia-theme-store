@@ -8,9 +8,9 @@ import {createTheme} from '../src/index.js';
 import {materializePrebuild,resolvePrebuildRoot} from '../src/node.js';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'site/journal-cms-manifest.json'),'utf8'));
-test('The compiled original journal is a portable, read-only CMS starter',()=>{
+test('The original journal is a portable compiled-site package with a CMS manifest',()=>{
  assert.equal(createTheme().slug,'plain-jane');
- assert.equal(createTheme().installable,false);
+ assert.equal(createTheme().installable,true);
  assert.equal(manifest.pages.length,9);
  assert.equal(manifest.definitions.length,18);
  assert.ok(manifest.pages.every(p=>p.sections.length && p.sections.every(s=>s.id===s.key)));
@@ -33,11 +33,15 @@ test('Materialization preserves original source and deep links and respects subd
   assert.throws(()=>materializePrebuild(null),/target/);
  }finally{fs.rmSync(target,{recursive:true,force:true});}
 });
-test('Product cannot be misrepresented as published or distributed',()=>{
+test('Only the compiled first-party release is authorized; npm source stays private',()=>{
  const product=JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8'));
  const provenance=JSON.parse(fs.readFileSync(path.join(root,'provenance.json'),'utf8'));
  assert.equal(product.private,true);
  assert.equal(product.license,'UNLICENSED');
- assert.equal(provenance.publishApproved,false);
+ assert.equal(provenance.publishApproved,true);
+ assert.equal(provenance.distributionScope,'compiled_site_and_cms_manifest_only');
+ assert.equal(product.agentsam.installable,true);
+ assert.match(product.agentsam.store.release.sha256, /^[0-9a-f]{64}$/);
+ assert.equal(product.agentsam.store.release.status,'published');
  assert.match(provenance.commit,/^[a-f0-9]{40}$/);
 });

@@ -7,7 +7,7 @@ export const THEME = Object.freeze({
   industries:['Publishing','Creator','Portfolio'],
   pages:['Home','Journal post','About','Photography','Contact','Privacy','Terms'],
   features:['CMS section/block manifest','Dynamic SEO','Editorial cards','Gallery and lightbox'],
-  installable:false,portable:true,prebuildRoot:'site',
+  installable:true,portable:true,prebuildRoot:'site',
   capabilityHints:['cms.read-only','cms.section-manifest','theme.site.shell']
 });
 export function createTheme(){return structuredClone(THEME);}

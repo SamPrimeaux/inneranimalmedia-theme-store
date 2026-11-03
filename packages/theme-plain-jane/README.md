@@ -26,12 +26,24 @@ The UI is read-only. The external CMS needs to own all writes, revisions,
 transactions and permissions. The exported manifest retains original section
 and block IDs, definition keys, version and template SKU.
 
-## Promotion gate
+## First-party compiled Theme Store release
 
-This package is private and not licensed for resale or production installation.
-Do not infer commercial permission from source file headers. The preview ZIP
-contains compiled UI, a sample SQL seed, provenance and explicit warnings.
-It is not a customer-site installer.
+The publisher has approved distribution of the **compiled** Plain Jane site and
+its CMS component manifest through Theme Store. Its package source and npm
+package stay private (UNLICENSED). Public distribution does not grant source
+resale, open-source relicensing, or derivative sublicensing.
+
+To build a reviewed release: run \`node scripts/build-theme-release.mjs plain-jane\`
+at the Theme Store repository root. Publishing uses \`--publish\`, uploads the
+zip to its SHA-256-addressed R2 key, verifies it by downloading it, and records
+the hash on the package manifest. The public \`/api/themes/plain-jane/0.1.0/manifest.json\`
+and \`/download\` endpoints serve that immutable release.
+
+The compiled site materializes independently with deep routes and the
+\`journal-cms-manifest.json\` used for future site-scoped authoring. This is a
+**real downloadable package**, not yet a verified AgentSam CMS draft install.
+The Theme Store must never imply that the customer editor save/publish flow is
+complete until the authenticated install receipt and isolation tests pass.
 
 Do NOT run seed/plain-jane-journal.sql against customer D1 databases without
 a matching schema, ownership checks, validated parameters, backup and

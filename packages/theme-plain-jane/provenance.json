@@ -11,6 +11,8 @@
     "CMS fixture resolveAsset honors Vite base URL",
     "Vite client type declaration"
   ],
-  "status": "review_before_distribution",
-  "publishApproved": false
+  "status": "first_party_compiled_release_authorized",
+  "publishApproved": true,
+  "distributionScope": "compiled_site_and_cms_manifest_only",
+  "approvalContext": "Owner-requested Theme Store release; original source and private npm package remain unredistributed"
 }

@@ -2,7 +2,7 @@
   "avoid_when": [
     "A licensed production storefront or a verified CMS installation is required."
   ],
-  "catalog_status": "needs-review",
+  "catalog_status": "package-ready",
   "class": "theme",
   "commands": [],
   "evidence": {
@@ -26,13 +26,12 @@
     "public_claim": false
   },
   "review_required": [
-    "distribution-license",
     "production-cms-adapter",
     "install-receipt",
     "tenant-isolation"
   ],
   "schema": "agentsam.package.v1",
-  "status": "review",
+  "status": "package-ready",
   "topics": [
     "cms",
     "editorial",

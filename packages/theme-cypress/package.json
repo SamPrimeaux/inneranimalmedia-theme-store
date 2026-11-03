@@ -46,8 +46,7 @@
       ],
       "colorway": "paper",
       "sortOrder": 0,
-      "cardImage": "/previews/cypress.webp",
-      "legacyPreviewUrl": "https://agentsam.inneranimalmedia.com/themes/cypress/demo/"
+      "cardImage": "/previews/cypress.webp"
     },
     "kind": "theme",
     "slug": "cypress",

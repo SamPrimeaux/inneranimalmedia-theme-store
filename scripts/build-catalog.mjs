@@ -72,7 +72,6 @@ export async function buildCatalog(packagesDir) {
       cardImage: typeof store.cardImage === 'string' ? store.cardImage : '/previews/' + slug + '.webp',
       sortOrder: Number.isFinite(store.sortOrder) ? store.sortOrder : 1000,
       previewBuild: store.previewBuild === 'external' ? 'external' : 'package',
-      ...(typeof store.legacyPreviewUrl === 'string' ? { legacyPreviewUrl: store.legacyPreviewUrl } : {}),
       ...(store.editorial ? { editorial: store.editorial } : {}),
       // Only immutable, checksum-addressed releases declared by the source
       // package may be downloaded. No external catalog overrides this.

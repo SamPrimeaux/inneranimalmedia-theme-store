@@ -2,16 +2,17 @@ import React, { useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ArrowLeft, ArrowRight, Check, ChevronDown, ExternalLink, Eye, Filter, Globe, Menu, Monitor, Search, ShieldCheck, Smartphone, Tablet, X } from 'lucide-react';
 import type { ThemeRecord } from './catalog';
+import type { SiteDocument } from './site.mjs';
 import './styles.css';
 
 type Device = 'desktop' | 'tablet' | 'mobile';
 type View = { kind: 'gallery' } | { kind: 'detail'; slug: string };
-const categoryLabels: Record<string, string> = { All: 'All themes', Commerce: 'Commerce / fashion', Nonprofit: 'Nonprofit & campaigns', Editorial: 'Editorial / journal' };
 function initialView(): View {
   const match = location.pathname.match(/^\/themes\/([a-z0-9-]+)\/?$/);
   return match ? {kind:'detail',slug:match[1]} : {kind:'gallery'};
 }
-function App({ themes }: { themes: ThemeRecord[] }) {
+function App({ themes, site }: { themes: ThemeRecord[]; site: SiteDocument }) {
+  const categoryLabels = site.categoryLabels;
   const categories = useMemo(() => ['All themes', ...Array.from(new Set(themes.map((theme) => theme.category)))], [themes]);
   const [view,setView] = useState<View>(initialView);
   const [query,setQuery] = useState('');
@@ -38,26 +39,26 @@ function App({ themes }: { themes: ThemeRecord[] }) {
   return <div className="app">
     <header className="site-header">
       <div className="header-inner">
-        <a className="brand" href="/" onClick={e=>{e.preventDefault();navigate({kind:'gallery'})}} aria-label="InnerAnimalMedia Themes home">
-          <span className="brand-monogram">IA<span className="brand-slash">/</span></span><span>THEME STORE</span>
+        <a className="brand" href="/" onClick={e=>{e.preventDefault();navigate({kind:'gallery'})}} aria-label={site.brand.ariaLabel}>
+          <span className="brand-monogram">{site.brand.monogram}<span className="brand-slash">/</span></span><span>{site.brand.label}</span>
         </a>
         <nav className={'top-nav '+(mobileMenu?'open':'')} aria-label="Main">
-          <a href="/" onClick={e=>{e.preventDefault();navigate({kind:'gallery'})}}>Discover</a>
-          <a href="#how-it-works" onClick={e=>{if(!isGallery){e.preventDefault();navigate({kind:'gallery'});setTimeout(()=>document.getElementById('how-it-works')?.scrollIntoView(),10)}}}>How it works</a>
-          <a href="https://agentsam.inneranimalmedia.com/sites" target="_blank" rel="noreferrer">AgentSam Sites <ExternalLink size={13}/></a>
+          <a href="/" onClick={e=>{e.preventDefault();navigate({kind:'gallery'})}}>{site.nav.discover}</a>
+          <a href="#how-it-works" onClick={e=>{if(!isGallery){e.preventDefault();navigate({kind:'gallery'});setTimeout(()=>document.getElementById('how-it-works')?.scrollIntoView(),10)}}}>{site.nav.howItWorks}</a>
+          <a href={site.nav.sitesHref} target="_blank" rel="noreferrer">{site.nav.sitesLabel} <ExternalLink size={13}/></a>
         </nav>
-        <div className="header-actions"><span className="origin-note"><Globe size={14}/> Built for your CMS</span><button aria-label="Toggle menu" className="mobile-nav-button" onClick={()=>setMobileMenu(v=>!v)}>{mobileMenu?<X size={21}/>:<Menu size={21}/>}</button></div>
+        <div className="header-actions"><span className="origin-note"><Globe size={14}/> {site.nav.originNote}</span><button aria-label="Toggle menu" className="mobile-nav-button" onClick={()=>setMobileMenu(v=>!v)}>{mobileMenu?<X size={21}/>:<Menu size={21}/>}</button></div>
       </div>
     </header>
 
     {isGallery ? <>
       <section className="hero shell">
-        <div className="eyebrow">InnerAnimalMedia / design systems</div>
-        <div className="hero-grid"><div><h1>Find the right <em>starting point.</em></h1></div><p>Real, responsive website experiences built to become your own. Explore the design first; add it to AgentSam only when it feels right.</p></div>
-        <div className="hero-meta"><span><Check size={15}/> Original theme designs</span><span><Check size={15}/> Editable CMS v2 direction</span><span><Check size={15}/> Preview before install</span></div>
+        <div className="eyebrow">{site.hero.eyebrow}</div>
+        <div className="hero-grid"><div><h1>{site.hero.headlineLead} <em>{site.hero.headlineEm}</em></h1></div><p>{site.hero.body}</p></div>
+        <div className="hero-meta">{site.hero.points.map(point=><span key={point}><Check size={15}/> {point}</span>)}</div>
       </section>
       <main className="shell">
-        <div className="catalog-bar"><div><div className="eyebrow muted">Curated library</div><h2>Browse themes <span className="count">{filtered.length}</span></h2></div>
+        <div className="catalog-bar"><div><div className="eyebrow muted">{site.library.eyebrow}</div><h2>{site.library.title} <span className="count">{filtered.length}</span></h2></div>
           <div className="catalog-filters"><label className="search-field"><Search size={18}/><span className="sr-only">Search themes</span><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search themes" /></label>
             <label className="select-field"><Filter size={17}/><span className="sr-only">Filter by category</span><select value={category} onChange={e=>setCategory(e.target.value)}>{categories.map(c=><option key={c} value={c}>{categoryLabels[c]||c}</option>)}</select><ChevronDown size={15}/></label>
           </div>
@@ -75,8 +76,8 @@ function App({ themes }: { themes: ThemeRecord[] }) {
           </article>)}
         </div>
         {!filtered.length&&<div className="no-results"><h3>No themes found</h3><p>Try a different keyword or category.</p><button className="secondary-button" onClick={()=>{setQuery('');setCategory('All themes')}}>Clear filters</button></div>}
-        <section className="how-it-works" id="how-it-works"><div><div className="eyebrow">Designed to get out of your way</div><h2>Choose. Add. Make it yours.</h2><p>Theme Store distributes theme-packages. AgentSam owns your sites, settings and private drafts. A theme can change completely without its original product package being overwritten.</p></div>
-          <div className="steps"><div><b>01</b><h3>Explore</h3><p>Browse the themes and explore a complete responsive site.</p></div><div><b>02</b><h3>Add to drafts</h3><p>Install a private, editable copy into your authorized AgentSam site.</p></div><div><b>03</b><h3>Customize</h3><p>Edit sections, tokens, forms and content in the real CMS v2 editor.</p></div></div>
+        <section className="how-it-works" id="how-it-works"><div><div className="eyebrow">{site.howItWorks.eyebrow}</div><h2>{site.howItWorks.title}</h2><p>{site.howItWorks.body}</p></div>
+          <div className="steps">{site.howItWorks.steps.map((step,i)=><div key={step.title}><b>{String(i+1).padStart(2,'0')}</b><h3>{step.title}</h3><p>{step.body}</p></div>)}</div>
         </section>
       </main>
     </> : selected ? <main className="detail-shell">
@@ -112,17 +113,22 @@ function App({ themes }: { themes: ThemeRecord[] }) {
     </div>}
   </div>;
 }
-/** The catalog is served by the Worker (`/api/catalog`), generated from the packages. */
+/** Catalog (`/api/catalog`, generated from packages) and site copy/tokens (`/api/site`, published from the CMS). */
 function Root() {
-  const [themes, setThemes] = useState<ThemeRecord[] | null>(null);
+  const [data, setData] = useState<{ themes: ThemeRecord[]; site: SiteDocument } | null>(null);
   const [error, setError] = useState(false);
   React.useEffect(() => {
-    fetch('/api/catalog').then(r => r.json() as Promise<{ products?: ThemeRecord[] }>).then(j => {
-      if (!j.products) throw new Error('bad catalog'); setThemes(j.products);
+    Promise.all([
+      fetch('/api/catalog').then(r => r.json() as Promise<{ products?: ThemeRecord[] }>),
+      fetch('/api/site').then(r => r.json() as Promise<{ site?: SiteDocument }>),
+    ]).then(([catalog, siteRes]) => {
+      if (!catalog.products || !siteRes.site) throw new Error('bad payload');
+      for (const [name, value] of Object.entries(siteRes.site.tokens)) document.documentElement.style.setProperty('--ts-' + name, value);
+      setData({ themes: catalog.products, site: siteRes.site });
     }).catch(() => setError(true));
   }, []);
   if (error) return <main className="shell no-results"><h1>Catalog unavailable</h1><button onClick={() => location.reload()}>Try again</button></main>;
-  if (!themes) return <main className="shell no-results"><p>Loading themes…</p></main>;
-  return <App themes={themes}/>;
+  if (!data) return <main className="shell no-results"><p>Loading themes…</p></main>;
+  return <App themes={data.themes} site={data.site}/>;
 }
 createRoot(document.getElementById('root')!).render(<React.StrictMode><Root/></React.StrictMode>);

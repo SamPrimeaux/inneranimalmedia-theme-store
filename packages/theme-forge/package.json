@@ -45,8 +45,7 @@
       ],
       "colorway": "wine",
       "sortOrder": 4,
-      "cardImage": "/previews/forge.webp",
-      "legacyPreviewUrl": "https://agentsam.inneranimalmedia.com/themes/forge/demo/"
+      "cardImage": "/previews/forge.webp"
     },
     "kind": "theme",
     "slug": "forge",

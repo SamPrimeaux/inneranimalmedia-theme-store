@@ -1,4 +1,6 @@
 import { findTheme, publicTheme, themes } from './catalog';
+import siteDefaults from './site.default.json';
+import { resolveSite, type SiteDocument } from './site.mjs';
 
 type Env = {
   ASSETS: Fetcher;
@@ -16,14 +18,13 @@ function missing(message: string, status = 404): Response {
 }
 const strictSlug = /^[a-z0-9-]+$/;
 
-// A theme is previewable when its versioned preview is actually in R2; otherwise
-// fall back to the package's declared legacy URL, else null. Never typed by hand.
-async function resolvePreview(env: Env, origin: string, theme: { slug: string; version: string; legacyPreviewUrl?: string }): Promise<string | null> {
+// A theme is previewable only when its versioned preview is actually in R2.
+async function resolvePreview(env: Env, origin: string, theme: { slug: string; version: string }): Promise<string | null> {
   const root = 'theme-packages/' + theme.slug + '/' + theme.version + '/preview/';
   try {
     if (await env.THEME_PACKAGES.head(root + 'index.html')) return origin + '/' + root;
-  } catch { /* storage hiccup: fall through to the declared fallback */ }
-  return theme.legacyPreviewUrl ?? null;
+  } catch { /* storage hiccup: treat as not previewable */ }
+  return null;
 }
 const strictVersion = /^[0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.-]+)?$/;
 const digest = /^[0-9a-f]{64}$/;
@@ -32,6 +33,14 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
     const method = request.method.toUpperCase();
+    if (url.pathname === '/api/site') {
+      if (method !== 'GET') return missing('method_not_allowed', 405);
+      // Published site document (copy + tokens) from R2, validated against the bundled defaults.
+      let override: unknown;
+      try { const object = await env.THEME_PACKAGES.get('site/store-site.json'); override = object ? await object.json() : undefined; } catch { override = undefined; }
+      const site = resolveSite(siteDefaults as SiteDocument, override);
+      return Response.json({ ok: true, site }, { headers: { 'cache-control': 'public, max-age=60', 'x-content-type-options': 'nosniff' } });
+    }
     if (url.pathname === '/api/catalog') {
       if (method !== 'GET') return missing('method_not_allowed', 405);
       const products = await Promise.all(themes.map(async theme => publicTheme(theme, await resolvePreview(env, url.origin, theme))));

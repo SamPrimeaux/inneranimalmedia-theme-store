@@ -45,8 +45,7 @@
       ],
       "colorway": "paper",
       "sortOrder": 5,
-      "cardImage": "/previews/harbor.webp",
-      "legacyPreviewUrl": "https://agentsam.inneranimalmedia.com/themes/harbor/demo/"
+      "cardImage": "/previews/harbor.webp"
     },
     "kind": "theme",
     "slug": "harbor",

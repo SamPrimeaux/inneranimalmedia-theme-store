@@ -17,7 +17,8 @@
     "dev": "npm run catalog && vite",
     "check": "npm run catalog && tsc --noEmit",
     "build": "npm run catalog && tsc --noEmit && vite build",
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "publish:site": "node scripts/publish-site.mjs --database inneranimalmedia-business"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

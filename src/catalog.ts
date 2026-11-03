@@ -12,9 +12,8 @@ export type ThemeRecord = {
   category: ThemeCategory; tags: string[]; pages: string[];
   colorway: 'wine' | 'violet' | 'paper'; version: string;
   publisher: string; priceUsd: number | null; downloadReady?: boolean;
-  /** Resolved at request time by the Worker: live R2 preview if published, else a legacy URL, else null. */
+  /** Resolved at request time by the Worker: live R2 preview if published, else null. */
   previewUrl: string | null;
-  legacyPreviewUrl?: string;
   cardImage: string;
   sortOrder: number;
   previewBuild: 'package' | 'external';

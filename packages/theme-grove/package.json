@@ -1,7 +1,7 @@
 {
   "name": "@inneranimalmedia/theme-grove",
   "version": "2.6.13",
-  "description": "A visual service-business prebuild centered on project galleries, material detail, process, reviews, and estimate conversion — polished enough for a studio, practical enough for a crew.",
+  "description": "A visual service-business prebuild centered on project galleries, material detail, process, reviews, and estimate conversion \u2014 polished enough for a studio, practical enough for a crew.",
   "type": "module",
   "main": "./src/index.js",
   "exports": {
@@ -45,8 +45,7 @@
       ],
       "colorway": "paper",
       "sortOrder": 2,
-      "cardImage": "/previews/grove.webp",
-      "legacyPreviewUrl": "https://agentsam.inneranimalmedia.com/themes/grove/demo/"
+      "cardImage": "/previews/grove.webp"
     },
     "kind": "theme",
     "slug": "grove",

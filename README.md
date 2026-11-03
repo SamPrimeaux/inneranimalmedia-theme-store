@@ -72,3 +72,13 @@ A theme lists itself. Add a folder `packages/theme-<slug>/` whose `package.json`
 - `/api/catalog` marks a theme previewable only when its preview exists in R2.
 
 Do not edit `src/catalog.generated.json` or add themes to `src/catalog.ts`.
+
+## Editing the store site (no redeploy)
+
+The store's own copy and color tokens live in the `cms_sites` row (slug `theme-store`), under `settings_json.store`.
+Defaults are bundled in `src/site.default.json`; anything you omit or get wrong falls back to them.
+
+    npm run publish:site        # validate settings_json.store -> R2 site/store-site.json -> live at /api/site (~60s)
+
+Only copy and the five color tokens are editable data; layout stays code. Themes are never listed here: add a package
+(`agentsam.store` in its package.json) and the catalog regenerates.

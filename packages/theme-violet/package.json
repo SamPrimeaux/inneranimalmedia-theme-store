@@ -46,7 +46,12 @@
       ],
       "colorway": "violet",
       "sortOrder": 1,
-      "cardImage": "/previews/violet.webp"
+      "cardImage": "/previews/violet.webp",
+      "release": {
+        "status": "published",
+        "sha256": "3d14021105332246d282f83d38b2d397b3319bd1db886a8dc7e3c0829ca915c5",
+        "storageKey": "releases/violet/2.6.13/3d14021105332246d282f83d38b2d397b3319bd1db886a8dc7e3c0829ca915c5.zip"
+      }
     },
     "kind": "theme",
     "slug": "violet",

@@ -49,17 +49,48 @@
       "name": "Inner Animals / IASF",
       "summary": "A striking editorial apparel storefront with product, collection, journal and story layouts.",
       "category": "Commerce",
-      "industries": ["Retail", "Apparel", "Lifestyle"],
-      "catalogSizes": ["Small catalog", "Medium catalog"],
-      "tags": ["Products", "Collections", "Editorial", "Archetypes", "Responsive"],
-      "pages": ["Home", "Shop", "Product", "Collection", "Journal", "Story", "Checkout preview"],
-      "features": ["Responsive storefront", "Product discovery", "Search", "Cart preview", "CMS starter manifest"],
+      "industries": [
+        "Retail",
+        "Apparel",
+        "Lifestyle"
+      ],
+      "catalogSizes": [
+        "Small catalog",
+        "Medium catalog"
+      ],
+      "tags": [
+        "Products",
+        "Collections",
+        "Editorial",
+        "Archetypes",
+        "Responsive"
+      ],
+      "pages": [
+        "Home",
+        "Shop",
+        "Product",
+        "Collection",
+        "Journal",
+        "Story",
+        "Checkout preview"
+      ],
+      "features": [
+        "Responsive storefront",
+        "Product discovery",
+        "Search",
+        "Cart preview",
+        "CMS starter manifest"
+      ],
       "colorway": "paper",
       "cardImage": "/previews/iasf.svg",
       "sortOrder": 8,
       "priceUsd": 0,
       "previewBuild": "package",
-      "release": {"status": "preview"}
+      "release": {
+        "status": "published",
+        "sha256": "9973c5be0ce719c33b1510adf684f6a9db12c7b267a10109d970766c809729e3",
+        "storageKey": "releases/iasf/2.6.14/9973c5be0ce719c33b1510adf684f6a9db12c7b267a10109d970766c809729e3.zip"
+      }
     }
   },
   "repository": {

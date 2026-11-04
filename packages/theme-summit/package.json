@@ -45,7 +45,12 @@
       ],
       "colorway": "paper",
       "sortOrder": 6,
-      "cardImage": "/previews/summit.webp"
+      "cardImage": "/previews/summit.webp",
+      "release": {
+        "status": "published",
+        "sha256": "1067b1a25f8dc0974d7f9093b60de4fbea5e5755a1b1140cd323a3f63eb028ab",
+        "storageKey": "releases/summit/2.6.13/1067b1a25f8dc0974d7f9093b60de4fbea5e5755a1b1140cd323a3f63eb028ab.zip"
+      }
     },
     "kind": "theme",
     "slug": "summit",

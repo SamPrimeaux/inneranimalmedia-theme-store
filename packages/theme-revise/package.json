@@ -62,7 +62,9 @@
       "priceUsd": 0,
       "previewBuild": "package",
       "release": {
-        "status": "preview"
+        "status": "published",
+        "sha256": "319835494b0d5c18811b9d0c5ce6b788fbee199c4b8c6d749b30c194fde80d7e",
+        "storageKey": "releases/revise/0.1.1/319835494b0d5c18811b9d0c5ce6b788fbee199c4b8c6d749b30c194fde80d7e.zip"
       }
     }
   }

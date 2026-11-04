@@ -38,8 +38,14 @@
       "name": "Resolve",
       "summary": "A cinematic fashion storefront with curated collections, shoppable editorial and a striking visual rhythm.",
       "category": "Commerce",
-      "industries": ["Clothing", "Fashion"],
-      "catalogSizes": ["Small catalog", "Large catalog"],
+      "industries": [
+        "Clothing",
+        "Fashion"
+      ],
+      "catalogSizes": [
+        "Small catalog",
+        "Large catalog"
+      ],
       "tags": [
         "Fashion",
         "Products",
@@ -56,7 +62,12 @@
       ],
       "colorway": "wine",
       "sortOrder": 7,
-      "cardImage": "/previews/resolve.webp"
+      "cardImage": "/previews/resolve.webp",
+      "release": {
+        "status": "published",
+        "sha256": "08ee3438a85bbc7aefbfa1a766e8b3f88f094ce5c382a042bd2e6c0adee88536",
+        "storageKey": "releases/resolve/2.6.13/08ee3438a85bbc7aefbfa1a766e8b3f88f094ce5c382a042bd2e6c0adee88536.zip"
+      }
     },
     "kind": "theme",
     "slug": "resolve",

@@ -45,7 +45,12 @@
       ],
       "colorway": "wine",
       "sortOrder": 4,
-      "cardImage": "/previews/forge.webp"
+      "cardImage": "/previews/forge.webp",
+      "release": {
+        "status": "published",
+        "sha256": "3b2d3ff9c64b70a30eaf76132206fc06554872ea654138f7af30be06c9dcffe0",
+        "storageKey": "releases/forge/2.6.13/3b2d3ff9c64b70a30eaf76132206fc06554872ea654138f7af30be06c9dcffe0.zip"
+      }
     },
     "kind": "theme",
     "slug": "forge",

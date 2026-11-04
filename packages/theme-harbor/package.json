@@ -45,7 +45,12 @@
       ],
       "colorway": "paper",
       "sortOrder": 5,
-      "cardImage": "/previews/harbor.webp"
+      "cardImage": "/previews/harbor.webp",
+      "release": {
+        "status": "published",
+        "sha256": "9f2453aef4229db691dd47cea0acf47e29ddf0a51beb003f6bef28ccac053d38",
+        "storageKey": "releases/harbor/2.6.13/9f2453aef4229db691dd47cea0acf47e29ddf0a51beb003f6bef28ccac053d38.zip"
+      }
     },
     "kind": "theme",
     "slug": "harbor",

@@ -46,7 +46,12 @@
       ],
       "colorway": "paper",
       "sortOrder": 0,
-      "cardImage": "/previews/cypress.webp"
+      "cardImage": "/previews/cypress.webp",
+      "release": {
+        "status": "published",
+        "sha256": "b220d9f587175b21e55b857dfc06d7fda2deab4cdbe8fc173dc2ab323eaa8f31",
+        "storageKey": "releases/cypress/2.6.13/b220d9f587175b21e55b857dfc06d7fda2deab4cdbe8fc173dc2ab323eaa8f31.zip"
+      }
     },
     "kind": "theme",
     "slug": "cypress",

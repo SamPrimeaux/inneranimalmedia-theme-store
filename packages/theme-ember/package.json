@@ -30,8 +30,14 @@
       "name": "Ember",
       "summary": "Expressive e-commerce with bold product discovery and memorable shopping moments.",
       "category": "Commerce",
-      "industries": ["Retail", "Lifestyle"],
-      "catalogSizes": ["Small catalog", "Large catalog"],
+      "industries": [
+        "Retail",
+        "Lifestyle"
+      ],
+      "catalogSizes": [
+        "Small catalog",
+        "Large catalog"
+      ],
       "tags": [
         "Products",
         "Collections",
@@ -48,7 +54,12 @@
       ],
       "colorway": "wine",
       "sortOrder": 3,
-      "cardImage": "/previews/ember.webp"
+      "cardImage": "/previews/ember.webp",
+      "release": {
+        "status": "published",
+        "sha256": "5e496653f373eb06610feeb87e486887d276ae3d69504fd852aca0f95b78a913",
+        "storageKey": "releases/ember/2.6.13/5e496653f373eb06610feeb87e486887d276ae3d69504fd852aca0f95b78a913.zip"
+      }
     },
     "kind": "theme",
     "slug": "ember",

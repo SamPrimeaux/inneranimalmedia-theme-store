@@ -53,7 +53,9 @@ function App({ themes, site, footer }: { themes: ThemeRecord[]; site: SiteDocume
   };
   function navigate(next:View) {
     setView(next);setMobileMenu(false);
-    history.pushState({},'',next.kind==='gallery'?'/':'/themes/'+next.slug+'/');
+    const destination=new URL(next.kind==='gallery'?'/':'/themes/'+next.slug+'/',location.origin);
+    if(preferredSiteId.current)destination.searchParams.set('site_id',preferredSiteId.current);
+    history.pushState({},'',destination.pathname+destination.search);
     window.scrollTo({top:0,behavior:'instant'});
   }
   React.useEffect(()=>{

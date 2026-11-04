@@ -18,7 +18,7 @@ export function CatalogFilters({ facets, selection, onToggle, onClear, labels }:
   onClear: () => void;
   labels?: Partial<Record<FilterName,string>>;
 }) {
-  const choices: FilterSelection = {prices:['Free','Paid','Not listed'], ...facets};
+  const choices: FilterSelection = {prices:['Free','Paid'], ...facets};
   const count = Object.values(selection).reduce((sum,values)=>sum+values.length,0);
   const [expanded,setExpanded] = useState(false);
   return <aside className="catalog-sidebar" aria-label="Theme filters">

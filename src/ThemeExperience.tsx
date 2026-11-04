@@ -46,7 +46,7 @@ export function ThemeExperience({ theme, onBack, onTry }: {
         </div>
         <div className="experience-toolbar-actions">
           <button type="button" onClick={fullscreen} aria-label={expanded ? 'Exit fullscreen' : 'Expand preview'} title={expanded ? 'Exit fullscreen' : 'Expand preview'}>{expanded ? <Minimize2 size={19}/> : <Maximize2 size={19}/>}</button>
-          {ready && <button className="experience-toolbar-try" onClick={onTry}>Try theme <ArrowRight size={15}/></button>}
+          {ready && <button className="experience-toolbar-try" onClick={onTry}>Add <ArrowRight size={15}/></button>}
         </div>
       </div>
       <div className={'experience-frame-outer ' + device}>
@@ -63,7 +63,7 @@ export function ThemeExperience({ theme, onBack, onTry }: {
         </div>
         <div className="experience-action-buttons">
           {canDemo && <a href={theme.previewUrl!} rel="noopener noreferrer" target="_blank" className="experience-demo-button">View demo <ExternalLink size={15}/></a>}
-          {ready && <button className="experience-try-button" onClick={onTry}>Try theme <ArrowRight size={15}/></button>}
+          {ready && <button className="experience-try-button" onClick={onTry}>Add <ArrowRight size={15}/></button>}
         </div>
       </div>
     </section>
@@ -89,7 +89,7 @@ export function ThemeExperience({ theme, onBack, onTry }: {
       <div className="experience-bottom-cta">
         <strong>{theme.name}</strong>{price && <span>{price}</span>}
         {canDemo && <a href={theme.previewUrl!} target="_blank" rel="noopener noreferrer">View demo <ExternalLink size={15}/></a>}
-        {ready && <button onClick={onTry}>Try theme <ArrowRight size={15}/></button>}
+        {ready && <button onClick={onTry}>Add <ArrowRight size={15}/></button>}
       </div>
     </div>
   </main>;

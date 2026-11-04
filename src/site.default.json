@@ -13,17 +13,17 @@
     "headlineLead": "Find the right",
     "headlineEm": "starting point.",
     "body": "Real, responsive website experiences built to become your own. Explore the design first; add it to AgentSam only when it feels right.",
-    "points": ["Original theme designs", "Editable CMS v2 direction", "Preview before install"]
+    "points": ["Original theme designs", "Make every detail your own", "Preview before install"]
   },
   "library": { "eyebrow": "Curated library", "title": "Browse themes", "browseLabel": "Browse themes", "filters": { "prices": "Price", "industries": "Industry", "catalogSizes": "Catalog size", "features": "Features" } },
   "howItWorks": {
     "eyebrow": "Designed to get out of your way",
     "title": "Choose. Add. Make it yours.",
-    "body": "Theme Store distributes theme-packages. AgentSam owns your sites, settings and private drafts. A theme can change completely without its original product package being overwritten.",
+    "body": "Preview a theme, add it to your drafts, and make it your own. Publish when you’re ready.",
     "steps": [
       { "title": "Explore", "body": "Browse the themes and explore a complete responsive site." },
-      { "title": "Add to drafts", "body": "Install a private, editable copy into your authorized AgentSam site." },
-      { "title": "Customize", "body": "Edit sections, tokens, forms and content in the real CMS v2 editor." }
+      { "title": "Add to drafts", "body": "Add an editable copy to your site’s drafts." },
+      { "title": "Customize", "body": "Make the layout, colors, images and content your own." }
     ]
   },
   "categoryLabels": { "All themes": "All themes", "Commerce": "Commerce / fashion", "Nonprofit": "Nonprofit & campaigns", "Editorial": "Editorial / journal" },

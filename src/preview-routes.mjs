@@ -12,3 +12,13 @@ export function resolveDemoAlias(pathname, themes) {
 export function publicDemoUrl(origin, slug) {
   return origin + '/themes/' + slug + '/presets/' + slug + '/demo/';
 }
+
+/** Correct a release URL accidentally nested beneath its own preview root.
+ * Keeps compiled relative assets portable without altering immutable ZIPs.
+ * Never resolves a different slug/version or arbitrary upstream address.
+ */
+export function normalizeReleaseAssetRelative(relative, slug, version) {
+  const marker = 'theme-packages/' + slug + '/' + version + '/preview/';
+  const found = relative.indexOf(marker);
+  return found > 0 ? relative.slice(found + marker.length) : relative;
+}

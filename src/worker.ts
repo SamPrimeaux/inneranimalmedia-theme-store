@@ -2,7 +2,7 @@ import { findTheme, publicTheme, themes } from './catalog';
 import siteDefaults from './site.default.json';
 import { normalizePreviewHtml } from './preview-html.mjs';
 import { previewFileHeaders } from './preview-headers.mjs';
-import { resolveDemoAlias, publicDemoUrl } from './preview-routes.mjs';
+import { resolveDemoAlias, publicDemoUrl, normalizeReleaseAssetRelative } from './preview-routes.mjs';
 import { resolveSite, type SiteDocument } from './site.mjs';
 
 type Env = {
@@ -64,9 +64,10 @@ export default {
         catch { approvedArchived = false; }
       }
       if (!theme || (version !== theme.version && !approvedArchived)) return missing('preview_not_found');
-      const segments = relative.split('/').filter(Boolean);
+      const canonicalRelative = normalizeReleaseAssetRelative(relative, slug, version);
+      const segments = canonicalRelative.split('/').filter(Boolean);
       if (segments.some(segment => segment === '..' || segment.startsWith('.') || !/^[a-zA-Z0-9._-]+$/.test(segment))) return missing('invalid_preview_path', 400);
-      const file = segments.length === 0 || relative.endsWith('/') ? [...segments, 'index.html'].join('/') : segments.join('/');
+      const file = segments.length === 0 || canonicalRelative.endsWith('/') ? [...segments, 'index.html'].join('/') : segments.join('/');
       const keyRoot = 'theme-packages/' + slug + '/' + version + '/preview/';
       const types: Record<string, string> = {
         html: 'text/html; charset=utf-8', js: 'text/javascript; charset=utf-8',

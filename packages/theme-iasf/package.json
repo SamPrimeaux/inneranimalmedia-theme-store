@@ -1,11 +1,12 @@
 {
   "name": "@inneranimalmedia/theme-iasf",
-  "version": "2.6.13",
+  "version": "2.6.14",
   "description": "IASF — stock Inner Animal Storefront theme pack (normalized from studio-cms-editor harvest).",
   "type": "module",
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js",
+    "./node": "./src/node.js",
     "./content": "./src/content.js",
     "./tokens": "./src/tokens.js",
     "./styles/storefront.css": "./src/styles/storefront.css",
@@ -14,6 +15,8 @@
   },
   "files": [
     "src",
+    "site",
+    "prebuild.json",
     "README.md"
   ],
   "scripts": {
@@ -41,11 +44,27 @@
       "inneranimals-site",
       "theme-inneranimals-site",
       "inner-animals-storefront"
-    ]
+    ],
+    "store": {
+      "name": "Inner Animals / IASF",
+      "summary": "A striking editorial apparel storefront with product, collection, journal and story layouts.",
+      "category": "Commerce",
+      "industries": ["Retail", "Apparel", "Lifestyle"],
+      "catalogSizes": ["Small catalog", "Medium catalog"],
+      "tags": ["Products", "Collections", "Editorial", "Archetypes", "Responsive"],
+      "pages": ["Home", "Shop", "Product", "Collection", "Journal", "Story", "Checkout preview"],
+      "features": ["Responsive storefront", "Product discovery", "Search", "Cart preview", "CMS starter manifest"],
+      "colorway": "paper",
+      "cardImage": "/previews/iasf.svg",
+      "sortOrder": 8,
+      "priceUsd": 0,
+      "previewBuild": "package",
+      "release": {"status": "preview"}
+    }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SamPrimeaux/agentsam-sdk.git",
+    "url": "git+https://github.com/SamPrimeaux/inneranimalmedia-theme-store.git",
     "directory": "packages/theme-iasf"
   }
 }

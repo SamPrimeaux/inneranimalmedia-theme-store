@@ -1,0 +1,21 @@
+{
+  "schema": "agentsam.prebuild.v1",
+  "id": "iasf",
+  "package": "@inneranimalmedia/theme-iasf",
+  "version": "2.6.14",
+  "siteRoot": "site",
+  "entrypoint": "index.html",
+  "rootDeployable": true,
+  "portable": true,
+  "materializer": {
+    "export": "@inneranimalmedia/theme-iasf/node",
+    "function": "materializePrebuild"
+  },
+  "defaults": {
+    "basePath": "/"
+  },
+  "notes": [
+    "Static storefront design and interaction demo. Checkout never submits orders or payments.",
+    "cms-starter.json describes future editable CMS installation; preview publication is not a completed install."
+  ]
+}

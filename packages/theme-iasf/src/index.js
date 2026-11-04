@@ -12,6 +12,7 @@ import { products, archetypes, journal, nav, brand } from './content.js';
 import { IASF_CSS_VARS, themeToCssVars } from './tokens.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
+const PACKAGE_VERSION = JSON.parse(readFileSync(join(HERE, '..', 'package.json'), 'utf8')).version;
 const harvest = JSON.parse(readFileSync(join(HERE, 'harvest.json'), 'utf8'));
 
 const THEME = Object.freeze({
@@ -20,7 +21,7 @@ const THEME = Object.freeze({
   lineage: 'iasf',
   family: 'editorial-commerce',
   displayName: 'IASF Storefront',
-  version: '0.1.0',
+  version: PACKAGE_VERSION,
   kind: 'stock-theme',
   icon: 'theme',
   package: '@inneranimalmedia/theme-iasf',

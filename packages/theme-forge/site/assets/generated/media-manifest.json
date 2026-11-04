@@ -1,0 +1,17 @@
+{
+  "schema": "agentsam.theme-media.v1",
+  "theme": "forge",
+  "generated": [
+    {
+      "kind": "generated-social",
+      "slot": "social-card",
+      "label": "social sharing card",
+      "aspect_ratio": "16:9",
+      "provider": "openai",
+      "model": "gpt-image-2.5-sunburst",
+      "output": "assets/generated/social-card.webp",
+      "width": 1536,
+      "height": 864
+    }
+  ]
+}

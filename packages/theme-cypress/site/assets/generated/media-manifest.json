@@ -1,0 +1,226 @@
+{
+  "schema": "agentsam.theme-media.v1",
+  "theme": "cypress",
+  "generated": [
+    {
+      "kind": "generated-stock",
+      "slot": "media-ce06595d59",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "gemini",
+      "model": "gemini-3.1-flash-image",
+      "output": "assets/generated/media-ce06595d59.webp",
+      "width": 1264,
+      "height": 848
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-46205bfde8",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "gemini",
+      "model": "gemini-3.1-flash-image",
+      "output": "assets/generated/media-46205bfde8.webp",
+      "width": 1264,
+      "height": 848
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-50c5f3e279",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "gemini",
+      "model": "gemini-3.1-flash-image",
+      "output": "assets/generated/media-50c5f3e279.webp",
+      "width": 1264,
+      "height": 848
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-044ba16613",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "gemini",
+      "model": "gemini-3.1-flash-image",
+      "output": "assets/generated/media-044ba16613.webp",
+      "width": 1264,
+      "height": 848
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-0a1ea6f6d9",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "gemini",
+      "model": "gemini-3.1-flash-image",
+      "output": "assets/generated/media-0a1ea6f6d9.webp",
+      "width": 1264,
+      "height": 848
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-997c10ef39",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "gemini",
+      "model": "gemini-3.1-flash-image",
+      "output": "assets/generated/media-997c10ef39.webp",
+      "width": 1264,
+      "height": 848
+    },
+    {
+      "kind": "generated-social",
+      "slot": "social-card",
+      "label": "social sharing card",
+      "aspect_ratio": "16:9",
+      "provider": "openai",
+      "model": "gpt-image-2.5-sunburst",
+      "output": "assets/generated/social-card.webp",
+      "width": 1536,
+      "height": 864
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-2df479fd2d",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "openai",
+      "model": "gpt-image-2.5-sunburst",
+      "output": "assets/generated/media-2df479fd2d.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-2e8bd0d9bc",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "openai",
+      "model": "gpt-image-2.5-sunburst",
+      "output": "assets/generated/media-2e8bd0d9bc.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-a423735c21",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "openai",
+      "model": "gpt-image-2.5-sunburst",
+      "output": "assets/generated/media-a423735c21.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-0c06778307",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "openai",
+      "model": "gpt-image-2.5-sunburst",
+      "output": "assets/generated/media-0c06778307.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-c9cea5245b",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "openai",
+      "model": "gpt-image-2.5-sunburst",
+      "output": "assets/generated/media-c9cea5245b.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-5f1467778c",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "openai",
+      "model": "gpt-image-2.5-sunburst",
+      "output": "assets/generated/media-5f1467778c.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-f6711b5053",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "openai",
+      "model": "gpt-image-2.5-sunburst",
+      "output": "assets/generated/media-f6711b5053.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-cab3c84c60",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "openai",
+      "model": "gpt-image-2.5-sunburst",
+      "output": "assets/generated/media-cab3c84c60.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-6703642b22",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "openai",
+      "model": "gpt-image-2.5-sunburst",
+      "output": "assets/generated/media-6703642b22.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-41d4e2643c",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "openai",
+      "model": "gpt-image-2.5-sunburst",
+      "output": "assets/generated/media-41d4e2643c.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-1539ed373a",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "openai",
+      "model": "gpt-image-2.5-sunburst",
+      "output": "assets/generated/media-1539ed373a.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-87a490bc8e",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "openai",
+      "model": "gpt-image-2.5-sunburst",
+      "output": "assets/generated/media-87a490bc8e.webp",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "kind": "generated-stock",
+      "slot": "media-d268905e7e",
+      "label": "editorial content image",
+      "aspect_ratio": "3:2",
+      "provider": "openai",
+      "model": "gpt-image-2.5-sunburst",
+      "output": "assets/generated/media-d268905e7e.webp",
+      "width": 1536,
+      "height": 1024
+    }
+  ]
+}

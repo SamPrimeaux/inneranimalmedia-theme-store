@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ember">
+<rect width="64" height="64" rx="16" fill="#111111"/>
+<g transform="translate(32 32) rotate(34)" fill="none" stroke="#e36b2c" stroke-width="4">
+  <rect x="-14" y="-14" width="28" height="28" rx="7"/>
+  <path d="M-14 0H14M0-14V14"/>
+</g>
+</svg>

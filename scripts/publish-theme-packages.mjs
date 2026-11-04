@@ -5,7 +5,7 @@
  * separately authenticated operator laptop. No editable CMS state lives here.
  */
 import { spawn } from 'node:child_process';
-import { mkdtemp, readdir, lstat, readFile, rm } from 'node:fs/promises';
+import { mkdtemp, readdir, lstat, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, relative, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -120,23 +120,58 @@ try {
     const out = join(root, 'pkg-' + theme.slug);
     entry.materializePrebuild(out, { basePath: themePrefix });
     const index = await readFile(join(out, 'index.html'));
-    const remoteIndex = join(root, 'remote-' + theme.slug + '.html');
-    let unchanged = false;
-    try {
-      await run('npx', ['wrangler', 'r2', 'object', 'get', bucket + themePrefix + 'index.html', '--remote', '--file', remoteIndex], process.cwd(), true);
-      unchanged = sha256(await readFile(remoteIndex)) === sha256(index);
-    } catch { /* not published yet */ }
-    if (unchanged) { console.log('Unchanged, skipping:', themePrefix); continue; }
     const themeFiles = await walk(out);
-    console.log('Uploading ' + themeFiles.length + ' files for ' + theme.slug + '@' + theme.version);
+    // The index HTML alone is not a complete preview. Bind the release to every
+    // file so newly added images cannot be skipped when index.html is unchanged.
+    const fileDigests = await Promise.all(themeFiles.map(async file => ({
+      path: relative(out, file).split(sep).join('/'),
+      sha256: sha256(await readFile(file)),
+    })));
+    fileDigests.sort((a,b)=>a.path.localeCompare(b.path));
+    const manifest = Buffer.from(JSON.stringify({
+      schema: 'iam.theme-preview-files.v1',
+      slug: theme.slug, version: theme.version, files: fileDigests,
+    }, null, 2) + '\n');
+    const manifestKey = bucket + themePrefix + 'preview-files.json';
+    const remoteManifest = join(root, 'manifest-' + theme.slug + '.json');
+    let previousManifest = null;
+    try {
+      await run('npx', ['wrangler', 'r2', 'object', 'get', manifestKey,
+        '--remote', '--file', remoteManifest], process.cwd(), true);
+      previousManifest = await readFile(remoteManifest);
+    } catch { /* first publish or legacy preview without a complete-file manifest */ }
+    if (previousManifest) {
+      if (sha256(previousManifest) !== sha256(manifest)) {
+        throw new Error('Immutable preview differs for ' + theme.slug + '@' + theme.version
+          + '; bump the package version before publishing changed files');
+      }
+      console.log('Verified unchanged manifest, skipping:', themePrefix);
+      continue;
+    }
+    console.log('Publishing ' + themeFiles.length + ' files for ' + theme.slug + '@' + theme.version);
     await pool(themeFiles, 6, async (file) => {
       const path = relative(out, file).split(sep).join('/');
       if (path.startsWith('../') || path.startsWith('/')) throw new Error('Invalid object path');
-      await run('npx', ['wrangler', 'r2', 'object', 'put', bucket + themePrefix + path, '--remote', '--file', file, '--content-type', mediaType(file)]);
+      await run('npx', ['wrangler', 'r2', 'object', 'put', bucket + themePrefix + path,
+        '--remote', '--file', file, '--content-type', mediaType(file)]);
     });
-    await run('npx', ['wrangler', 'r2', 'object', 'get', bucket + themePrefix + 'index.html', '--remote', '--file', remoteIndex], process.cwd(), true);
-    if (sha256(await readFile(remoteIndex)) !== sha256(index)) throw new Error('R2 round-trip mismatch for ' + theme.slug);
-    console.log('Verified R2 preview:', themePrefix);
+    const remoteIndex = join(root, 'remote-' + theme.slug + '.html');
+    await run('npx', ['wrangler', 'r2', 'object', 'get',
+      bucket + themePrefix + 'index.html', '--remote', '--file', remoteIndex], process.cwd(), true);
+    if (sha256(await readFile(remoteIndex)) !== sha256(index)) {
+      throw new Error('R2 index round-trip mismatch for ' + theme.slug);
+    }
+    // Manifest is the last write: its existence indicates a completed release.
+    const localManifest = join(root, 'local-manifest-' + theme.slug + '.json');
+    await writeFile(localManifest, manifest);
+    await run('npx', ['wrangler', 'r2', 'object', 'put', manifestKey,
+      '--remote', '--file', localManifest, '--content-type', 'application/json']);
+    await run('npx', ['wrangler', 'r2', 'object', 'get', manifestKey,
+      '--remote', '--file', remoteManifest], process.cwd(), true);
+    if (sha256(await readFile(remoteManifest)) !== sha256(manifest)) {
+      throw new Error('R2 manifest round-trip mismatch for ' + theme.slug);
+    }
+    console.log('Verified complete immutable R2 preview:', themePrefix);
   }
 
   if (deploy) {

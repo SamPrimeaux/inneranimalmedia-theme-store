@@ -15,7 +15,7 @@ export function ThemeCard({ theme, onExplore, onAdd }: {
     </button>
     <div className="card-bottom">
       <div className="card-names"><h3>{theme.name}</h3><p>by {theme.publisher}</p></div>
-      <button type="button" className="card-add" onClick={onAdd} aria-label={'Add '+theme.name}>Add</button>
+      <button type="button" className="card-add" onClick={onAdd} aria-label={(theme.downloadReady?'Add ':'Preview ')+theme.name}>{theme.downloadReady?'Add':'Preview'}</button>
     </div>
   </article>;
 }

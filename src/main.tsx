@@ -33,8 +33,8 @@ function App({ themes, site }: { themes: ThemeRecord[]; site: SiteDocument }) {
   };
   const [mobileMenu,setMobileMenu] = useState(false);
   const [device,setDevice] = useState<Device>('desktop');
-  const [installOpen,setInstallOpen] = useState(false);
   const [expanded,setExpanded] = useState(false);
+  const preferredSiteId = useRef(new URLSearchParams(window.location.search).get('site_id'));
   const previewRef = useRef<HTMLElement>(null);
   React.useEffect(()=>{
     const sync = () => setExpanded(document.fullscreenElement===previewRef.current);
@@ -49,13 +49,24 @@ function App({ themes, site }: { themes: ThemeRecord[]; site: SiteDocument }) {
     query, ...selection, sort,
   }),[themes,category,query,selection,sort]);
   const selected = view.kind === 'detail' ? themes.find(t=>t.slug===view.slug) : undefined;
+  const tryTheme = (theme:ThemeRecord) => {
+    if (!theme.downloadReady || theme.release.status !== 'published') return;
+    const destination = new URL('/sites', 'https://agentsam.inneranimalmedia.com');
+    destination.searchParams.set('theme_sku', theme.sku);
+    destination.searchParams.set('theme_version', theme.version);
+    destination.searchParams.set('action', 'try');
+    const siteId = preferredSiteId.current;
+    if (siteId && /^[A-Za-z0-9_-]{1,160}$/.test(siteId))
+      destination.searchParams.set('site_id', siteId);
+    window.location.assign(destination.href);
+  };
   function navigate(next:View) {
-    setView(next);setInstallOpen(false);setDevice('desktop');setMobileMenu(false);
+    setView(next);setDevice('desktop');setMobileMenu(false);
     history.pushState({},'',next.kind==='gallery'?'/':'/themes/'+next.slug+'/');
     window.scrollTo({top:0,behavior:'instant'});
   }
   React.useEffect(()=>{
-    const handler=()=>{setView(initialView());setInstallOpen(false)};
+    const handler=()=>{setView(initialView())};
     window.addEventListener('popstate',handler);
     return()=>window.removeEventListener('popstate',handler);
   },[]);
@@ -110,7 +121,7 @@ function App({ themes, site }: { themes: ThemeRecord[]; site: SiteDocument }) {
             <div className="theme-grid">
               {filtered.map(t=><ThemeCard key={t.slug} theme={t}
                 onExplore={()=>navigate({kind:'detail',slug:t.slug})}
-                onAdd={()=>{navigate({kind:'detail',slug:t.slug});setInstallOpen(true)}}/>)}
+                onAdd={()=>t.downloadReady?tryTheme(t):navigate({kind:'detail',slug:t.slug})}/>)}
             </div>
             {!filtered.length&&<div className="no-results"><h3>No themes found</h3><p>Try a different filter.</p>
               <button className="secondary-button" onClick={clearFilters}>Clear filters</button></div>}
@@ -124,7 +135,7 @@ function App({ themes, site }: { themes: ThemeRecord[]; site: SiteDocument }) {
       <div className="detail-intro">
       <div className="shell breadcrumb"><button onClick={()=>navigate({kind:'gallery'})}><ArrowLeft size={16}/> All themes</button><span>/</span><span>{selected.category}</span><span>/</span><b>{selected.name}</b></div>
       <div className="shell detail-header"><div><div className="eyebrow">{selected.category} / Original design</div><h1>{selected.name}<span className="version">v{selected.version}</span></h1><p>{selected.summary}</p><div className="detail-features">{selected.tags.map(tag=><span key={tag}>{tag}</span>)}</div></div>
-        <div className="header-cta"><button className="light-button" onClick={()=>document.getElementById('live-preview')?.scrollIntoView({behavior:'smooth'})}><Eye size={17}/> Explore live preview</button><button className="primary-button" onClick={()=>setInstallOpen(true)}>Try theme <ArrowRight size={17}/></button></div></div>
+        <div className="header-cta"><button className="light-button" onClick={()=>document.getElementById('live-preview')?.scrollIntoView({behavior:'smooth'})}><Eye size={17}/> Explore live preview</button><button className="primary-button" disabled={!selected.downloadReady} title={selected.downloadReady?'Install a draft in AgentSam':'Preview only — installable release not yet available'} onClick={()=>tryTheme(selected)}>{selected.downloadReady?'Try theme':'Preview only'} <ArrowRight size={17}/></button></div></div>
       </div>
       <section ref={previewRef} className="preview-surface" id="live-preview"><div className="preview-controls"><div className="preview-title"><span className="live-indicator"/><b>{selected.name} preview</b><span>Fully interactive website</span></div><div className="device-group" aria-label="Device size">{([['desktop',Monitor],['tablet',Tablet],['mobile',Smartphone]] as const).map(([d,Icon])=><button key={d} className={device===d?'active':''} aria-label={d+' preview'} aria-pressed={device===d} onClick={()=>setDevice(d)}><Icon size={17}/></button>)}</div><div className="view-actions"><button className="secondary-button" onClick={togglePreview}><Maximize2 size={16}/>{expanded?'Exit fullscreen':'Fullscreen'}</button>{selected.previewUrl&&<a href={selected.previewUrl} target="_blank" rel="noreferrer" className="secondary-button" aria-label="Open live site preview"><ExternalLink size={16}/></a>}</div></div>
       <div className={'preview-stage '+(expanded?'wide':'')}><div className={'preview-browser '+device}><div className="browser-bar"><span/><span/><span/><small>{selected.previewUrl??'Preview not yet hosted'}</small></div>{selected.previewUrl?
@@ -141,19 +152,10 @@ function App({ themes, site }: { themes: ThemeRecord[]; site: SiteDocument }) {
         {selected.editorial?.notes && <div className="story-notes">{selected.editorial.notes.map((note,index)=><div key={note}><span>0{index+1}</span><p>{note}</p></div>)}</div>}
       </section>
       <section className="shell included"><div><div className="eyebrow">Inside the theme</div><h2>Ready to make your own.</h2><p>Includes the starter layout and interaction patterns shown in the preview. Connecting content and installing to a site are separate actions.</p></div><div className="included-content"><h3>Page templates</h3><div className="page-tags">{selected.pages.map(p=><span key={p}><Check size={14}/>{p}</span>)}</div><div className="compat-note"><ShieldCheck size={20}/><div><b>CMS v2 target</b><span>Theme Store supplies the release. AgentSam handles site permissions, draft creation and editing.</span></div></div></div></section>
-      <div className="sticky-detail-cta"><div><strong>{selected.name}</strong><span>by {selected.publisher}</span></div><div><button className="light-button" onClick={()=>document.getElementById('live-preview')?.scrollIntoView({behavior:'smooth'})}>Explore live preview</button><button className="primary-button" onClick={()=>setInstallOpen(true)}>Try theme <ArrowRight size={16}/></button></div></div>
+      <div className="sticky-detail-cta"><div><strong>{selected.name}</strong><span>by {selected.publisher}</span></div><div><button className="light-button" onClick={()=>document.getElementById('live-preview')?.scrollIntoView({behavior:'smooth'})}>Explore live preview</button><button className="primary-button" disabled={!selected.downloadReady} title={selected.downloadReady?'Install a draft in AgentSam':'Preview only — installable release not yet available'} onClick={()=>tryTheme(selected)}>{selected.downloadReady?'Try theme':'Preview only'} <ArrowRight size={16}/></button></div></div>
     </main> : <main className="shell no-results"><h1>Theme not found</h1><button onClick={()=>navigate({kind:'gallery'})}>Back to themes</button></main>}
     <footer className="site-footer"><div className="shell"><div><span className="brand-monogram">IA<span className="brand-slash">/</span></span><p>Original, adaptable website starting points.<br/>Made for the InnerAnimalMedia ecosystem.</p></div><span>© {new Date().getFullYear()} InnerAnimalMedia · Theme Store</span></div></footer>
-    {installOpen&&selected&&<div className="modal-backdrop" role="presentation" onMouseDown={e=>{if(e.currentTarget===e.target)setInstallOpen(false)}}>
-      <div className="install-modal" role="dialog" aria-modal="true" aria-labelledby="add-title"><div className="modal-heading"><div><div className="eyebrow">Private installation</div><h2 id="add-title">{selected.downloadReady ? "Install " + selected.name : selected.name + " preview"}</h2></div><button className="icon-button" onClick={()=>setInstallOpen(false)} aria-label="Close"><X size={18}/></button></div><p>{selected.downloadReady
-          ? "Select an authorized AgentSam site to create an editable private draft from this release. Installation never overwrites the published storefront."
-          : "This version has no verified, editable release to install yet. You can explore its original preview, but no site will be modified."}</p><div className="install-summary"><b>{selected.name} · v{selected.version}</b><span>{selected.pages.length} starter page layouts · CMS v2 target</span></div>{selected.downloadReady && selected.release?.status==='published'
-            ? <><p className="boundary-note">Install this verified release into a site you own. AgentSam creates a private, editable CMS draft; your live website will not be replaced.</p>
-              <a className="primary-button full" href={'https://agentsam.inneranimalmedia.com/sites?theme_sku='+encodeURIComponent(selected.sku)+'&theme_version='+encodeURIComponent(selected.version)}>Install &amp; edit in AgentSam <ArrowRight size={16}/></a>
-              <a className="secondary-button full" href={'/api/themes/'+encodeURIComponent(selected.slug)+'/'+encodeURIComponent(selected.version)+'/download'}>Download verified package <ArrowRight size={16}/></a>
-              <a className="secondary-button full" href={'/api/themes/'+encodeURIComponent(selected.slug)+'/'+encodeURIComponent(selected.version)+'/manifest.json'} target="_blank" rel="noreferrer">View release checksum and manifest <ExternalLink size={16}/></a></>
-            : <p className="boundary-note" role="status">Preview only. An editable CMS release has not been published for this package yet.</p>}<button className="secondary-button full" onClick={()=>setInstallOpen(false)}>Keep browsing</button></div>
-    </div>}
+
   </div>;
 }
 /** Catalog (`/api/catalog`, generated from packages) and site copy/tokens (`/api/site`, published from the CMS). */

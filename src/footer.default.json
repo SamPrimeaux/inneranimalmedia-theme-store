@@ -1,0 +1,261 @@
+{
+  "schema": "iam.cms.global-footer.v1",
+  "section": {
+    "id": "cmss_cmsp_theme_store_site_shell_footer",
+    "type": "global-footer",
+    "settings": {
+      "background": "#050505",
+      "foreground": "#ffffff",
+      "muted": "#b9b9bd",
+      "divider": "#343438",
+      "width": "1280px",
+      "glb_enabled": true,
+      "glb_url": "https://assets.inneranimalmedia.com/glb/inneranimalmediafooterglb.glb",
+      "glb_opacity": 0.1,
+      "glb_tint": "#e9edf5",
+      "glb_rotation": true
+    }
+  },
+  "blocks": [
+    {
+      "key": "cta",
+      "type": "cta",
+      "parent": null,
+      "order": 10,
+      "settings": {
+        "enabled": true,
+        "eyebrow": "YOUR NEXT STARTING POINT",
+        "heading": "Build something worth keeping.",
+        "description": "Find a starting point that feels right, then make it yours.",
+        "primary_label": "Explore themes",
+        "primary_href": "/themes/",
+        "secondary_label": "Get in touch",
+        "secondary_href": "mailto:hey@inneranimalmedia.com"
+      }
+    },
+    {
+      "key": "contact",
+      "type": "contact",
+      "parent": null,
+      "order": 20,
+      "settings": {
+        "logo_url": "",
+        "logo_alt": "Theme Store",
+        "brand_label": "THEME STORE",
+        "heading": "Let's Talk",
+        "description": "Original website experiences, ready to make your own.",
+        "email": "hey@inneranimalmedia.com",
+        "phone": "337-450-9998",
+        "phone_href": "tel:+13374509998"
+      }
+    },
+    {
+      "key": "company",
+      "type": "group",
+      "parent": null,
+      "order": 30,
+      "settings": {
+        "heading": "Company"
+      }
+    },
+    {
+      "key": "company-about",
+      "type": "link",
+      "parent": "company",
+      "order": 10,
+      "settings": {
+        "label": "About",
+        "href": "https://inneranimalmedia.com/"
+      }
+    },
+    {
+      "key": "company-work",
+      "type": "link",
+      "parent": "company",
+      "order": 20,
+      "settings": {
+        "label": "Our work",
+        "href": "https://inneranimalmedia.com/#work"
+      }
+    },
+    {
+      "key": "company-contact",
+      "type": "link",
+      "parent": "company",
+      "order": 30,
+      "settings": {
+        "label": "Contact",
+        "href": "mailto:hey@inneranimalmedia.com"
+      }
+    },
+    {
+      "key": "products",
+      "type": "group",
+      "parent": null,
+      "order": 40,
+      "settings": {
+        "heading": "Products & Apps"
+      }
+    },
+    {
+      "key": "product-agentsam",
+      "type": "link",
+      "parent": "products",
+      "order": 10,
+      "settings": {
+        "label": "AgentSam",
+        "href": "https://agentsam.inneranimalmedia.com/",
+        "icon_url": "https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/dbb316af-9c97-4959-f09f-bf58b2783d00/avatar"
+      }
+    },
+    {
+      "key": "product-cad",
+      "type": "link",
+      "parent": "products",
+      "order": 20,
+      "settings": {
+        "label": "CAD Creator",
+        "href": "https://cad.inneranimalmedia.com/#aspiration"
+      }
+    },
+    {
+      "key": "product-themes",
+      "type": "link",
+      "parent": "products",
+      "order": 30,
+      "settings": {
+        "label": "Theme Store",
+        "href": "https://themes.inneranimalmedia.com/"
+      }
+    },
+    {
+      "key": "resources",
+      "type": "group",
+      "parent": null,
+      "order": 50,
+      "settings": {
+        "heading": "Resources"
+      }
+    },
+    {
+      "key": "resources-field-manual",
+      "type": "link",
+      "parent": "resources",
+      "order": 10,
+      "settings": {
+        "label": "Architecture Field Manual",
+        "href": "https://agentsam.inneranimalmedia.com/learn/architecture-field-manual/"
+      }
+    },
+    {
+      "key": "resources-themes",
+      "type": "link",
+      "parent": "resources",
+      "order": 20,
+      "settings": {
+        "label": "Browse themes",
+        "href": "/themes/"
+      }
+    },
+    {
+      "key": "social",
+      "type": "social-group",
+      "parent": null,
+      "order": 60,
+      "settings": {
+        "heading": "Follow"
+      }
+    },
+    {
+      "key": "social-facebook",
+      "type": "social-link",
+      "parent": "social",
+      "order": 10,
+      "settings": {
+        "label": "Facebook",
+        "icon": "facebook",
+        "href": ""
+      }
+    },
+    {
+      "key": "social-instagram",
+      "type": "social-link",
+      "parent": "social",
+      "order": 20,
+      "settings": {
+        "label": "Instagram",
+        "icon": "instagram",
+        "href": ""
+      }
+    },
+    {
+      "key": "social-youtube",
+      "type": "social-link",
+      "parent": "social",
+      "order": 30,
+      "settings": {
+        "label": "YouTube",
+        "icon": "youtube",
+        "href": ""
+      }
+    },
+    {
+      "key": "utilities",
+      "type": "utilities",
+      "parent": null,
+      "order": 70,
+      "settings": {}
+    },
+    {
+      "key": "copyright",
+      "type": "copyright",
+      "parent": "utilities",
+      "order": 10,
+      "settings": {
+        "text": "© {year} Theme Store. All rights reserved."
+      }
+    },
+    {
+      "key": "policy-privacy",
+      "type": "link",
+      "parent": "utilities",
+      "order": 20,
+      "settings": {
+        "label": "Privacy",
+        "href": "https://inneranimalmedia.com/privacy"
+      }
+    },
+    {
+      "key": "policy-terms",
+      "type": "link",
+      "parent": "utilities",
+      "order": 30,
+      "settings": {
+        "label": "Terms",
+        "href": "https://inneranimalmedia.com/terms"
+      }
+    },
+    {
+      "key": "policy-sitemap",
+      "type": "link",
+      "parent": "utilities",
+      "order": 40,
+      "settings": {
+        "label": "Sitemap",
+        "href": "/sitemap.xml"
+      }
+    },
+    {
+      "key": "signature",
+      "type": "attribution",
+      "parent": "utilities",
+      "order": 50,
+      "settings": {
+        "label": "Developed by",
+        "logo_url": "https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/238de9d1-a470-4fe5-5424-9182f4bc0500/small",
+        "logo_alt": "InnerAnimalMedia",
+        "href": "https://inneranimalmedia.com/"
+      }
+    }
+  ]
+}

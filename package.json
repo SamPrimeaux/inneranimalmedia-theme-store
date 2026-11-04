@@ -19,18 +19,22 @@
     "check": "npm run catalog && tsc --noEmit",
     "build": "npm run catalog && tsc --noEmit && vite build",
     "test": "node --test tests/*.test.mjs",
-    "publish:site": "node scripts/publish-site.mjs --database inneranimalmedia-business"
+    "publish:site": "node scripts/publish-site.mjs --database inneranimalmedia-business && node scripts/publish-footer.mjs --database inneranimalmedia-business",
+    "footer:seed": "node scripts/seed-footer.mjs --database inneranimalmedia-business",
+    "publish:footer": "node scripts/publish-footer.mjs --database inneranimalmedia-business"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "three": "^0.187.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20261023.1",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.187.0",
     "@vitejs/plugin-react": "^4.5.0",
     "typescript": "~5.8.3",
     "vite": "^6.1.0",

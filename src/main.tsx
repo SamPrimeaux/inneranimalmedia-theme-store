@@ -7,6 +7,9 @@ import { CatalogFilters, type FilterName, type FilterSelection } from './Catalog
 import { ThemeCard } from './ThemeCard';
 import { ThemeExperience } from './ThemeExperience';
 import type { SiteDocument } from './site.mjs';
+import type { FooterData } from './footer.mjs';
+import { defaultFooter } from './footer.mjs';
+import { Footer } from './UniversalFooter';
 import './styles.css';
 import './catalog.css';
 
@@ -15,7 +18,7 @@ function initialView(): View {
   const match = location.pathname.match(/^\/themes\/([a-z0-9-]+)(?:\/preview)?\/?$/);
   return match ? {kind:'detail',slug:match[1]} : {kind:'gallery'};
 }
-function App({ themes, site }: { themes: ThemeRecord[]; site: SiteDocument }) {
+function App({ themes, site, footer }: { themes: ThemeRecord[]; site: SiteDocument; footer: FooterData }) {
   const categoryLabels = site.categoryLabels;
   const categories = useMemo(() => ['All themes', ...Array.from(new Set(themes.map((theme) => theme.category)))], [themes]);
   const [view,setView] = useState<View>(initialView);
@@ -120,26 +123,27 @@ function App({ themes, site }: { themes: ThemeRecord[]; site: SiteDocument }) {
         </section>
       </main>
     </> : selected ? <ThemeExperience theme={selected} onBack={()=>navigate({kind:'gallery'})} onTry={()=>tryTheme(selected)} /> : <main className="shell no-results"><h1>Theme not found</h1><button onClick={()=>navigate({kind:'gallery'})}>Back to themes</button></main>}
-    <footer className="site-footer"><div className="shell"><div><span className="brand-monogram">IA<span className="brand-slash">/</span></span><p>Original, adaptable website starting points.<br/>Made for the InnerAnimalMedia ecosystem.</p></div><span>© {new Date().getFullYear()} InnerAnimalMedia · Theme Store</span></div></footer>
+    <Footer data={footer} />
 
   </div>;
 }
 /** Catalog (`/api/catalog`, generated from packages) and site copy/tokens (`/api/site`, published from the CMS). */
 function Root() {
-  const [data, setData] = useState<{ themes: ThemeRecord[]; site: SiteDocument } | null>(null);
+  const [data, setData] = useState<{ themes: ThemeRecord[]; site: SiteDocument; footer: FooterData } | null>(null);
   const [error, setError] = useState(false);
   React.useEffect(() => {
     Promise.all([
       fetch('/api/catalog').then(r => r.json() as Promise<{ products?: ThemeRecord[] }>),
       fetch('/api/site').then(r => r.json() as Promise<{ site?: SiteDocument }>),
-    ]).then(([catalog, siteRes]) => {
+      fetch('/api/footer').then(r => r.ok ? r.json() as Promise<{ footer?: FooterData }> : { footer: defaultFooter }).catch(() => ({ footer: defaultFooter })),
+    ]).then(([catalog, siteRes, footerRes]) => {
       if (!catalog.products || !siteRes.site) throw new Error('bad payload');
       for (const [name, value] of Object.entries(siteRes.site.tokens)) document.documentElement.style.setProperty('--ts-' + name, value);
-      setData({ themes: catalog.products, site: siteRes.site });
+      setData({ themes: catalog.products, site: siteRes.site, footer: footerRes.footer || defaultFooter });
     }).catch(() => setError(true));
   }, []);
   if (error) return <main className="shell no-results"><h1>Catalog unavailable</h1><button onClick={() => location.reload()}>Try again</button></main>;
   if (!data) return <main className="shell no-results"><p>Loading themes…</p></main>;
-  return <App themes={data.themes} site={data.site}/>;
+  return <App themes={data.themes} site={data.site} footer={data.footer}/>;
 }
 createRoot(document.getElementById('root')!).render(<React.StrictMode><Root/></React.StrictMode>);

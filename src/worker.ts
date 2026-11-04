@@ -4,6 +4,7 @@ import { normalizePreviewHtml } from './preview-html.mjs';
 import { previewFileHeaders } from './preview-headers.mjs';
 import { resolveDemoAlias, publicDemoUrl, normalizeReleaseAssetRelative } from './preview-routes.mjs';
 import { resolveSite, type SiteDocument } from './site.mjs';
+import { normalizeFooter, defaultFooter } from './footer.mjs';
 import { verifiedInstallEntries } from './install-index.mjs';
 
 type Env = {
@@ -57,6 +58,15 @@ export default {
       try { const object = await env.THEME_PACKAGES.get('site/store-site.json'); override = object ? await object.json() : undefined; } catch { override = undefined; }
       const site = resolveSite(siteDefaults as SiteDocument, override);
       return Response.json({ ok: true, site }, { headers: { 'cache-control': 'public, max-age=60', 'x-content-type-options': 'nosniff' } });
+    }
+    if (url.pathname === '/api/footer') {
+      if (method !== 'GET') return missing('method_not_allowed', 405);
+      let footer = defaultFooter;
+      try {
+        const snapshot = await env.THEME_PACKAGES.get('site/theme-store-footer.json');
+        if (snapshot && snapshot.size <= 128_000) footer = normalizeFooter(await snapshot.json());
+      } catch { /* The safe CMS footer default remains available. */ }
+      return Response.json({ ok:true, footer }, { headers:{'cache-control':'public, max-age=60', 'x-content-type-options':'nosniff'} });
     }
     if (url.pathname === '/api/catalog') {
       if (method !== 'GET') return missing('method_not_allowed', 405);

@@ -1,5 +1,6 @@
 import { findTheme, publicTheme, themes } from './catalog';
 import siteDefaults from './site.default.json';
+import { normalizePreviewHtml } from './preview-html.mjs';
 import { resolveSite, type SiteDocument } from './site.mjs';
 
 type Env = {
@@ -81,6 +82,10 @@ export default {
           'x-content-type-options': 'nosniff',
           'content-security-policy': "frame-ancestors 'self'",
         });
+        if (ext === 'html') {
+          const body = method === 'HEAD' ? null : normalizePreviewHtml(await object.text(), slug, version);
+          return new Response(body, {status: 200, headers});
+        }
         return new Response(method === 'HEAD' ? null : object.body, {status: 200, headers});
       } catch {
         return missing('preview_storage_unavailable', 503);

@@ -46,6 +46,9 @@ function rewriteStaticBase(root, basePath) {
       for (const segment of STATIC_ROOTS) {
         text = text.replaceAll('/' + segment + '/', basePath + segment + '/');
       }
+      // Original assets may use ./assets/...; don't leave a relative ./ before
+      // the absolute versioned release prefix or the browser doubles the URL.
+      text = text.replaceAll('.' + basePath, basePath);
       fs.writeFileSync(target, text);
     }
   }

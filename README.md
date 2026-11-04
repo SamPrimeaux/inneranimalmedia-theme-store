@@ -14,7 +14,7 @@ npm run build
 npx wrangler dev  # local Worker / catalog API
 ```
 
-Cloudflare prerequisites: create a private R2 bucket named `theme-store` (or change the binding in `wrangler.jsonc`), assign the already-configured `themes.inneranimalmedia.com` custom domain to this Worker, and deploy with `npm run deploy`. GitHub Actions validates typechecking and builds before shipping. Do not enable a downloadable release until its ZIP has been uploaded to R2 and its SHA-256 recorded in the catalog.
+Cloudflare prerequisites: create a private R2 bucket named `theme-store` (or change the binding in `wrangler.jsonc`), assign the already-configured `themes.inneranimalmedia.com` custom domain to this Worker, and deploy with `npm run deploy`. Cloudflare Builds runs `npm run build` then `npm run deploy:cloudflare` (Worker deploy only). Publish a new theme preview intentionally with `npm run publish:previews`; the combined release-and-Worker operation is `npm run publish:previews:deploy`. A routine UI change must never rewrite theme packages. GitHub Actions validates typechecking and builds before shipping. Do not enable a downloadable release until its ZIP has been uploaded to R2 and its SHA-256 recorded in the catalog.
 
 ## Customer journey
 
@@ -54,9 +54,9 @@ The preview URL is not the downloadable theme-package. Production-ready installa
 
 
 ### Cloudflare-native Git builds (no GitHub Actions secrets required)
-If you connect `SamPrimeaux/inneranimalmedia-theme-store` directly to the existing Cloudflare Worker from **Workers & Pages → inneranimalmedia-theme-store → Settings → Builds**, set the project root to `/` and **deploy command** to `npm run deploy:cloudflare`. Ensure Node.js 22+ and the deployment environment's Cloudflare credentials can write R2 objects and edit the Worker. The command fetches an exact reviewed Plain Jane source commit (never an unpinned `main`), compiles its full website, publishes the preview tree to private `theme-store` R2, validates the root asset round trip, and only then deploys the Worker with the R2 binding.
+If you connect `SamPrimeaux/inneranimalmedia-theme-store` directly to the existing Cloudflare Worker from **Workers & Pages → inneranimalmedia-theme-store → Settings → Builds**, set the project root to `/` and **deploy command** to `npm run deploy:cloudflare`. Ensure Node.js 22+ and the deployment environment's Cloudflare credentials can write R2 objects and edit the Worker. The Worker deployment command only deploys the already built Theme Store and leaves existing R2 theme releases untouched. Run `npm run publish:previews` explicitly when publishing reviewed theme preview assets, or `npm run publish:previews:deploy` for a coordinated theme-release deployment.
 
-You may also run this on an authenticated workstation with `npm install && npm run deploy:cloudflare`. To upload preview assets without deploying the Worker, run `npm run publish:previews`. If any stage fails, the Worker deploy is skipped. The original root site remains unchanged until the final Wrangler deployment succeeds. This script does not mark theme-package ZIPs installable.
+You may also run the separate Worker deployment on an authenticated workstation with `npm install && npm run deploy`. To upload preview assets without deploying the Worker, run `npm run publish:previews`. If any stage fails, the Worker deploy is skipped. The original root site remains unchanged until the final Wrangler deployment succeeds. This script does not mark theme-package ZIPs installable.
 
 ## Adding a theme
 

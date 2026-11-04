@@ -9,7 +9,7 @@ export type ThemeCategory = 'Commerce' | 'Nonprofit' | 'Editorial' | 'Services' 
 export type ReleaseState = 'preview' | 'published';
 export type ThemeRecord = {
   slug: string; sku: string; name: string; summary: string;
-  category: ThemeCategory; tags: string[]; pages: string[];
+  category: ThemeCategory; tags: string[]; pages: string[]; industries: string[]; features: string[]; catalogSizes: string[];
   colorway: 'wine' | 'violet' | 'paper'; version: string;
   publisher: string; priceUsd: number | null; downloadReady?: boolean;
   /** Resolved at request time by the Worker: live R2 preview if published, else null. */

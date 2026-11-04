@@ -1,9 +1,13 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { ArrowLeft, ArrowRight, Check, ChevronDown, ExternalLink, Eye, Filter, Globe, Menu, Monitor, Search, ShieldCheck, Smartphone, Tablet, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, ChevronDown, ExternalLink, Eye, Filter, Globe, Maximize2, Menu, Monitor, Search, ShieldCheck, Smartphone, Tablet, X } from 'lucide-react';
 import type { ThemeRecord } from './catalog';
+import { availableFilters, filterThemes } from './filter-themes.mjs';
+import { CatalogFilters, type FilterName, type FilterSelection } from './CatalogFilters';
+import { ThemeCard } from './ThemeCard';
 import type { SiteDocument } from './site.mjs';
 import './styles.css';
+import './catalog.css';
 
 type Device = 'desktop' | 'tablet' | 'mobile';
 type View = { kind: 'gallery' } | { kind: 'detail'; slug: string };
@@ -17,12 +21,33 @@ function App({ themes, site }: { themes: ThemeRecord[]; site: SiteDocument }) {
   const [view,setView] = useState<View>(initialView);
   const [query,setQuery] = useState('');
   const [category,setCategory] = useState('All themes');
+  const [selection,setSelection] = useState<FilterSelection>({prices:[],industries:[],catalogSizes:[],features:[]});
+  const [sort,setSort] = useState('featured');
+  const facets = useMemo(()=>availableFilters(themes),[themes]);
+  const toggleFilter = (name:FilterName,value:string) => setSelection(prev=>({
+    ...prev,[name]:prev[name].includes(value)?prev[name].filter(x=>x!==value):[...prev[name],value],
+  }));
+  const clearFilters = () => {
+    setQuery('');setCategory('All themes');setSort('featured');
+    setSelection({prices:[],industries:[],catalogSizes:[],features:[]});
+  };
   const [mobileMenu,setMobileMenu] = useState(false);
   const [device,setDevice] = useState<Device>('desktop');
   const [installOpen,setInstallOpen] = useState(false);
   const [expanded,setExpanded] = useState(false);
-  const filtered = useMemo(() => themes.filter(t => (category==='All themes'||t.category===category) &&
-    [t.name,t.summary,t.category,...t.tags].join(' ').toLowerCase().includes(query.toLowerCase())),[themes,category,query]);
+  const previewRef = useRef<HTMLElement>(null);
+  React.useEffect(()=>{
+    const sync = () => setExpanded(document.fullscreenElement===previewRef.current);
+    document.addEventListener('fullscreenchange',sync);
+    return ()=>document.removeEventListener('fullscreenchange',sync);
+  },[]);
+  const togglePreview = () => {
+    if(document.fullscreenElement===previewRef.current) void document.exitFullscreen();
+    else void previewRef.current?.requestFullscreen();
+  };
+  const filtered = useMemo(()=>filterThemes(themes.filter(t=>category==='All themes'||t.category===category),{
+    query, ...selection, sort,
+  }),[themes,category,query,selection,sort]);
   const selected = view.kind === 'detail' ? themes.find(t=>t.slug===view.slug) : undefined;
   function navigate(next:View) {
     setView(next);setInstallOpen(false);setDevice('desktop');setMobileMenu(false);
@@ -43,7 +68,14 @@ function App({ themes, site }: { themes: ThemeRecord[]; site: SiteDocument }) {
           <span className="brand-monogram">{site.brand.monogram}<span className="brand-slash">/</span></span><span>{site.brand.label}</span>
         </a>
         <nav className={'top-nav '+(mobileMenu?'open':'')} aria-label="Main">
-          <a href="/" onClick={e=>{e.preventDefault();navigate({kind:'gallery'})}}>{site.nav.discover}</a>
+          <details className="browse-menu">
+            <summary>{site.library.browseLabel}<ChevronDown size={14}/></summary>
+            <div className="browse-options">{categories.map(c=><button key={c} type="button" onClick={e=>{
+              setCategory(c);setMobileMenu(false);(e.currentTarget.closest('details') as HTMLDetailsElement).open=false;
+              navigate({kind:'gallery'});
+              setTimeout(()=>document.getElementById('browse-themes')?.scrollIntoView({behavior:'smooth'}),25);
+            }}>{categoryLabels[c]||c}</button>)}</div>
+          </details>
           <a href="#how-it-works" onClick={e=>{if(!isGallery){e.preventDefault();navigate({kind:'gallery'});setTimeout(()=>document.getElementById('how-it-works')?.scrollIntoView(),10)}}}>{site.nav.howItWorks}</a>
           <a href={site.nav.sitesHref} target="_blank" rel="noreferrer">{site.nav.sitesLabel} <ExternalLink size={13}/></a>
         </nav>
@@ -58,33 +90,43 @@ function App({ themes, site }: { themes: ThemeRecord[]; site: SiteDocument }) {
         <div className="hero-meta">{site.hero.points.map(point=><span key={point}><Check size={15}/> {point}</span>)}</div>
       </section>
       <main className="shell">
-        <div className="catalog-bar"><div><div className="eyebrow muted">{site.library.eyebrow}</div><h2>{site.library.title} <span className="count">{filtered.length}</span></h2></div>
-          <div className="catalog-filters"><label className="search-field"><Search size={18}/><span className="sr-only">Search themes</span><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search themes" /></label>
-            <label className="select-field"><Filter size={17}/><span className="sr-only">Filter by category</span><select value={category} onChange={e=>setCategory(e.target.value)}>{categories.map(c=><option key={c} value={c}>{categoryLabels[c]||c}</option>)}</select><ChevronDown size={15}/></label>
+        <div className="catalog-bar" id="browse-themes">
+          <div><div className="eyebrow muted">{site.library.eyebrow}</div><h2>{site.library.title}</h2></div>
+          <div className="catalog-filters">
+            <label className="search-field"><Search size={18}/><span className="sr-only">Search themes</span>
+              <input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search themes" /></label>
+            <label className="select-field"><span className="sr-only">Sort themes</span>
+              <select value={sort} onChange={e=>setSort(e.target.value)}>
+                <option value="featured">Featured</option><option value="name">Name A–Z</option>
+                <option value="price-ascending">Price: low to high</option>
+              </select><ChevronDown size={15}/></label>
           </div>
         </div>
-        <div className="theme-grid">
-          {filtered.map(t=><article key={t.slug} className="theme-card">
-            <button className={'theme-art '+t.colorway} onClick={()=>navigate({kind:'detail',slug:t.slug})} aria-label={'Preview '+t.name}>
-              <div className="theme-art-image" style={{backgroundImage:'url('+t.cardImage+')'}}/>
-              <span className="art-fallback" aria-hidden="true"><span>{t.name.toUpperCase()}</span><strong>{t.summary.split(' ').slice(0,4).join(' ')}</strong></span>
-              <span className="art-preview"><Eye size={16}/> Explore theme</span>
-            </button>
-            <div className="card-bottom"><div className="card-names"><span className="theme-category">{t.category}</span><h3>{t.name}</h3><p>{t.summary}</p><div className="tags">{t.tags.slice(0,3).map(tag=><span key={tag}>{tag}</span>)}</div></div>
-              <button className="square-arrow" aria-label={'View '+t.name} onClick={()=>navigate({kind:'detail',slug:t.slug})}><ArrowRight size={19}/></button>
+        <div className="catalog-layout">
+          <CatalogFilters facets={facets} selection={selection} onToggle={toggleFilter}
+            onClear={clearFilters} labels={site.library.filters}/>
+          <div className="catalog-results">
+            <div className="result-count">{filtered.length} {filtered.length===1?'theme':'themes'}</div>
+            <div className="theme-grid">
+              {filtered.map(t=><ThemeCard key={t.slug} theme={t}
+                onExplore={()=>navigate({kind:'detail',slug:t.slug})}
+                onAdd={()=>{navigate({kind:'detail',slug:t.slug});setInstallOpen(true)}}/>)}
             </div>
-          </article>)}
+            {!filtered.length&&<div className="no-results"><h3>No themes found</h3><p>Try a different filter.</p>
+              <button className="secondary-button" onClick={clearFilters}>Clear filters</button></div>}
+          </div>
         </div>
-        {!filtered.length&&<div className="no-results"><h3>No themes found</h3><p>Try a different keyword or category.</p><button className="secondary-button" onClick={()=>{setQuery('');setCategory('All themes')}}>Clear filters</button></div>}
         <section className="how-it-works" id="how-it-works"><div><div className="eyebrow">{site.howItWorks.eyebrow}</div><h2>{site.howItWorks.title}</h2><p>{site.howItWorks.body}</p></div>
           <div className="steps">{site.howItWorks.steps.map((step,i)=><div key={step.title}><b>{String(i+1).padStart(2,'0')}</b><h3>{step.title}</h3><p>{step.body}</p></div>)}</div>
         </section>
       </main>
     </> : selected ? <main className="detail-shell">
+      <div className="detail-intro">
       <div className="shell breadcrumb"><button onClick={()=>navigate({kind:'gallery'})}><ArrowLeft size={16}/> All themes</button><span>/</span><span>{selected.category}</span><span>/</span><b>{selected.name}</b></div>
       <div className="shell detail-header"><div><div className="eyebrow">{selected.category} / Original design</div><h1>{selected.name}<span className="version">v{selected.version}</span></h1><p>{selected.summary}</p><div className="detail-features">{selected.tags.map(tag=><span key={tag}>{tag}</span>)}</div></div>
-        <div className="header-cta"><button className="light-button" onClick={()=>document.getElementById('live-preview')?.scrollIntoView({behavior:'smooth'})}><Eye size={17}/> Explore live preview</button><button className="primary-button" onClick={()=>setInstallOpen(true)}>Add to AgentSam <ArrowRight size={17}/></button></div></div>
-      <section className="preview-surface" id="live-preview"><div className="preview-controls"><div className="preview-title"><span className="live-indicator"/><b>{selected.name} preview</b><span>Fully interactive website</span></div><div className="device-group" aria-label="Device size">{([['desktop',Monitor],['tablet',Tablet],['mobile',Smartphone]] as const).map(([d,Icon])=><button key={d} className={device===d?'active':''} aria-label={d+' preview'} aria-pressed={device===d} onClick={()=>setDevice(d)}><Icon size={17}/></button>)}</div><div className="view-actions"><button className="secondary-button" onClick={()=>setExpanded(v=>!v)}>{expanded?'Standard view':'Expand preview'}</button>{selected.previewUrl&&<a href={selected.previewUrl} target="_blank" rel="noreferrer" className="secondary-button" aria-label="Open live site preview"><ExternalLink size={16}/></a>}</div></div>
+        <div className="header-cta"><button className="light-button" onClick={()=>document.getElementById('live-preview')?.scrollIntoView({behavior:'smooth'})}><Eye size={17}/> Explore live preview</button><button className="primary-button" onClick={()=>setInstallOpen(true)}>Try theme <ArrowRight size={17}/></button></div></div>
+      </div>
+      <section ref={previewRef} className="preview-surface" id="live-preview"><div className="preview-controls"><div className="preview-title"><span className="live-indicator"/><b>{selected.name} preview</b><span>Fully interactive website</span></div><div className="device-group" aria-label="Device size">{([['desktop',Monitor],['tablet',Tablet],['mobile',Smartphone]] as const).map(([d,Icon])=><button key={d} className={device===d?'active':''} aria-label={d+' preview'} aria-pressed={device===d} onClick={()=>setDevice(d)}><Icon size={17}/></button>)}</div><div className="view-actions"><button className="secondary-button" onClick={togglePreview}><Maximize2 size={16}/>{expanded?'Exit fullscreen':'Fullscreen'}</button>{selected.previewUrl&&<a href={selected.previewUrl} target="_blank" rel="noreferrer" className="secondary-button" aria-label="Open live site preview"><ExternalLink size={16}/></a>}</div></div>
       <div className={'preview-stage '+(expanded?'wide':'')}><div className={'preview-browser '+device}><div className="browser-bar"><span/><span/><span/><small>{selected.previewUrl??'Preview not yet hosted'}</small></div>{selected.previewUrl?
         <iframe title={selected.name+' live interactive theme-package preview'} src={selected.previewUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade"/>:
         <div className={'preview-missing '+selected.colorway}><h2>{selected.name}</h2><p>Interactive website preview is being prepared. The package is available in the catalog for inspection.</p></div>
@@ -99,7 +141,7 @@ function App({ themes, site }: { themes: ThemeRecord[]; site: SiteDocument }) {
         {selected.editorial?.notes && <div className="story-notes">{selected.editorial.notes.map((note,index)=><div key={note}><span>0{index+1}</span><p>{note}</p></div>)}</div>}
       </section>
       <section className="shell included"><div><div className="eyebrow">Inside the theme</div><h2>Ready to make your own.</h2><p>Includes the starter layout and interaction patterns shown in the preview. Connecting content and installing to a site are separate actions.</p></div><div className="included-content"><h3>Page templates</h3><div className="page-tags">{selected.pages.map(p=><span key={p}><Check size={14}/>{p}</span>)}</div><div className="compat-note"><ShieldCheck size={20}/><div><b>CMS v2 target</b><span>Theme Store supplies the release. AgentSam handles site permissions, draft creation and editing.</span></div></div></div></section>
-      <div className="sticky-detail-cta"><div><strong>{selected.name}</strong><span>by {selected.publisher}</span></div><div><button className="light-button" onClick={()=>document.getElementById('live-preview')?.scrollIntoView({behavior:'smooth'})}>Explore live preview</button><button className="primary-button" onClick={()=>setInstallOpen(true)}>Add theme <ArrowRight size={16}/></button></div></div>
+      <div className="sticky-detail-cta"><div><strong>{selected.name}</strong><span>by {selected.publisher}</span></div><div><button className="light-button" onClick={()=>document.getElementById('live-preview')?.scrollIntoView({behavior:'smooth'})}>Explore live preview</button><button className="primary-button" onClick={()=>setInstallOpen(true)}>Try theme <ArrowRight size={16}/></button></div></div>
     </main> : <main className="shell no-results"><h1>Theme not found</h1><button onClick={()=>navigate({kind:'gallery'})}>Back to themes</button></main>}
     <footer className="site-footer"><div className="shell"><div><span className="brand-monogram">IA<span className="brand-slash">/</span></span><p>Original, adaptable website starting points.<br/>Made for the InnerAnimalMedia ecosystem.</p></div><span>© {new Date().getFullYear()} InnerAnimalMedia · Theme Store</span></div></footer>
     {installOpen&&selected&&<div className="modal-backdrop" role="presentation" onMouseDown={e=>{if(e.currentTarget===e.target)setInstallOpen(false)}}>

@@ -30,6 +30,8 @@
       "name": "Ember",
       "summary": "Expressive e-commerce with bold product discovery and memorable shopping moments.",
       "category": "Commerce",
+      "industries": ["Retail", "Lifestyle"],
+      "catalogSizes": ["Small catalog", "Large catalog"],
       "tags": [
         "Products",
         "Collections",

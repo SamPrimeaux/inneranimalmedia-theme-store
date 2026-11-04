@@ -26,6 +26,12 @@ function requireString(dir, store, key) {
   if (typeof store[key] !== 'string' || !store[key].trim()) fail(dir, 'agentsam.store.' + key + ' must be a non-empty string');
   return store[key];
 }
+function optionalStringList(dir, store, key, fallback) {
+  if (store[key] === undefined) return fallback;
+  const value = store[key];
+  if (!Array.isArray(value) || value.some(item => typeof item !== 'string' || !item.trim())) fail(dir, 'agentsam.store.' + key + ' must be a list of strings');
+  return value;
+}
 function requireStringList(dir, store, key) {
   const value = store[key];
   if (!Array.isArray(value) || !value.length || value.some(item => typeof item !== 'string' || !item.trim())) {
@@ -64,6 +70,9 @@ export async function buildCatalog(packagesDir) {
       category,
       tags: requireStringList(dir, store, 'tags'),
       pages: requireStringList(dir, store, 'pages'),
+      industries: optionalStringList(dir, store, 'industries', [category]),
+      features: optionalStringList(dir, store, 'features', requireStringList(dir, store, 'pages')),
+      catalogSizes: optionalStringList(dir, store, 'catalogSizes', []),
       colorway,
       version: pkg.version,
       publisher: store.publisher ?? DEFAULT_PUBLISHER,

@@ -38,6 +38,8 @@
       "name": "Resolve",
       "summary": "A cinematic fashion storefront with curated collections, shoppable editorial and a striking visual rhythm.",
       "category": "Commerce",
+      "industries": ["Clothing", "Fashion"],
+      "catalogSizes": ["Small catalog", "Large catalog"],
       "tags": [
         "Fashion",
         "Products",

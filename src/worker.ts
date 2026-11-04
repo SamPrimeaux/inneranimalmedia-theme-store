@@ -1,6 +1,7 @@
 import { findTheme, publicTheme, themes } from './catalog';
 import siteDefaults from './site.default.json';
 import { normalizePreviewHtml } from './preview-html.mjs';
+import { previewFileHeaders } from './preview-headers.mjs';
 import { resolveDemoAlias, publicDemoUrl } from './preview-routes.mjs';
 import { resolveSite, type SiteDocument } from './site.mjs';
 
@@ -84,12 +85,7 @@ export default {
         }
         if (!object) return missing('preview_asset_missing');
         const ext = contentFile.split('.').at(-1)?.toLowerCase() ?? '';
-        const headers = new Headers({
-          'content-type': types[ext] ?? 'application/octet-stream',
-          'cache-control': ext === 'html' ? 'public, max-age=60' : 'public, max-age=31536000, immutable',
-          'x-content-type-options': 'nosniff',
-          'content-security-policy': "frame-ancestors 'self'",
-        });
+        const headers = previewFileHeaders(ext, types);
         if (ext === 'html') {
           const body = method === 'HEAD' ? null : normalizePreviewHtml(await object.text(), slug, version);
           return new Response(body, {status: 200, headers});

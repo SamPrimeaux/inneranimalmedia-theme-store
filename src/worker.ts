@@ -1,6 +1,7 @@
 import { findTheme, publicTheme, themes } from './catalog';
 import siteDefaults from './site.default.json';
 import { normalizePreviewHtml } from './preview-html.mjs';
+import { resolveDemoAlias, publicDemoUrl } from './preview-routes.mjs';
 import { resolveSite, type SiteDocument } from './site.mjs';
 
 type Env = {
@@ -23,7 +24,7 @@ const strictSlug = /^[a-z0-9-]+$/;
 async function resolvePreview(env: Env, origin: string, theme: { slug: string; version: string }): Promise<string | null> {
   const root = 'theme-packages/' + theme.slug + '/' + theme.version + '/preview/';
   try {
-    if (await env.THEME_PACKAGES.head(root + 'index.html')) return origin + '/' + root;
+    if (await env.THEME_PACKAGES.head(root + 'index.html')) return publicDemoUrl(origin, theme.slug);
   } catch { /* storage hiccup: treat as not previewable */ }
   return null;
 }
@@ -49,12 +50,19 @@ export default {
     }
     // Versioned, fully functional theme-package previews served from private R2.
     // R2 files: theme-packages/<slug>/<version>/preview/<relative-file>.
-    const demo = /^\/theme-packages\/([a-z0-9-]+)\/([0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.-]+)?)\/preview\/?(.*)$/.exec(url.pathname);
+    const aliasPath = resolveDemoAlias(url.pathname, themes);
+    if (url.pathname.startsWith('/themes/') && url.pathname.includes('/presets/') && !aliasPath) return missing('preview_not_found');
+    const demo = /^\/theme-packages\/([a-z0-9-]+)\/([0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.-]+)?)\/preview\/?(.*)$/.exec(aliasPath ?? url.pathname);
     if (demo) {
       if (method !== 'GET' && method !== 'HEAD') return missing('method_not_allowed', 405);
       const [, slug, version, relative] = demo;
       const theme = findTheme(slug);
-      if (!theme || version !== theme.version) return missing('preview_not_found');
+      let approvedArchived = false;
+      if (theme && version !== theme.version) {
+        try { approvedArchived = !!(await env.THEME_PACKAGES.head('theme-packages/' + slug + '/' + version + '/preview/preview-files.json')); }
+        catch { approvedArchived = false; }
+      }
+      if (!theme || (version !== theme.version && !approvedArchived)) return missing('preview_not_found');
       const segments = relative.split('/').filter(Boolean);
       if (segments.some(segment => segment === '..' || segment.startsWith('.') || !/^[a-zA-Z0-9._-]+$/.test(segment))) return missing('invalid_preview_path', 400);
       const file = segments.length === 0 || relative.endsWith('/') ? [...segments, 'index.html'].join('/') : segments.join('/');

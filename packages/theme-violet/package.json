@@ -65,7 +65,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SamPrimeaux/agentsam-sdk.git",
+    "url": "git+https://github.com/SamPrimeaux/inneranimalmedia-theme-store.git",
     "directory": "packages/theme-violet"
   }
 }

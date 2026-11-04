@@ -3,7 +3,7 @@
   "version": "2.6.13",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SamPrimeaux/agentsam-sdk.git",
+    "url": "git+https://github.com/SamPrimeaux/inneranimalmedia-theme-store.git",
     "directory": "packages/theme-resolve"
   },
   "description": "A high-fashion commerce prebuild built around cinematic scroll, shoppable editorial, sticky purchase rails, lookbooks, stories, bundles, and micro-interactions that make the storefront feel directed instead of assembled.",

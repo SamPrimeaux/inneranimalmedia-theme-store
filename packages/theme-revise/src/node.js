@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const SOURCE = fileURLToPath(new URL('../site/', import.meta.url));
-const PACKAGED_BASE = '/theme-packages/revise/0.1.0/preview/';
+const PACKAGED_BASE = '/theme-packages/revise/0.1.1/preview/';
 const TEXT_EXT = new Set(['.html','.js','.css','.json','.svg']);
 function normalizeBasePath(input = '/') {
   let base = String(input || '/');

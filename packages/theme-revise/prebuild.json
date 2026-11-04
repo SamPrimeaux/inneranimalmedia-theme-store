@@ -2,7 +2,7 @@
   "schema": "agentsam.prebuild.v1",
   "id": "revise",
   "package": "@inneranimalmedia/theme-revise",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "siteRoot": "site",
   "entrypoint": "index.html",
   "rootDeployable": true,

@@ -1,18 +1,18 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { ArrowLeft, ArrowRight, Check, ChevronDown, ExternalLink, Eye, Filter, Globe, Maximize2, Menu, Monitor, Search, ShieldCheck, Smartphone, Tablet, X } from 'lucide-react';
+import { Check, ChevronDown, ExternalLink, Globe, Menu, Search, X } from 'lucide-react';
 import type { ThemeRecord } from './catalog';
 import { availableFilters, filterThemes } from './filter-themes.mjs';
 import { CatalogFilters, type FilterName, type FilterSelection } from './CatalogFilters';
 import { ThemeCard } from './ThemeCard';
+import { ThemeExperience } from './ThemeExperience';
 import type { SiteDocument } from './site.mjs';
 import './styles.css';
 import './catalog.css';
 
-type Device = 'desktop' | 'tablet' | 'mobile';
 type View = { kind: 'gallery' } | { kind: 'detail'; slug: string };
 function initialView(): View {
-  const match = location.pathname.match(/^\/themes\/([a-z0-9-]+)\/?$/);
+  const match = location.pathname.match(/^\/themes\/([a-z0-9-]+)(?:\/preview)?\/?$/);
   return match ? {kind:'detail',slug:match[1]} : {kind:'gallery'};
 }
 function App({ themes, site }: { themes: ThemeRecord[]; site: SiteDocument }) {
@@ -32,19 +32,7 @@ function App({ themes, site }: { themes: ThemeRecord[]; site: SiteDocument }) {
     setSelection({prices:[],industries:[],catalogSizes:[],features:[]});
   };
   const [mobileMenu,setMobileMenu] = useState(false);
-  const [device,setDevice] = useState<Device>('desktop');
-  const [expanded,setExpanded] = useState(false);
   const preferredSiteId = useRef(new URLSearchParams(window.location.search).get('site_id'));
-  const previewRef = useRef<HTMLElement>(null);
-  React.useEffect(()=>{
-    const sync = () => setExpanded(document.fullscreenElement===previewRef.current);
-    document.addEventListener('fullscreenchange',sync);
-    return ()=>document.removeEventListener('fullscreenchange',sync);
-  },[]);
-  const togglePreview = () => {
-    if(document.fullscreenElement===previewRef.current) void document.exitFullscreen();
-    else void previewRef.current?.requestFullscreen();
-  };
   const filtered = useMemo(()=>filterThemes(themes.filter(t=>category==='All themes'||t.category===category),{
     query, ...selection, sort,
   }),[themes,category,query,selection,sort]);
@@ -61,7 +49,7 @@ function App({ themes, site }: { themes: ThemeRecord[]; site: SiteDocument }) {
     window.location.assign(destination.href);
   };
   function navigate(next:View) {
-    setView(next);setDevice('desktop');setMobileMenu(false);
+    setView(next);setMobileMenu(false);
     history.pushState({},'',next.kind==='gallery'?'/':'/themes/'+next.slug+'/');
     window.scrollTo({top:0,behavior:'instant'});
   }
@@ -131,29 +119,7 @@ function App({ themes, site }: { themes: ThemeRecord[]; site: SiteDocument }) {
           <div className="steps">{site.howItWorks.steps.map((step,i)=><div key={step.title}><b>{String(i+1).padStart(2,'0')}</b><h3>{step.title}</h3><p>{step.body}</p></div>)}</div>
         </section>
       </main>
-    </> : selected ? <main className="detail-shell">
-      <div className="detail-intro">
-      <div className="shell breadcrumb"><button onClick={()=>navigate({kind:'gallery'})}><ArrowLeft size={16}/> All themes</button><span>/</span><span>{selected.category}</span><span>/</span><b>{selected.name}</b></div>
-      <div className="shell detail-header"><div><div className="eyebrow">{selected.category} / Original design</div><h1>{selected.name}<span className="version">v{selected.version}</span></h1><p>{selected.summary}</p><div className="detail-features">{selected.tags.map(tag=><span key={tag}>{tag}</span>)}</div></div>
-        <div className="header-cta"><button className="light-button" onClick={()=>document.getElementById('live-preview')?.scrollIntoView({behavior:'smooth'})}><Eye size={17}/> Explore live preview</button><button className="primary-button" disabled={!selected.downloadReady} title={selected.downloadReady?'Install a draft in AgentSam':'Preview only — installable release not yet available'} onClick={()=>tryTheme(selected)}>{selected.downloadReady?'Try theme':'Preview only'} <ArrowRight size={17}/></button></div></div>
-      </div>
-      <section ref={previewRef} className="preview-surface" id="live-preview"><div className="preview-controls"><div className="preview-title"><span className="live-indicator"/><b>{selected.name} preview</b><span>Fully interactive website</span></div><div className="device-group" aria-label="Device size">{([['desktop',Monitor],['tablet',Tablet],['mobile',Smartphone]] as const).map(([d,Icon])=><button key={d} className={device===d?'active':''} aria-label={d+' preview'} aria-pressed={device===d} onClick={()=>setDevice(d)}><Icon size={17}/></button>)}</div><div className="view-actions"><button className="secondary-button" onClick={togglePreview}><Maximize2 size={16}/>{expanded?'Exit fullscreen':'Fullscreen'}</button>{selected.previewUrl&&<a href={selected.previewUrl} target="_blank" rel="noreferrer" className="secondary-button" aria-label="Open live site preview"><ExternalLink size={16}/></a>}</div></div>
-      <div className={'preview-stage '+(expanded?'wide':'')}><div className={'preview-browser '+device}><div className="browser-bar"><span/><span/><span/><small>{selected.previewUrl??'Preview not yet hosted'}</small></div>{selected.previewUrl?
-        <iframe title={selected.name+' live interactive theme-package preview'} src={selected.previewUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade"/>:
-        <div className={'preview-missing '+selected.colorway}><h2>{selected.name}</h2><p>Interactive website preview is being prepared. The package is available in the catalog for inspection.</p></div>
-      }</div></div></section>
-      <section className="shell product-story">
-        <div className="story-label"><span className="eyebrow">{selected.editorial?.eyebrow ?? 'Behind the design'}</span><span>THEME NO. {String(themes.indexOf(selected) + 1).padStart(2, '0')} / {selected.category.toUpperCase()}</span></div>
-        <div className="story-layout"><div><h2>{selected.editorial?.headline ?? 'Made to explore. Built to become yours.'}</h2><p>{selected.editorial?.body ?? selected.summary + ' Begin with an existing complete website, then replace its copy, imagery and settings with your own brand through the authorized CMS workflow.'}</p></div>
-          <aside className="story-spec"><h3>What you can explore</h3><p>Navigate the actual preview, switch viewport widths and inspect the included page types before choosing a draft.</p>
-            <dl><div><dt>Design category</dt><dd>{selected.category}</dd></div><div><dt>Starter pages</dt><dd>{selected.pages.length}</dd></div><div><dt>Latest catalog version</dt><dd>{selected.version}</dd></div><div><dt>Installation</dt><dd>Private draft after verification</dd></div></dl>
-          </aside>
-        </div>
-        {selected.editorial?.notes && <div className="story-notes">{selected.editorial.notes.map((note,index)=><div key={note}><span>0{index+1}</span><p>{note}</p></div>)}</div>}
-      </section>
-      <section className="shell included"><div><div className="eyebrow">Inside the theme</div><h2>Ready to make your own.</h2><p>Includes the starter layout and interaction patterns shown in the preview. Connecting content and installing to a site are separate actions.</p></div><div className="included-content"><h3>Page templates</h3><div className="page-tags">{selected.pages.map(p=><span key={p}><Check size={14}/>{p}</span>)}</div><div className="compat-note"><ShieldCheck size={20}/><div><b>CMS v2 target</b><span>Theme Store supplies the release. AgentSam handles site permissions, draft creation and editing.</span></div></div></div></section>
-      <div className="sticky-detail-cta"><div><strong>{selected.name}</strong><span>by {selected.publisher}</span></div><div><button className="light-button" onClick={()=>document.getElementById('live-preview')?.scrollIntoView({behavior:'smooth'})}>Explore live preview</button><button className="primary-button" disabled={!selected.downloadReady} title={selected.downloadReady?'Install a draft in AgentSam':'Preview only — installable release not yet available'} onClick={()=>tryTheme(selected)}>{selected.downloadReady?'Try theme':'Preview only'} <ArrowRight size={16}/></button></div></div>
-    </main> : <main className="shell no-results"><h1>Theme not found</h1><button onClick={()=>navigate({kind:'gallery'})}>Back to themes</button></main>}
+    </> : selected ? <ThemeExperience theme={selected} onBack={()=>navigate({kind:'gallery'})} onTry={()=>tryTheme(selected)} /> : <main className="shell no-results"><h1>Theme not found</h1><button onClick={()=>navigate({kind:'gallery'})}>Back to themes</button></main>}
     <footer className="site-footer"><div className="shell"><div><span className="brand-monogram">IA<span className="brand-slash">/</span></span><p>Original, adaptable website starting points.<br/>Made for the InnerAnimalMedia ecosystem.</p></div><span>© {new Date().getFullYear()} InnerAnimalMedia · Theme Store</span></div></footer>
 
   </div>;

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" role="img" aria-label="Abstract editorial study 11">
+  <defs>
+    <linearGradient id="g11" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#18140e"/>
+      <stop offset=".55" stop-color="#5c4a32"/>
+      <stop offset="1" stop-color="#a78961"/>
+    </linearGradient>
+    <radialGradient id="r11" cx=".7" cy=".22" r=".7">
+      <stop offset="0" stop-color="#e6dbca" stop-opacity=".72"/>
+      <stop offset="1" stop-color="#e6dbca" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="1500" fill="url(#g11)"/>
+  <ellipse cx="917" cy="631" rx="320" ry="470" fill="url(#r11)"/>
+  <path d="M263 1450 C 250 920, 270 460, 709 120 C 790 510, 930 980, 1060 1450 Z" fill="#e6dbca" opacity=".20"/>
+  <path d="M140 1320 C 430 1110, 690 1090, 1080 1240" fill="none" stroke="#e6dbca" stroke-opacity=".24" stroke-width="42"/>
+  <circle cx="607" cy="747" r="112" fill="#e6dbca" opacity=".16"/>
+</svg>

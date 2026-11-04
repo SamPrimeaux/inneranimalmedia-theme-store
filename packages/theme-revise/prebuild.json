@@ -1,0 +1,21 @@
+{
+  "schema": "agentsam.prebuild.v1",
+  "id": "revise",
+  "package": "@inneranimalmedia/theme-revise",
+  "version": "0.1.0",
+  "siteRoot": "site",
+  "entrypoint": "index.html",
+  "rootDeployable": true,
+  "portable": true,
+  "materializer": {
+    "export": "@inneranimalmedia/theme-revise/node",
+    "function": "materializePrebuild"
+  },
+  "defaults": {
+    "basePath": "/"
+  },
+  "notes": [
+    "Preview-only editorial theme derived from existing Revise frontend and the Fuel & Free Time concept site.",
+    "No merchant account, inventory, order, or authenticated CMS installation is included."
+  ]
+}

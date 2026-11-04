@@ -1,0 +1,69 @@
+{
+  "name": "@inneranimalmedia/theme-revise",
+  "version": "0.1.0",
+  "description": "Revise — editorial commerce starter, with multipage Fuel & Free Time demonstration and reusable section library.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js",
+    "./node": "./src/node.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "site",
+    "src",
+    "prebuild.json",
+    "README.md"
+  ],
+  "license": "UNLICENSED",
+  "agentsam": {
+    "kind": "theme",
+    "slug": "revise",
+    "canonicalId": "revise",
+    "installable": false,
+    "stock": true,
+    "store": {
+      "name": "Revise — Editorial Commerce",
+      "summary": "Dynamic editorial storefront with a five-page launch story, layered product displays, media galleries and campaign sections.",
+      "category": "Commerce",
+      "industries": [
+        "Retail",
+        "Lifestyle",
+        "Editorial"
+      ],
+      "catalogSizes": [
+        "Small catalog",
+        "Medium catalog"
+      ],
+      "tags": [
+        "Editorial",
+        "Commerce",
+        "Campaigns",
+        "Collections",
+        "Stories"
+      ],
+      "pages": [
+        "Home",
+        "Products",
+        "Stories",
+        "Campaigns",
+        "Ideas"
+      ],
+      "features": [
+        "Multipage",
+        "Search panel",
+        "Section library",
+        "Product preview",
+        "Navigation overlays",
+        "Mobile layouts"
+      ],
+      "colorway": "paper",
+      "cardImage": "/previews/revise.svg",
+      "sortOrder": 9,
+      "priceUsd": 0,
+      "previewBuild": "package",
+      "release": {
+        "status": "preview"
+      }
+    }
+  }
+}

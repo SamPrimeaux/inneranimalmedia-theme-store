@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Abstract folded paper study</title>
+  <desc id="desc">Neutral geometric planes arranged like layered editorial paper.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#171713"/>
+      <stop offset="0.55" stop-color="#302e28"/>
+      <stop offset="1" stop-color="#696457"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3efe4"/>
+      <stop offset="1" stop-color="#bcb5a6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#bg)"/>
+  <path d="M820 90 1390 310 1110 980 610 760Z" fill="#d7d0c0" opacity=".82"/>
+  <path d="M1020 120 1480 520 1080 860 760 430Z" fill="url(#paper)" opacity=".9"/>
+  <path d="M620 250 1050 610 690 1040 330 660Z" fill="#7c7669" opacity=".74"/>
+  <circle cx="1210" cy="300" r="210" fill="#f8f4ea" opacity=".16"/>
+</svg>

@@ -21,7 +21,8 @@
     "test": "node --test tests/*.test.mjs",
     "publish:site": "node scripts/publish-site.mjs --database inneranimalmedia-business && node scripts/publish-footer.mjs --database inneranimalmedia-business",
     "footer:seed": "node scripts/seed-footer.mjs --database inneranimalmedia-business",
-    "publish:footer": "node scripts/publish-footer.mjs --database inneranimalmedia-business"
+    "publish:footer": "node scripts/publish-footer.mjs --database inneranimalmedia-business",
+    "publish:install-projects": "node scripts/publish-install-projects.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

@@ -2,6 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "inneranimalmedia-theme-store",
   "main": "src/worker.ts",
+  "workers_dev": true,
   "compatibility_date": "2026-10-28",
   "assets": {
     "directory": "./dist",

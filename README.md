@@ -82,3 +82,8 @@ Defaults are bundled in `src/site.default.json`; anything you omit or get wrong 
 
 Only copy and the five color tokens are editable data; layout stays code. Themes are never listed here: add a package
 (`agentsam.store` in its package.json) and the catalog regenerates.
+
+
+### CMS install projects
+
+Reviewed editable CMS starter projects live beside their theme package as `install-project.json`. Publish them with `npm run publish:install-projects`. The publisher reads only this repository, validates project identity and release hashes, uploads content-addressed JSON to the private `theme-store` R2 bucket, verifies the downloaded bytes, then updates `install-index/index.json` last. Publishing a theme ZIP does not by itself make a theme installer-ready; a project is listed only after its reviewed project artifact is present. AgentSam remains responsible for user authentication, site ownership, draft creation and CMS writes.

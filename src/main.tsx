@@ -46,9 +46,8 @@ function App({ themes, site, footer }: { themes: ThemeRecord[]; site: SiteDocume
     destination.searchParams.set('theme_sku', theme.sku);
     destination.searchParams.set('theme_version', theme.version);
     destination.searchParams.set('action', 'try');
-    const siteId = preferredSiteId.current;
-    if (siteId && /^[A-Za-z0-9_-]{1,160}$/.test(siteId))
-      destination.searchParams.set('site_id', siteId);
+    // Public Try always creates or resumes a private draft. A site selected
+    // for browsing is never permission to alter that website.
     window.location.assign(destination.href);
   };
   function navigate(next:View) {

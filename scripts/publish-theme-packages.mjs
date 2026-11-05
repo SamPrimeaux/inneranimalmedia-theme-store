@@ -29,6 +29,7 @@ async function pool(items, size, task) {
   await Promise.all(Array.from({length: size}, async () => { while (queue.length) await task(queue.shift()); }));
 }
 const deploy = process.argv.includes('--deploy');
+const onlyPlainJane = process.argv.includes('--only=plain-jane');
 
 function run(bin, args, cwd = process.cwd(), capture = false) {
   return new Promise((resolve, reject) => {
@@ -92,8 +93,33 @@ try {
 
   const files = await walk(compiled);
   if (files.length < 5) throw new Error('Built site is suspiciously incomplete');
-  console.log('Uploading ' + files.length + ' versioned preview files to R2');
-  for (const file of files) {
+  const externalDigests = await Promise.all(files.map(async file => ({
+    path: relative(compiled, file).split(sep).join('/'),
+    sha256: sha256(await readFile(file)),
+  })));
+  externalDigests.sort((a,b)=>a.path.localeCompare(b.path));
+  const externalManifest = Buffer.from(JSON.stringify({
+    schema:'iam.theme-preview-files.v1', slug:product.slug, version:product.version,
+    files:externalDigests,
+  }, null, 2) + '\n');
+  const externalManifestKey = bucket + prefix + 'preview-files.json';
+  const externalManifestPath = join(root, 'manifest-' + product.slug + '.json');
+  let previousExternalManifest = null;
+  try {
+    await run('npx', ['wrangler', 'r2', 'object', 'get', externalManifestKey,
+      '--remote', '--file', externalManifestPath], process.cwd(), true);
+    previousExternalManifest = await readFile(externalManifestPath);
+  } catch { /* first complete manifest for this legacy preview */ }
+  if (previousExternalManifest && sha256(previousExternalManifest) !== sha256(externalManifest)) {
+    throw new Error('Immutable preview differs for ' + product.slug + '@' + product.version
+      + '; bump the pinned source and package version before publishing changed files');
+  }
+  if (previousExternalManifest) {
+    console.log('Verified unchanged manifest, skipping:', prefix);
+  } else {
+    console.log('Uploading ' + files.length + ' versioned preview files to R2');
+  }
+  if (!previousExternalManifest) for (const file of files) {
     const path = relative(compiled, file).split(sep).join('/');
     if (path.startsWith('../') || path.startsWith('/')) throw new Error('Invalid object path');
     const key = bucket + prefix + path;
@@ -107,6 +133,17 @@ try {
     throw new Error('R2 HTML round-trip SHA-256 mismatch');
   }
   console.log('Verified R2 preview index and path:', prefix);
+  if (!previousExternalManifest) {
+    await writeFile(externalManifestPath, externalManifest);
+    await run('npx', ['wrangler', 'r2', 'object', 'put', externalManifestKey,
+      '--remote', '--file', externalManifestPath, '--content-type', 'application/json']);
+    await run('npx', ['wrangler', 'r2', 'object', 'get', externalManifestKey,
+      '--remote', '--file', externalManifestPath], process.cwd(), true);
+    if (sha256(await readFile(externalManifestPath)) !== sha256(externalManifest)) {
+      throw new Error('R2 external preview manifest round-trip mismatch');
+    }
+    console.log('Verified complete immutable R2 preview:', prefix);
+  }
 
   // Every other theme publishes its own preview from its own package: each package
   // ships materializePrebuild(target, {basePath}). Versioned keys are immutable, so a
@@ -114,7 +151,7 @@ try {
   // run before deploy, leaving the live store untouched.
   const catalog = await buildCatalog(join(process.cwd(), 'packages'));
   for (const theme of catalog) {
-    if (theme.previewBuild === 'external') continue; // built from its own source repo above
+    if (onlyPlainJane || theme.previewBuild === 'external') continue; // built from its own source repo above
     const themePrefix = '/theme-packages/' + theme.slug + '/' + theme.version + '/preview/';
     const entry = await import(pathToFileURL(join(process.cwd(), 'packages', 'theme-' + theme.slug, 'src', 'node.js')).href);
     const out = join(root, 'pkg-' + theme.slug);

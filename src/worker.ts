@@ -1,6 +1,6 @@
 import { findTheme, publicTheme, themes } from './catalog';
 import siteDefaults from './site.default.json';
-import { normalizePreviewHtml } from './preview-html.mjs';
+import { normalizePreviewHtml, normalizePreviewManifest } from './preview-html.mjs';
 import { previewFileHeaders } from './preview-headers.mjs';
 import { resolveDemoAlias, publicDemoUrl, normalizeReleaseAssetRelative } from './preview-routes.mjs';
 import { resolveSite, type SiteDocument } from './site.mjs';
@@ -137,6 +137,13 @@ export default {
         if (!object) return missing('preview_asset_missing');
         const ext = contentFile.split('.').at(-1)?.toLowerCase() ?? '';
         const headers = previewFileHeaders(ext, types);
+        if (contentFile === 'preview-files.json') {
+          const manifest = await object.json<{schema:string;slug:string;version:string;files:Array<{path:string;sha256:string}>}>();
+          const rawIndex = await env.THEME_PACKAGES.get(keyRoot + 'index.html');
+          if (!rawIndex) return missing('preview_manifest_index_missing', 503);
+          const servedManifest = await normalizePreviewManifest(manifest, await rawIndex.text(), slug, version);
+          return new Response(method === 'HEAD' ? null : JSON.stringify(servedManifest), {status:200, headers});
+        }
         if (ext === 'html') {
           const body = method === 'HEAD' ? null : normalizePreviewHtml(await object.text(), slug, version, { spaFallback: contentFile === 'index.html' && file !== 'index.html' });
           return new Response(body, {status: 200, headers});

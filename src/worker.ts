@@ -139,9 +139,13 @@ export default {
         const headers = previewFileHeaders(ext, types);
         if (contentFile === 'preview-files.json') {
           const manifest = await object.json<{schema:string;slug:string;version:string;files:Array<{path:string;sha256:string}>}>();
-          const rawIndex = await env.THEME_PACKAGES.get(keyRoot + 'index.html');
-          if (!rawIndex) return missing('preview_manifest_index_missing', 503);
-          const servedManifest = await normalizePreviewManifest(manifest, await rawIndex.text(), slug, version);
+          const htmlByPath:Record<string,string> = {};
+          await Promise.all(manifest.files.filter(entry=>entry.path.toLowerCase().endsWith('.html')).map(async entry=>{
+            const htmlObject = await env.THEME_PACKAGES.get(keyRoot + entry.path);
+            if (!htmlObject) throw new Error('Preview manifest HTML missing');
+            htmlByPath[entry.path] = await htmlObject.text();
+          }));
+          const servedManifest = await normalizePreviewManifest(manifest, htmlByPath, slug, version);
           return new Response(method === 'HEAD' ? null : JSON.stringify(servedManifest), {status:200, headers});
         }
         if (ext === 'html') {

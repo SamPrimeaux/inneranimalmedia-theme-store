@@ -19,6 +19,13 @@
       "bucket_name": "theme-store"
     }
   ],
+  "routes": [
+    {
+      "pattern": "themes.inneranimalmedia.com",
+      "zone_name": "inneranimalmedia.com",
+      "custom_domain": true
+    }
+  ],
   "observability": {
     "enabled": true
   }

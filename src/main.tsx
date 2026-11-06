@@ -9,16 +9,23 @@ import { ThemeExperience } from './ThemeExperience';
 import type { SiteDocument } from './site.mjs';
 import type { FooterData } from './footer.mjs';
 import { defaultFooter } from './footer.mjs';
+import type { HeaderData } from './header.mjs';
+import { defaultHeader } from './header.mjs';
 import { Footer } from './UniversalFooter';
+import { AccountMenu } from './AccountMenu';
+import { PublicCollectionPage } from './PublicCollectionPage';
 import './styles.css';
 import './catalog.css';
+import './header-global.css';
 
-type View = { kind: 'gallery' } | { kind: 'detail'; slug: string };
+type View = { kind: 'gallery' } | { kind: 'detail'; slug: string } | {kind:'collection';slug:string;productSlug?:string};
 function initialView(): View {
+  const collection = location.pathname.match(/^\/(app-embeds|apps|integrations)(?:\/([a-z0-9-]+))?\/?$/);
+  if(collection)return {kind:'collection',slug:collection[1],productSlug:collection[2]};
   const match = location.pathname.match(/^\/themes\/([a-z0-9-]+)(?:\/preview)?\/?$/);
   return match ? {kind:'detail',slug:match[1]} : {kind:'gallery'};
 }
-function App({ themes, site, footer }: { themes: ThemeRecord[]; site: SiteDocument; footer: FooterData }) {
+function App({ themes, site, footer, header }: { themes: ThemeRecord[]; site: SiteDocument; footer: FooterData; header: HeaderData }) {
   const categoryLabels = site.categoryLabels;
   const categories = useMemo(() => ['All themes', ...Array.from(new Set(themes.map((theme) => theme.category)))], [themes]);
   const [view,setView] = useState<View>(initialView);
@@ -52,7 +59,8 @@ function App({ themes, site, footer }: { themes: ThemeRecord[]; site: SiteDocume
   };
   function navigate(next:View) {
     setView(next);setMobileMenu(false);
-    const destination=new URL(next.kind==='gallery'?'/':'/themes/'+next.slug+'/',location.origin);
+    const path=next.kind==='gallery'?'/':next.kind==='detail'?'/themes/'+next.slug+'/':'/'+next.slug+'/'+(next.productSlug?next.productSlug+'/':'');
+    const destination=new URL(path,location.origin);
     if(preferredSiteId.current)destination.searchParams.set('site_id',preferredSiteId.current);
     history.pushState({},'',destination.pathname+destination.search);
     window.scrollTo({top:0,behavior:'instant'});
@@ -64,25 +72,42 @@ function App({ themes, site, footer }: { themes: ThemeRecord[]; site: SiteDocume
   },[]);
   React.useEffect(()=>{document.title=selected?selected.name+' — InnerAnimalMedia Themes':'Themes — InnerAnimalMedia'},[selected]);
   const isGallery = view.kind==='gallery';
+  const headerBrand = header.blocks.find(b=>b.type==='brand')?.settings || {};
+  const headerUtility = header.blocks.find(b=>b.type==='utilities')?.settings || {};
+  const headerSettings = header.section.settings;
   return <div className="app">
-    <header className="site-header">
-      <div className="header-inner">
-        <a className="brand" href="/" onClick={e=>{e.preventDefault();navigate({kind:'gallery'})}} aria-label={site.brand.ariaLabel}>
-          <span className="brand-monogram">{site.brand.monogram}<span className="brand-slash">/</span></span><span>{site.brand.label}</span>
+    <header className="site-header" style={{background:headerSettings.background,color:headerSettings.foreground,position:headerSettings.sticky?'sticky':'relative'}}>
+      <div className="header-inner" style={{height:headerSettings.height}}>
+        <a className="brand" href={String(headerBrand.href||'/')} onClick={e=>{if(headerBrand.href==='/'){e.preventDefault();navigate({kind:'gallery'})}}} aria-label={String(headerBrand.aria_label||'Theme Store home')}>
+          {headerBrand.logo_url?<img className="header-site-logo" src={String(headerBrand.logo_url)} alt="" />:<span className="brand-monogram">{String(headerBrand.monogram||'IA')}<span className="brand-slash">/</span></span>}
+          <span>{String(headerBrand.label||'THEME STORE')}</span>
         </a>
         <nav className={'top-nav '+(mobileMenu?'open':'')} aria-label="Main">
-          <details className="browse-menu">
-            <summary>{site.library.browseLabel}<ChevronDown size={14}/></summary>
-            <div className="browse-options">{categories.map(c=><button key={c} type="button" onClick={e=>{
-              setCategory(c);setMobileMenu(false);(e.currentTarget.closest('details') as HTMLDetailsElement).open=false;
-              navigate({kind:'gallery'});
-              setTimeout(()=>document.getElementById('browse-themes')?.scrollIntoView({behavior:'smooth'}),25);
-            }}>{categoryLabels[c]||c}</button>)}</div>
-          </details>
-          <a href="#how-it-works" onClick={e=>{if(!isGallery){e.preventDefault();navigate({kind:'gallery'});setTimeout(()=>document.getElementById('how-it-works')?.scrollIntoView(),10)}}}>{site.nav.howItWorks}</a>
-          <a href={site.nav.sitesHref} target="_blank" rel="noreferrer">{site.nav.sitesLabel} <ExternalLink size={13}/></a>
+          {header.navigation.items.map(item=>item.type==='browse'
+            ? <details className="browse-menu" key={item.key}>
+                <summary>{item.label}<ChevronDown size={14}/></summary>
+                <div className="browse-options">{categories.map(c=><button key={c} type="button" onClick={e=>{
+                  setCategory(c);setMobileMenu(false);(e.currentTarget.closest('details') as HTMLDetailsElement).open=false;
+                  navigate({kind:'gallery'});setTimeout(()=>document.getElementById('browse-themes')?.scrollIntoView({behavior:'smooth'}),25);
+                }}>{categoryLabels[c]||c}</button>)}</div>
+              </details>
+            : <a key={item.key} href={item.href} target={item.type==='external'?'_blank':undefined} rel={item.type==='external'?'noreferrer':undefined}
+                onClick={e=>{
+                  if(item.href==='/themes/'||item.href==='/'){e.preventDefault();navigate({kind:'gallery'});}
+                  if(item.href==='/#how-it-works'||item.href==='#how-it-works'||item.href==='/how-it-works/'){
+                    e.preventDefault();
+                    if(!isGallery)navigate({kind:'gallery'});
+                    setTimeout(()=>document.getElementById('how-it-works')?.scrollIntoView({behavior:'smooth'}),25);
+                  }
+                  setMobileMenu(false);
+                }}>{item.label}{item.type==='external'&&<ExternalLink size={13}/>}</a>
+          )}
         </nav>
-        <div className="header-actions"><span className="origin-note"><Globe size={14}/> {site.nav.originNote}</span><button aria-label="Toggle menu" className="mobile-nav-button" onClick={()=>setMobileMenu(v=>!v)}>{mobileMenu?<X size={21}/>:<Menu size={21}/>}</button></div>
+        <div className="header-actions">
+          <span className="origin-note">{headerUtility.show_globe!==false&&<Globe size={14}/>} {String(headerUtility.origin_note||'')}</span>
+          <AccountMenu />
+          <button aria-label="Toggle menu" className="mobile-nav-button" onClick={()=>setMobileMenu(v=>!v)}>{mobileMenu?<X size={21}/>:<Menu size={21}/>}</button>
+        </div>
       </div>
     </header>
 
@@ -123,28 +148,33 @@ function App({ themes, site, footer }: { themes: ThemeRecord[]; site: SiteDocume
           <div className="steps">{site.howItWorks.steps.map((step,i)=><div key={step.title}><b>{String(i+1).padStart(2,'0')}</b><h3>{step.title}</h3><p>{step.body}</p></div>)}</div>
         </section>
       </main>
-    </> : selected ? <ThemeExperience theme={selected} onBack={()=>navigate({kind:'gallery'})} onTry={()=>tryTheme(selected)} /> : <main className="shell no-results"><h1>Theme not found</h1><button onClick={()=>navigate({kind:'gallery'})}>Back to themes</button></main>}
+    </> : view.kind==='collection'
+      ? <PublicCollectionPage slug={view.slug} productSlug={view.productSlug}
+          onProduct={productSlug=>navigate({kind:'collection',slug:view.slug,productSlug:productSlug||undefined})}
+          onBack={()=>navigate({kind:'gallery'})}/>
+      : selected ? <ThemeExperience theme={selected} onBack={()=>navigate({kind:'gallery'})} onTry={()=>tryTheme(selected)} /> : <main className="shell no-results"><h1>Theme not found</h1><button onClick={()=>navigate({kind:'gallery'})}>Back to themes</button></main>}
     <Footer data={footer} />
 
   </div>;
 }
 /** Catalog (`/api/catalog`, generated from packages) and site copy/tokens (`/api/site`, published from the CMS). */
 function Root() {
-  const [data, setData] = useState<{ themes: ThemeRecord[]; site: SiteDocument; footer: FooterData } | null>(null);
+  const [data, setData] = useState<{ themes: ThemeRecord[]; site: SiteDocument; footer: FooterData; header: HeaderData } | null>(null);
   const [error, setError] = useState(false);
   React.useEffect(() => {
     Promise.all([
       fetch('/api/catalog').then(r => r.json() as Promise<{ products?: ThemeRecord[] }>),
       fetch('/api/site').then(r => r.json() as Promise<{ site?: SiteDocument }>),
       fetch('/api/footer').then(r => r.ok ? r.json() as Promise<{ footer?: FooterData }> : { footer: defaultFooter }).catch(() => ({ footer: defaultFooter })),
-    ]).then(([catalog, siteRes, footerRes]) => {
+      fetch('/api/header').then(r => r.ok ? r.json() as Promise<{ header?: HeaderData }> : { header: defaultHeader }).catch(() => ({ header: defaultHeader })),
+    ]).then(([catalog, siteRes, footerRes, headerRes]) => {
       if (!catalog.products || !siteRes.site) throw new Error('bad payload');
       for (const [name, value] of Object.entries(siteRes.site.tokens)) document.documentElement.style.setProperty('--ts-' + name, value);
-      setData({ themes: catalog.products, site: siteRes.site, footer: footerRes.footer || defaultFooter });
+      setData({ themes: catalog.products, site: siteRes.site, footer: footerRes.footer || defaultFooter, header: headerRes.header || defaultHeader });
     }).catch(() => setError(true));
   }, []);
   if (error) return <main className="shell no-results"><h1>Catalog unavailable</h1><button onClick={() => location.reload()}>Try again</button></main>;
   if (!data) return <main className="shell no-results"><p>Loading themes…</p></main>;
-  return <App themes={data.themes} site={data.site} footer={data.footer}/>;
+  return <App themes={data.themes} site={data.site} footer={data.footer} header={data.header}/>;
 }
 createRoot(document.getElementById('root')!).render(<React.StrictMode><Root/></React.StrictMode>);

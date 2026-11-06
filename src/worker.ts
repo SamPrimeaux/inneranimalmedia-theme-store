@@ -5,7 +5,8 @@ import { previewFileHeaders } from './preview-headers.mjs';
 import { resolveDemoAlias, publicDemoUrl, normalizeReleaseAssetRelative } from './preview-routes.mjs';
 import { resolveSite, type SiteDocument } from './site.mjs';
 import { normalizeFooter, defaultFooter } from './footer.mjs';
-import { verifiedInstallEntries } from './install-index.mjs';
+import { normalizeHeader, defaultHeader } from './header.mjs';
+import { verifiedInstallEntries, hasEditableInstallProject } from './install-index.mjs';
 
 type Env = {
   ASSETS: Fetcher;
@@ -43,7 +44,7 @@ async function loadInstallIndex(env: Env) {
 }
 function publicInstallableTheme(theme: (typeof themes)[number], previewUrl: string | null, installed: Awaited<ReturnType<typeof loadInstallIndex>>) {
   const product = publicTheme(theme, previewUrl);
-  product.downloadReady = installed === null ? product.downloadReady : installed.some(item => item.slug === theme.slug && item.version === theme.version);
+  product.downloadReady = hasEditableInstallProject(theme, installed);
   return product;
 }
 
@@ -51,6 +52,33 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
     const method = request.method.toUpperCase();
+    if (url.pathname === '/api/account/me') {
+      if (method !== 'GET') return missing('method_not_allowed',405);
+      const headers = { 'cache-control':'private, no-store, max-age=0', 'vary':'Cookie', 'x-content-type-options':'nosniff' };
+      const guest = () => Response.json({authenticated:false,requires_sso:true},{headers});
+      // Proxy only the canonical session cookie to the authoritative AgentSam
+      // session endpoint. No persisted user identities, public profile guesses,
+      // or cached / R2 account records.
+      const cookie = request.headers.get('Cookie')?.match(/(?:^|;\s*)session=([^;]+)/)?.[1];
+      if (!cookie || cookie.length>4096) return guest();
+      try {
+        const result = await fetch('https://agentsam.inneranimalmedia.com/api/auth/me',{
+          method:'GET',headers:{Accept:'application/json',Cookie:'session='+cookie},
+          signal:AbortSignal.timeout(4500),redirect:'manual'
+        });
+        if (!result.ok || !result.headers.get('content-type')?.includes('application/json')) return guest();
+        const body:any = await result.json();
+        const user = body?.user ?? body?.data?.user ?? body?.data?.account ?? body?.account ?? body;
+        const id = user?.id ?? user?.user_id ?? user?.auth_user_id;
+        if (!body || body.ok===false || !(typeof id==='string' && id.length>0)) return guest();
+        const clean=(s:unknown,n:number)=>typeof s==='string'?s.slice(0,n):'';
+        const url=clean(user.avatar_url??user.avatarUrl??user.picture??user.profile_image_url??user.image_url,700);
+        return Response.json({authenticated:true,user:{
+          id:clean(id,100),name:clean(user.display_name??user.full_name??user.name,200),
+          email:clean(user.email,250),avatar_url:url.startsWith('https://')?url:''
+        }},{headers});
+      } catch { return guest(); }
+    }
     if (url.pathname === '/api/site') {
       if (method !== 'GET') return missing('method_not_allowed', 405);
       // Published site document (copy + tokens) from R2, validated against the bundled defaults.
@@ -59,19 +87,75 @@ export default {
       const site = resolveSite(siteDefaults as SiteDocument, override);
       return Response.json({ ok: true, site }, { headers: { 'cache-control': 'public, max-age=60', 'x-content-type-options': 'nosniff' } });
     }
-    if (url.pathname === '/api/footer') {
+    if (url.pathname === '/api/header' || url.pathname === '/api/footer') {
       if (method !== 'GET') return missing('method_not_allowed', 405);
-      let footer = defaultFooter;
+      const header = url.pathname === '/api/header';
+      const current = 'sites/theme-store/globals/' + (header ? 'header' : 'footer') + '/current.json';
+      const legacy = header ? null : 'site/theme-store-footer.json';
+      let value = header ? defaultHeader : defaultFooter;
       try {
-        const snapshot = await env.THEME_PACKAGES.get('site/theme-store-footer.json');
-        if (snapshot && snapshot.size <= 128_000) footer = normalizeFooter(await snapshot.json());
-      } catch { /* The safe CMS footer default remains available. */ }
-      return Response.json({ ok:true, footer }, { headers:{'cache-control':'public, max-age=60', 'x-content-type-options':'nosniff'} });
+        const snapshot = await env.THEME_PACKAGES.get(current) || (legacy ? await env.THEME_PACKAGES.get(legacy) : null);
+        if (snapshot && snapshot.size <= 128_000) value = header ? normalizeHeader(await snapshot.json()) : normalizeFooter(await snapshot.json());
+      } catch { /* Retain safe, bundled fallback if R2 is temporarily unavailable. */ }
+      return Response.json(header ? { ok:true, header:value } : { ok:true, footer:value }, {
+        headers:{ 'cache-control':'public, max-age=60', 'x-content-type-options':'nosniff' }
+      });
+    }
+    const collectionPath = /^\/api\/collections\/([a-z0-9-]+)\/?$/.exec(url.pathname);
+    if (collectionPath) {
+      if (method !== 'GET') return missing('method_not_allowed',405);
+      try {
+        const obj = await env.THEME_PACKAGES.get('sites/theme-store/collections/'+collectionPath[1]+'/current.json');
+        if (!obj || obj.size>256_000) return missing('collection_not_published');
+        const collection:any=await obj.json();
+        if (collection?.schema!=='iam.cms.public-collection.v1'||collection.site_id!=='theme-store'||collection.collection?.slug!==collectionPath[1])
+          return missing('collection_invalid');
+        return Response.json({ok:true,...collection},{headers:{'cache-control':'public, max-age=120','x-content-type-options':'nosniff'}});
+      }catch{return missing('collection_unavailable',503);}
+    }
+    const mediaPath = /^\/site-media\/(?:(products)\/)?([a-z0-9-]+)\/([0-9a-f]{16})\.(webp|png|jpg|jpeg|svg)$/.exec(url.pathname);
+    if (mediaPath) {
+      if (method!=='GET'&&method!=='HEAD')return missing('method_not_allowed',405);
+      const [,category,slug,hash,extension]=mediaPath;
+      const key='sites/theme-store/media/'+(category==='products'?'products':'previews')+'/'+slug+'/'+hash+'.'+extension;
+      try {
+        const asset=await env.THEME_PACKAGES.get(key);
+        if(!asset)return missing('media_not_found');
+        const contentType=extension==='svg'?'image/svg+xml':extension==='webp'?'image/webp':extension==='png'?'image/png':'image/jpeg';
+        return new Response(method==='HEAD'?null:asset.body,{status:200,headers:{
+          'content-type':contentType,'cache-control':'public, max-age=31536000, immutable',
+          'x-content-type-options':'nosniff','cross-origin-resource-policy':'same-site',
+          ...(extension==='svg'?{'content-security-policy':'sandbox'}:{})
+        }});
+      }catch{return missing('media_unavailable',503);}
     }
     if (url.pathname === '/api/catalog') {
       if (method !== 'GET') return missing('method_not_allowed', 405);
       const installed = await loadInstallIndex(env);
       const products = await Promise.all(themes.map(async theme => publicInstallableTheme(theme, await resolvePreview(env, url.origin, theme), installed)));
+      // Public CMS presentation is intentionally separate from signed theme releases.
+      // Images, product copy and galleries may be changed without regenerating an
+      // installable package; release/installation data remains package-owned.
+      try {
+        const obj=await env.THEME_PACKAGES.get('sites/theme-store/collections/themes/current.json');
+        if(obj && obj.size<256_000){
+          const catalog:any=await obj.json();
+          if(catalog?.schema==='iam.cms.public-collection.v1'&&catalog.site_id==='theme-store'&&Array.isArray(catalog.items)){
+            const approved=new Map<string,any>(catalog.items.filter((x:any)=>typeof x.slug==='string').map((x:any)=>[x.slug,x]));
+            const safe=(url:any)=>typeof url==='string'&&url.startsWith('https://themes.inneranimalmedia.com/site-media/')?url:null;
+            for(const product of products){
+              const item=approved.get(product.slug);
+              if(!item)continue;
+              const cover=safe(item.cover_url);
+              product.cardImage=cover||product.cardImage;
+              product.iconUrl=safe(item.icon_url);
+              product.galleryUrls=Array.isArray(item.gallery)?item.gallery.slice(0,12).filter((x:any)=>safe(x.url)).map((x:any)=>({url:safe(x.url),alt:typeof x.alt==='string'?x.alt.slice(0,250):product.name})):[];
+              if(typeof item.name==='string'&&item.name.length<150)product.name=item.name;
+              if(typeof item.summary==='string'&&item.summary.length<1000&&item.summary)product.summary=item.summary;
+            }
+          }
+        }
+      } catch { /* Installed theme metadata still comes from its verified package. */ }
       return response({ ok: true, schema: 'iam.theme-catalog.v1', products });
     }
     if (url.pathname === '/api/install-index') {

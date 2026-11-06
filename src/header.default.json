@@ -1,0 +1,74 @@
+{
+  "schema": "iam.cms.global-header.v1",
+  "section": {
+    "id": "cmss_cmsp_theme_store_site_shell_header",
+    "type": "global-header",
+    "settings": {
+      "background": "#151620",
+      "foreground": "#ffffff",
+      "height": 75,
+      "sticky": true
+    }
+  },
+  "blocks": [
+    {
+      "key": "brand",
+      "type": "brand",
+      "order": 10,
+      "settings": {
+        "monogram": "IA",
+        "label": "THEME STORE",
+        "logo_url": "",
+        "aria_label": "InnerAnimalMedia Themes home",
+        "href": "/"
+      }
+    },
+    {
+      "key": "navigation",
+      "type": "navigation",
+      "order": 20,
+      "settings": {
+        "menu_name": "main",
+        "browse_key": "browse-themes"
+      }
+    },
+    {
+      "key": "utilities",
+      "type": "utilities",
+      "order": 30,
+      "settings": {
+        "origin_note": "Built for your CMS",
+        "show_globe": true
+      }
+    }
+  ],
+  "navigation": {
+    "menu_name": "main",
+    "items": [
+      {
+        "key": "browse-themes",
+        "label": "Browse themes",
+        "href": "/themes/",
+        "type": "browse"
+      },
+      {
+        "key": "app-embeds",
+        "label": "App embeds",
+        "href": "/app-embeds/",
+        "type": "link"
+      },
+      {
+        "key": "how-it-works",
+        "label": "How it works",
+        "href": "/#how-it-works",
+        "type": "link"
+      },
+      {
+        "key": "agentsam-sites",
+        "label": "AgentSam Sites",
+        "href": "https://agentsam.inneranimalmedia.com/sites",
+        "type": "external"
+      }
+    ]
+  }
+}

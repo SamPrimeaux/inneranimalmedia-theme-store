@@ -1,0 +1,262 @@
+{
+  "schema": "agentsam.theme-project.v1",
+  "id": "theme_forge",
+  "name": "Forge",
+  "pages": [
+    {
+      "slug": "home",
+      "title": "Forge Works — Forge",
+      "assetBase": "https://themes.inneranimalmedia.com/theme-packages/forge/2.6.13/preview/",
+      "status": "draft",
+      "template": "<!DOCTYPE html><html lang=\"en\"><head><base href=\"https://themes.inneranimalmedia.com/theme-packages/forge/2.6.13/preview/\"><meta charset=\"utf-8\"><meta content=\"width=device-width,initial-scale=1\" name=\"viewport\"><meta content=\"#101417\" name=\"theme-color\"><meta content=\"yes\" name=\"apple-mobile-web-app-capable\"><meta content=\"default\" name=\"apple-mobile-web-app-status-bar-style\"><meta content=\"Forge\" name=\"apple-mobile-web-app-title\"><link href=\"./apple-touch-icon.png\" rel=\"apple-touch-icon\"><title>Forge Works — Forge</title> \n<link crossorigin=\"\" href=\"https://themes.inneranimalmedia.com/theme-packages/forge/2.6.13/preview/assets/index-DBOqQVsA.css\" rel=\"stylesheet\">\n<link href=\"./manifest.webmanifest\" rel=\"manifest\"><link href=\"https://example.com/\" rel=\"canonical\"><meta content=\"A mobile-first local services prebuild with clear estimate requests, service-area details, project photos, reviews, and practical trust signals for trade teams.\" name=\"description\"><meta content=\"index,follow,max-image-preview:large\" name=\"robots\"><meta content=\"website\" property=\"og:type\"><meta content=\"Forge Works — Forge\" property=\"og:title\"><meta content=\"A mobile-first local services prebuild with clear estimate requests, service-area details, project photos, reviews, and practical trust signals for trade teams.\" property=\"og:description\"><meta content=\"https://example.com/\" property=\"og:url\"><meta content=\"https://example.com/theme-packages/forge/2.6.13/preview/assets/generated/social-card.webp\" property=\"og:image\"><meta content=\"summary_large_image\" name=\"twitter:card\"><meta content=\"Forge Works — Forge\" name=\"twitter:title\"><meta content=\"A mobile-first local services prebuild with clear estimate requests, service-area details, project photos, reviews, and practical trust signals for trade teams.\" name=\"twitter:description\"><meta content=\"https://example.com/theme-packages/forge/2.6.13/preview/assets/generated/social-card.webp\" name=\"twitter:image\"></head><body><div id=\"root\"><div class=\"app\"><!--theme-section:section_1--><div class=\"scrim \"></div><aside class=\"drawer \" aria-hidden=\"true\"><div class=\"drawer-head\"><div class=\"wordmark\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-hammer\"><path d=\"m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9\"></path><path d=\"m18 15 4-4\"></path><path d=\"m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5\"></path></svg><span>Forge</span></div><button class=\"icon-button\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-x\"><path d=\"M18 6 6 18\"></path><path d=\"m6 6 12 12\"></path></svg></button></div><p class=\"drawer-kicker\">Handyman Services</p><nav><button><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-folder\"><path d=\"M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z\"></path></svg>Projects</button><button><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-wrench\"><path d=\"M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z\"></path></svg>Tools</button><button><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-circle-user-round\"><path d=\"M18 20a6 6 0 0 0-12 0\"></path><circle cx=\"12\" cy=\"10\" r=\"4\"></circle><circle cx=\"12\" cy=\"12\" r=\"10\"></circle></svg>Profile</button></nav><div class=\"drawer-note\"><b>Local device storage</b><span>V1 project records and photos remain on this device.</span></div></aside><main class=\"content\"><!--theme-section:section_2--></main><nav class=\"bottom-rail\" aria-label=\"Primary navigation\"><button class=\"active\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-folder\"><path d=\"M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z\"></path></svg><span>Projects</span></button><button class=\"\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-wrench\"><path d=\"M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z\"></path></svg><span>Tools</span></button><button class=\"\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-circle-user-round\"><path d=\"M18 20a6 6 0 0 0-12 0\"></path><circle cx=\"12\" cy=\"10\" r=\"4\"></circle><circle cx=\"12\" cy=\"12\" r=\"10\"></circle></svg><span>Profile</span></button></nav></div></div>\n\n</body></html>",
+      "sections": [
+        {
+          "key": "section_1",
+          "name": "Site header",
+          "globalKey": "site-header",
+          "zone": "HEADER",
+          "sourceKind": "site-header",
+          "html": "<header class=\"app-header\" data-theme-section=\"section_1\" data-theme-project-field=\"__section\"><button class=\"icon-button\" aria-label=\"Open menu\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-menu\"><line x1=\"4\" x2=\"20\" y1=\"12\" y2=\"12\"></line><line x1=\"4\" x2=\"20\" y1=\"6\" y2=\"6\"></line><line x1=\"4\" x2=\"20\" y1=\"18\" y2=\"18\"></line></svg></button><div class=\"wordmark\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-hammer\"><path d=\"m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9\"></path><path d=\"m18 15 4-4\"></path><path d=\"m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5\"></path></svg><span data-theme-project-field=\"text_1\">Forge</span></div><button class=\"avatar-button\" aria-label=\"Open profile\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-circle-user-round\"><path d=\"M18 20a6 6 0 0 0-12 0\"></path><circle cx=\"12\" cy=\"10\" r=\"4\"></circle><circle cx=\"12\" cy=\"12\" r=\"10\"></circle></svg></button></header>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_1",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "text_1": "Forge",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 0,
+          "schema": {
+            "key": "section_1",
+            "label": "Site header",
+            "zone": "HEADER",
+            "sourceKind": "site-header",
+            "fields": [
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": false,
+              "duplicate": false,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_2",
+          "name": "Projects",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section data-theme-section=\"section_2\" data-theme-project-field=\"__section\"><div class=\"page-title\"><div><span class=\"eyebrow\" data-theme-project-field=\"text_1\">Field workspace</span><h1 data-theme-project-field=\"heading_1\">Projects</h1></div><button class=\"create-button\" aria-label=\"Create project\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-plus\"><path d=\"M5 12h14\"></path><path d=\"M12 5v14\"></path></svg></button></div><label class=\"search\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-search\"><circle cx=\"11\" cy=\"11\" r=\"8\"></circle><path d=\"m21 21-4.3-4.3\"></path></svg><input placeholder=\"Search projects…\" value=\"\" data-theme-project-field=\"input_1\"></label><div class=\"stats\"><!--theme-block:block_1--><!--theme-block:block_2--><!--theme-block:block_3--></div><div class=\"project-stack\"><button class=\"project-row\"><div class=\"project-row-top\"><div><h2 data-theme-project-field=\"heading_2\">Demo Cabinet Install</h2><time>06/11/2026</time></div><span class=\"status status-proposal\" data-theme-project-field=\"text_2\">proposal</span></div><p data-theme-project-field=\"text_3\">Synthetic example project. Replace it with a real job after installation.</p><footer><span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-circle-user-round\"><path d=\"M18 20a6 6 0 0 0-12 0\"></path><circle cx=\"12\" cy=\"10\" r=\"4\"></circle><circle cx=\"12\" cy=\"12\" r=\"10\"></circle></svg>Demo Client</span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-chevron-right\"><path d=\"m9 18 6-6-6-6\"></path></svg></footer></button></div></section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_2",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": [
+                {
+                  "id": "block_1",
+                  "templateKey": "block_1"
+                },
+                {
+                  "id": "block_2",
+                  "templateKey": "block_2"
+                },
+                {
+                  "id": "block_3",
+                  "templateKey": "block_3"
+                }
+              ]
+            },
+            "block_1": {},
+            "block_2": {},
+            "block_3": {},
+            "text_1": "Field workspace",
+            "heading_1": "Projects",
+            "input_1": "Search projects…",
+            "heading_2": "Demo Cabinet Install",
+            "text_2": "proposal",
+            "text_3": "Synthetic example project. Replace it with a real job after installation.",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 1,
+          "schema": {
+            "key": "section_2",
+            "label": "Projects",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "heading_1",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "input_1",
+                "label": "Placeholder",
+                "group": "Forms",
+                "type": "text",
+                "binding": {
+                  "attribute": "placeholder"
+                }
+              },
+              {
+                "key": "heading_2",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_3",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [
+              {
+                "key": "block_1",
+                "label": "Card - Active",
+                "kind": "block",
+                "fields": [],
+                "settings": [],
+                "html": "<article><span class=\"green\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-wrench\"><path d=\"M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z\"></path></svg>Active</span><b>1</b></article>",
+                "defaults": {},
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              },
+              {
+                "key": "block_2",
+                "label": "Card - Archived",
+                "kind": "block",
+                "fields": [],
+                "settings": [],
+                "html": "<article><span class=\"orange\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-archive\"><rect width=\"20\" height=\"5\" x=\"2\" y=\"3\" rx=\"1\"></rect><path d=\"M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8\"></path><path d=\"M10 12h4\"></path></svg>Archived</span><b>0</b></article>",
+                "defaults": {},
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              },
+              {
+                "key": "block_3",
+                "label": "Card - Total",
+                "kind": "block",
+                "fields": [],
+                "settings": [],
+                "html": "<article><span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-folder\"><path d=\"M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z\"></path></svg>Total</span><b>1</b></article>",
+                "defaults": {},
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              }
+            ],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        }
+      ],
+      "sourceRoute": "/"
+    }
+  ],
+  "tokens": {},
+  "sourceThemeId": "forge",
+  "sourcePackage": "@inneranimalmedia/theme-forge",
+  "sourcePackageVersion": "2.6.13",
+  "sourcePreviewUrl": "https://themes.inneranimalmedia.com/theme-packages/forge/2.6.13/preview/",
+  "sourceReleaseSha256": "3b2d3ff9c64b70a30eaf76132206fc06554872ea654138f7af30be06c9dcffe0",
+  "sourceCmsManifestSchema": "iam.theme-package.v1",
+  "sourceManifestPageCount": 1,
+  "sourceRoutesNotRendered": [],
+  "sourcePagesDetected": 1,
+  "sourceAssetErrors": [],
+  "revision": 0,
+  "version": "0.1.0"
+}

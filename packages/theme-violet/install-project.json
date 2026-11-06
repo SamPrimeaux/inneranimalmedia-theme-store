@@ -1,0 +1,3121 @@
+{
+  "schema": "agentsam.theme-project.v1",
+  "id": "theme_violet",
+  "name": "Violet",
+  "pages": [
+    {
+      "slug": "home",
+      "title": "Violet Initiative — Violet",
+      "assetBase": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/",
+      "status": "draft",
+      "template": "<!DOCTYPE html><html lang=\"en\"><head><base href=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/\">\n<meta charset=\"utf-8\">\n<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">\n<title>Violet Initiative — Violet</title>\n<meta content=\"Explore a campaign website prebuild built around bold calls to action, impact proof, human stories, donation moments, and clear ways to take part.\" name=\"description\">\n<link href=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/global/cpas-shell.css\" rel=\"stylesheet\">\n<link href=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/global/cpas-public-surface.css\" rel=\"stylesheet\">\n\n<link href=\"https://example.com/\" rel=\"canonical\"><meta content=\"index,follow,max-image-preview:large\" name=\"robots\"><meta content=\"#17111f\" name=\"theme-color\"><meta content=\"website\" property=\"og:type\"><meta content=\"Violet Initiative — Violet\" property=\"og:title\"><meta content=\"Explore a campaign website prebuild built around bold calls to action, impact proof, human stories, donation moments, and clear ways to take part.\" property=\"og:description\"><meta content=\"https://example.com/\" property=\"og:url\"><meta content=\"https://example.com/theme-packages/violet/2.6.13/preview/assets/generated/social-card.webp\" property=\"og:image\"><meta content=\"summary_large_image\" name=\"twitter:card\"><meta content=\"Violet Initiative — Violet\" name=\"twitter:title\"><meta content=\"Explore a campaign website prebuild built around bold calls to action, impact proof, human stories, donation moments, and clear ways to take part.\" name=\"twitter:description\"><meta content=\"https://example.com/theme-packages/violet/2.6.13/preview/assets/generated/social-card.webp\" name=\"twitter:image\"></head>\n<body class=\"theme-dark\" data-font=\"playfair_inter\" data-route=\"/\" data-theme=\"dark\">\n<!--theme-section:section_1-->\n<div class=\"mobile-menu-panel\" id=\"mobileMenuPanel\">\n<a href=\"/\">Home</a>\n<a href=\"./about\">About</a>\n<a href=\"./services\">Foster</a>\n<a href=\"./adopt\">Adopt</a>\n<a href=\"./community\">Community</a>\n<a class=\"mobile-donate\" href=\"./donate\">Donate</a>\n</div>\n<main>\n<!--theme-section:section_2-->\n<!--theme-section:section_3-->\n<!--theme-section:section_4-->\n<!--theme-section:section_5-->\n<!--theme-section:section_6-->\n<!--theme-section:section_7-->\n</main>\n<!--theme-section:section_8-->\n\n\n\n\n</body></html>",
+      "sections": [
+        {
+          "key": "section_1",
+          "name": "Site header",
+          "globalKey": "site-header",
+          "zone": "HEADER",
+          "sourceKind": "site-header",
+          "html": "<header class=\"site-header\" data-theme-section=\"section_1\" data-theme-project-field=\"__section\">\n<div class=\"container header-inner\">\n<a aria-label=\"Violet Initiative — staff login\" class=\"logo-link\" href=\"./admin/login\" data-theme-project-field=\"link_1\">\n<img alt=\"Violet Initiative\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/theme-mark.svg\" data-theme-project-field=\"media_1\">\n</a>\n<nav aria-label=\"Main navigation\">\n<ul class=\"site-nav\">\n<li><a href=\"/\" class=\"active is-active\" data-theme-project-field=\"link_2\">Home</a></li>\n<li><a href=\"./about\" data-theme-project-field=\"link_3\">About</a></li>\n<li><a href=\"./services\" data-theme-project-field=\"link_4\">Foster</a></li>\n<li><a href=\"./adopt\" data-theme-project-field=\"link_5\">Adopt</a></li>\n<li><a href=\"./community\" data-theme-project-field=\"link_6\">Community</a></li>\n</ul>\n</nav>\n<div class=\"header-actions\">\n<a class=\"nav-donate\" href=\"./donate\" data-theme-project-field=\"link_7\">Donate</a>\n</div>\n<button aria-label=\"Open navigation\" class=\"mobile-menu-toggle\" type=\"button\">\n<span data-theme-project-field=\"text_1\"></span><span data-theme-project-field=\"text_2\"></span><span data-theme-project-field=\"text_3\"></span>\n</button>\n</div>\n</header>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_1",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "link_1": "./admin/login",
+            "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/theme-mark.svg",
+            "media_1_alt": "Violet Initiative",
+            "link_2": "Home",
+            "link_2_href": "/",
+            "link_3": "About",
+            "link_3_href": "./about",
+            "link_4": "Foster",
+            "link_4_href": "./services",
+            "link_5": "Adopt",
+            "link_5_href": "./adopt",
+            "link_6": "Community",
+            "link_6_href": "./community",
+            "link_7": "Donate",
+            "link_7_href": "./donate",
+            "text_1": "",
+            "text_2": "",
+            "text_3": "",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 0,
+          "schema": {
+            "key": "section_1",
+            "label": "Site header",
+            "zone": "HEADER",
+            "sourceKind": "site-header",
+            "fields": [
+              {
+                "key": "link_1",
+                "label": "Violet Initiative — staff login",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "media_1",
+                "label": "Violet Initiative",
+                "group": "Media",
+                "type": "media",
+                "binding": {
+                  "attribute": "src"
+                }
+              },
+              {
+                "key": "media_1_alt",
+                "label": "Image alternative text",
+                "group": "Accessibility",
+                "type": "text",
+                "binding": {
+                  "field": "media_1",
+                  "attribute": "alt"
+                }
+              },
+              {
+                "key": "link_2",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_2_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_2",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_3",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_3_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_3",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_4",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_4_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_4",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_5",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_5_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_5",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_6",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_6_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_6",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_7",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_7_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_7",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_3",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": false,
+              "duplicate": false,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_2",
+          "name": "Every dog deserves someone in their corner.",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"hero-split\" data-section-key=\"hero_main\" data-theme-section=\"section_2\" data-theme-project-field=\"__section\">\n<div class=\"hero-media-bg\">\n<img alt=\"Every dog deserves someone in their corner.\" decoding=\"async\" fetchpriority=\"high\" loading=\"eager\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-9bbd133220.webp\" data-theme-project-field=\"media_1\">\n<div class=\"hero-scrim\"></div>\n</div>\n<div class=\"hero-body\">\n<div class=\"container\">\n<div class=\"hero-content\">\n<div class=\"hero-badge\">North District Parish · Volunteer Powered</div>\n<h1 class=\"hero-heading\" data-theme-project-field=\"heading_1\">Every dog deserves someone in their corner.</h1>\n<p class=\"hero-sub\" data-theme-project-field=\"text_1\">Violet Initiative funds critical care, opens transport pathways, and helps dogs at North District Parish Animal Services reach families waiting for them.</p>\n<div class=\"hero-actions\"><a class=\"hero-cta hero-cta-primary\" href=\"./services\" data-theme-project-field=\"link_1\"><span class=\"hero-cta-text\"><span class=\"hero-cta-label\" data-theme-project-field=\"text_2\">Apply to Foster</span></span></a><a class=\"hero-cta hero-cta-ghost\" href=\"./donate\" data-theme-project-field=\"link_2\"><span class=\"hero-cta-text\"><span class=\"hero-cta-label\" data-theme-project-field=\"text_3\">Support Our Mission</span></span></a></div>\n</div>\n</div>\n</div>\n</section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_2",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-9bbd133220.webp",
+            "media_1_alt": "Every dog deserves someone in their corner.",
+            "heading_1": "Every dog deserves someone in their corner.",
+            "text_1": "Violet Initiative funds critical care, opens transport pathways, and helps dogs at North District Parish Animal Services reach families waiting for them.",
+            "link_1": "./services",
+            "text_2": "Apply to Foster",
+            "link_2": "./donate",
+            "text_3": "Support Our Mission",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 1,
+          "schema": {
+            "key": "section_2",
+            "label": "Every dog deserves someone in their corner.",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "media_1",
+                "label": "Every dog deserves someone in their corner.",
+                "group": "Media",
+                "type": "media",
+                "binding": {
+                  "attribute": "src"
+                }
+              },
+              {
+                "key": "media_1_alt",
+                "label": "Image alternative text",
+                "group": "Accessibility",
+                "type": "text",
+                "binding": {
+                  "field": "media_1",
+                  "attribute": "alt"
+                }
+              },
+              {
+                "key": "heading_1",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1",
+                "label": "Link",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_2",
+                "label": "Link",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "text_3",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_3",
+          "name": "We step in where the second chance starts.",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"section\" data-section-key=\"mission\" data-theme-section=\"section_3\" data-theme-project-field=\"__section\">\n<div class=\"container\">\n<div class=\"section-text-image img-left\">\n<div class=\"img-col\">\n<img alt=\"We step in where the second chance starts.\" class=\"section-img\" loading=\"lazy\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-254b0e2ad3.webp\" data-theme-project-field=\"media_1\">\n</div>\n<div class=\"text-col\">\n<p class=\"eyebrow\" data-theme-project-field=\"text_1\">Our Mission</p><h2 data-theme-project-field=\"heading_1\">We step in where the second chance starts.</h2><p data-theme-project-field=\"text_2\">Violet Initiative exists to give dogs at North District Parish Animal Services the opportunity they may not get otherwise. As a 100% volunteer-based nonprofit, every dollar is directed toward helping animals who need care, transport, visibility, and a safe path forward.</p>\n</div>\n</div>\n</div>\n</section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_3",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-254b0e2ad3.webp",
+            "media_1_alt": "We step in where the second chance starts.",
+            "text_1": "Our Mission",
+            "heading_1": "We step in where the second chance starts.",
+            "text_2": "Violet Initiative exists to give dogs at North District Parish Animal Services the opportunity they may not get otherwise. As a 100% volunteer-based nonprofit, every dollar is directed toward helping animals who need care, transport, visibility, and a safe path forward.",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 2,
+          "schema": {
+            "key": "section_3",
+            "label": "We step in where the second chance starts.",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "media_1",
+                "label": "We step in where the second chance starts.",
+                "group": "Media",
+                "type": "media",
+                "binding": {
+                  "attribute": "src"
+                }
+              },
+              {
+                "key": "media_1_alt",
+                "label": "Image alternative text",
+                "group": "Accessibility",
+                "type": "text",
+                "binding": {
+                  "field": "media_1",
+                  "attribute": "alt"
+                }
+              },
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "heading_1",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_4",
+          "name": "Meet your familys next best friend.",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"section\" data-section-key=\"foster_grid\" data-theme-section=\"section_4\" data-theme-project-field=\"__section\"><div class=\"container\"><div class=\"foster-header\"><div><p class=\"eyebrow\" data-theme-project-field=\"text_1\">Open Your Home</p><h2 data-theme-project-field=\"heading_1\">Meet your familys next best friend.</h2><p data-theme-project-field=\"text_2\">Fostering gives a dog safety, stability, and the time they need to be seen. It is one of the fastest ways to create space, save lives, and help a dog become ready for forever.</p></div><div class=\"foster-header-cta\"><a class=\"btn btn-primary\" href=\"./services\" data-theme-project-field=\"link_1\">Apply to Foster</a></div></div><div class=\"foster-grid mt-md\"><!--theme-block:block_1--><!--theme-block:block_2--><!--theme-block:block_3--></div></div></section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_4",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": [
+                {
+                  "id": "block_1",
+                  "templateKey": "block_1"
+                },
+                {
+                  "id": "block_2",
+                  "templateKey": "block_2"
+                },
+                {
+                  "id": "block_3",
+                  "templateKey": "block_3"
+                }
+              ]
+            },
+            "block_1": {
+              "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-3a78eb7d9d.webp",
+              "media_1_alt": "Open your home for a week",
+              "heading_1": "Open your home for a week",
+              "text_1": "Short-term fosters give dogs a break from the shelter — and give us time to find them the right forever home."
+            },
+            "block_2": {
+              "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-7a5fb7c91a.webp",
+              "media_1_alt": "Help a dog recover",
+              "heading_1": "Help a dog recover",
+              "text_1": "Some dogs arrive with medical needs. Foster carers who can follow a simple care routine save lives every time."
+            },
+            "block_3": {
+              "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-3a1b5c0a8d.webp",
+              "media_1_alt": "Be part of the moment they find their family",
+              "heading_1": "Be part of the moment they find their family",
+              "text_1": "Fosters are there for the transport day, the adoption call, the moment everything changes. It stays with you."
+            },
+            "text_1": "Open Your Home",
+            "heading_1": "Meet your familys next best friend.",
+            "text_2": "Fostering gives a dog safety, stability, and the time they need to be seen. It is one of the fastest ways to create space, save lives, and help a dog become ready for forever.",
+            "link_1": "Apply to Foster",
+            "link_1_href": "./services",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 3,
+          "schema": {
+            "key": "section_4",
+            "label": "Meet your familys next best friend.",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "heading_1",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_1",
+                  "attribute": "href"
+                }
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [
+              {
+                "key": "block_1",
+                "label": "Card - Open your home for a week",
+                "kind": "block",
+                "fields": [
+                  {
+                    "key": "media_1",
+                    "label": "Open your home for a week",
+                    "group": "Media",
+                    "type": "media",
+                    "binding": {
+                      "attribute": "src"
+                    }
+                  },
+                  {
+                    "key": "media_1_alt",
+                    "label": "Image alternative text",
+                    "group": "Accessibility",
+                    "type": "text",
+                    "binding": {
+                      "field": "media_1",
+                      "attribute": "alt"
+                    }
+                  },
+                  {
+                    "key": "heading_1",
+                    "label": "Heading",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "text_1",
+                    "label": "Text",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  }
+                ],
+                "settings": [],
+                "html": "<article class=\"foster-card foster-card--tall\"><img alt=\"Open your home for a week\" class=\"foster-img\" loading=\"lazy\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-3a78eb7d9d.webp\" data-theme-project-field=\"media_1\"><div class=\"foster-card-body\"><h3 data-theme-project-field=\"heading_1\">Open your home for a week</h3><p data-theme-project-field=\"text_1\">Short-term fosters give dogs a break from the shelter — and give us time to find them the right forever home.</p></div></article>",
+                "defaults": {
+                  "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-3a78eb7d9d.webp",
+                  "media_1_alt": "Open your home for a week",
+                  "heading_1": "Open your home for a week",
+                  "text_1": "Short-term fosters give dogs a break from the shelter — and give us time to find them the right forever home."
+                },
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              },
+              {
+                "key": "block_2",
+                "label": "Card - Help a dog recover",
+                "kind": "block",
+                "fields": [
+                  {
+                    "key": "media_1",
+                    "label": "Help a dog recover",
+                    "group": "Media",
+                    "type": "media",
+                    "binding": {
+                      "attribute": "src"
+                    }
+                  },
+                  {
+                    "key": "media_1_alt",
+                    "label": "Image alternative text",
+                    "group": "Accessibility",
+                    "type": "text",
+                    "binding": {
+                      "field": "media_1",
+                      "attribute": "alt"
+                    }
+                  },
+                  {
+                    "key": "heading_1",
+                    "label": "Heading",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "text_1",
+                    "label": "Text",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  }
+                ],
+                "settings": [],
+                "html": "<article class=\"foster-card\"><img alt=\"Help a dog recover\" class=\"foster-img\" loading=\"lazy\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-7a5fb7c91a.webp\" data-theme-project-field=\"media_1\"><div class=\"foster-card-body\"><h3 data-theme-project-field=\"heading_1\">Help a dog recover</h3><p data-theme-project-field=\"text_1\">Some dogs arrive with medical needs. Foster carers who can follow a simple care routine save lives every time.</p></div></article>",
+                "defaults": {
+                  "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-7a5fb7c91a.webp",
+                  "media_1_alt": "Help a dog recover",
+                  "heading_1": "Help a dog recover",
+                  "text_1": "Some dogs arrive with medical needs. Foster carers who can follow a simple care routine save lives every time."
+                },
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              },
+              {
+                "key": "block_3",
+                "label": "Card - Be part of the moment they find their family",
+                "kind": "block",
+                "fields": [
+                  {
+                    "key": "media_1",
+                    "label": "Be part of the moment they find their family",
+                    "group": "Media",
+                    "type": "media",
+                    "binding": {
+                      "attribute": "src"
+                    }
+                  },
+                  {
+                    "key": "media_1_alt",
+                    "label": "Image alternative text",
+                    "group": "Accessibility",
+                    "type": "text",
+                    "binding": {
+                      "field": "media_1",
+                      "attribute": "alt"
+                    }
+                  },
+                  {
+                    "key": "heading_1",
+                    "label": "Heading",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "text_1",
+                    "label": "Text",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  }
+                ],
+                "settings": [],
+                "html": "<article class=\"foster-card\"><img alt=\"Be part of the moment they find their family\" class=\"foster-img\" loading=\"lazy\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-3a1b5c0a8d.webp\" data-theme-project-field=\"media_1\"><div class=\"foster-card-body\"><h3 data-theme-project-field=\"heading_1\">Be part of the moment they find their family</h3><p data-theme-project-field=\"text_1\">Fosters are there for the transport day, the adoption call, the moment everything changes. It stays with you.</p></div></article>",
+                "defaults": {
+                  "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-3a1b5c0a8d.webp",
+                  "media_1_alt": "Be part of the moment they find their family",
+                  "heading_1": "Be part of the moment they find their family",
+                  "text_1": "Fosters are there for the transport day, the adoption call, the moment everything changes. It stays with you."
+                },
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              }
+            ],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_5",
+          "name": "Two direct ways your gift saves lives.",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"section section-campaigns\" data-section-key=\"campaigns\" data-theme-section=\"section_5\" data-theme-project-field=\"__section\"><div class=\"container\"><p class=\"eyebrow\" data-theme-project-field=\"text_1\">Featured Campaigns</p><h2 data-theme-project-field=\"heading_1\">Two direct ways your gift saves lives.</h2><div class=\"campaign-grid mt-md\"><!--theme-block:block_1--><!--theme-block:block_2--></div></div></section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_5",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": [
+                {
+                  "id": "block_1",
+                  "templateKey": "block_1"
+                },
+                {
+                  "id": "block_2",
+                  "templateKey": "block_2"
+                }
+              ]
+            },
+            "block_1": {
+              "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-646c65381e.webp",
+              "media_1_alt": "Transport Fund",
+              "heading_1": "Transport Fund",
+              "text_1": "Every transport gives a dog a shot at rescue. $40 covers a single dog ride to a partner rescue or approved adopter.",
+              "link_1": "Fund a Transport",
+              "link_1_href": "./donate"
+            },
+            "block_2": {
+              "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-6342d50dbd.webp",
+              "media_1_alt": "Emergency Medical Fund",
+              "heading_1": "Emergency Medical Fund",
+              "text_1": "Dogs arrive with injuries, illness, and untreated pain. Your gift goes directly to vet bills for animals in crisis.",
+              "link_1": "Support Medical Care",
+              "link_1_href": "./donate"
+            },
+            "text_1": "Featured Campaigns",
+            "heading_1": "Two direct ways your gift saves lives.",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 4,
+          "schema": {
+            "key": "section_5",
+            "label": "Two direct ways your gift saves lives.",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "heading_1",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [
+              {
+                "key": "block_1",
+                "label": "Card - Transport Fund",
+                "kind": "block",
+                "fields": [
+                  {
+                    "key": "media_1",
+                    "label": "Transport Fund",
+                    "group": "Media",
+                    "type": "media",
+                    "binding": {
+                      "attribute": "src"
+                    }
+                  },
+                  {
+                    "key": "media_1_alt",
+                    "label": "Image alternative text",
+                    "group": "Accessibility",
+                    "type": "text",
+                    "binding": {
+                      "field": "media_1",
+                      "attribute": "alt"
+                    }
+                  },
+                  {
+                    "key": "heading_1",
+                    "label": "Heading",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "text_1",
+                    "label": "Text",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "link_1",
+                    "label": "Link",
+                    "group": "Actions",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "link_1_href",
+                    "label": "Link destination",
+                    "group": "Actions",
+                    "type": "link",
+                    "binding": {
+                      "field": "link_1",
+                      "attribute": "href"
+                    }
+                  }
+                ],
+                "settings": [],
+                "html": "<article class=\"campaign-card\"><div class=\"campaign-img-wrap\"><img alt=\"Transport Fund\" class=\"campaign-img\" loading=\"lazy\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-646c65381e.webp\" data-theme-project-field=\"media_1\"><div class=\"campaign-img-overlay\"></div></div><div class=\"campaign-body\"><h3 class=\"campaign-title\" data-theme-project-field=\"heading_1\">Transport Fund</h3><p class=\"campaign-text\" data-theme-project-field=\"text_1\">Every transport gives a dog a shot at rescue. $40 covers a single dog ride to a partner rescue or approved adopter.</p><a class=\"btn btn-primary\" href=\"./donate\" data-theme-project-field=\"link_1\">Fund a Transport</a></div></article>",
+                "defaults": {
+                  "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-646c65381e.webp",
+                  "media_1_alt": "Transport Fund",
+                  "heading_1": "Transport Fund",
+                  "text_1": "Every transport gives a dog a shot at rescue. $40 covers a single dog ride to a partner rescue or approved adopter.",
+                  "link_1": "Fund a Transport",
+                  "link_1_href": "./donate"
+                },
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              },
+              {
+                "key": "block_2",
+                "label": "Card - Emergency Medical Fund",
+                "kind": "block",
+                "fields": [
+                  {
+                    "key": "media_1",
+                    "label": "Emergency Medical Fund",
+                    "group": "Media",
+                    "type": "media",
+                    "binding": {
+                      "attribute": "src"
+                    }
+                  },
+                  {
+                    "key": "media_1_alt",
+                    "label": "Image alternative text",
+                    "group": "Accessibility",
+                    "type": "text",
+                    "binding": {
+                      "field": "media_1",
+                      "attribute": "alt"
+                    }
+                  },
+                  {
+                    "key": "heading_1",
+                    "label": "Heading",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "text_1",
+                    "label": "Text",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "link_1",
+                    "label": "Link",
+                    "group": "Actions",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "link_1_href",
+                    "label": "Link destination",
+                    "group": "Actions",
+                    "type": "link",
+                    "binding": {
+                      "field": "link_1",
+                      "attribute": "href"
+                    }
+                  }
+                ],
+                "settings": [],
+                "html": "<article class=\"campaign-card\"><div class=\"campaign-img-wrap\"><img alt=\"Emergency Medical Fund\" class=\"campaign-img\" loading=\"lazy\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-6342d50dbd.webp\" data-theme-project-field=\"media_1\"><div class=\"campaign-img-overlay\"></div></div><div class=\"campaign-body\"><h3 class=\"campaign-title\" data-theme-project-field=\"heading_1\">Emergency Medical Fund</h3><p class=\"campaign-text\" data-theme-project-field=\"text_1\">Dogs arrive with injuries, illness, and untreated pain. Your gift goes directly to vet bills for animals in crisis.</p><a class=\"btn btn-primary\" href=\"./donate\" data-theme-project-field=\"link_1\">Support Medical Care</a></div></article>",
+                "defaults": {
+                  "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-6342d50dbd.webp",
+                  "media_1_alt": "Emergency Medical Fund",
+                  "heading_1": "Emergency Medical Fund",
+                  "text_1": "Dogs arrive with injuries, illness, and untreated pain. Your gift goes directly to vet bills for animals in crisis.",
+                  "link_1": "Support Medical Care",
+                  "link_1_href": "./donate"
+                },
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              }
+            ],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_6",
+          "name": "Section 6",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"section section-testimonial\" data-section-key=\"testimonial\" data-theme-section=\"section_6\" data-theme-project-field=\"__section\">\n<div class=\"container\">\n<p class=\"eyebrow\" data-theme-project-field=\"text_1\">Real Impact</p>\n<blockquote class=\"testimonial-quote\">Companions gave me the chance to say yes - and to fight for her.</blockquote>\n<p class=\"testimonial-attr\" data-theme-project-field=\"text_2\">Brittany Ramsey, foster and board member</p>\n</div>\n</section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_6",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "text_1": "Real Impact",
+            "text_2": "Brittany Ramsey, foster and board member",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 5,
+          "schema": {
+            "key": "section_6",
+            "label": "Section 6",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_7",
+          "name": "Some dogs arrive with stories they cannot tell.",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"section\" data-section-key=\"crisis_care\" data-theme-section=\"section_7\" data-theme-project-field=\"__section\">\n<div class=\"container\">\n<div class=\"section-text-image\">\n<div class=\"text-col\">\n<p class=\"eyebrow\" data-theme-project-field=\"text_1\">From Crisis to Care</p><h2 data-theme-project-field=\"heading_1\">Some dogs arrive with stories they cannot tell.</h2><p data-theme-project-field=\"text_2\">Road rash, illness, neglect, and urgent medical needs can make a dog easy to overlook in an overcrowded shelter. Violet Initiative helps turn those moments into treatment, recovery, and a future.</p>\n<div class=\"hero-actions mt-md\"><a class=\"btn btn-primary\" href=\"./donate\" data-theme-project-field=\"link_1\">Help Fund Recovery</a></div>\n</div>\n<div class=\"img-col\">\n<img alt=\"Some dogs arrive with stories they cannot tell.\" class=\"section-img\" loading=\"lazy\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-cd07daa54a.webp\" data-theme-project-field=\"media_1\">\n</div>\n</div>\n</div>\n</section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_7",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "text_1": "From Crisis to Care",
+            "heading_1": "Some dogs arrive with stories they cannot tell.",
+            "text_2": "Road rash, illness, neglect, and urgent medical needs can make a dog easy to overlook in an overcrowded shelter. Violet Initiative helps turn those moments into treatment, recovery, and a future.",
+            "link_1": "Help Fund Recovery",
+            "link_1_href": "./donate",
+            "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-cd07daa54a.webp",
+            "media_1_alt": "Some dogs arrive with stories they cannot tell.",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 6,
+          "schema": {
+            "key": "section_7",
+            "label": "Some dogs arrive with stories they cannot tell.",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "heading_1",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_1",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "media_1",
+                "label": "Some dogs arrive with stories they cannot tell.",
+                "group": "Media",
+                "type": "media",
+                "binding": {
+                  "attribute": "src"
+                }
+              },
+              {
+                "key": "media_1_alt",
+                "label": "Image alternative text",
+                "group": "Accessibility",
+                "type": "text",
+                "binding": {
+                  "field": "media_1",
+                  "attribute": "alt"
+                }
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_8",
+          "name": "Site footer",
+          "globalKey": "site-footer",
+          "zone": "FOOTER",
+          "sourceKind": "site-footer",
+          "html": "<footer class=\"site-footer\" data-theme-section=\"section_8\" data-theme-project-field=\"__section\">\n<div class=\"container\">\n<div class=\"footer-grid\">\n<div class=\"footer-brand\">\n<img alt=\"Violet Initiative\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/theme-mark.svg\" data-theme-project-field=\"media_1\">\n<p class=\"footer-tagline\" data-theme-project-field=\"text_1\">A volunteer-run nonprofit helping dogs at North District Parish Animal Services receive medical care, transport support, and second chances.</p>\n</div>\n<div>\n<p class=\"footer-col-label\" data-theme-project-field=\"text_2\">Pages</p>\n<ul class=\"footer-links\">\n<li><a href=\"/\" data-theme-project-field=\"link_1\">Home</a></li>\n<li><a href=\"./about\" data-theme-project-field=\"link_2\">About</a></li>\n<li><a href=\"./services\" data-theme-project-field=\"link_3\">Foster</a></li>\n<li><a href=\"./adopt\" data-theme-project-field=\"link_4\">Adopt</a></li>\n<li><a href=\"./community\" data-theme-project-field=\"link_5\">Community</a></li>\n<li><a href=\"./donate\" data-theme-project-field=\"link_6\">Donate</a></li>\n</ul>\n</div>\n<div>\n<p class=\"footer-col-label\" data-theme-project-field=\"text_3\">Organization</p>\n<div class=\"footer-org-row\">\n<span><strong data-theme-project-field=\"text_4\">Violet Initiative</strong></span>\n<span data-theme-project-field=\"text_5\">501(c)(3) Tax-Exempt</span>\n<span data-theme-project-field=\"text_6\">EIN: 88-4156327</span>\n<span data-theme-project-field=\"text_7\">North District Parish, Louisiana</span>\n<span><a href=\"mailto:hello@violet.example\" data-theme-project-field=\"link_7\">hello@violet.example</a></span>\n</div>\n</div>\n<div class=\"footer-dev\">\n<p class=\"footer-dev-label\" data-theme-project-field=\"text_8\">Developed by</p>\n<a href=\"https://inneranimalmedia.com\" rel=\"noopener\" target=\"_blank\" data-theme-project-field=\"link_8\">\n<img alt=\"Inner Animal Media\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-b8f43a3887.webp\" data-theme-project-field=\"media_2\">\n</a>\n</div>\n</div>\n<div class=\"footer-bottom\">\n<p class=\"footer-ein\" data-theme-project-field=\"text_9\">Violet Initiative &nbsp;·&nbsp; 501(c)(3) &nbsp;·&nbsp; EIN 88-4156327</p>\n<div class=\"footer-socials\">\n<a href=\"#social\" rel=\"noopener\" target=\"_blank\" data-theme-project-field=\"link_9\">Facebook</a>\n<a href=\"#social\" rel=\"noopener\" target=\"_blank\" data-theme-project-field=\"link_10\">Instagram</a>\n</div>\n</div>\n</div>\n</footer>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_8",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/theme-mark.svg",
+            "media_1_alt": "Violet Initiative",
+            "text_1": "A volunteer-run nonprofit helping dogs at North District Parish Animal Services receive medical care, transport support, and second chances.",
+            "text_2": "Pages",
+            "link_1": "Home",
+            "link_1_href": "/",
+            "link_2": "About",
+            "link_2_href": "./about",
+            "link_3": "Foster",
+            "link_3_href": "./services",
+            "link_4": "Adopt",
+            "link_4_href": "./adopt",
+            "link_5": "Community",
+            "link_5_href": "./community",
+            "link_6": "Donate",
+            "link_6_href": "./donate",
+            "text_3": "Organization",
+            "text_4": "Violet Initiative",
+            "text_5": "501(c)(3) Tax-Exempt",
+            "text_6": "EIN: 88-4156327",
+            "text_7": "North District Parish, Louisiana",
+            "link_7": "hello@violet.example",
+            "link_7_href": "mailto:hello@violet.example",
+            "text_8": "Developed by",
+            "link_8": "https://inneranimalmedia.com",
+            "media_2": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-b8f43a3887.webp",
+            "media_2_alt": "Inner Animal Media",
+            "text_9": "Violet Initiative  ·  501(c)(3)  ·  EIN 88-4156327",
+            "link_9": "Facebook",
+            "link_9_href": "#social",
+            "link_10": "Instagram",
+            "link_10_href": "#social",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 7,
+          "schema": {
+            "key": "section_8",
+            "label": "Site footer",
+            "zone": "FOOTER",
+            "sourceKind": "site-footer",
+            "fields": [
+              {
+                "key": "media_1",
+                "label": "Violet Initiative",
+                "group": "Media",
+                "type": "media",
+                "binding": {
+                  "attribute": "src"
+                }
+              },
+              {
+                "key": "media_1_alt",
+                "label": "Image alternative text",
+                "group": "Accessibility",
+                "type": "text",
+                "binding": {
+                  "field": "media_1",
+                  "attribute": "alt"
+                }
+              },
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_1",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_2",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_2_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_2",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_3",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_3_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_3",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_4",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_4_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_4",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_5",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_5_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_5",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_6",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_6_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_6",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "text_3",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_4",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_5",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_6",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_7",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_7",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_7_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_7",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "text_8",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_8",
+                "label": "Link",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "media_2",
+                "label": "Inner Animal Media",
+                "group": "Media",
+                "type": "media",
+                "binding": {
+                  "attribute": "src"
+                }
+              },
+              {
+                "key": "media_2_alt",
+                "label": "Image alternative text",
+                "group": "Accessibility",
+                "type": "text",
+                "binding": {
+                  "field": "media_2",
+                  "attribute": "alt"
+                }
+              },
+              {
+                "key": "text_9",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_9",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_9_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_9",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_10",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_10_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_10",
+                  "attribute": "href"
+                }
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": false,
+              "duplicate": false,
+              "reusable": true
+            }
+          }
+        }
+      ],
+      "sourceRoute": "/"
+    },
+    {
+      "slug": "pages",
+      "title": "Every dog deserves someone in their corner. — Violet",
+      "assetBase": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/",
+      "status": "draft",
+      "template": "<!DOCTYPE html><html lang=\"en\"><head><base href=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/\">\n<meta charset=\"utf-8\">\n<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">\n<title>Every dog deserves someone in their corner. — Violet</title>\n<meta content=\"Explore a campaign website prebuild built around bold calls to action, impact proof, human stories, donation moments, and clear ways to take part.\" name=\"description\">\n<link href=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/global/cpas-shell.css\" rel=\"stylesheet\">\n<link href=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/global/cpas-public-surface.css\" rel=\"stylesheet\">\n\n<link href=\"https://example.com/pages/\" rel=\"canonical\"><meta content=\"index,follow,max-image-preview:large\" name=\"robots\"><meta content=\"#17111f\" name=\"theme-color\"><meta content=\"website\" property=\"og:type\"><meta content=\"Every dog deserves someone in their corner. — Violet\" property=\"og:title\"><meta content=\"Explore a campaign website prebuild built around bold calls to action, impact proof, human stories, donation moments, and clear ways to take part.\" property=\"og:description\"><meta content=\"https://example.com/pages/\" property=\"og:url\"><meta content=\"https://example.com/theme-packages/violet/2.6.13/preview/assets/generated/social-card.webp\" property=\"og:image\"><meta content=\"summary_large_image\" name=\"twitter:card\"><meta content=\"Every dog deserves someone in their corner. — Violet\" name=\"twitter:title\"><meta content=\"Explore a campaign website prebuild built around bold calls to action, impact proof, human stories, donation moments, and clear ways to take part.\" name=\"twitter:description\"><meta content=\"https://example.com/theme-packages/violet/2.6.13/preview/assets/generated/social-card.webp\" name=\"twitter:image\"></head>\n<body class=\"theme-dark\" data-font=\"playfair_inter\" data-route=\"/\" data-theme=\"dark\">\n<!--theme-section:section_1-->\n<div class=\"mobile-menu-panel\" id=\"mobileMenuPanel\">\n<a href=\"/\">Home</a>\n<a href=\"./about\">About</a>\n<a href=\"./services\">Foster</a>\n<a href=\"./adopt\">Adopt</a>\n<a href=\"./community\">Community</a>\n<a class=\"mobile-donate\" href=\"./donate\">Donate</a>\n</div>\n<main>\n<!--theme-section:section_2-->\n<!--theme-section:section_3-->\n<!--theme-section:section_4-->\n<!--theme-section:section_5-->\n<!--theme-section:section_6-->\n<!--theme-section:section_7-->\n</main>\n<!--theme-section:section_8-->\n\n\n\n\n</body></html>",
+      "sections": [
+        {
+          "key": "section_1",
+          "name": "Site header",
+          "globalKey": "site-header",
+          "zone": "HEADER",
+          "sourceKind": "site-header",
+          "html": "<header class=\"site-header\" data-theme-section=\"section_1\" data-theme-project-field=\"__section\">\n<div class=\"container header-inner\">\n<a aria-label=\"Violet Initiative — staff login\" class=\"logo-link\" href=\"./admin/login\" data-theme-project-field=\"link_1\">\n<img alt=\"Violet Initiative\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/theme-mark.svg\" data-theme-project-field=\"media_1\">\n</a>\n<nav aria-label=\"Main navigation\">\n<ul class=\"site-nav\">\n<li><a href=\"/\" class=\"active is-active\" data-theme-project-field=\"link_2\">Home</a></li>\n<li><a href=\"./about\" data-theme-project-field=\"link_3\">About</a></li>\n<li><a href=\"./services\" data-theme-project-field=\"link_4\">Foster</a></li>\n<li><a href=\"./adopt\" data-theme-project-field=\"link_5\">Adopt</a></li>\n<li><a href=\"./community\" data-theme-project-field=\"link_6\">Community</a></li>\n</ul>\n</nav>\n<div class=\"header-actions\">\n<a class=\"nav-donate\" href=\"./donate\" data-theme-project-field=\"link_7\">Donate</a>\n</div>\n<button aria-label=\"Open navigation\" class=\"mobile-menu-toggle\" type=\"button\">\n<span data-theme-project-field=\"text_1\"></span><span data-theme-project-field=\"text_2\"></span><span data-theme-project-field=\"text_3\"></span>\n</button>\n</div>\n</header>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_1",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "link_1": "./admin/login",
+            "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/theme-mark.svg",
+            "media_1_alt": "Violet Initiative",
+            "link_2": "Home",
+            "link_2_href": "/",
+            "link_3": "About",
+            "link_3_href": "./about",
+            "link_4": "Foster",
+            "link_4_href": "./services",
+            "link_5": "Adopt",
+            "link_5_href": "./adopt",
+            "link_6": "Community",
+            "link_6_href": "./community",
+            "link_7": "Donate",
+            "link_7_href": "./donate",
+            "text_1": "",
+            "text_2": "",
+            "text_3": "",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 0,
+          "schema": {
+            "key": "section_1",
+            "label": "Site header",
+            "zone": "HEADER",
+            "sourceKind": "site-header",
+            "fields": [
+              {
+                "key": "link_1",
+                "label": "Violet Initiative — staff login",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "media_1",
+                "label": "Violet Initiative",
+                "group": "Media",
+                "type": "media",
+                "binding": {
+                  "attribute": "src"
+                }
+              },
+              {
+                "key": "media_1_alt",
+                "label": "Image alternative text",
+                "group": "Accessibility",
+                "type": "text",
+                "binding": {
+                  "field": "media_1",
+                  "attribute": "alt"
+                }
+              },
+              {
+                "key": "link_2",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_2_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_2",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_3",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_3_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_3",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_4",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_4_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_4",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_5",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_5_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_5",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_6",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_6_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_6",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_7",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_7_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_7",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_3",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": false,
+              "duplicate": false,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_2",
+          "name": "Every dog deserves someone in their corner.",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"hero-split\" data-section-key=\"hero_main\" data-theme-section=\"section_2\" data-theme-project-field=\"__section\">\n<div class=\"hero-media-bg\">\n<img alt=\"Every dog deserves someone in their corner.\" decoding=\"async\" fetchpriority=\"high\" loading=\"eager\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-9bbd133220.webp\" data-theme-project-field=\"media_1\">\n<div class=\"hero-scrim\"></div>\n</div>\n<div class=\"hero-body\">\n<div class=\"container\">\n<div class=\"hero-content\">\n<div class=\"hero-badge\">North District Parish · Volunteer Powered</div>\n<h1 class=\"hero-heading\" data-theme-project-field=\"heading_1\">Every dog deserves someone in their corner.</h1>\n<p class=\"hero-sub\" data-theme-project-field=\"text_1\">Violet Initiative funds critical care, opens transport pathways, and helps dogs at North District Parish Animal Services reach families waiting for them.</p>\n<div class=\"hero-actions\"><a class=\"hero-cta hero-cta-primary\" href=\"./services\" data-theme-project-field=\"link_1\"><span class=\"hero-cta-text\"><span class=\"hero-cta-label\" data-theme-project-field=\"text_2\">Apply to Foster</span></span></a><a class=\"hero-cta hero-cta-ghost\" href=\"./donate\" data-theme-project-field=\"link_2\"><span class=\"hero-cta-text\"><span class=\"hero-cta-label\" data-theme-project-field=\"text_3\">Support Our Mission</span></span></a></div>\n</div>\n</div>\n</div>\n</section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_2",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-9bbd133220.webp",
+            "media_1_alt": "Every dog deserves someone in their corner.",
+            "heading_1": "Every dog deserves someone in their corner.",
+            "text_1": "Violet Initiative funds critical care, opens transport pathways, and helps dogs at North District Parish Animal Services reach families waiting for them.",
+            "link_1": "./services",
+            "text_2": "Apply to Foster",
+            "link_2": "./donate",
+            "text_3": "Support Our Mission",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 1,
+          "schema": {
+            "key": "section_2",
+            "label": "Every dog deserves someone in their corner.",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "media_1",
+                "label": "Every dog deserves someone in their corner.",
+                "group": "Media",
+                "type": "media",
+                "binding": {
+                  "attribute": "src"
+                }
+              },
+              {
+                "key": "media_1_alt",
+                "label": "Image alternative text",
+                "group": "Accessibility",
+                "type": "text",
+                "binding": {
+                  "field": "media_1",
+                  "attribute": "alt"
+                }
+              },
+              {
+                "key": "heading_1",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1",
+                "label": "Link",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_2",
+                "label": "Link",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "text_3",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_3",
+          "name": "We step in where the second chance starts.",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"section\" data-section-key=\"mission\" data-theme-section=\"section_3\" data-theme-project-field=\"__section\">\n<div class=\"container\">\n<div class=\"section-text-image img-left\">\n<div class=\"img-col\">\n<img alt=\"We step in where the second chance starts.\" class=\"section-img\" loading=\"lazy\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-254b0e2ad3.webp\" data-theme-project-field=\"media_1\">\n</div>\n<div class=\"text-col\">\n<p class=\"eyebrow\" data-theme-project-field=\"text_1\">Our Mission</p><h2 data-theme-project-field=\"heading_1\">We step in where the second chance starts.</h2><p data-theme-project-field=\"text_2\">Violet Initiative exists to give dogs at North District Parish Animal Services the opportunity they may not get otherwise. As a 100% volunteer-based nonprofit, every dollar is directed toward helping animals who need care, transport, visibility, and a safe path forward.</p>\n</div>\n</div>\n</div>\n</section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_3",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-254b0e2ad3.webp",
+            "media_1_alt": "We step in where the second chance starts.",
+            "text_1": "Our Mission",
+            "heading_1": "We step in where the second chance starts.",
+            "text_2": "Violet Initiative exists to give dogs at North District Parish Animal Services the opportunity they may not get otherwise. As a 100% volunteer-based nonprofit, every dollar is directed toward helping animals who need care, transport, visibility, and a safe path forward.",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 2,
+          "schema": {
+            "key": "section_3",
+            "label": "We step in where the second chance starts.",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "media_1",
+                "label": "We step in where the second chance starts.",
+                "group": "Media",
+                "type": "media",
+                "binding": {
+                  "attribute": "src"
+                }
+              },
+              {
+                "key": "media_1_alt",
+                "label": "Image alternative text",
+                "group": "Accessibility",
+                "type": "text",
+                "binding": {
+                  "field": "media_1",
+                  "attribute": "alt"
+                }
+              },
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "heading_1",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_4",
+          "name": "Meet your familys next best friend.",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"section\" data-section-key=\"foster_grid\" data-theme-section=\"section_4\" data-theme-project-field=\"__section\"><div class=\"container\"><div class=\"foster-header\"><div><p class=\"eyebrow\" data-theme-project-field=\"text_1\">Open Your Home</p><h2 data-theme-project-field=\"heading_1\">Meet your familys next best friend.</h2><p data-theme-project-field=\"text_2\">Fostering gives a dog safety, stability, and the time they need to be seen. It is one of the fastest ways to create space, save lives, and help a dog become ready for forever.</p></div><div class=\"foster-header-cta\"><a class=\"btn btn-primary\" href=\"./services\" data-theme-project-field=\"link_1\">Apply to Foster</a></div></div><div class=\"foster-grid mt-md\"><!--theme-block:block_1--><!--theme-block:block_2--><!--theme-block:block_3--></div></div></section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_4",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": [
+                {
+                  "id": "block_1",
+                  "templateKey": "block_1"
+                },
+                {
+                  "id": "block_2",
+                  "templateKey": "block_2"
+                },
+                {
+                  "id": "block_3",
+                  "templateKey": "block_3"
+                }
+              ]
+            },
+            "block_1": {
+              "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-3a78eb7d9d.webp",
+              "media_1_alt": "Open your home for a week",
+              "heading_1": "Open your home for a week",
+              "text_1": "Short-term fosters give dogs a break from the shelter — and give us time to find them the right forever home."
+            },
+            "block_2": {
+              "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-7a5fb7c91a.webp",
+              "media_1_alt": "Help a dog recover",
+              "heading_1": "Help a dog recover",
+              "text_1": "Some dogs arrive with medical needs. Foster carers who can follow a simple care routine save lives every time."
+            },
+            "block_3": {
+              "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-3a1b5c0a8d.webp",
+              "media_1_alt": "Be part of the moment they find their family",
+              "heading_1": "Be part of the moment they find their family",
+              "text_1": "Fosters are there for the transport day, the adoption call, the moment everything changes. It stays with you."
+            },
+            "text_1": "Open Your Home",
+            "heading_1": "Meet your familys next best friend.",
+            "text_2": "Fostering gives a dog safety, stability, and the time they need to be seen. It is one of the fastest ways to create space, save lives, and help a dog become ready for forever.",
+            "link_1": "Apply to Foster",
+            "link_1_href": "./services",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 3,
+          "schema": {
+            "key": "section_4",
+            "label": "Meet your familys next best friend.",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "heading_1",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_1",
+                  "attribute": "href"
+                }
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [
+              {
+                "key": "block_1",
+                "label": "Card - Open your home for a week",
+                "kind": "block",
+                "fields": [
+                  {
+                    "key": "media_1",
+                    "label": "Open your home for a week",
+                    "group": "Media",
+                    "type": "media",
+                    "binding": {
+                      "attribute": "src"
+                    }
+                  },
+                  {
+                    "key": "media_1_alt",
+                    "label": "Image alternative text",
+                    "group": "Accessibility",
+                    "type": "text",
+                    "binding": {
+                      "field": "media_1",
+                      "attribute": "alt"
+                    }
+                  },
+                  {
+                    "key": "heading_1",
+                    "label": "Heading",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "text_1",
+                    "label": "Text",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  }
+                ],
+                "settings": [],
+                "html": "<article class=\"foster-card foster-card--tall\"><img alt=\"Open your home for a week\" class=\"foster-img\" loading=\"lazy\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-3a78eb7d9d.webp\" data-theme-project-field=\"media_1\"><div class=\"foster-card-body\"><h3 data-theme-project-field=\"heading_1\">Open your home for a week</h3><p data-theme-project-field=\"text_1\">Short-term fosters give dogs a break from the shelter — and give us time to find them the right forever home.</p></div></article>",
+                "defaults": {
+                  "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-3a78eb7d9d.webp",
+                  "media_1_alt": "Open your home for a week",
+                  "heading_1": "Open your home for a week",
+                  "text_1": "Short-term fosters give dogs a break from the shelter — and give us time to find them the right forever home."
+                },
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              },
+              {
+                "key": "block_2",
+                "label": "Card - Help a dog recover",
+                "kind": "block",
+                "fields": [
+                  {
+                    "key": "media_1",
+                    "label": "Help a dog recover",
+                    "group": "Media",
+                    "type": "media",
+                    "binding": {
+                      "attribute": "src"
+                    }
+                  },
+                  {
+                    "key": "media_1_alt",
+                    "label": "Image alternative text",
+                    "group": "Accessibility",
+                    "type": "text",
+                    "binding": {
+                      "field": "media_1",
+                      "attribute": "alt"
+                    }
+                  },
+                  {
+                    "key": "heading_1",
+                    "label": "Heading",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "text_1",
+                    "label": "Text",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  }
+                ],
+                "settings": [],
+                "html": "<article class=\"foster-card\"><img alt=\"Help a dog recover\" class=\"foster-img\" loading=\"lazy\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-7a5fb7c91a.webp\" data-theme-project-field=\"media_1\"><div class=\"foster-card-body\"><h3 data-theme-project-field=\"heading_1\">Help a dog recover</h3><p data-theme-project-field=\"text_1\">Some dogs arrive with medical needs. Foster carers who can follow a simple care routine save lives every time.</p></div></article>",
+                "defaults": {
+                  "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-7a5fb7c91a.webp",
+                  "media_1_alt": "Help a dog recover",
+                  "heading_1": "Help a dog recover",
+                  "text_1": "Some dogs arrive with medical needs. Foster carers who can follow a simple care routine save lives every time."
+                },
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              },
+              {
+                "key": "block_3",
+                "label": "Card - Be part of the moment they find their family",
+                "kind": "block",
+                "fields": [
+                  {
+                    "key": "media_1",
+                    "label": "Be part of the moment they find their family",
+                    "group": "Media",
+                    "type": "media",
+                    "binding": {
+                      "attribute": "src"
+                    }
+                  },
+                  {
+                    "key": "media_1_alt",
+                    "label": "Image alternative text",
+                    "group": "Accessibility",
+                    "type": "text",
+                    "binding": {
+                      "field": "media_1",
+                      "attribute": "alt"
+                    }
+                  },
+                  {
+                    "key": "heading_1",
+                    "label": "Heading",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "text_1",
+                    "label": "Text",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  }
+                ],
+                "settings": [],
+                "html": "<article class=\"foster-card\"><img alt=\"Be part of the moment they find their family\" class=\"foster-img\" loading=\"lazy\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-3a1b5c0a8d.webp\" data-theme-project-field=\"media_1\"><div class=\"foster-card-body\"><h3 data-theme-project-field=\"heading_1\">Be part of the moment they find their family</h3><p data-theme-project-field=\"text_1\">Fosters are there for the transport day, the adoption call, the moment everything changes. It stays with you.</p></div></article>",
+                "defaults": {
+                  "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-3a1b5c0a8d.webp",
+                  "media_1_alt": "Be part of the moment they find their family",
+                  "heading_1": "Be part of the moment they find their family",
+                  "text_1": "Fosters are there for the transport day, the adoption call, the moment everything changes. It stays with you."
+                },
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              }
+            ],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_5",
+          "name": "Two direct ways your gift saves lives.",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"section section-campaigns\" data-section-key=\"campaigns\" data-theme-section=\"section_5\" data-theme-project-field=\"__section\"><div class=\"container\"><p class=\"eyebrow\" data-theme-project-field=\"text_1\">Featured Campaigns</p><h2 data-theme-project-field=\"heading_1\">Two direct ways your gift saves lives.</h2><div class=\"campaign-grid mt-md\"><!--theme-block:block_1--><!--theme-block:block_2--></div></div></section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_5",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": [
+                {
+                  "id": "block_1",
+                  "templateKey": "block_1"
+                },
+                {
+                  "id": "block_2",
+                  "templateKey": "block_2"
+                }
+              ]
+            },
+            "block_1": {
+              "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-646c65381e.webp",
+              "media_1_alt": "Transport Fund",
+              "heading_1": "Transport Fund",
+              "text_1": "Every transport gives a dog a shot at rescue. $40 covers a single dog ride to a partner rescue or approved adopter.",
+              "link_1": "Fund a Transport",
+              "link_1_href": "./donate"
+            },
+            "block_2": {
+              "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-6342d50dbd.webp",
+              "media_1_alt": "Emergency Medical Fund",
+              "heading_1": "Emergency Medical Fund",
+              "text_1": "Dogs arrive with injuries, illness, and untreated pain. Your gift goes directly to vet bills for animals in crisis.",
+              "link_1": "Support Medical Care",
+              "link_1_href": "./donate"
+            },
+            "text_1": "Featured Campaigns",
+            "heading_1": "Two direct ways your gift saves lives.",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 4,
+          "schema": {
+            "key": "section_5",
+            "label": "Two direct ways your gift saves lives.",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "heading_1",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [
+              {
+                "key": "block_1",
+                "label": "Card - Transport Fund",
+                "kind": "block",
+                "fields": [
+                  {
+                    "key": "media_1",
+                    "label": "Transport Fund",
+                    "group": "Media",
+                    "type": "media",
+                    "binding": {
+                      "attribute": "src"
+                    }
+                  },
+                  {
+                    "key": "media_1_alt",
+                    "label": "Image alternative text",
+                    "group": "Accessibility",
+                    "type": "text",
+                    "binding": {
+                      "field": "media_1",
+                      "attribute": "alt"
+                    }
+                  },
+                  {
+                    "key": "heading_1",
+                    "label": "Heading",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "text_1",
+                    "label": "Text",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "link_1",
+                    "label": "Link",
+                    "group": "Actions",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "link_1_href",
+                    "label": "Link destination",
+                    "group": "Actions",
+                    "type": "link",
+                    "binding": {
+                      "field": "link_1",
+                      "attribute": "href"
+                    }
+                  }
+                ],
+                "settings": [],
+                "html": "<article class=\"campaign-card\"><div class=\"campaign-img-wrap\"><img alt=\"Transport Fund\" class=\"campaign-img\" loading=\"lazy\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-646c65381e.webp\" data-theme-project-field=\"media_1\"><div class=\"campaign-img-overlay\"></div></div><div class=\"campaign-body\"><h3 class=\"campaign-title\" data-theme-project-field=\"heading_1\">Transport Fund</h3><p class=\"campaign-text\" data-theme-project-field=\"text_1\">Every transport gives a dog a shot at rescue. $40 covers a single dog ride to a partner rescue or approved adopter.</p><a class=\"btn btn-primary\" href=\"./donate\" data-theme-project-field=\"link_1\">Fund a Transport</a></div></article>",
+                "defaults": {
+                  "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-646c65381e.webp",
+                  "media_1_alt": "Transport Fund",
+                  "heading_1": "Transport Fund",
+                  "text_1": "Every transport gives a dog a shot at rescue. $40 covers a single dog ride to a partner rescue or approved adopter.",
+                  "link_1": "Fund a Transport",
+                  "link_1_href": "./donate"
+                },
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              },
+              {
+                "key": "block_2",
+                "label": "Card - Emergency Medical Fund",
+                "kind": "block",
+                "fields": [
+                  {
+                    "key": "media_1",
+                    "label": "Emergency Medical Fund",
+                    "group": "Media",
+                    "type": "media",
+                    "binding": {
+                      "attribute": "src"
+                    }
+                  },
+                  {
+                    "key": "media_1_alt",
+                    "label": "Image alternative text",
+                    "group": "Accessibility",
+                    "type": "text",
+                    "binding": {
+                      "field": "media_1",
+                      "attribute": "alt"
+                    }
+                  },
+                  {
+                    "key": "heading_1",
+                    "label": "Heading",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "text_1",
+                    "label": "Text",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "link_1",
+                    "label": "Link",
+                    "group": "Actions",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "link_1_href",
+                    "label": "Link destination",
+                    "group": "Actions",
+                    "type": "link",
+                    "binding": {
+                      "field": "link_1",
+                      "attribute": "href"
+                    }
+                  }
+                ],
+                "settings": [],
+                "html": "<article class=\"campaign-card\"><div class=\"campaign-img-wrap\"><img alt=\"Emergency Medical Fund\" class=\"campaign-img\" loading=\"lazy\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-6342d50dbd.webp\" data-theme-project-field=\"media_1\"><div class=\"campaign-img-overlay\"></div></div><div class=\"campaign-body\"><h3 class=\"campaign-title\" data-theme-project-field=\"heading_1\">Emergency Medical Fund</h3><p class=\"campaign-text\" data-theme-project-field=\"text_1\">Dogs arrive with injuries, illness, and untreated pain. Your gift goes directly to vet bills for animals in crisis.</p><a class=\"btn btn-primary\" href=\"./donate\" data-theme-project-field=\"link_1\">Support Medical Care</a></div></article>",
+                "defaults": {
+                  "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-6342d50dbd.webp",
+                  "media_1_alt": "Emergency Medical Fund",
+                  "heading_1": "Emergency Medical Fund",
+                  "text_1": "Dogs arrive with injuries, illness, and untreated pain. Your gift goes directly to vet bills for animals in crisis.",
+                  "link_1": "Support Medical Care",
+                  "link_1_href": "./donate"
+                },
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              }
+            ],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_6",
+          "name": "Section 6",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"section section-testimonial\" data-section-key=\"testimonial\" data-theme-section=\"section_6\" data-theme-project-field=\"__section\">\n<div class=\"container\">\n<p class=\"eyebrow\" data-theme-project-field=\"text_1\">Real Impact</p>\n<blockquote class=\"testimonial-quote\">Companions gave me the chance to say yes - and to fight for her.</blockquote>\n<p class=\"testimonial-attr\" data-theme-project-field=\"text_2\">Brittany Ramsey, foster and board member</p>\n</div>\n</section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_6",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "text_1": "Real Impact",
+            "text_2": "Brittany Ramsey, foster and board member",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 5,
+          "schema": {
+            "key": "section_6",
+            "label": "Section 6",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_7",
+          "name": "Some dogs arrive with stories they cannot tell.",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"section\" data-section-key=\"crisis_care\" data-theme-section=\"section_7\" data-theme-project-field=\"__section\">\n<div class=\"container\">\n<div class=\"section-text-image\">\n<div class=\"text-col\">\n<p class=\"eyebrow\" data-theme-project-field=\"text_1\">From Crisis to Care</p><h2 data-theme-project-field=\"heading_1\">Some dogs arrive with stories they cannot tell.</h2><p data-theme-project-field=\"text_2\">Road rash, illness, neglect, and urgent medical needs can make a dog easy to overlook in an overcrowded shelter. Violet Initiative helps turn those moments into treatment, recovery, and a future.</p>\n<div class=\"hero-actions mt-md\"><a class=\"btn btn-primary\" href=\"./donate\" data-theme-project-field=\"link_1\">Help Fund Recovery</a></div>\n</div>\n<div class=\"img-col\">\n<img alt=\"Some dogs arrive with stories they cannot tell.\" class=\"section-img\" loading=\"lazy\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-cd07daa54a.webp\" data-theme-project-field=\"media_1\">\n</div>\n</div>\n</div>\n</section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_7",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "text_1": "From Crisis to Care",
+            "heading_1": "Some dogs arrive with stories they cannot tell.",
+            "text_2": "Road rash, illness, neglect, and urgent medical needs can make a dog easy to overlook in an overcrowded shelter. Violet Initiative helps turn those moments into treatment, recovery, and a future.",
+            "link_1": "Help Fund Recovery",
+            "link_1_href": "./donate",
+            "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-cd07daa54a.webp",
+            "media_1_alt": "Some dogs arrive with stories they cannot tell.",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 6,
+          "schema": {
+            "key": "section_7",
+            "label": "Some dogs arrive with stories they cannot tell.",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "heading_1",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_1",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "media_1",
+                "label": "Some dogs arrive with stories they cannot tell.",
+                "group": "Media",
+                "type": "media",
+                "binding": {
+                  "attribute": "src"
+                }
+              },
+              {
+                "key": "media_1_alt",
+                "label": "Image alternative text",
+                "group": "Accessibility",
+                "type": "text",
+                "binding": {
+                  "field": "media_1",
+                  "attribute": "alt"
+                }
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_8",
+          "name": "Site footer",
+          "globalKey": "site-footer",
+          "zone": "FOOTER",
+          "sourceKind": "site-footer",
+          "html": "<footer class=\"site-footer\" data-theme-section=\"section_8\" data-theme-project-field=\"__section\">\n<div class=\"container\">\n<div class=\"footer-grid\">\n<div class=\"footer-brand\">\n<img alt=\"Violet Initiative\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/theme-mark.svg\" data-theme-project-field=\"media_1\">\n<p class=\"footer-tagline\" data-theme-project-field=\"text_1\">A volunteer-run nonprofit helping dogs at North District Parish Animal Services receive medical care, transport support, and second chances.</p>\n</div>\n<div>\n<p class=\"footer-col-label\" data-theme-project-field=\"text_2\">Pages</p>\n<ul class=\"footer-links\">\n<li><a href=\"/\" data-theme-project-field=\"link_1\">Home</a></li>\n<li><a href=\"./about\" data-theme-project-field=\"link_2\">About</a></li>\n<li><a href=\"./services\" data-theme-project-field=\"link_3\">Foster</a></li>\n<li><a href=\"./adopt\" data-theme-project-field=\"link_4\">Adopt</a></li>\n<li><a href=\"./community\" data-theme-project-field=\"link_5\">Community</a></li>\n<li><a href=\"./donate\" data-theme-project-field=\"link_6\">Donate</a></li>\n</ul>\n</div>\n<div>\n<p class=\"footer-col-label\" data-theme-project-field=\"text_3\">Organization</p>\n<div class=\"footer-org-row\">\n<span><strong data-theme-project-field=\"text_4\">Violet Initiative</strong></span>\n<span data-theme-project-field=\"text_5\">501(c)(3) Tax-Exempt</span>\n<span data-theme-project-field=\"text_6\">EIN: 88-4156327</span>\n<span data-theme-project-field=\"text_7\">North District Parish, Louisiana</span>\n<span><a href=\"mailto:hello@violet.example\" data-theme-project-field=\"link_7\">hello@violet.example</a></span>\n</div>\n</div>\n<div class=\"footer-dev\">\n<p class=\"footer-dev-label\" data-theme-project-field=\"text_8\">Developed by</p>\n<a href=\"https://inneranimalmedia.com\" rel=\"noopener\" target=\"_blank\" data-theme-project-field=\"link_8\">\n<img alt=\"Inner Animal Media\" src=\"https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-b8f43a3887.webp\" data-theme-project-field=\"media_2\">\n</a>\n</div>\n</div>\n<div class=\"footer-bottom\">\n<p class=\"footer-ein\" data-theme-project-field=\"text_9\">Violet Initiative &nbsp;·&nbsp; 501(c)(3) &nbsp;·&nbsp; EIN 88-4156327</p>\n<div class=\"footer-socials\">\n<a href=\"#social\" rel=\"noopener\" target=\"_blank\" data-theme-project-field=\"link_9\">Facebook</a>\n<a href=\"#social\" rel=\"noopener\" target=\"_blank\" data-theme-project-field=\"link_10\">Instagram</a>\n</div>\n</div>\n</div>\n</footer>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_8",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "media_1": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/theme-mark.svg",
+            "media_1_alt": "Violet Initiative",
+            "text_1": "A volunteer-run nonprofit helping dogs at North District Parish Animal Services receive medical care, transport support, and second chances.",
+            "text_2": "Pages",
+            "link_1": "Home",
+            "link_1_href": "/",
+            "link_2": "About",
+            "link_2_href": "./about",
+            "link_3": "Foster",
+            "link_3_href": "./services",
+            "link_4": "Adopt",
+            "link_4_href": "./adopt",
+            "link_5": "Community",
+            "link_5_href": "./community",
+            "link_6": "Donate",
+            "link_6_href": "./donate",
+            "text_3": "Organization",
+            "text_4": "Violet Initiative",
+            "text_5": "501(c)(3) Tax-Exempt",
+            "text_6": "EIN: 88-4156327",
+            "text_7": "North District Parish, Louisiana",
+            "link_7": "hello@violet.example",
+            "link_7_href": "mailto:hello@violet.example",
+            "text_8": "Developed by",
+            "link_8": "https://inneranimalmedia.com",
+            "media_2": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/assets/generated/media-b8f43a3887.webp",
+            "media_2_alt": "Inner Animal Media",
+            "text_9": "Violet Initiative  ·  501(c)(3)  ·  EIN 88-4156327",
+            "link_9": "Facebook",
+            "link_9_href": "#social",
+            "link_10": "Instagram",
+            "link_10_href": "#social",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 7,
+          "schema": {
+            "key": "section_8",
+            "label": "Site footer",
+            "zone": "FOOTER",
+            "sourceKind": "site-footer",
+            "fields": [
+              {
+                "key": "media_1",
+                "label": "Violet Initiative",
+                "group": "Media",
+                "type": "media",
+                "binding": {
+                  "attribute": "src"
+                }
+              },
+              {
+                "key": "media_1_alt",
+                "label": "Image alternative text",
+                "group": "Accessibility",
+                "type": "text",
+                "binding": {
+                  "field": "media_1",
+                  "attribute": "alt"
+                }
+              },
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_1",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_2",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_2_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_2",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_3",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_3_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_3",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_4",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_4_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_4",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_5",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_5_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_5",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_6",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_6_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_6",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "text_3",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_4",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_5",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_6",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_7",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_7",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_7_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_7",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "text_8",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_8",
+                "label": "Link",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "media_2",
+                "label": "Inner Animal Media",
+                "group": "Media",
+                "type": "media",
+                "binding": {
+                  "attribute": "src"
+                }
+              },
+              {
+                "key": "media_2_alt",
+                "label": "Image alternative text",
+                "group": "Accessibility",
+                "type": "text",
+                "binding": {
+                  "field": "media_2",
+                  "attribute": "alt"
+                }
+              },
+              {
+                "key": "text_9",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_9",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_9_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_9",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_10",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_10_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_10",
+                  "attribute": "href"
+                }
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": false,
+              "duplicate": false,
+              "reusable": true
+            }
+          }
+        }
+      ],
+      "sourceRoute": "/pages/",
+      "sourceOrigin": "rendered-route-alias"
+    }
+  ],
+  "tokens": {},
+  "sourceThemeId": "violet",
+  "sourcePackage": "@inneranimalmedia/theme-violet",
+  "sourcePackageVersion": "2.6.13",
+  "sourcePreviewUrl": "https://themes.inneranimalmedia.com/theme-packages/violet/2.6.13/preview/",
+  "sourceReleaseSha256": "3d14021105332246d282f83d38b2d397b3319bd1db886a8dc7e3c0829ca915c5",
+  "sourceCmsManifestSchema": "iam.theme-package.v1",
+  "sourceManifestPageCount": 2,
+  "sourceRoutesNotRendered": [],
+  "sourcePagesDetected": 14,
+  "sourceAssetErrors": [],
+  "revision": 0,
+  "version": "0.1.0"
+}

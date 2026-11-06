@@ -1,0 +1,1187 @@
+{
+  "schema": "agentsam.theme-project.v1",
+  "id": "theme_harbor",
+  "name": "Harbor",
+  "pages": [
+    {
+      "slug": "home",
+      "title": "Harbor Advisory — Harbor",
+      "assetBase": "https://themes.inneranimalmedia.com/theme-packages/harbor/2.6.13/preview/",
+      "status": "draft",
+      "template": "<!DOCTYPE html><html lang=\"en\"><head><base href=\"https://themes.inneranimalmedia.com/theme-packages/harbor/2.6.13/preview/\">\n<meta charset=\"utf-8\">\n<meta content=\"width=device-width, initial-scale=1.0\" name=\"viewport\">\n<meta content=\"A polished professional-services website prebuild with clear service pages, thoughtful proof, useful resources, and calm, confident lead capture.\" name=\"description\">\n<title>Harbor Advisory — Harbor</title>\n\n<link crossorigin=\"\" href=\"https://themes.inneranimalmedia.com/theme-packages/harbor/2.6.13/preview/assets/index-Dd3YN9Mf.css\" rel=\"stylesheet\">\n<link href=\"https://example.com/\" rel=\"canonical\"><meta content=\"index,follow,max-image-preview:large\" name=\"robots\"><meta content=\"#0d1b24\" name=\"theme-color\"><meta content=\"website\" property=\"og:type\"><meta content=\"Harbor Advisory — Harbor\" property=\"og:title\"><meta content=\"A polished professional-services website prebuild with clear service pages, thoughtful proof, useful resources, and calm, confident lead capture.\" property=\"og:description\"><meta content=\"https://example.com/\" property=\"og:url\"><meta content=\"https://example.com/theme-packages/harbor/2.6.13/preview/assets/generated/social-card.webp\" property=\"og:image\"><meta content=\"summary_large_image\" name=\"twitter:card\"><meta content=\"Harbor Advisory — Harbor\" name=\"twitter:title\"><meta content=\"A polished professional-services website prebuild with clear service pages, thoughtful proof, useful resources, and calm, confident lead capture.\" name=\"twitter:description\"><meta content=\"https://example.com/theme-packages/harbor/2.6.13/preview/assets/generated/social-card.webp\" name=\"twitter:image\"></head>\n<body>\n<div id=\"root\"><div class=\"site-shell\"><!--theme-section:section_1--><main><!--theme-section:section_2--><!--theme-section:section_3--><!--theme-section:section_4--><!--theme-section:section_5--><!--theme-section:section_6--><!--theme-section:section_7--></main><!--theme-section:section_8--></div></div>\n\n\n\n</body></html>",
+      "sections": [
+        {
+          "key": "section_1",
+          "name": "Site header",
+          "globalKey": "site-header",
+          "zone": "HEADER",
+          "sourceKind": "site-header",
+          "html": "<header class=\"site-header\" data-theme-section=\"section_1\" data-theme-project-field=\"__section\"><a class=\"brand\" href=\"#home\" aria-label=\"Harbor Advisory home\" data-theme-project-field=\"link_1\"><span class=\"brand-mark\" data-theme-project-field=\"text_1\">HA</span><span><strong data-theme-project-field=\"text_2\">Harbor Advisory</strong><small data-theme-project-field=\"text_3\">Insurance Agency LLC</small></span></a><button class=\"menu-button\" aria-label=\"Toggle navigation\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-menu\" aria-hidden=\"true\"><path d=\"M4 5h16\"></path><path d=\"M4 12h16\"></path><path d=\"M4 19h16\"></path></svg></button><nav class=\"nav\"><a href=\"#home\" data-theme-project-field=\"link_2\">Home</a><a href=\"#services\" data-theme-project-field=\"link_3\">Services</a><a href=\"#about\" data-theme-project-field=\"link_4\">About</a><a href=\"#contact\" data-theme-project-field=\"link_5\">Contact</a><a class=\"nav-cta\" href=\"#contact\" data-theme-project-field=\"link_6\">Request a Quote</a></nav></header>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_1",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "link_1": "#home",
+            "text_1": "HA",
+            "text_2": "Harbor Advisory",
+            "text_3": "Insurance Agency LLC",
+            "link_2": "Home",
+            "link_2_href": "#home",
+            "link_3": "Services",
+            "link_3_href": "#services",
+            "link_4": "About",
+            "link_4_href": "#about",
+            "link_5": "Contact",
+            "link_5_href": "#contact",
+            "link_6": "Request a Quote",
+            "link_6_href": "#contact",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 0,
+          "schema": {
+            "key": "section_1",
+            "label": "Site header",
+            "zone": "HEADER",
+            "sourceKind": "site-header",
+            "fields": [
+              {
+                "key": "link_1",
+                "label": "Harbor Advisory home",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_3",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_2",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_2_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_2",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_3",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_3_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_3",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_4",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_4_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_4",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_5",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_5_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_5",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_6",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_6_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_6",
+                  "attribute": "href"
+                }
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": false,
+              "duplicate": false,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_2",
+          "name": "Protect your business with coverage that actually makes sens",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"hero\" id=\"home\" data-theme-section=\"section_2\" data-theme-project-field=\"__section\"><div class=\"hero-copy\"><p class=\"eyebrow\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-sparkles\" aria-hidden=\"true\"><path d=\"M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z\"></path><path d=\"M20 2v4\"></path><path d=\"M22 4h-4\"></path><circle cx=\"4\" cy=\"20\" r=\"2\"></circle></svg> Commercial Insurance, Clearly Explained</p><h1 data-theme-project-field=\"heading_1\">Protect your business with coverage that actually makes sense.</h1><p class=\"hero-lede\" data-theme-project-field=\"text_1\">Harbor Advisory helps businesses understand their options, compare practical coverage paths, and move forward with confidence.</p><div class=\"hero-actions\"><a class=\"btn primary\" href=\"#contact\" data-theme-project-field=\"link_1\">Start a Quote <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-arrow-right\" aria-hidden=\"true\"><path d=\"M5 12h14\"></path><path d=\"m12 5 7 7-7 7\"></path></svg></a><a class=\"btn ghost\" href=\"#services\" data-theme-project-field=\"link_2\">Explore Coverage</a></div></div><aside class=\"hero-card\" aria-label=\"Agency highlights\"><p class=\"card-kicker\" data-theme-project-field=\"text_2\">Built for business owners</p><h2 data-theme-project-field=\"heading_2\">Clear guidance. Practical protection. No confusing runaround.</h2><div class=\"stat-grid\"><div><strong data-theme-project-field=\"text_3\">10+</strong><span data-theme-project-field=\"text_4\">Years industry experience</span></div><div><strong data-theme-project-field=\"text_5\">5</strong><span data-theme-project-field=\"text_6\">Core commercial coverage areas</span></div><div><strong data-theme-project-field=\"text_7\">1</strong><span data-theme-project-field=\"text_8\">Simple place to start</span></div></div></aside></section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_2",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "heading_1": "Protect your business with coverage that actually makes sense.",
+            "text_1": "Harbor Advisory helps businesses understand their options, compare practical coverage paths, and move forward with confidence.",
+            "link_1": "#contact",
+            "link_2": "Explore Coverage",
+            "link_2_href": "#services",
+            "text_2": "Built for business owners",
+            "heading_2": "Clear guidance. Practical protection. No confusing runaround.",
+            "text_3": "10+",
+            "text_4": "Years industry experience",
+            "text_5": "5",
+            "text_6": "Core commercial coverage areas",
+            "text_7": "1",
+            "text_8": "Simple place to start",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 1,
+          "schema": {
+            "key": "section_2",
+            "label": "Protect your business with coverage that actually makes sens",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "heading_1",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1",
+                "label": "Link",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "link_2",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_2_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_2",
+                  "attribute": "href"
+                }
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "heading_2",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_3",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_4",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_5",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_6",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_7",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_8",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_3",
+          "name": "Key benefits",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"trust-strip\" aria-label=\"Key benefits\" data-theme-section=\"section_3\" data-theme-project-field=\"__section\"><span data-theme-project-field=\"text_1\">Tailored business coverage</span><span data-theme-project-field=\"text_2\">Transparent explanations</span><span data-theme-project-field=\"text_3\">Quote-focused support</span><span data-theme-project-field=\"text_4\">Commercial risk guidance</span></section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_3",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "text_1": "Tailored business coverage",
+            "text_2": "Transparent explanations",
+            "text_3": "Quote-focused support",
+            "text_4": "Commercial risk guidance",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 2,
+          "schema": {
+            "key": "section_3",
+            "label": "Key benefits",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_3",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_4",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_4",
+          "name": "Commercial insurance organized around real business needs.",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"section\" id=\"services\" data-theme-section=\"section_4\" data-theme-project-field=\"__section\"><div class=\"section-heading\"><p class=\"eyebrow\" data-theme-project-field=\"text_1\">Coverage Areas</p><h2 data-theme-project-field=\"heading_1\">Commercial insurance organized around real business needs.</h2><p data-theme-project-field=\"text_2\">Keep the demo simple: short, confident coverage cards instead of a wall of policy language. Full details can be expanded once the client approves the project.</p></div><div class=\"service-grid\"><!--theme-block:block_1--><!--theme-block:block_2--><!--theme-block:block_3--><!--theme-block:block_4--><!--theme-block:block_5--></div></section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_4",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": [
+                {
+                  "id": "block_1",
+                  "templateKey": "block_1"
+                },
+                {
+                  "id": "block_2",
+                  "templateKey": "block_2"
+                },
+                {
+                  "id": "block_3",
+                  "templateKey": "block_3"
+                },
+                {
+                  "id": "block_4",
+                  "templateKey": "block_4"
+                },
+                {
+                  "id": "block_5",
+                  "templateKey": "block_5"
+                }
+              ]
+            },
+            "block_1": {
+              "heading_1": "General Liability",
+              "text_1": "Protection for common business risks like bodily injury, property damage, and certain advertising-related claims."
+            },
+            "block_2": {
+              "heading_1": "Professional Liability",
+              "text_1": "Coverage designed for service-based businesses when a client claims an error, omission, or professional mistake caused financial harm."
+            },
+            "block_3": {
+              "heading_1": "Commercial Auto",
+              "text_1": "Coverage for vehicles used in business operations, from liability protection to comprehensive and hired/non-owned auto options."
+            },
+            "block_4": {
+              "heading_1": "Commercial Property",
+              "text_1": "Insurance for business buildings, equipment, tools, inventory, and other property that keeps operations moving."
+            },
+            "block_5": {
+              "heading_1": "Commercial Bonds",
+              "text_1": "Surety and business bonds that help satisfy licensing, permit, contract, or compliance requirements."
+            },
+            "text_1": "Coverage Areas",
+            "heading_1": "Commercial insurance organized around real business needs.",
+            "text_2": "Keep the demo simple: short, confident coverage cards instead of a wall of policy language. Full details can be expanded once the client approves the project.",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 3,
+          "schema": {
+            "key": "section_4",
+            "label": "Commercial insurance organized around real business needs.",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "heading_1",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [
+              {
+                "key": "block_1",
+                "label": "Card - General Liability",
+                "kind": "block",
+                "fields": [
+                  {
+                    "key": "heading_1",
+                    "label": "Heading",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "text_1",
+                    "label": "Text",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  }
+                ],
+                "settings": [],
+                "html": "<article class=\"service-card\"><div class=\"service-icon\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-shield-check\" aria-hidden=\"true\"><path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\"></path><path d=\"m9 12 2 2 4-4\"></path></svg></div><h3 data-theme-project-field=\"heading_1\">General Liability</h3><p data-theme-project-field=\"text_1\">Protection for common business risks like bodily injury, property damage, and certain advertising-related claims.</p></article>",
+                "defaults": {
+                  "heading_1": "General Liability",
+                  "text_1": "Protection for common business risks like bodily injury, property damage, and certain advertising-related claims."
+                },
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              },
+              {
+                "key": "block_2",
+                "label": "Card - Professional Liability",
+                "kind": "block",
+                "fields": [
+                  {
+                    "key": "heading_1",
+                    "label": "Heading",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "text_1",
+                    "label": "Text",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  }
+                ],
+                "settings": [],
+                "html": "<article class=\"service-card\"><div class=\"service-icon\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-file-check-corner\" aria-hidden=\"true\"><path d=\"M10.5 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v6\"></path><path d=\"M14 2v5a1 1 0 0 0 1 1h5\"></path><path d=\"m14 20 2 2 4-4\"></path></svg></div><h3 data-theme-project-field=\"heading_1\">Professional Liability</h3><p data-theme-project-field=\"text_1\">Coverage designed for service-based businesses when a client claims an error, omission, or professional mistake caused financial harm.</p></article>",
+                "defaults": {
+                  "heading_1": "Professional Liability",
+                  "text_1": "Coverage designed for service-based businesses when a client claims an error, omission, or professional mistake caused financial harm."
+                },
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              },
+              {
+                "key": "block_3",
+                "label": "Card - Commercial Auto",
+                "kind": "block",
+                "fields": [
+                  {
+                    "key": "heading_1",
+                    "label": "Heading",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "text_1",
+                    "label": "Text",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  }
+                ],
+                "settings": [],
+                "html": "<article class=\"service-card\"><div class=\"service-icon\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-car\" aria-hidden=\"true\"><path d=\"M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2\"></path><circle cx=\"7\" cy=\"17\" r=\"2\"></circle><path d=\"M9 17h6\"></path><circle cx=\"17\" cy=\"17\" r=\"2\"></circle></svg></div><h3 data-theme-project-field=\"heading_1\">Commercial Auto</h3><p data-theme-project-field=\"text_1\">Coverage for vehicles used in business operations, from liability protection to comprehensive and hired/non-owned auto options.</p></article>",
+                "defaults": {
+                  "heading_1": "Commercial Auto",
+                  "text_1": "Coverage for vehicles used in business operations, from liability protection to comprehensive and hired/non-owned auto options."
+                },
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              },
+              {
+                "key": "block_4",
+                "label": "Card - Commercial Property",
+                "kind": "block",
+                "fields": [
+                  {
+                    "key": "heading_1",
+                    "label": "Heading",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "text_1",
+                    "label": "Text",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  }
+                ],
+                "settings": [],
+                "html": "<article class=\"service-card\"><div class=\"service-icon\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-building2 lucide-building-2\" aria-hidden=\"true\"><path d=\"M10 12h4\"></path><path d=\"M10 8h4\"></path><path d=\"M14 21v-3a2 2 0 0 0-4 0v3\"></path><path d=\"M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2\"></path><path d=\"M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16\"></path></svg></div><h3 data-theme-project-field=\"heading_1\">Commercial Property</h3><p data-theme-project-field=\"text_1\">Insurance for business buildings, equipment, tools, inventory, and other property that keeps operations moving.</p></article>",
+                "defaults": {
+                  "heading_1": "Commercial Property",
+                  "text_1": "Insurance for business buildings, equipment, tools, inventory, and other property that keeps operations moving."
+                },
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              },
+              {
+                "key": "block_5",
+                "label": "Card - Commercial Bonds",
+                "kind": "block",
+                "fields": [
+                  {
+                    "key": "heading_1",
+                    "label": "Heading",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  },
+                  {
+                    "key": "text_1",
+                    "label": "Text",
+                    "group": "Content",
+                    "type": "text",
+                    "binding": {}
+                  }
+                ],
+                "settings": [],
+                "html": "<article class=\"service-card\"><div class=\"service-icon\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-house\" aria-hidden=\"true\"><path d=\"M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8\"></path><path d=\"M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"></path></svg></div><h3 data-theme-project-field=\"heading_1\">Commercial Bonds</h3><p data-theme-project-field=\"text_1\">Surety and business bonds that help satisfy licensing, permit, contract, or compliance requirements.</p></article>",
+                "defaults": {
+                  "heading_1": "Commercial Bonds",
+                  "text_1": "Surety and business bonds that help satisfy licensing, permit, contract, or compliance requirements."
+                },
+                "capabilities": {
+                  "duplicate": true,
+                  "reorder": true,
+                  "reusable": true
+                }
+              }
+            ],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_5",
+          "name": "A more transparent way to approach business insurance.",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"split-section\" id=\"about\" data-theme-section=\"section_5\" data-theme-project-field=\"__section\"><div><p class=\"eyebrow\" data-theme-project-field=\"text_1\">Why Harbor Advisory</p><h2 data-theme-project-field=\"heading_1\">A more transparent way to approach business insurance.</h2></div><div class=\"split-copy\"><p data-theme-project-field=\"text_2\">From home offices to multi-location commercial exposures, the goal is simple: help business owners understand what protection they may need without making the process feel overwhelming.</p><div class=\"pill-list\"><span data-theme-project-field=\"text_3\">Plain-language support</span><span data-theme-project-field=\"text_4\">Commercial-first focus</span><span data-theme-project-field=\"text_5\">Coverage guidance</span><span data-theme-project-field=\"text_6\">Responsive communication</span></div></div></section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_5",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "text_1": "Why Harbor Advisory",
+            "heading_1": "A more transparent way to approach business insurance.",
+            "text_2": "From home offices to multi-location commercial exposures, the goal is simple: help business owners understand what protection they may need without making the process feel overwhelming.",
+            "text_3": "Plain-language support",
+            "text_4": "Commercial-first focus",
+            "text_5": "Coverage guidance",
+            "text_6": "Responsive communication",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 4,
+          "schema": {
+            "key": "section_5",
+            "label": "A more transparent way to approach business insurance.",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "heading_1",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_3",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_4",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_5",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_6",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_6",
+          "name": "Make the next step obvious.",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"quote-band\" data-theme-section=\"section_6\" data-theme-project-field=\"__section\"><div><p class=\"eyebrow\" data-theme-project-field=\"text_1\">Time = Money</p><h2 data-theme-project-field=\"heading_1\">Make the next step obvious.</h2><p data-theme-project-field=\"text_2\">A cleaner website should help visitors quickly understand the offer and contact the agency without digging through dense copy.</p></div><a class=\"btn primary light\" href=\"#contact\" data-theme-project-field=\"link_1\">Request a Quote</a></section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_6",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "text_1": "Time = Money",
+            "heading_1": "Make the next step obvious.",
+            "text_2": "A cleaner website should help visitors quickly understand the offer and contact the agency without digging through dense copy.",
+            "link_1": "Request a Quote",
+            "link_1_href": "#contact",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 5,
+          "schema": {
+            "key": "section_6",
+            "label": "Make the next step obvious.",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "heading_1",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1",
+                "label": "Link",
+                "group": "Actions",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "link_1_href",
+                "label": "Link destination",
+                "group": "Actions",
+                "type": "link",
+                "binding": {
+                  "field": "link_1",
+                  "attribute": "href"
+                }
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_7",
+          "name": "Request a quote or ask a coverage question.",
+          "zone": "BODY",
+          "sourceKind": "content-section",
+          "html": "<section class=\"section contact-section\" id=\"contact\" data-theme-section=\"section_7\" data-theme-project-field=\"__section\"><div class=\"section-heading compact\"><p class=\"eyebrow\" data-theme-project-field=\"text_1\">Contact</p><h2 data-theme-project-field=\"heading_1\">Request a quote or ask a coverage question.</h2><p data-theme-project-field=\"text_2\">This demo form is visual only. Final form routing, compliance language, and CRM/email delivery should be confirmed before launch.</p></div><div class=\"contact-layout\"><form class=\"contact-form\"><label>Full Name<input placeholder=\"Your name\" data-theme-project-field=\"input_1\"></label><label>Business Name<input placeholder=\"Company or organization\" data-theme-project-field=\"input_2\"></label><label>Email<input placeholder=\"you@example.com\" type=\"email\" data-theme-project-field=\"input_3\"></label><label>Coverage Interest<select><option value=\"\" disabled=\"\" selected=\"\">Select one</option><option>General Liability</option><option>Professional Liability</option><option>Commercial Auto</option><option>Commercial Property</option><option>Commercial Bonds</option><option>Not sure yet</option></select></label><label>Message<textarea placeholder=\"Tell us what you need help with.\" data-theme-project-field=\"input_4\"></textarea></label><button class=\"btn primary\" type=\"button\">Send Request <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-arrow-right\" aria-hidden=\"true\"><path d=\"M5 12h14\"></path><path d=\"m12 5 7 7-7 7\"></path></svg></button></form><aside class=\"contact-card\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"26\" height=\"26\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-phone\" aria-hidden=\"true\"><path d=\"M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384\"></path></svg><h3 data-theme-project-field=\"heading_2\">Prefer to start by email?</h3><p data-theme-project-field=\"text_3\">hello@harbor.example</p><small data-theme-project-field=\"text_4\">Insurance coverage cannot be bound, changed, or guaranteed through this demo form. Final language should be reviewed by the agency before publishing.</small></aside></div></section>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_7",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "text_1": "Contact",
+            "heading_1": "Request a quote or ask a coverage question.",
+            "text_2": "This demo form is visual only. Final form routing, compliance language, and CRM/email delivery should be confirmed before launch.",
+            "input_1": "Your name",
+            "input_2": "Company or organization",
+            "input_3": "you@example.com",
+            "input_4": "Tell us what you need help with.",
+            "heading_2": "Prefer to start by email?",
+            "text_3": "hello@harbor.example",
+            "text_4": "Insurance coverage cannot be bound, changed, or guaranteed through this demo form. Final language should be reviewed by the agency before publishing.",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 6,
+          "schema": {
+            "key": "section_7",
+            "label": "Request a quote or ask a coverage question.",
+            "zone": "BODY",
+            "sourceKind": "content-section",
+            "fields": [
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "heading_1",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "input_1",
+                "label": "Placeholder",
+                "group": "Forms",
+                "type": "text",
+                "binding": {
+                  "attribute": "placeholder"
+                }
+              },
+              {
+                "key": "input_2",
+                "label": "Placeholder",
+                "group": "Forms",
+                "type": "text",
+                "binding": {
+                  "attribute": "placeholder"
+                }
+              },
+              {
+                "key": "input_3",
+                "label": "Placeholder",
+                "group": "Forms",
+                "type": "text",
+                "binding": {
+                  "attribute": "placeholder"
+                }
+              },
+              {
+                "key": "input_4",
+                "label": "Placeholder",
+                "group": "Forms",
+                "type": "text",
+                "binding": {
+                  "attribute": "placeholder"
+                }
+              },
+              {
+                "key": "heading_2",
+                "label": "Heading",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_3",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_4",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": true,
+              "duplicate": true,
+              "reusable": true
+            }
+          }
+        },
+        {
+          "key": "section_8",
+          "name": "Site footer",
+          "globalKey": "site-footer",
+          "zone": "FOOTER",
+          "sourceKind": "site-footer",
+          "html": "<footer data-theme-section=\"section_8\" data-theme-project-field=\"__section\"><p data-theme-project-field=\"text_1\">© 2026 Harbor Advisory Agency LLC</p><p data-theme-project-field=\"text_2\">Website demo by Inner Animal Media</p></footer>",
+          "content": {
+            "__editor": {
+              "templateKey": "section_8",
+              "visibility": {
+                "enabled": true
+              },
+              "blocks": []
+            },
+            "text_1": "© 2026 Harbor Advisory Agency LLC",
+            "text_2": "Website demo by Inner Animal Media",
+            "layout_padding": "",
+            "layout_background": ""
+          },
+          "version": 0,
+          "status": "draft",
+          "sort_order": 7,
+          "schema": {
+            "key": "section_8",
+            "label": "Site footer",
+            "zone": "FOOTER",
+            "sourceKind": "site-footer",
+            "fields": [
+              {
+                "key": "text_1",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              },
+              {
+                "key": "text_2",
+                "label": "Text",
+                "group": "Content",
+                "type": "text",
+                "binding": {}
+              }
+            ],
+            "settings": [
+              {
+                "key": "layout_padding",
+                "label": "Padding",
+                "type": "text",
+                "group": "Spacing",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "padding"
+                }
+              },
+              {
+                "key": "layout_background",
+                "label": "Background",
+                "type": "text",
+                "group": "Surface",
+                "binding": {
+                  "field": "__section",
+                  "styleProperty": "background"
+                }
+              }
+            ],
+            "blocks": [],
+            "capabilities": {
+              "reorder": false,
+              "duplicate": false,
+              "reusable": true
+            }
+          }
+        }
+      ],
+      "sourceRoute": "/"
+    }
+  ],
+  "tokens": {},
+  "sourceThemeId": "harbor",
+  "sourcePackage": "@inneranimalmedia/theme-harbor",
+  "sourcePackageVersion": "2.6.13",
+  "sourcePreviewUrl": "https://themes.inneranimalmedia.com/theme-packages/harbor/2.6.13/preview/",
+  "sourceReleaseSha256": "9f2453aef4229db691dd47cea0acf47e29ddf0a51beb003f6bef28ccac053d38",
+  "sourceCmsManifestSchema": "iam.theme-package.v1",
+  "sourceManifestPageCount": 1,
+  "sourceRoutesNotRendered": [],
+  "sourcePagesDetected": 1,
+  "sourceAssetErrors": [],
+  "revision": 0,
+  "version": "0.1.0"
+}

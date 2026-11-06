@@ -23,9 +23,11 @@ for(const dir of await readdir(packages,{withFileTypes:true})){
   try{
     const pkg=JSON.parse(await readFile(packagePath,'utf8'));
     const meta=pkg.agentsam?.store;
-    if(meta?.release?.status!=='published')continue;
+    if(meta?.release?.status!=='published'||pkg.agentsam?.installable!==true)continue;
     const artifact=join(packages,dir.name,'install-project.json');
-    try{await readFile(artifact);}catch{continue;}
+    // A missing source-backed project is a broken release pipeline, not a
+    // reason to silently drop a previously installable theme from the index.
+    try{await readFile(artifact);}catch{throw Error('published_installable_project_missing:'+pkg.agentsam.slug);}
     candidates.push({dir:dir.name,pkg,meta,artifact});
   }catch(error){if(String(error.message).startsWith('published_installable_project_missing:'))throw error;}
 }
@@ -52,6 +54,15 @@ try{
       project.pages.some(p=>!p.slug||!Array.isArray(p.sections)||!p.sections.length||
         !p.sections.some(s=>(s.schema?.fields||[]).length||(s.schema?.blocks||[]).some(b=>b.fields?.length)))||
       project.sourceAssetErrors?.length)throw Error('invalid_installable_project:'+slug);
+    // A route which could not render may be included only when an actual
+    // author-supplied CMS source manifest supplies its editable content.
+    // No blank / missing routes may be represented as successful imports.
+    const unresolved=(project.sourceRoutesNotRendered||[]).filter(entry=>{
+      const route=String(entry).split(':')[0].replace(/^\/+|\/+$/g,'');
+      return !project.pages.some(page=>page.sourceOrigin==='authored-cms-manifest-fallback'&&
+        String(page.sourceRoute||'').replace(/^\/+|\/+$/g,'')===route);
+    });
+    if(unresolved.length)throw Error('unresolved_source_routes:'+slug+':'+unresolved.join(','));
     const projectHash=hash(bytes);
     const key='install-projects/'+slug+'/'+version+'/'+projectHash+'.json';
     console.log('PUBLISH PROJECT',slug,'pages',project.pages.length,'bytes',bytes.length,'hash',projectHash);

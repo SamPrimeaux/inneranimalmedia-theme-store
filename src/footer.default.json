@@ -256,6 +256,26 @@
         "logo_alt": "InnerAnimalMedia",
         "href": "https://inneranimalmedia.com/"
       }
+    },
+    {
+      "key": "resources-app-embeds",
+      "type": "link",
+      "parent": "resources",
+      "order": 30,
+      "settings": {
+        "label": "App embeds",
+        "href": "/app-embeds/"
+      }
+    },
+    {
+      "key": "resources-how-it-works",
+      "type": "link",
+      "parent": "resources",
+      "order": 40,
+      "settings": {
+        "label": "How it works",
+        "href": "/#how-it-works"
+      }
     }
   ]
 }

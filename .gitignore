@@ -12,3 +12,6 @@ src/catalog.generated.json
 
 # Local build artifacts, never commit customer-install ZIP files
 /.releases/
+*.pem
+.env*
+!.env.example

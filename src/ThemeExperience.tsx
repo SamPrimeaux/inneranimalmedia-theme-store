@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, ExternalLink, Maximize2, Minimize2, Monitor, Smartphone, Check, Layers } from 'lucide-react';
 import type { ThemeRecord } from './catalog';
 import './theme-experience.css';
+import './collection-gallery.css';
 
 type Device = 'desktop' | 'mobile';
 const devices: Device[] = ['desktop', 'mobile'];
@@ -75,6 +76,12 @@ export function ThemeExperience({ theme, onBack, onTry }: {
         <div><p className="experience-kicker">Website theme / {theme.category}</p><h1>{theme.name}</h1><p className="experience-subtitle">{theme.summary}</p></div>
         <div className="experience-overview-side"><span>Designed by {theme.publisher}</span><span>{price}</span></div>
       </section>
+      {!!theme.galleryUrls?.length&&<section className="experience-gallery" id="gallery" aria-label={theme.name+' image gallery'}>
+        <div className="experience-gallery-heading"><p className="experience-kicker">Product gallery</p><h2>Explore the details.</h2><p>Real images supplied in the CMS media library.</p></div>
+        <div className="experience-gallery-grid">{theme.galleryUrls.map((media,i)=><a key={media.url} href={media.url} target="_blank" rel="noopener noreferrer" aria-label={'Open gallery image '+(i+1)}>
+          <img src={media.url} alt={media.alt||theme.name} loading="lazy"/>
+        </a>)}</div>
+      </section>}
       <section className="experience-features" id="features">
         <div><p className="experience-kicker">The experience</p><h2>{theme.editorial?.headline || 'Make it yours.'}</h2><p>{theme.editorial?.body || theme.summary}</p></div>
         <div className="experience-feature-grid">

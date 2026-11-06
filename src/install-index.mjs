@@ -23,3 +23,15 @@ export function verifiedInstallEntries(raw, themes) {
     project_url:'/api/themes/'+p.slug+'/'+p.version+'/project',
   }));
 }
+
+/** A release ZIP is not enough to activate Try: the same signed release must
+ * also have a verified, editable, source-derived CMS install project.
+ * Fail closed when the R2 index is unavailable; never advertise ZIP-only designs.
+ */
+export function hasEditableInstallProject(theme, entries) {
+  return Array.isArray(entries) && entries.some(entry =>
+    entry.slug === theme?.slug && entry.version === theme?.version &&
+    entry.sha256 === theme?.release?.sha256 &&
+    theme?.release?.status === 'published' &&
+    Number.isSafeInteger(entry.page_count) && entry.page_count > 0);
+}

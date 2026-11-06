@@ -11,7 +11,8 @@
     "run_worker_first": [
       "/api/*",
       "/theme-packages/*",
-      "/themes/*"
+      "/themes/*",
+      "/site-media/*"
     ]
   },
   "r2_buckets": [

@@ -19,6 +19,8 @@ export type ThemeRecord = {
   previewBuild: 'package' | 'external';
   minCmsSchema: '2';
   editorial?: {eyebrow: string; headline: string; body: string; notes: string[]};
+  iconUrl?: string | null;
+  galleryUrls?: {url:string;alt:string}[];
   release: {status: ReleaseState; sha256: string | null; storageKey: string | null};
 };
 

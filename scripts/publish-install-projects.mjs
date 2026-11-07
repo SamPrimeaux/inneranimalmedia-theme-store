@@ -6,6 +6,7 @@ import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
+import { completeInstallProject } from '../src/install-project-repair.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 const packages=join(root,'packages');
@@ -44,9 +45,9 @@ try{
       !/^[0-9a-f]{64}$/.test(release.sha256||'')||
       release.storageKey!=='releases/'+slug+'/'+version+'/'+release.sha256+'.zip')
       throw Error('invalid_published_release:'+dir);
-    const bytes=await readFile(artifact);
-    if(bytes.length>8*1024*1024)throw Error('oversized_project:'+slug);
-    const project=JSON.parse(bytes.toString('utf8'));
+    const sourceBytes=await readFile(artifact);
+    if(sourceBytes.length>8*1024*1024)throw Error('oversized_source_project:'+slug);
+    const project=JSON.parse(sourceBytes.toString('utf8'));
     if(project.schema!=='agentsam.theme-project.v1'||project.id!=='theme_'+slug||
       project.sourceThemeId!==slug||project.sourcePackage!=='@inneranimalmedia/theme-'+slug||
       project.sourcePackageVersion!==version||project.sourceReleaseSha256!==release.sha256||
@@ -63,16 +64,23 @@ try{
         String(page.sourceRoute||'').replace(/^\/+|\/+$/g,'')===route);
     });
     if(unresolved.length)throw Error('unresolved_source_routes:'+slug+':'+unresolved.join(','));
+    // Complete only missing platform pages. Preserve the verified, authored
+    // source pages in the immutable install document; no preview rewriting.
+    const completion=completeInstallProject(project);
+    const bytes=Buffer.from(JSON.stringify(completion.project));
+    if(bytes.length>8*1024*1024)throw Error('oversized_completed_project:'+slug);
+    const completedArtifact=join(temp,slug+'-complete.json');
+    await writeFile(completedArtifact,bytes);
     const projectHash=hash(bytes);
     const key='install-projects/'+slug+'/'+version+'/'+projectHash+'.json';
-    console.log('PUBLISH PROJECT',slug,'pages',project.pages.length,'bytes',bytes.length,'hash',projectHash);
-    run(['put','theme-store/'+key,'--remote','--file',artifact,'--content-type','application/json']);
+    console.log('PUBLISH PROJECT',slug,'authored',project.pages.length,'system',completion.added.length,'bytes',bytes.length,'hash',projectHash);
+    run(['put','theme-store/'+key,'--remote','--file',completedArtifact,'--content-type','application/json']);
     const fetched=join(temp,slug+'.json');
     run(['get','theme-store/'+key,'--remote','--file',fetched]);
     if(hash(await readFile(fetched))!==projectHash)throw Error('r2_project_digest_mismatch:'+slug);
     result.push({slug,version,sha256:release.sha256,project_sha256:projectHash,
-      project_key:key,page_count:project.pages.length,manifest_page_count:project.sourceManifestPageCount||project.pages.length});
-    console.log('VERIFIED PROJECT',slug,project.pages.length);
+      project_key:key,page_count:completion.project.pages.length,manifest_page_count:project.sourceManifestPageCount||project.pages.length});
+    console.log('VERIFIED PROJECT',slug,completion.project.pages.length);
   }
   const manifest={schema:'agentsam.website-theme-install-index.v1',packages:result.sort((a,b)=>a.slug.localeCompare(b.slug))};
   const content=Buffer.from(JSON.stringify(manifest,null,2)+'\n');

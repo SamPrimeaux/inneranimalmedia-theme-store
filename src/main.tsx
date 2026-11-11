@@ -14,13 +14,14 @@ import { defaultHeader } from './header.mjs';
 import { Footer } from './UniversalFooter';
 import { AccountMenu } from './AccountMenu';
 import { PublicCollectionPage } from './PublicCollectionPage';
+import { marketplaceRedirect } from './marketplace-redirect.mjs';
 import './styles.css';
 import './catalog.css';
 import './header-global.css';
 
 type View = { kind: 'gallery' } | { kind: 'detail'; slug: string } | {kind:'collection';slug:string;productSlug?:string};
 function initialView(): View {
-  const collection = location.pathname.match(/^\/(app-embeds|apps|integrations)(?:\/([a-z0-9-]+))?\/?$/);
+  const collection = location.pathname.match(/^\/(apps|integrations)(?:\/([a-z0-9-]+))?\/?$/);
   if(collection)return {kind:'collection',slug:collection[1],productSlug:collection[2]};
   const match = location.pathname.match(/^\/themes\/([a-z0-9-]+)(?:\/preview)?\/?$/);
   return match ? {kind:'detail',slug:match[1]} : {kind:'gallery'};
@@ -177,4 +178,6 @@ function Root() {
   if (!data) return <main className="shell no-results"><p>Loading themes…</p></main>;
   return <App themes={data.themes} site={data.site} footer={data.footer} header={data.header}/>;
 }
-createRoot(document.getElementById('root')!).render(<React.StrictMode><Root/></React.StrictMode>);
+const marketplaceDestination = marketplaceRedirect(window.location.pathname);
+if (marketplaceDestination) window.location.replace(marketplaceDestination);
+else createRoot(document.getElementById('root')!).render(<React.StrictMode><Root/></React.StrictMode>);

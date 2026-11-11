@@ -54,8 +54,8 @@
       {
         "key": "app-embeds",
         "label": "App embeds",
-        "href": "/app-embeds/",
-        "type": "link"
+        "href": "https://apps.inneranimalmedia.com/collections/embeds",
+        "type": "external"
       },
       {
         "key": "how-it-works",

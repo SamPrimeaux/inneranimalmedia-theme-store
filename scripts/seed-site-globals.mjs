@@ -42,7 +42,7 @@ for(const block of header.blocks){
 }
 // Retain the current footer navigation items while allowing blocks to drive rendering.
 for(const [key,label,href,order] of [
- ['resources-app-embeds','App embeds','/app-embeds/',30],
+ ['resources-app-embeds','App embeds','https://apps.inneranimalmedia.com/collections/embeds',30],
  ['resources-how-it-works','How it works','/#how-it-works',40]
 ]){
  const id='cmsb_theme_store_footer_'+key.replaceAll('-','_');

@@ -44,7 +44,7 @@ export function normalizeHeader(input){
     const key=value(item?.key,derivedKey,90);
     if(!STR.test(key)||!label||!SAFE.test(href)||unique.has(key))continue;
     unique.add(key);
-    const inferredType=href==='https://agentsam.inneranimalmedia.com/sites'?'external':key==='browse-themes'?'browse':'link';
+    const inferredType=href.startsWith('https://')?'external':key==='browse-themes'?'browse':'link';
     const type=['browse','link','external'].includes(item.type)?item.type:inferredType;
     items.push({key,label,href,type});
   }

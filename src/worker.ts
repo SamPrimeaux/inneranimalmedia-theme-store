@@ -9,10 +9,12 @@ import { normalizeHeader, defaultHeader } from './header.mjs';
 import { verifiedInstallEntries, hasEditableInstallProject } from './install-index.mjs';
 import { marketplaceRedirect } from './marketplace-redirect.mjs';
 import { resolveOwnedThemeStoreEditor } from './owner-editor.mjs';
+import { publishedStoreSettings, publishedStoreGlobal } from './published-cms.mjs';
 
 type Env = {
   ASSETS: Fetcher;
   THEME_PACKAGES: R2Bucket;
+  DB?: D1Database;
 };
 
 function response(data: unknown, status = 200): Response {
@@ -97,9 +99,20 @@ export default {
     }
     if (url.pathname === '/api/site') {
       if (method !== 'GET') return missing('method_not_allowed', 405);
-      // Published site document (copy + tokens) from R2, validated against the bundled defaults.
+      // The published CMS site row is authoritative. The versioned R2
+      // delivery snapshot is a compatibility fallback, not an edit authority.
       let override: unknown;
-      try { const object = await env.THEME_PACKAGES.get('site/store-site.json'); override = object ? await object.json() : undefined; } catch { override = undefined; }
+      let source = 'r2-fallback';
+      try {
+        override = await publishedStoreSettings(env.DB);
+        if (override) source = 'cms-d1';
+      } catch (error) {
+        console.error('Theme Store CMS site settings unavailable', error instanceof Error ? error.message : 'unknown');
+      }
+      if (!override) {
+        try { const object = await env.THEME_PACKAGES.get('site/store-site.json'); override = object ? await object.json() : undefined; }
+        catch { override = undefined; }
+      }
       const site = resolveSite(siteDefaults as SiteDocument, override);
       return Response.json({ ok: true, site }, { headers: { 'cache-control': 'public, max-age=60', 'x-content-type-options': 'nosniff' } });
     }
@@ -109,10 +122,16 @@ export default {
       const current = 'sites/theme-store/globals/' + (header ? 'header' : 'footer') + '/current.json';
       const legacy = header ? null : 'site/theme-store-footer.json';
       let value = header ? defaultHeader : defaultFooter;
-      try {
+      let published = null;
+      try { published = await publishedStoreGlobal(env.DB, header ? 'header' : 'footer'); }
+      catch (error) {
+        console.error('Theme Store published CMS global unavailable', error instanceof Error ? error.message : 'unknown');
+      }
+      if (published) value = header ? normalizeHeader(published) : normalizeFooter(published);
+      else try {
         const snapshot = await env.THEME_PACKAGES.get(current) || (legacy ? await env.THEME_PACKAGES.get(legacy) : null);
         if (snapshot && snapshot.size <= 128_000) value = header ? normalizeHeader(await snapshot.json()) : normalizeFooter(await snapshot.json());
-      } catch { /* Retain safe, bundled fallback if R2 is temporarily unavailable. */ }
+      } catch { /* Retain bundled fallback if R2 is temporarily unavailable. */ }
       return Response.json(header ? { ok:true, header:value } : { ok:true, footer:value }, {
         headers:{ 'cache-control':'public, max-age=60', 'x-content-type-options':'nosniff' }
       });

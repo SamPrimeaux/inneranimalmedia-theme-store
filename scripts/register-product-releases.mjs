@@ -11,6 +11,8 @@ import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const action=process.argv.includes('--publish')?'published':'staged';
+const only=process.argv.find(arg=>arg.startsWith('--only='))?.slice(7);
+if(only!==undefined&&!/^[a-z][a-z0-9-]{0,63}$/.test(only))throw Error('invalid_theme_slug');
 const staged=JSON.parse(await readFile(join(root,'.releases/staged-releases.json'),'utf8'));
 function run(bin,args) {
  const r=spawnSync(bin,args,{cwd:root,encoding:'utf8',maxBuffer:10_000_000});
@@ -22,12 +24,13 @@ const raw=join(tmp,'install-index.json');
 try {
  run('npx',['wrangler','r2','object','get','theme-store/install-index/index.json','--remote','--file',raw]);
  const idx=JSON.parse(await readFile(raw,'utf8'));
- if(idx.schema!=='agentsam.website-theme-install-index.v1'||idx.packages.length!==11||staged.products.length!==11)
-   throw Error('release_batch_not_11');
+ const selected=only?staged.products.filter(item=>item.slug===only):staged.products;
+ if(idx.schema!=='agentsam.website-theme-install-index.v1'||!Array.isArray(idx.packages)||
+    selected.length!==(only?1:11))throw Error('invalid_release_batch');
  const q=v=>"'"+String(v).replaceAll("'","''")+"'";
  const safe=p=>/^[a-z][a-z0-9-]{0,63}$/.test(p.slug)&&/^\d+\.\d+\.\d+$/.test(p.version)&&/^[a-f0-9]{64}$/.test(p.sha256);
  const sql=['PRAGMA foreign_keys=ON;'];
- for (const item of staged.products) {
+ for (const item of selected) {
    const published=idx.packages.find(p=>p.slug===item.slug&&p.version===item.version&&p.sha256===item.sha256);
    if(!safe(item)||!published||!/^[a-f0-9]{64}$/.test(published.project_sha256||'')||
        published.project_key!=='install-projects/'+item.slug+'/'+item.version+'/'+published.project_sha256+'.json')
@@ -64,7 +67,7 @@ try {
  }
  const file=join(tmp,'releases.sql');
  await writeFile(file,sql.join('\n')+'\n');
- console.log('REGISTER',action,idx.packages.length);
+ console.log('REGISTER',action,selected.length);
  if(process.argv.includes('--dry-run')){console.log(sql.join('\n').slice(0,1000));process.exit(0);}
  console.log(run('npx',['wrangler','d1','execute','inneranimalmedia-business','--remote','--file',file]).slice(-6000));
 }finally{await rm(tmp,{recursive:true,force:true});}

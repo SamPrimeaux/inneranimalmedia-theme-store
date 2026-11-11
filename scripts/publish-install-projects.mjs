@@ -17,6 +17,8 @@ function run(args){
   if(p.status!==0)throw Error(p.stderr||p.stdout||'R2 operation failed');
 }
 
+const only=process.argv.find(arg=>arg.startsWith('--only='))?.slice(7);
+if(only!==undefined&&!SAFE_SLUG.test(only))throw Error('invalid_theme_slug');
 const candidates=[];
 for(const dir of await readdir(packages,{withFileTypes:true})){
   if(!dir.isDirectory())continue;
@@ -24,6 +26,7 @@ for(const dir of await readdir(packages,{withFileTypes:true})){
   try{
     const pkg=JSON.parse(await readFile(packagePath,'utf8'));
     const meta=pkg.agentsam?.store;
+    if(only&&pkg.agentsam?.slug!==only)continue;
     if(meta?.release?.status!=='published'||pkg.agentsam?.installable!==true)continue;
     const artifact=join(packages,dir.name,'install-project.json');
     // A missing source-backed project is a broken release pipeline, not a
@@ -82,7 +85,17 @@ try{
       project_key:key,page_count:completion.project.pages.length,manifest_page_count:project.sourceManifestPageCount||project.pages.length});
     console.log('VERIFIED PROJECT',slug,completion.project.pages.length);
   }
-  const manifest={schema:'agentsam.website-theme-install-index.v1',packages:result.sort((a,b)=>a.slug.localeCompare(b.slug))};
+  const schema='agentsam.website-theme-install-index.v1';
+  let previous=[];
+  if(only){
+    const current=join(temp,'install-index-before.json');
+    run(['get','theme-store/install-index/index.json','--remote','--file',current]);
+    const index=JSON.parse(await readFile(current,'utf8'));
+    if(index.schema!==schema||!Array.isArray(index.packages))throw Error('invalid_existing_install_index');
+    // Keep the currently deployed version available during the Worker rollout.
+    previous=index.packages.filter(entry=>entry.slug!==only||entry.version!==result[0].version);
+  }
+  const manifest={schema,packages:[...previous,...result].sort((a,b)=>a.slug.localeCompare(b.slug)||a.version.localeCompare(b.version))};
   const content=Buffer.from(JSON.stringify(manifest,null,2)+'\n');
   const manifestFile=join(temp,'install-index.json');await writeFile(manifestFile,content);
   run(['put','theme-store/install-index/index.json','--remote','--file',manifestFile,'--content-type','application/json']);

@@ -2,7 +2,7 @@
   "schema": "agentsam.prebuild.v1",
   "id": "revise",
   "package": "@inneranimalmedia/theme-revise",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "siteRoot": "site",
   "entrypoint": "index.html",
   "rootDeployable": true,
@@ -15,7 +15,7 @@
     "basePath": "/"
   },
   "notes": [
-    "Preview-only editorial theme derived from existing Revise frontend and the Fuel & Free Time concept site.",
-    "No merchant account, inventory, order, or authenticated CMS installation is included."
+    "The compiled preview and the editable CMS project use the same stock Revise composition.",
+    "Merchant inventory, orders and authenticated storefront services are supplied by the host."
   ]
 }

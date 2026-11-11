@@ -2,28 +2,27 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-test('Try Theme opens the canonical Sites installer inside Theme Store without binding a live site', () => {
+test('Try Theme stays in Theme Store, preserving SKU/release without binding a live site', () => {
   const source = readFileSync(new URL('../src/main.tsx', import.meta.url), 'utf8');
   const start = source.indexOf('const tryTheme = (theme:ThemeRecord) => {');
   const end = source.indexOf('  function navigate(next:View)', start);
   assert.ok(start > 0 && end > start);
   const handler = source.slice(start, end);
-  assert.match(handler, /theme_sku/);
-  assert.match(handler, /theme_version/);
-  assert.match(handler, /'panel', 'install'/);
-  assert.match(handler, /new URL\\('\/studio'/);
-  assert.match(handler, /window\.location\.assign\(destination\.pathname \+ destination\.search\)/);
-  assert.doesNotMatch(handler, /searchParams\.set\('site_id'/);
-  assert.doesNotMatch(handler, /preferredSiteId\.current/);
-  // Browsing returns to the selected site context without making the Try
-  // installer inherit the site as a write target.
-  assert.match(source.slice(end, end+550), /preferredSiteId\.current/);
+  assert.ok(handler.includes("new URL('/studio', window.location.origin)"));
+  assert.ok(handler.includes("searchParams.set('panel', 'install')"));
+  assert.ok(handler.includes("searchParams.set('theme_sku', theme.sku)"));
+  assert.ok(handler.includes("searchParams.set('theme_version', theme.version)"));
+  assert.ok(handler.includes('window.location.assign(destination.pathname + destination.search)'));
+  assert.ok(!handler.includes("searchParams.set('site_id'"));
+  assert.ok(!handler.includes('preferredSiteId.current'));
+  assert.ok(source.slice(end, end + 550).includes('preferredSiteId.current'));
 });
 
-test('in-store theme installer delegates to AgentSam while preserving site consent',()=>{
-  const src=readFileSync(new URL('../src/StoreStudio.tsx',import.meta.url),'utf8');
-  assert.match(src,/new URL\\('\/sites','https:\/\/agentsam\.inneranimalmedia\.com'\\)/);
-  assert.match(src,/target\.searchParams\.set\\('action','try'\\)/);
-  assert.match(src,/installing \? <div className="store-studio-body"/);
-  assert.doesNotMatch(src,/site_id.*set\\(/);
+test('same-domain installer hosts canonical AgentSam site selection without new CMS writes', () => {
+  const source = readFileSync(new URL('../src/StoreStudio.tsx', import.meta.url), 'utf8');
+  assert.ok(source.includes("new URL('/sites','https://agentsam.inneranimalmedia.com')"));
+  assert.ok(source.includes("target.searchParams.set('action','try')"));
+  assert.ok(source.includes("installing ? <div className=\"store-studio-body\""));
+  assert.ok(!source.includes("target.searchParams.set('site_id'"));
+  assert.ok(source.includes('iframe'));
 });

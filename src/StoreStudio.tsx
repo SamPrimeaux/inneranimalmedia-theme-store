@@ -3,8 +3,24 @@ import { ArrowLeft, ExternalLink, FileText, LayoutTemplate, RefreshCw } from 'lu
 import type { AccountState } from './AccountMenu';
 import './store-studio.css';
 
-type Panel = 'pages' | 'globals';
-const panelFromUrl = (): Panel => new URLSearchParams(window.location.search).get('panel') === 'globals' ? 'globals' : 'pages';
+type Panel = 'pages' | 'globals' | 'install';
+const panelFromUrl = (): Panel => {
+  const raw = new URLSearchParams(window.location.search).get('panel');
+  return raw === 'install' || raw === 'globals' ? raw : 'pages';
+};
+function installerDestination() {
+  const params=new URLSearchParams(window.location.search);
+  const sku=params.get('theme_sku')||'';
+  const version=params.get('theme_version')||'';
+  // The release and CMS ownership are verified by AgentSam after selection.
+  // This is navigation, not a write or an implicit site selection.
+  if (!/^[a-z][a-z0-9-]{0,63}$/.test(sku) || !/^[0-9]+[.][0-9]+[.][0-9]+$/.test(version)) return null;
+  const target=new URL('/sites','https://agentsam.inneranimalmedia.com');
+  target.searchParams.set('theme_sku',sku);
+  target.searchParams.set('theme_version',version);
+  target.searchParams.set('action','try');
+  return target.href;
+}
 
 /**
  * Store-local, owner-gated host of the EXISTING AgentSam site-owned CMS editor.
@@ -25,7 +41,9 @@ export function StoreStudio() {
     return () => controller.abort();
   }, []);
   const editor = account?.authenticated && account.editor?.site_id === 'theme-store' ? account.editor : null;
-  const url = editor ? (panel === 'pages' ? editor.pages_href : editor.globals_href) : '';
+  const installing=panel==='install';
+  const installUrl=installing?installerDestination():null;
+  const url = installing ? installUrl || '' : editor ? (panel === 'pages' ? editor.pages_href : editor.globals_href) : '';
   function select(next: Panel) {
     setPanel(next);
     setLoading(true);
@@ -35,13 +53,25 @@ export function StoreStudio() {
   return <div className="store-studio">
     <header className="store-studio-header">
       <a className="store-studio-back" href="/"><ArrowLeft size={16}/> Theme Store</a>
-      <div><strong>Site Studio</strong><span>Theme Store · Published CMS</span></div>
+      <div><strong>{installing?'Start a theme draft':'Site Studio'}</strong><span>{installing?'Choose a site · Customize · Publish when ready':'Theme Store · Published CMS'}</span></div>
       <div className="store-studio-actions">
         <a href="/" target="_blank" rel="noreferrer"><ExternalLink size={15}/> View store</a>
-        <button type="button" disabled={!editor} onClick={() => { setLoading(true); setReload(x=>x+1); }}><RefreshCw size={16}/> Refresh editor</button>
+        <button type="button" disabled={!url} onClick={() => { setLoading(true); setReload(x=>x+1); }}><RefreshCw size={16}/> Refresh editor</button>
       </div>
     </header>
-    {account === null ? <main className="store-studio-gate" role="status">Checking your CMS permissions…</main>
+    {installing && !installUrl ? <main className="store-studio-gate"><h1>Choose a published theme first</h1><p>Open a theme in this store to start an authorized draft.</p><a href="/">Browse themes</a></main>
+      : installing ? <div className="store-studio-body">
+          <nav className="store-studio-rail" aria-label="Theme installation">
+            <a href="/" className="store-studio-rail-link">Browse another theme</a>
+            <p>This is AgentSam's existing site and theme installer. Select a site explicitly before a private draft is created. Your published site remains unchanged.</p>
+          </nav>
+          <div className="store-studio-frame">
+            {loading && <div className="store-studio-loading" role="status">Opening theme installer…</div>}
+            <iframe key={'install-'+reload} src={url} title="AgentSam verified theme installation and site selection" onLoad={()=>setLoading(false)}
+              referrerPolicy="strict-origin-when-cross-origin" />
+          </div>
+        </div>
+      : account === null ? <main className="store-studio-gate" role="status">Checking your CMS permissions…</main>
       : !account.authenticated ? <main className="store-studio-gate">
           <h1>Sign in to edit this site</h1>
           <p>The public theme catalog stays available. Editing requires your existing InnerAnimalMedia account and site permissions.</p>

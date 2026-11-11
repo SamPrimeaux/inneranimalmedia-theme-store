@@ -50,14 +50,8 @@ function App({ themes, site, footer, header }: { themes: ThemeRecord[]; site: Si
   }),[themes,category,query,selection,sort]);
   const selected = view.kind === 'detail' ? themes.find(t=>t.slug===view.slug) : undefined;
   const tryTheme = (theme:ThemeRecord) => {
-    if (!theme.downloadReady || theme.release.status !== 'published') return;
-    const destination = new URL('/studio', window.location.origin);
-    destination.searchParams.set('panel', 'install');
-    destination.searchParams.set('theme_sku', theme.sku);
-    destination.searchParams.set('theme_version', theme.version);
-    // Keep the canonical AgentSam Sites installer INSIDE this store.
-    // No site_id is inferred from browsing; explicit selection remains there.
-    window.location.assign(destination.pathname + destination.search);
+    if (!theme.installUrl || theme.release.status !== 'published') return;
+    window.location.assign(theme.installUrl);
   };
   function navigate(next:View) {
     setView(next);setMobileMenu(false);
@@ -140,7 +134,7 @@ function App({ themes, site, footer, header }: { themes: ThemeRecord[]; site: Si
             <div className="theme-grid">
               {filtered.map(t=><ThemeCard key={t.slug} theme={t}
                 onExplore={()=>navigate({kind:'detail',slug:t.slug})}
-                onAdd={()=>t.downloadReady?tryTheme(t):navigate({kind:'detail',slug:t.slug})}/>)}
+                onAdd={()=>t.installUrl?tryTheme(t):navigate({kind:'detail',slug:t.slug})}/>)}
             </div>
             {!filtered.length&&<div className="no-results"><h3>No themes found</h3><p>Try a different filter.</p>
               <button className="secondary-button" onClick={clearFilters}>Clear filters</button></div>}

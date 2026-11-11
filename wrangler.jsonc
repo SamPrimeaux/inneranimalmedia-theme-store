@@ -4,12 +4,17 @@
   "main": "src/worker.ts",
   "workers_dev": true,
   "compatibility_date": "2026-10-28",
+  "vars": {
+    "THEME_INSTALLER_URL": "https://agentsam.inneranimalmedia.com/sites"
+  },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
     "not_found_handling": "single-page-application",
     "run_worker_first": [
       "/api/*",
+      "/studio",
+      "/studio/*",
       "/app-embeds",
       "/app-embeds/*",
       "/theme-packages/*",

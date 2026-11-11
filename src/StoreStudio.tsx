@@ -14,7 +14,7 @@ function installerDestination() {
   const version=params.get('theme_version')||'';
   // The release and CMS ownership are verified by AgentSam after selection.
   // This is navigation, not a write or an implicit site selection.
-  if (!/^[a-z][a-z0-9-]{0,63}$/.test(sku) || !/^\\d+\\.\\d+\\.\\d+$/.test(version)) return null;
+  if (!/^[a-z][a-z0-9-]{0,63}$/.test(sku) || !/^[0-9]+[.][0-9]+[.][0-9]+$/.test(version)) return null;
   const target=new URL('/sites','https://agentsam.inneranimalmedia.com');
   target.searchParams.set('theme_sku',sku);
   target.searchParams.set('theme_version',version);

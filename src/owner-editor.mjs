@@ -12,6 +12,8 @@ export function resolveOwnedThemeStoreEditor(inventory) {
   return {
     site_id: 'theme-store',
     pages_href: base + '/admin/pages?site_id=theme-store',
-    globals_href: base + '/admin/theme-editor?site_id=theme-store&slug=site-shell&page_id=cmsp_theme_store_site_shell'
+    // The site-shell is an internal CMS record without a public route.
+    // Use the published Home page as the visual canvas for shared globals.
+    globals_href: base + '/admin/theme-editor?site_id=theme-store&slug=home&page_id=cmsp_theme_store_home'
   };
 }

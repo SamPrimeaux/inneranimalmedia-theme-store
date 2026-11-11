@@ -8,7 +8,7 @@ test('CMS editing is granted only by the authenticated authorized inventory',()=
   const editor=resolveOwnedThemeStoreEditor({sites:[owner]});
   assert.equal(editor.site_id,'theme-store');
   assert.equal(editor.pages_href,'https://agentsam.inneranimalmedia.com/admin/pages?site_id=theme-store');
-  assert.equal(editor.globals_href,'https://agentsam.inneranimalmedia.com/admin/theme-editor?site_id=theme-store&slug=site-shell&page_id=cmsp_theme_store_site_shell');
+  assert.equal(editor.globals_href,'https://agentsam.inneranimalmedia.com/admin/theme-editor?site_id=theme-store&slug=home&page_id=cmsp_theme_store_home');
   assert.equal(resolveOwnedThemeStoreEditor({sites:[{...owner,can_publish:false}]}).site_id,'theme-store');
 });
 test('guests, foreign sites, and unverified permissions cannot see owner editor',()=>{
@@ -33,6 +33,11 @@ test('host-scoped sessions can navigate to the protected AgentSam editor without
   const menu=readFileSync(new URL('../src/AccountMenu.tsx',import.meta.url),'utf8');
   const guest=menu.split('if(!state.authenticated||!state.user)return ')[1]?.split('const person=')[0]||'';
   assert.match(guest,/className="account-manage"/);
-  assert.match(guest,/https:\/\/agentsam\.inneranimalmedia\.com\/admin\/pages\?site_id=theme-store/);
+  assert.match(guest,/href="\/studio"/);
+  assert.match(menu,/href="\/studio\?panel=globals"/);
+  const studio=readFileSync(new URL('../src/StoreStudio.tsx',import.meta.url),'utf8');
+  assert.match(studio,/api\/account\/me/);
+  assert.match(studio,/account\.editor\?\.site_id === 'theme-store'/);
+  assert.match(studio,/<iframe/);
   assert.doesNotMatch(guest,/onClick=\{.*fetch/);
 });

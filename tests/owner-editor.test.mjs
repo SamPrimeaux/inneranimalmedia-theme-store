@@ -28,3 +28,11 @@ test('account UI and worker use the authorized inventory rather than a site_id q
   assert.match(menu,/state\.editor\?\.site_id==='theme-store'/);
   assert.doesNotMatch(menu,/au_871d/);
 });
+
+test('host-scoped sessions can navigate to the protected AgentSam editor without duplicating authentication',()=>{
+  const menu=readFileSync(new URL('../src/AccountMenu.tsx',import.meta.url),'utf8');
+  const guest=menu.split('if(!state.authenticated||!state.user)return ')[1]?.split('const person=')[0]||'';
+  assert.match(guest,/className="account-manage"/);
+  assert.match(guest,/https:\/\/agentsam\.inneranimalmedia\.com\/admin\/pages\?site_id=theme-store/);
+  assert.doesNotMatch(guest,/onClick=\{.*fetch/);
+});

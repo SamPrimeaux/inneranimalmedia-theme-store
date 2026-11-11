@@ -14,7 +14,7 @@ function installerDestination() {
   const version=params.get('theme_version')||'';
   // The release and CMS ownership are verified by AgentSam after selection.
   // This is navigation, not a write or an implicit site selection.
-  if (!/^[a-z][a-z0-9-]{0,63}$/.test(sku) || !/^[0-9]+[.][0-9]+[.][0-9]+$/.test(version)) return null;
+  if (!/^iam\.theme\.[a-z][a-z0-9-]{0,63}$/.test(sku) || !/^[0-9]+[.][0-9]+[.][0-9]+$/.test(version)) return null;
   const target=new URL('/sites','https://agentsam.inneranimalmedia.com');
   target.searchParams.set('theme_sku',sku);
   target.searchParams.set('theme_version',version);
@@ -43,7 +43,7 @@ export function StoreStudio() {
   const editor = account?.authenticated && account.editor?.site_id === 'theme-store' ? account.editor : null;
   const installing=panel==='install';
   const installUrl=installing?installerDestination():null;
-  const url = installing ? installUrl || '' : editor ? (panel === 'pages' ? editor.pages_href : editor.globals_href) : '';
+  const url = editor ? (panel === 'pages' ? editor.pages_href : editor.globals_href) : '';
   function select(next: Panel) {
     setPanel(next);
     setLoading(true);
@@ -65,11 +65,11 @@ export function StoreStudio() {
             <a href="/" className="store-studio-rail-link">Browse another theme</a>
             <p>This is AgentSam's existing site and theme installer. Select a site explicitly before a private draft is created. Your published site remains unchanged.</p>
           </nav>
-          <div className="store-studio-frame">
-            {loading && <div className="store-studio-loading" role="status">Opening theme installer…</div>}
-            <iframe key={'install-'+reload} src={url} title="AgentSam verified theme installation and site selection" onLoad={()=>setLoading(false)}
-              referrerPolicy="strict-origin-when-cross-origin" />
-          </div>
+          <main className="store-studio-gate">
+            <h1>Continue to AgentSam</h1>
+            <p>Open the theme installer to create a private draft.</p>
+            <a href={installUrl ?? undefined}>Open theme installer</a>
+          </main>
         </div>
       : account === null ? <main className="store-studio-gate" role="status">Checking your CMS permissions…</main>
       : !account.authenticated ? <main className="store-studio-gate">

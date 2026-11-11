@@ -7,6 +7,7 @@ import { resolveSite, type SiteDocument } from './site.mjs';
 import { normalizeFooter, defaultFooter } from './footer.mjs';
 import { normalizeHeader, defaultHeader } from './header.mjs';
 import { verifiedInstallEntries, hasEditableInstallProject } from './install-index.mjs';
+import { marketplaceRedirect } from './marketplace-redirect.mjs';
 
 type Env = {
   ASSETS: Fetcher;
@@ -52,6 +53,8 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
     const method = request.method.toUpperCase();
+    const destination = marketplaceRedirect(url.pathname);
+    if (destination && (method === 'GET' || method === 'HEAD')) return Response.redirect(destination, 302);
     if (url.pathname === '/api/account/me') {
       if (method !== 'GET') return missing('method_not_allowed',405);
       const headers = { 'cache-control':'private, no-store, max-age=0', 'vary':'Cookie', 'x-content-type-options':'nosniff' };

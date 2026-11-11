@@ -36,3 +36,28 @@ test('Revise is a portable 5-route, source-backed presentation, not another SDK/
     assert.equal(readFileSync(join(tmp,'root','index.html'),'utf8').includes(prefix),false);
   } finally {rmSync(tmp,{recursive:true,force:true});}
 });
+
+test('Revise installs the original global chrome, hero buttons and commerce templates', () => {
+  const project = require('../packages/theme-revise/install-project.json');
+  const bySlug = Object.fromEntries(project.pages.map(page => [page.slug, page]));
+  assert.equal(bySlug.product.sourceRoute, '/products/');
+  assert.equal(bySlug.collection.sourceRoute, '/ideas/');
+  assert.equal(bySlug.product.template_key, 'product');
+  assert.equal(bySlug.collection.template_key, 'collection');
+  for (const page of project.pages) {
+    assert.deepEqual(page.sections.slice(0, 2).map(section => section.globalKey), ['site-announcement', 'site-header']);
+    assert.equal(page.sections.at(-1).globalKey, 'site-footer');
+    assert.ok(page.sections.filter(section => section.zone === 'BODY').length > 1);
+    for (const section of page.sections) {
+      assert.ok(page.template.includes('<!--theme-section:' + section.key + '-->'));
+      for (const block of section.content.__editor.blocks) {
+        assert.ok(section.schema.blocks.some(candidate => candidate.key === block.templateKey));
+        assert.ok(section.html.includes('<!--theme-block:' + block.templateKey + '-->'));
+      }
+    }
+  }
+  const hero = bySlug.home.sections.find(section => section.sourceKind === 'revise/sticky-curtain');
+  assert.deepEqual(hero.schema.blocks.map(block => block.defaults.label), ['Preview the drop', 'See campaign directions']);
+  assert.deepEqual(hero.schema.blocks.map(block => block.fields.map(field => field.key)), [['label', 'href'], ['label', 'href']]);
+  assert.ok(bySlug.collection.sections.every(section => !section.html.includes('[object Object]')));
+});

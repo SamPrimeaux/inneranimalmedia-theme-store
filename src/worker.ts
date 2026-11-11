@@ -8,6 +8,7 @@ import { normalizeFooter, defaultFooter } from './footer.mjs';
 import { normalizeHeader, defaultHeader } from './header.mjs';
 import { verifiedInstallEntries, hasEditableInstallProject } from './install-index.mjs';
 import { marketplaceRedirect } from './marketplace-redirect.mjs';
+import { resolveOwnedThemeStoreEditor } from './owner-editor.mjs';
 
 type Env = {
   ASSETS: Fetcher;
@@ -75,11 +76,23 @@ export default {
         const id = user?.id ?? user?.user_id ?? user?.auth_user_id;
         if (!body || body.ok===false || !(typeof id==='string' && id.length>0)) return guest();
         const clean=(s:unknown,n:number)=>typeof s==='string'?s.slice(0,n):'';
-        const url=clean(user.avatar_url??user.avatarUrl??user.picture??user.profile_image_url??user.image_url,700);
+        const avatar=clean(user.avatar_url??user.avatarUrl??user.picture??user.profile_image_url??user.image_url,700);
+        // Only the platform's authenticated, account-scoped CMS inventory
+        // can unlock this site's editor. A public identity is not an editor grant.
+        let editor=null;
+        try {
+          const inventoryResponse=await fetch('https://agentsam.inneranimalmedia.com/api/admin/cms/sites',{
+            method:'GET',headers:{Accept:'application/json',Cookie:'session='+cookie},
+            signal:AbortSignal.timeout(4500),redirect:'manual'
+          });
+          if(inventoryResponse.ok && inventoryResponse.headers.get('content-type')?.includes('application/json')) {
+            editor=resolveOwnedThemeStoreEditor(await inventoryResponse.json());
+          }
+        } catch { /* A CMS outage must never expose an unverified edit action. */ }
         return Response.json({authenticated:true,user:{
           id:clean(id,100),name:clean(user.display_name??user.full_name??user.name,200),
-          email:clean(user.email,250),avatar_url:url.startsWith('https://')?url:''
-        }},{headers});
+          email:clean(user.email,250),avatar_url:avatar.startsWith('https://')?avatar:''
+        },editor},{headers});
       } catch { return guest(); }
     }
     if (url.pathname === '/api/site') {

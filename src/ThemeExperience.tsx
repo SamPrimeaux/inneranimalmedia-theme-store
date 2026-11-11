@@ -17,7 +17,7 @@ export function ThemeExperience({ theme, onBack, onTry }: {
   const [expanded, setExpanded] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [previewError, setPreviewError] = useState(false);
-  const ready = theme.downloadReady === true && theme.release.status === 'published';
+  const ready = Boolean(theme.installUrl) && theme.release.status === 'published';
   useEffect(() => {
     const sync = () => setExpanded(document.fullscreenElement === stage.current);
     document.addEventListener('fullscreenchange', sync);

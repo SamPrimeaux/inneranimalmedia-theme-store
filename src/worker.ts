@@ -7,7 +7,7 @@ import { resolveSite, type SiteDocument } from './site.mjs';
 import { normalizeFooter, defaultFooter } from './footer.mjs';
 import { normalizeHeader, defaultHeader } from './header.mjs';
 import { verifiedInstallEntries, hasEditableInstallProject } from './install-index.mjs';
-import { marketplaceRedirect } from './marketplace-redirect.mjs';
+import { marketplaceRedirect, themeInstallerUrl } from './marketplace-redirect.mjs';
 import { resolveOwnedThemeStoreEditor } from './owner-editor.mjs';
 import { publishedStoreSettings, publishedStoreGlobal } from './published-cms.mjs';
 
@@ -15,6 +15,7 @@ type Env = {
   ASSETS: Fetcher;
   THEME_PACKAGES: R2Bucket;
   DB?: D1Database;
+  THEME_INSTALLER_URL?: string;
 };
 
 function response(data: unknown, status = 200): Response {
@@ -56,8 +57,14 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
     const method = request.method.toUpperCase();
-    const destination = marketplaceRedirect(url.pathname);
-    if (destination && (method === 'GET' || method === 'HEAD')) return Response.redirect(destination, 302);
+    const legacyInstall = (url.pathname === '/studio' || url.pathname === '/studio/') &&
+      url.searchParams.get('panel') === 'install';
+    const destination = legacyInstall
+      ? themeInstallerUrl(env.THEME_INSTALLER_URL, url.searchParams.get('theme_sku'), url.searchParams.get('theme_version'))
+      : marketplaceRedirect(url.pathname);
+    if (destination && (method === 'GET' || method === 'HEAD')) {
+      return new Response(null, { status:302, headers:{ location:destination, 'cache-control':'no-store' } });
+    }
     if (url.pathname === '/api/account/me') {
       if (method !== 'GET') return missing('method_not_allowed',405);
       const headers = { 'cache-control':'private, no-store, max-age=0', 'vary':'Cookie', 'x-content-type-options':'nosniff' };
@@ -167,7 +174,11 @@ export default {
     if (url.pathname === '/api/catalog') {
       if (method !== 'GET') return missing('method_not_allowed', 405);
       const installed = await loadInstallIndex(env);
-      const products = await Promise.all(themes.map(async theme => publicInstallableTheme(theme, await resolvePreview(env, url.origin, theme), installed)));
+      const products = await Promise.all(themes.map(async theme => {
+        const product = publicInstallableTheme(theme, await resolvePreview(env, url.origin, theme), installed);
+        product.installUrl = product.downloadReady ? themeInstallerUrl(env.THEME_INSTALLER_URL, theme.sku, theme.version) : null;
+        return product;
+      }));
       // Public CMS presentation is intentionally separate from signed theme releases.
       // Images, product copy and galleries may be changed without regenerating an
       // installable package; release/installation data remains package-owned.

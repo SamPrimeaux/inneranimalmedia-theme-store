@@ -11,7 +11,7 @@ export type ThemeRecord = {
   slug: string; sku: string; name: string; summary: string;
   category: ThemeCategory; tags: string[]; pages: string[]; industries: string[]; features: string[]; catalogSizes: string[];
   colorway: 'wine' | 'violet' | 'paper'; version: string;
-  publisher: string; priceUsd: number | null; downloadReady?: boolean;
+  publisher: string; priceUsd: number | null; downloadReady?: boolean; installUrl?: string | null;
   /** Resolved at request time by the Worker: live R2 preview if published, else null. */
   previewUrl: string | null;
   cardImage: string;

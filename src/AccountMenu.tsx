@@ -34,7 +34,7 @@ export function AccountMenu(){
  if(!state.authenticated||!state.user)return <div className="account-guest">
    <a href="https://agentsam.inneranimalmedia.com/auth/login"><LogIn size={14}/> Sign in</a>
    <a className="account-join" href="https://agentsam.inneranimalmedia.com/auth/signup">Sign up</a>
-   <a className="account-manage" href="https://agentsam.inneranimalmedia.com/admin/pages?site_id=theme-store" title="Manage the Theme Store through your AgentSam account"><Pencil size={14}/><span>Manage</span></a>
+   <a className="account-manage" href="/studio" title="Open the Theme Store CMS editor"><Pencil size={14}/><span>Manage</span></a>
  </div>;
  const person=state.user;
  const initials=(person.name||person.email||'U').slice(0,1).toUpperCase();
@@ -51,8 +51,8 @@ export function AccountMenu(){
       <a role="menuitem" href="https://agentsam.inneranimalmedia.com/admin/home"><LayoutDashboard size={16}/> Dashboard</a>
       <a role="menuitem" href="https://agentsam.inneranimalmedia.com/sites"><Store size={16}/> My sites</a>
       {state.editor?.site_id==='theme-store'&&<>
-        <a role="menuitem" href={state.editor.pages_href}><PanelsTopLeft size={16}/> Edit Theme Store pages</a>
-        <a role="menuitem" href={state.editor.globals_href}><Pencil size={16}/> Edit header &amp; footer</a>
+        <a role="menuitem" href="/studio?panel=pages"><PanelsTopLeft size={16}/> Edit Theme Store pages</a>
+        <a role="menuitem" href="/studio?panel=globals"><Pencil size={16}/> Edit logo, header &amp; navigation</a>
       </>}
       <a role="menuitem" href="https://agentsam.inneranimalmedia.com/admin/profile"><UserCircle size={16}/> Profile</a>
       <a role="menuitem" href="https://agentsam.inneranimalmedia.com/dashboard/settings/integrations"><Settings size={16}/> Settings & connections</a>

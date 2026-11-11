@@ -20,3 +20,5 @@
 .store-studio-gate p{font-size:13px;color:#626a77}
 .store-studio-gate a{display:inline-block;padding:10px 15px;background:#202633;color:#fff;text-decoration:none;border-radius:7px;font-size:13px;margin-top:16px}
 @media(max-width:760px){.store-studio-header{gap:12px;padding:10px 12px;flex-wrap:wrap}.store-studio-actions{width:100%;justify-content:flex-end}.store-studio-body{display:flex;flex-direction:column}.store-studio-rail{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid #dce0e5;padding:8px}.store-studio-rail button{flex-shrink:0}.store-studio-rail p{display:none}.store-studio-frame iframe{min-height:calc(100dvh - 150px)}}
+
+.store-studio-rail-link{display:block;border-radius:7px;text-decoration:none;padding:11px 13px;font-size:12px;color:#1749b3;background:#e8efff}

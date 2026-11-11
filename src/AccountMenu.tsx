@@ -34,6 +34,7 @@ export function AccountMenu(){
  if(!state.authenticated||!state.user)return <div className="account-guest">
    <a href="https://agentsam.inneranimalmedia.com/auth/login"><LogIn size={14}/> Sign in</a>
    <a className="account-join" href="https://agentsam.inneranimalmedia.com/auth/signup">Sign up</a>
+   <a className="account-manage" href="https://agentsam.inneranimalmedia.com/admin/pages?site_id=theme-store" title="Manage the Theme Store through your AgentSam account"><Pencil size={14}/><span>Manage</span></a>
  </div>;
  const person=state.user;
  const initials=(person.name||person.email||'U').slice(0,1).toUpperCase();

@@ -51,13 +51,13 @@ function App({ themes, site, footer, header }: { themes: ThemeRecord[]; site: Si
   const selected = view.kind === 'detail' ? themes.find(t=>t.slug===view.slug) : undefined;
   const tryTheme = (theme:ThemeRecord) => {
     if (!theme.downloadReady || theme.release.status !== 'published') return;
-    const destination = new URL('/sites', 'https://agentsam.inneranimalmedia.com');
+    const destination = new URL('/studio', window.location.origin);
+    destination.searchParams.set('panel', 'install');
     destination.searchParams.set('theme_sku', theme.sku);
     destination.searchParams.set('theme_version', theme.version);
-    destination.searchParams.set('action', 'try');
-    // Public Try always creates or resumes a private draft. A site selected
-    // for browsing is never permission to alter that website.
-    window.location.assign(destination.href);
+    // Keep the canonical AgentSam Sites installer INSIDE this store.
+    // No site_id is inferred from browsing; explicit selection remains there.
+    window.location.assign(destination.pathname + destination.search);
   };
   function navigate(next:View) {
     setView(next);setMobileMenu(false);

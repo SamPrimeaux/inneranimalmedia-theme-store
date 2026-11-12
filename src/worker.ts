@@ -10,6 +10,7 @@ import { verifiedInstallEntries, hasEditableInstallProject } from './install-ind
 import { marketplaceRedirect, themeInstallerUrl } from './marketplace-redirect.mjs';
 import { resolveOwnedThemeStoreEditor } from './owner-editor.mjs';
 import { publishedStoreSettings, publishedStoreGlobal } from './published-cms.mjs';
+import { serveUiThemePackage } from './ui-theme-packages.mjs';
 
 type Env = {
   ASSETS: Fetcher;
@@ -57,6 +58,7 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
     const method = request.method.toUpperCase();
+    if (url.pathname.startsWith('/api/ui-themes/')) return serveUiThemePackage(request,env);
     const legacyInstall = (url.pathname === '/studio' || url.pathname === '/studio/') &&
       url.searchParams.get('panel') === 'install';
     const destination = legacyInstall

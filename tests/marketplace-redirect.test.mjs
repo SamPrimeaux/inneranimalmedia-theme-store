@@ -24,3 +24,13 @@ test('Cloudflare Worker handles the old route before its SPA asset fallback',()=
   assert.ok(cfg.assets.run_worker_first.includes('/app-embeds'));
   assert.ok(cfg.assets.run_worker_first.includes('/app-embeds/*'));
 });
+
+test('retired Theme Store studio is not an embedded CMS entry point',()=>{
+  const worker=readFileSync(new URL('../src/worker.ts',import.meta.url),'utf8');
+  const app=readFileSync(new URL('../src/main.tsx',import.meta.url),'utf8');
+  const account=readFileSync(new URL('../src/AccountMenu.tsx',import.meta.url),'utf8');
+  assert.match(worker,/url\.pathname === '\/studio' \|\| url\.pathname\.startsWith\('\/studio\/'\)/);
+  assert.doesNotMatch(worker,/resolveOwnedThemeStoreEditor|legacyInstall|\/api\/admin\/cms\/sites/);
+  assert.doesNotMatch(app,/StoreStudio|studioRoute/);
+  assert.doesNotMatch(account,/account-manage|\/studio|state\.editor/);
+});

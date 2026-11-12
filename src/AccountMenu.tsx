@@ -1,12 +1,11 @@
 import React from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { ChevronDown, LogIn, Settings, LayoutDashboard, Store, UserCircle, PanelsTopLeft, Pencil } from 'lucide-react';
+import { ChevronDown, LogIn, Settings, LayoutDashboard, Store, UserCircle } from 'lucide-react';
 import './account-menu.css';
 
 export type AccountState = {
   authenticated:boolean;
   user?: { id:string; name:string; email:string; avatar_url:string };
-  editor?: {site_id:'theme-store';pages_href:string;globals_href:string}|null;
   requires_sso?:boolean;
 };
 const GUEST:AccountState={authenticated:false};
@@ -34,7 +33,6 @@ export function AccountMenu(){
  if(!state.authenticated||!state.user)return <div className="account-guest">
    <a href="https://agentsam.inneranimalmedia.com/auth/login"><LogIn size={14}/> Sign in</a>
    <a className="account-join" href="https://agentsam.inneranimalmedia.com/auth/signup">Sign up</a>
-   <a className="account-manage" href="/studio" title="Open the Theme Store CMS editor"><Pencil size={14}/><span>Manage</span></a>
  </div>;
  const person=state.user;
  const initials=(person.name||person.email||'U').slice(0,1).toUpperCase();
@@ -50,10 +48,6 @@ export function AccountMenu(){
       </div>
       <a role="menuitem" href="https://agentsam.inneranimalmedia.com/admin/home"><LayoutDashboard size={16}/> Dashboard</a>
       <a role="menuitem" href="https://agentsam.inneranimalmedia.com/sites"><Store size={16}/> My sites</a>
-      {state.editor?.site_id==='theme-store'&&<>
-        <a role="menuitem" href="/studio?panel=pages"><PanelsTopLeft size={16}/> Edit Theme Store pages</a>
-        <a role="menuitem" href="/studio?panel=globals"><Pencil size={16}/> Edit logo, header &amp; navigation</a>
-      </>}
       <a role="menuitem" href="https://agentsam.inneranimalmedia.com/admin/profile"><UserCircle size={16}/> Profile</a>
       <a role="menuitem" href="https://agentsam.inneranimalmedia.com/dashboard/settings/integrations"><Settings size={16}/> Settings & connections</a>
       <div className="account-menu-note">Your account is verified by AgentSam. Sign-out is managed by the identity provider.</div>

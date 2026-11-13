@@ -13,7 +13,6 @@ import type { HeaderData } from './header.mjs';
 import { defaultHeader } from './header.mjs';
 import { Footer } from './UniversalFooter';
 import { AccountMenu } from './AccountMenu';
-import { StoreStudio } from './StoreStudio';
 import { PublicCollectionPage } from './PublicCollectionPage';
 import { marketplaceRedirect } from './marketplace-redirect.mjs';
 import './styles.css';
@@ -155,11 +154,9 @@ function App({ themes, site, footer, header }: { themes: ThemeRecord[]; site: Si
 }
 /** Catalog (`/api/catalog`, generated from packages) and site copy/tokens (`/api/site`, published from the CMS). */
 function Root() {
-  const studioRoute = window.location.pathname === '/studio' || window.location.pathname === '/studio/';
   const [data, setData] = useState<{ themes: ThemeRecord[]; site: SiteDocument; footer: FooterData; header: HeaderData } | null>(null);
   const [error, setError] = useState(false);
   React.useEffect(() => {
-    if (studioRoute) return;
     Promise.all([
       fetch('/api/catalog').then(r => r.json() as Promise<{ products?: ThemeRecord[] }>),
       fetch('/api/site').then(r => r.json() as Promise<{ site?: SiteDocument }>),
@@ -170,8 +167,7 @@ function Root() {
       for (const [name, value] of Object.entries(siteRes.site.tokens)) document.documentElement.style.setProperty('--ts-' + name, value);
       setData({ themes: catalog.products, site: siteRes.site, footer: footerRes.footer || defaultFooter, header: headerRes.header || defaultHeader });
     }).catch(() => setError(true));
-  }, [studioRoute]);
-  if (studioRoute) return <StoreStudio/>;
+  }, []);
   if (error) return <main className="shell no-results"><h1>Catalog unavailable</h1><button onClick={() => location.reload()}>Try again</button></main>;
   if (!data) return <main className="shell no-results"><p>Loading themes…</p></main>;
   return <App themes={data.themes} site={data.site} footer={data.footer} header={data.header}/>;

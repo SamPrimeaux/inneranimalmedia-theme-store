@@ -9,6 +9,7 @@ import { normalizeHeader, defaultHeader } from './header.mjs';
 import { verifiedInstallEntries, hasEditableInstallProject } from './install-index.mjs';
 import { marketplaceRedirect, themeInstallerUrl } from './marketplace-redirect.mjs';
 import { publishedStoreSettings, publishedStoreGlobal } from './published-cms.mjs';
+import { serveUiThemePackage } from './ui-theme-packages.mjs';
 
 type Env = {
   ASSETS: Fetcher;
@@ -56,6 +57,7 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
     const method = request.method.toUpperCase();
+    if (url.pathname.startsWith('/api/ui-themes/')) return serveUiThemePackage(request,env);
     // The old store-owned Studio has been retired. Keep this explicit 404
     // because SPA asset fallbacks would otherwise render the store at this URL.
     if (url.pathname === '/studio' || url.pathname.startsWith('/studio/')) return missing('route_not_found');

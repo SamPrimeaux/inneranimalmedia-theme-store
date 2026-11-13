@@ -73,4 +73,3 @@ export async function serveUiThemePackage(request, env, authenticate = authorize
     return new Response(request.method === 'HEAD' ? null : object.body,{status:200,headers});
   } catch { return unavailable(503); }
 }
-

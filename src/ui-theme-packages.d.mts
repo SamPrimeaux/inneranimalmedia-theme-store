@@ -10,4 +10,3 @@ export function serveUiThemePackage(
   env:{DB?:D1Database;THEME_PACKAGES:R2Bucket},
   authenticate?:(request:Request,row:UiThemeRecord)=>Promise<boolean>,
 ):Promise<Response>;
-

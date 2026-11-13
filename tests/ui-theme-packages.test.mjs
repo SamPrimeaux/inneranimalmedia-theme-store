@@ -52,4 +52,3 @@ test('unavailable D1 refuses even public theme',async()=>{
  const result=await serveUiThemePackage(new Request(url),{THEME_PACKAGES:{get:async()=>null}});
  assert.equal(result.status,503);
 });
-

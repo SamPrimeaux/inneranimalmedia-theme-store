@@ -29,7 +29,8 @@
     "collections:seed-drafts": "node scripts/seed-app-draft-collections.mjs",
     "publish:collections": "node scripts/publish-collections.mjs",
     "media:add": "node scripts/add-product-media.mjs",
-    "publish:install-projects": "node scripts/publish-install-projects.mjs"
+    "publish:install-projects": "node scripts/publish-install-projects.mjs",
+    "fonts:publish": "node scripts/publish-fontsource-families.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

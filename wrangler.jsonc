@@ -3,6 +3,7 @@
   "name": "inneranimalmedia-theme-store",
   "main": "src/worker.ts",
   "workers_dev": true,
+  "preview_urls": false,
   "compatibility_date": "2026-10-28",
   "vars": {
     "THEME_INSTALLER_URL": "https://agentsam.inneranimalmedia.com/sites"

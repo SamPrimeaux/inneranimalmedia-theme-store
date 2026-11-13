@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { serveFontAssets } from '../src/font-assets.mjs';
@@ -104,4 +105,10 @@ test('unknown families and methods are rejected', async () => {
   assert.equal(unknown.status, 404);
   const post = await serveFontAssets(new Request('https://themes.example/fonts/manifest.json', { method: 'POST' }), env);
   assert.equal(post.status, 405);
+});
+
+
+test('Wrangler routes font requests through the Worker before the SPA asset fallback', () => {
+  const config = readFileSync(new URL('../wrangler.jsonc', import.meta.url), 'utf8');
+  assert.match(config, /"run_worker_first"\s*:\s*\[[\s\S]*?"\/fonts\/\*"/);
 });

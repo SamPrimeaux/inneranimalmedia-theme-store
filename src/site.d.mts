@@ -2,7 +2,7 @@ export type SiteDocument = {
   schema: string;
   brand: { monogram: string; label: string; ariaLabel: string };
   nav: { discover: string; howItWorks: string; sitesLabel: string; sitesHref: string; originNote: string };
-  hero: { eyebrow: string; headlineLead: string; headlineEm: string; body: string; points: string[] };
+  hero: { eyebrow: string; headlineLead: string; headlineEm: string; body: string; points: string[]; imageHref: string; featuredLabel: string };
   library: { eyebrow: string; title: string; filters: { prices: string; industries: string; catalogSizes: string; features: string }; browseLabel: string };
   howItWorks: { eyebrow: string; title: string; body: string; steps: { title: string; body: string }[] };
   categoryLabels: Record<string, string>;

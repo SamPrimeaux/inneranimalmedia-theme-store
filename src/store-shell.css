@@ -1,0 +1,41 @@
+/* Store shell: Shopify-style light header + full-bleed hero. Header colors come from the CMS header section (--hdr-bg / --hdr-fg). */
+.site-header{border-bottom:1px solid color-mix(in srgb,var(--hdr-fg,#151620) 10%,transparent)}
+.site-header .header-inner{gap:24px}
+.site-header .brand{font-size:19px;font-weight:650;letter-spacing:-.025em;gap:11px;text-transform:none}
+.site-header .brand .header-site-logo{width:34px;height:34px}
+.site-header .header-search{flex:1 1 240px;max-width:430px;min-width:170px;display:flex;align-items:center;gap:10px;height:42px;padding:0 16px;border:1px solid color-mix(in srgb,var(--hdr-fg,#151620) 22%,transparent);border-radius:999px;background:color-mix(in srgb,var(--hdr-fg,#151620) 4%,var(--hdr-bg,#fff));color:color-mix(in srgb,var(--hdr-fg,#151620) 62%,transparent)}
+.site-header .header-search:focus-within{border-color:var(--hdr-fg,#151620);box-shadow:0 0 0 3px color-mix(in srgb,var(--ts-accent,#9a77ed) 30%,transparent)}
+.site-header .header-search input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--hdr-fg,#151620);font-size:14px}
+.site-header .top-nav{margin-left:auto;gap:26px}
+.site-header .top-nav a,.site-header .browse-menu summary{font-size:14px;font-weight:600;color:color-mix(in srgb,var(--hdr-fg,#151620) 82%,transparent)}
+.site-header .top-nav a:hover,.site-header .browse-menu summary:hover{color:var(--hdr-fg,#151620)}
+.site-header .origin-note{color:color-mix(in srgb,var(--hdr-fg,#151620) 55%,transparent);font-size:12px}
+.site-header .mobile-nav-button{color:var(--hdr-fg,#151620)}
+.site-header .account-guest a{font-size:13px;color:var(--hdr-fg,#151620);border-color:color-mix(in srgb,var(--hdr-fg,#151620) 25%,transparent);border-radius:999px;padding:10px 16px}
+.site-header .account-guest a:hover{border-color:var(--hdr-fg,#151620)}
+.site-header .account-guest .account-join{background:var(--hdr-fg,#151620);color:var(--hdr-bg,#fff)!important;border-color:var(--hdr-fg,#151620)}
+.site-header .account-trigger{color:var(--hdr-fg,#151620);border-color:color-mix(in srgb,var(--hdr-fg,#151620) 25%,transparent)}
+.site-header .account-loading{background:color-mix(in srgb,var(--hdr-fg,#151620) 12%,transparent)}
+@media(max-width:1500px){.site-header .origin-note{display:none}}
+@media(max-width:900px){.site-header .header-search{display:none}.site-header .top-nav.open{background:var(--hdr-bg,#fff)}}
+.store-hero{position:relative;background-color:#000b1a;background-size:cover;background-position:center right;color:#fff;isolation:isolate}
+.store-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#000b1ae6 0%,#000b1ab3 40%,#000b1a40 100%)}
+.store-hero-inner{max-width:1280px;margin:auto;padding:84px 34px 88px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:64px;align-items:center;min-height:540px}
+.store-hero .eyebrow{color:color-mix(in srgb,var(--ts-accent,#9a77ed) 40%,#fff);margin-bottom:22px}
+.store-hero h1{font-size:clamp(44px,5.6vw,84px);font-weight:700;letter-spacing:-.06em;line-height:1.04;margin:0;color:#fff}
+.store-hero h1 em{font-family:'Playfair Display',serif;font-weight:500;letter-spacing:-.05em;color:color-mix(in srgb,var(--ts-accent,#9a77ed) 40%,#fff)}
+.store-hero-copy>p{max-width:520px;margin:26px 0 0;font-size:17px;line-height:1.75;color:#ffffffc7}
+.store-hero .hero-meta{margin-top:32px;color:#ffffffb8}
+.store-hero .hero-meta svg{color:color-mix(in srgb,var(--ts-accent,#9a77ed) 40%,#fff)}
+.store-hero-picks{background:#ffffff12;border:1px solid #ffffff26;border-radius:16px;padding:20px 18px 12px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.store-hero-picks h2{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#ffffffa6;margin:0 6px 10px}
+.store-hero-picks ul{list-style:none;margin:0;padding:0}
+.store-hero-picks li+li{border-top:1px solid #ffffff1a}
+.store-hero-picks button{width:100%;display:flex;align-items:center;gap:14px;padding:11px 6px;background:none;border:0;color:#fff;text-align:left;border-radius:10px}
+.store-hero-picks button:hover{background:#ffffff14}
+.pick-thumb{flex:0 0 46px;height:46px;border-radius:11px;background:#ffffff1f center/cover no-repeat}
+.pick-text{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.pick-text strong{font-size:15px;font-weight:650}
+.pick-text small{font-size:12px;color:#ffffffa3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pick-price{font-size:12px;color:#ffffffb8;white-space:nowrap}
+@media(max-width:900px){.store-hero-inner{grid-template-columns:1fr;gap:36px;padding:56px 22px 54px;min-height:0}.store-hero::before{background:#000b1ad9}}

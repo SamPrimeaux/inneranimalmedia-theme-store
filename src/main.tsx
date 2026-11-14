@@ -18,6 +18,7 @@ import { marketplaceRedirect } from './marketplace-redirect.mjs';
 import './styles.css';
 import './catalog.css';
 import './header-global.css';
+import './store-shell.css';
 
 type View = { kind: 'gallery' } | { kind: 'detail'; slug: string } | {kind:'collection';slug:string;productSlug?:string};
 function initialView(): View {
@@ -71,12 +72,15 @@ function App({ themes, site, footer, header }: { themes: ThemeRecord[]; site: Si
   const headerUtility = header.blocks.find(b=>b.type==='utilities')?.settings || {};
   const headerSettings = header.section.settings;
   return <div className="app">
-    <header className="site-header" style={{background:headerSettings.background,color:headerSettings.foreground,position:headerSettings.sticky?'sticky':'relative'}}>
+    <header className="site-header" style={{background:headerSettings.background,color:headerSettings.foreground,position:headerSettings.sticky?'sticky':'relative','--hdr-bg':headerSettings.background,'--hdr-fg':headerSettings.foreground} as React.CSSProperties}>
       <div className="header-inner" style={{height:headerSettings.height}}>
         <a className="brand" href={String(headerBrand.href||'/')} onClick={e=>{if(headerBrand.href==='/'){e.preventDefault();navigate({kind:'gallery'})}}} aria-label={String(headerBrand.aria_label||'Theme Store home')}>
           {headerBrand.logo_url?<img className="header-site-logo" src={String(headerBrand.logo_url)} alt="" />:<span className="brand-monogram">{String(headerBrand.monogram||'IA')}<span className="brand-slash">/</span></span>}
           <span>{String(headerBrand.label||'THEME STORE')}</span>
         </a>
+        <form className="header-search" role="search" onSubmit={e=>{e.preventDefault();if(!isGallery)navigate({kind:'gallery'});setTimeout(()=>document.getElementById('browse-themes')?.scrollIntoView({behavior:'smooth'}),25)}}>
+          <Search size={16}/><input type="search" aria-label="Search themes" placeholder="Search themes" value={query} onChange={e=>setQuery(e.target.value)}/>
+        </form>
         <nav className={'top-nav '+(mobileMenu?'open':'')} aria-label="Main">
           {header.navigation.items.map(item=>item.type==='browse'
             ? <details className="browse-menu" key={item.key}>
@@ -107,10 +111,24 @@ function App({ themes, site, footer, header }: { themes: ThemeRecord[]; site: Si
     </header>
 
     {isGallery ? <>
-      <section className="hero shell">
-        <div className="eyebrow">{site.hero.eyebrow}</div>
-        <div className="hero-grid"><div><h1>{site.hero.headlineLead} <em>{site.hero.headlineEm}</em></h1></div><p>{site.hero.body}</p></div>
-        <div className="hero-meta">{site.hero.points.map(point=><span key={point}><Check size={15}/> {point}</span>)}</div>
+      <section className="store-hero" style={{backgroundImage:'url("'+site.hero.imageHref+'")'}}>
+        <div className="store-hero-inner">
+          <div className="store-hero-copy">
+            <div className="eyebrow">{site.hero.eyebrow}</div>
+            <h1>{site.hero.headlineLead} <em>{site.hero.headlineEm}</em></h1>
+            <p>{site.hero.body}</p>
+            <div className="hero-meta">{site.hero.points.map(point=><span key={point}><Check size={15}/> {point}</span>)}</div>
+          </div>
+          <aside className="store-hero-picks" aria-label={site.hero.featuredLabel}>
+            <h2>{site.hero.featuredLabel}</h2>
+            <ul>{themes.slice(0,6).map(t=><li key={t.slug}>
+              <button type="button" onClick={()=>navigate({kind:'detail',slug:t.slug})}>
+                <span className="pick-thumb" style={{backgroundImage:'url('+t.cardImage+')'}} aria-hidden="true"/>
+                <span className="pick-text"><strong>{t.name}</strong><small>{t.summary}</small></span>
+                <span className="pick-price">{t.priceUsd?'$'+t.priceUsd:'Free'}</span>
+              </button></li>)}</ul>
+          </aside>
+        </div>
       </section>
       <main className="shell">
         <div className="catalog-bar" id="browse-themes">

@@ -4,9 +4,9 @@
     "id": "cmss_cmsp_theme_store_site_shell_header",
     "type": "global-header",
     "settings": {
-      "background": "#151620",
-      "foreground": "#ffffff",
-      "height": 75,
+      "background": "#ffffff",
+      "foreground": "#151620",
+      "height": 68,
       "sticky": true
     }
   },
@@ -17,7 +17,7 @@
       "order": 10,
       "settings": {
         "monogram": "IA",
-        "label": "THEME STORE",
+        "label": "Theme Store",
         "logo_url": "https://themes.inneranimalmedia.com/site-media/brand/2db2e64197cd0f0e.png",
         "aria_label": "InnerAnimalMedia Themes home",
         "href": "/"

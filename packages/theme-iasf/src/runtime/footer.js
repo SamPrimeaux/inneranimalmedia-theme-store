@@ -32,7 +32,8 @@
       go.then(function () {
         var tint = canvas.getAttribute('data-glb-tint') || cssVar(footer, '--iasf-glb-tint') || cssVar(footer, '--ia-bone') || '#e8e4d9';
         root.IasfGLB.mount(canvas, {
-          url: canvas.getAttribute('data-glb-url'),
+          // Packaged (relative) models resolve against the theme root so they work under any base path.
+          url: /^(?:[a-z]+:)?\/\//i.test(canvas.getAttribute('data-glb-url')) || canvas.getAttribute('data-glb-url').charAt(0) === '/' ? canvas.getAttribute('data-glb-url') : new URL(canvas.getAttribute('data-glb-url'), I.base).href,
           tint: tint,
           opacity: parseFloat(canvas.getAttribute('data-glb-opacity')) || 0.92,
           rotation: parseFloat(canvas.getAttribute('data-glb-rotation')) || 0.0016,

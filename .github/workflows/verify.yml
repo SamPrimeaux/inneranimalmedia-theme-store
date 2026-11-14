@@ -17,7 +17,7 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Install Plain Jane authored source dependencies
         working-directory: packages/theme-plain-jane/source
-        run: npm ci --no-audit --no-fund
+        run: npm install --no-audit --no-fund
       - name: Rebuild Plain Jane compiled site and CMS manifest
         working-directory: packages/theme-plain-jane
         run: npm run build

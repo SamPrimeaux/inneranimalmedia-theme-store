@@ -16,6 +16,15 @@ export const shellDefaults = Object.freeze({
     dropbar: {
       enabled: true,
       text: 'FIELD ISSUE 001 — FIRST ACCESS OPENS SOON',
+      // Scrolling announcement messages (loops continuously). Empty list falls back to `text`.
+      messages: [
+        'FIELD ISSUE 001 — FIRST ACCESS OPENS SOON',
+        'FREE SHIPPING ON ORDERS OVER $150',
+        'HEAVYWEIGHT BASICS, CUT AND SEWN IN SMALL RUNS',
+        'MEMBERS GET FIRST ACCESS TO EVERY DROP',
+      ],
+      speed: 38, // seconds per loop
+      pauseOnHover: true,
       cta: { label: 'Join the pack', action: 'pack' },
     },
     brand: { name: 'Inner Animals', href: '/' },
@@ -25,7 +34,7 @@ export const shellDefaults = Object.freeze({
       { label: 'Field Journal', href: '/journal/' },
       { label: 'Our Code', href: '/story/' },
     ],
-    actions: { search: true, bag: true, bagLabel: 'Bag' },
+    actions: { search: true, bag: true, bagLabel: 'Bag', cta: { label: 'Join the pack', source: 'iasf_header' } },
     motion: {
       enabled: true,
       condenseOnScroll: true,

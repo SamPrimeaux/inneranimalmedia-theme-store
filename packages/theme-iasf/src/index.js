@@ -8,7 +8,7 @@
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { products, archetypes, journal, nav, brand } from './content.js';
+import { products, archetypes, journal, nav, brand, media } from './content.js';
 import { IASF_CSS_VARS, themeToCssVars } from './tokens.js';
 import { shellDefaults } from './shell/config.js';
 
@@ -140,8 +140,14 @@ export function createIasfStarterPackSeed() {
       protocol_version: 1,
       sections: [
         { key: 'header', type: 'header', version: 1, label: 'Store header' },
-        { key: 'hero', type: 'hero', version: 1, label: 'Cinematic hero' },
-        { key: 'instinct-nav', type: 'feature-grid', version: 1, label: 'Shop by instinct' },
+        { key: 'hero', type: 'hero', version: 1, label: 'Atlas hero (glass + milestone cards)' },
+        { key: 'category-cards', type: 'feature-grid', version: 1, label: 'Category cards' },
+        { key: 'editorial-tiles', type: 'feature-grid', version: 1, label: 'Editorial tiles' },
+        { key: 'story-rings', type: 'feature-grid', version: 1, label: 'Story rings' },
+        { key: 'product-shelf', type: 'product-grid', version: 1, label: 'Tabbed product shelf' },
+        { key: 'brand-world', type: 'hero', version: 1, label: 'Brand world (parallax)' },
+        { key: 'feature', type: 'feature-grid', version: 1, label: 'Feature split' },
+        { key: 'quote', type: 'cta', version: 1, label: 'Quote' },
         { key: 'product-grid', type: 'product-grid', version: 1, label: 'Product grid' },
         { key: 'manifesto', type: 'cta', version: 1, label: 'Manifesto' },
         { key: 'archetypes', type: 'feature-grid', version: 1, label: 'Archetypes' },
@@ -175,37 +181,78 @@ export function createIasfStarterPackSeed() {
             fields: headerFields(),
           },
           {
-            name: 'Cinematic hero',
+            name: 'Atlas hero',
             type: 'hero',
             zone: 'BODY',
             fields: {
-              eyebrow: 'FIELD ISSUE 001 / THE UNDOMESTICATED',
-              headline: 'THE WILD IS STILL IN THERE.',
-              subline: 'Training goods and field uniforms for people becoming harder to domesticate.',
+              eyebrow: 'Field Issue 001 — built for people becoming harder to domesticate',
+              headline: 'The wild is still in there.',
+              subline:
+                'Training goods and field uniforms, cut heavy and made in small runs for people who understand that discipline and instinct are not opposites.',
               primary_cta: 'Shop the drop',
               primary_cta_url: '/shop',
               secondary_cta: 'Enter the story',
               secondary_cta_url: '/story',
-              location: '01 / 04 · LAFAYETTE, LA',
+              glass_card: {
+                image: media.hero,
+                tabs: [
+                  { label: 'Instinct', title: 'Our guiding force', body: 'Every piece starts with a single question: what does the body actually need at the hour nobody is watching?' },
+                  { label: 'Craft', title: 'Made to be worn hard', body: 'Heavyweight cotton, flat-felled seams and finishes that soften instead of fail.' },
+                  { label: 'Pack', title: 'Closer than a following', body: 'Members get private drops, field notes and first access before anything goes public.' },
+                ],
+              },
+              milestones: {
+                title: 'Milestones in our journey',
+                items: [
+                  { caption: '2023 — First sample run, cut and sewn by hand in Lafayette.' },
+                  { caption: '2025 — The four archetypes take shape: Wolf, Bear, Panther, Bull.' },
+                  { caption: '2026 — Field Issue 001 opens to the pack.' },
+                ],
+              },
             },
           },
           {
-            name: 'Shop by instinct',
+            name: 'Category cards',
             type: 'feature-grid',
             zone: 'BODY',
             fields: {
-              section_label: 'SHOP BY INSTINCT',
-              title: 'WHAT DOES THE DAY REQUIRE?',
-              items: ['Train', 'Recover', 'Roam', 'Everyday'],
+              title: 'The field store',
+              subtitle: 'Four natures · one uniform',
+              items: ['Train', 'Recover', 'Roam', 'Everyday', 'Archetypes'].map((t) => ({ title: t, href: '/shop' })),
             },
           },
           {
-            name: 'Current drop',
+            name: 'Editorial tiles',
+            type: 'feature-grid',
+            zone: 'BODY',
+            fields: {
+              section_label: 'Curated editorial tiles',
+              items: [
+                { kicker: 'Iconic cuts', title: 'The Heavyweight Edit', cta: 'Shop tees', href: '/collections/wolf' },
+                { kicker: 'Train', title: 'Quiet movement, sudden power', cta: 'Shop shorts', href: '/collections/panther' },
+                { kicker: 'Special invitation', title: 'First access, before anyone else.', cta: 'Join the pack', action: 'pack' },
+                { kicker: 'Field journal', title: 'Training after the noise', cta: 'Read more', href: '/journal' },
+              ],
+            },
+          },
+          {
+            name: 'Story rings',
+            type: 'feature-grid',
+            zone: 'BODY',
+            fields: {
+              title: 'The pack',
+              items: [...archetypes.map((a) => ({ title: a.name, href: `/collections/${a.slug}` })), { title: 'Journal', href: '/journal' }],
+            },
+          },
+          {
+            name: 'Product shelf',
             type: 'product-grid',
             zone: 'BODY',
             fields: {
+              tabs: ['New arrivals', 'Best sellers', 'Archive'],
               section_label: 'CURRENT DROP / ISSUE 001',
               title: 'UNIFORMS FOR THE INNER LIFE.',
+              quick_add: true,
               columns: 4,
             },
             blocks: products.map((p) => ({
@@ -221,30 +268,41 @@ export function createIasfStarterPackSeed() {
             })),
           },
           {
-            name: 'Manifesto',
-            type: 'cta',
+            name: 'Brand world',
+            type: 'hero',
             zone: 'BODY',
             fields: {
-              eyebrow: 'THE INNER ANIMAL IS NOT AN EXCUSE.',
-              heading: 'CIVILIZED ENOUGH TO FUNCTION. WILD ENOUGH TO MATTER.',
-              body: 'We make fewer things, with more weight, for people who understand that discipline and instinct are not opposites.',
+              eyebrow: 'The inner life',
+              headline: 'Civilized enough to function. Wild enough to matter.',
+              body: 'We make fewer things, with more weight. Each uniform is built to disappear into the work and outlast the season.',
               button_label: 'Read our code',
               button_url: '/story',
+              image: '/assets/iasf/jungle-river-mist-bg.webp',
             },
           },
           {
-            name: 'Archetypes',
+            name: 'Material feature',
             type: 'feature-grid',
             zone: 'BODY',
             fields: {
-              section_label: 'CHOOSE YOUR ARCHETYPE',
-              title: 'FOUR NATURES. NO MASCOTS.',
-              items: archetypes.map((a) => ({
-                title: a.name,
-                body: a.line,
-                href: `/collections/${a.slug}`,
-                className: a.className,
-              })),
+              eyebrow: 'Material first',
+              title: 'Heavy cotton, cut to move.',
+              body: 'Dense knit, honest weight and finishes that soften with use.',
+              image: '/assets/iasf/elephant-skin-texture-card.webp',
+              items: [
+                { label: 'Weight', value: '280–480 GSM' },
+                { label: 'Construction', value: 'Flat-felled seams' },
+                { label: 'Run size', value: 'Small, numbered' },
+              ],
+            },
+          },
+          {
+            name: 'Quote',
+            type: 'cta',
+            zone: 'BODY',
+            fields: {
+              quote: 'Built for the hours nobody sees — it only gets better the harder you wear it.',
+              attribution: 'Field notes, member 0042',
             },
           },
           {

@@ -2,7 +2,7 @@
   "schema": "agentsam.prebuild.v1",
   "id": "iasf",
   "package": "@inneranimalmedia/theme-iasf",
-  "version": "2.6.14",
+  "version": "2.6.16",
   "siteRoot": "site",
   "entrypoint": "index.html",
   "rootDeployable": true,

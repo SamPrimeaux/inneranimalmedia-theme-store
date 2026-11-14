@@ -10,6 +10,12 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { products, archetypes, journal, nav, brand } from './content.js';
 import { IASF_CSS_VARS, themeToCssVars } from './tokens.js';
+import { shellDefaults } from './shell/config.js';
+
+// Editable header/footer fields come straight from the shell config, so the CMS section
+// editor and the rendered storefront can never drift apart. Fresh copy per section.
+const headerFields = () => structuredClone(shellDefaults.header);
+const footerFields = () => structuredClone(shellDefaults.footer);
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PACKAGE_VERSION = JSON.parse(readFileSync(join(HERE, '..', 'package.json'), 'utf8')).version;
@@ -54,6 +60,11 @@ export function createTheme() {
 export default createTheme;
 
 export { products, archetypes, journal, nav, brand, IASF_CSS_VARS, themeToCssVars, harvest };
+export { media } from './content.js';
+export {
+  SHELL_VERSION, shellDefaults, mergeShellConfig, shellSchema, runtimeConfig,
+  renderHeader, renderFooter, renderSignature,
+} from './shell/index.js';
 
 /** Absolute path helper for consumers that mount the CSS file. */
 export function resolveStorefrontCssPath() {
@@ -161,7 +172,7 @@ export function createIasfStarterPackSeed() {
             name: 'Store header',
             type: 'header',
             zone: 'HEADER',
-            fields: { brand: brand.name, nav, dropbar: brand.dropbar },
+            fields: headerFields(),
           },
           {
             name: 'Cinematic hero',
@@ -260,11 +271,7 @@ export function createIasfStarterPackSeed() {
             name: 'Store footer',
             type: 'footer',
             zone: 'FOOTER',
-            fields: {
-              heading: 'STAY CLOSE TO THE WILD.',
-              copyright_text: '© 2026 Inner Animals. Built in Lafayette, Louisiana.',
-              footer_links: nav.map((n) => n.label),
-            },
+            fields: footerFields(),
           },
         ],
       },
@@ -279,7 +286,7 @@ export function createIasfStarterPackSeed() {
             name: 'Store header',
             type: 'header',
             zone: 'HEADER',
-            fields: { brand: brand.name, nav },
+            fields: headerFields(),
           },
           {
             name: 'Shop hero',
@@ -315,7 +322,7 @@ export function createIasfStarterPackSeed() {
             name: 'Store footer',
             type: 'footer',
             zone: 'FOOTER',
-            fields: { copyright_text: '© 2026 Inner Animals.' },
+            fields: footerFields(),
           },
         ],
       },
@@ -330,7 +337,7 @@ export function createIasfStarterPackSeed() {
             name: 'Store header',
             type: 'header',
             zone: 'HEADER',
-            fields: { brand: brand.name, nav },
+            fields: headerFields(),
           },
           {
             name: 'Journal hero',
@@ -356,7 +363,7 @@ export function createIasfStarterPackSeed() {
             name: 'Store footer',
             type: 'footer',
             zone: 'FOOTER',
-            fields: { copyright_text: '© 2026 Inner Animals.' },
+            fields: footerFields(),
           },
         ],
       },
@@ -371,7 +378,7 @@ export function createIasfStarterPackSeed() {
             name: 'Store header',
             type: 'header',
             zone: 'HEADER',
-            fields: { brand: brand.name, nav },
+            fields: headerFields(),
           },
           {
             name: 'Story hero',
@@ -399,7 +406,7 @@ export function createIasfStarterPackSeed() {
             name: 'Store footer',
             type: 'footer',
             zone: 'FOOTER',
-            fields: { copyright_text: '© 2026 Inner Animals.' },
+            fields: footerFields(),
           },
         ],
       },

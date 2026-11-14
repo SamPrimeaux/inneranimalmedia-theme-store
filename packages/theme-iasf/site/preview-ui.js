@@ -15,10 +15,11 @@
   const saveCart = entries => { try { sessionStorage.setItem(cartKey, JSON.stringify(entries)); } catch { /* preview works without storage */ } updateCount(); };
   const updateCount = () => {
     const count = loadCart().reduce((sum, item) => sum + item.quantity, 0);
-    $$('.ia-actions button').filter(b => /^cart/i.test(b.textContent.trim())).forEach(b => {
-      b.innerHTML = 'Cart <span>(' + count + ')</span>';
-      b.setAttribute('aria-label', 'View preview cart, ' + count + ' items');
+    $$('[data-iasf-action="bag"]').forEach(b => {
+      const c = $('[data-iasf-count]', b); if (c) c.textContent = String(count);
+      b.setAttribute('aria-label', 'View bag, ' + count + ' items');
     });
+    document.dispatchEvent(new CustomEvent('iasf:cart:count', { detail: { count } }));
   };
   const close = () => {
     if (!overlay) return;
@@ -144,32 +145,14 @@
       result.focus();
     });
   }
-  function initMenu() {
-    const header = $('.ia-header'); if (!header) return;
-    const nav = $('nav', header); if (!nav) return;
-    const button = document.createElement('button');
-    button.className = 'ia-demo-menu-btn'; button.type = 'button';
-    button.setAttribute('aria-label','Toggle navigation'); button.setAttribute('aria-expanded','false');
-    button.textContent = 'Menu';
-    header.insertBefore(button, nav);
-    button.addEventListener('click', () => {
-      const open = nav.classList.toggle('open');
-      button.setAttribute('aria-expanded', String(open));
-    });
-    $$('a', nav).forEach(a => a.addEventListener('click', () => {
-      nav.classList.remove('open'); button.setAttribute('aria-expanded','false');
-    }));
-  }
   async function start() {
     try {
       const response = await fetch(resolve('site-data.json'));
       if (response.ok) catalog = await response.json();
     } catch { /* Static page remains visible if fixture JSON is unavailable */ }
-    initFilters(); initProduct(); initMenu(); initCheckout(); updateCount();
-    $$('.ia-actions button').forEach(button => {
-      if (/^search/i.test(button.textContent.trim())) button.addEventListener('click', () => renderSearch(button));
-      else if (/^cart/i.test(button.textContent.trim())) button.addEventListener('click', () => renderCart(button));
-    });
+    initFilters(); initProduct(); initCheckout(); updateCount();
+    $$('[data-iasf-action="search"]').forEach(button => button.addEventListener('click', () => renderSearch(button)));
+    $$('[data-iasf-action="bag"]').forEach(button => button.addEventListener('click', () => renderCart(button)));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true}); else start();

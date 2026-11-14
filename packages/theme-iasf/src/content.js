@@ -75,7 +75,7 @@ export const journal = Object.freeze([
     title: 'Training After the Noise',
     copy: 'What remains when motivation leaves the room.',
     image:
-      'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1400&q=85',
+      '/assets/iasf/jungle-river-mist-card.webp',
   },
   {
     slug: 'uniform-for-the-work',
@@ -83,7 +83,7 @@ export const journal = Object.freeze([
     title: 'A Uniform for the Work',
     copy: 'Why weight, texture and restraint matter more than trends.',
     image:
-      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=85',
+      '/assets/iasf/elephant-skin-texture-card.webp',
   },
   {
     slug: 'lafayette-5am',
@@ -91,7 +91,7 @@ export const journal = Object.freeze([
     title: 'Lafayette, 5:04 A.M.',
     copy: 'Before the traffic, before the heat, before the excuses.',
     image:
-      'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1400&q=85',
+      '/assets/iasf/gorilla-troop-card.webp',
   },
 ]);
 
@@ -106,4 +106,18 @@ export const brand = Object.freeze({
   name: 'Inner Animals',
   dropbar: 'FIELD ISSUE 001 — FIRST ACCESS OPENS SOON',
   tagline: 'Civilized enough to function. Wild enough to matter.',
+});
+
+/**
+ * Packaged stock media (site/assets/iasf). Every file is Inner Animal Media's own;
+ * delete or replace any of them — pages read these paths from data, not from CSS.
+ */
+export const media = Object.freeze({
+  hero: '/assets/iasf/elephant-sanctuary-hero.webp',
+  footer: '/assets/iasf/jungle-river-mist-bg.webp',
+  journal: Object.freeze({
+    'training-after-the-noise': '/assets/iasf/jungle-river-mist-card.webp',
+    'uniform-for-the-work': '/assets/iasf/elephant-skin-texture-card.webp',
+    'lafayette-5am': '/assets/iasf/gorilla-troop-card.webp',
+  }),
 });

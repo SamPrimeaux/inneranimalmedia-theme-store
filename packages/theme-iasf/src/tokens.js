@@ -19,6 +19,10 @@ export const IASF_CSS_VARS = Object.freeze({
   '--ia-acid': '#d6ff3f',
   '--ia-rust': '#a54528',
   '--ia-line': 'rgba(232,228,217,.2)',
+  '--ia-jungle': '#07140f',
+  '--ia-moss': '#173627',
+  '--ia-leaf': '#2c5a3c',
+  '--ia-clay': '#11271c',
 });
 
 export function themeToCssVars(overrides = {}) {

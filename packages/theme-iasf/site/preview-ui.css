@@ -18,7 +18,6 @@
 .ia-demo-primary{display:block;margin-top:24px;padding:20px;background:#d6ff3f!important;color:#090a07!important;text-align:center;text-decoration:none;font:700 12px "DM Mono",monospace;text-transform:uppercase}
 .ia-demo-empty{padding-top:60px}.ia-demo-empty h3{font:37px/1 "Archivo Black",sans-serif;text-transform:uppercase;letter-spacing:-.06em;margin:18px 0}
 .ia-demo-empty p{line-height:1.7;color:#a5a89f;max-width:340px}
-.ia-demo-menu-btn{display:none;border:1px solid #ffffff50;background:transparent;color:inherit;padding:12px;font:11px "DM Mono",monospace}
 .ia-filters button{cursor:pointer}.ia-product-card[hidden]{display:none!important}
 .ia-sizes button,.ia-add{cursor:pointer}.ia-sizes button:focus-visible,.ia-filters button:focus-visible,.ia-demo-primary:focus-visible,.ia-demo-panel button:focus-visible{outline:3px solid #d6ff3f;outline-offset:3px}
 .ia-checkout-page{display:grid;grid-template-columns:1.2fr .8fr;gap:7vw;padding:85px 5vw;min-height:72vh}
@@ -31,4 +30,4 @@
 .ia-checkout-page aside [data-iasf-order-items]>div,.ia-checkout-total{display:flex;justify-content:space-between;gap:15px;padding:17px 0;border-bottom:1px solid #ffffff24;font-size:12px}
 .ia-checkout-page small{color:#b5baad;font:11px/1.7 "DM Mono",monospace}
 .ia-checkout-page [data-iasf-confirmation]{color:#d6ff3f;outline:none}
-@media(max-width:800px){.ia-demo-menu-btn{display:block;margin-left:auto}.ia-header nav{top:60px}.ia-actions{margin-left:4px}.ia-checkout-page{grid-template-columns:1fr;padding:60px 20px}.ia-demo-panel h2{font-size:36px}}
+@media(max-width:800px){.ia-checkout-page{grid-template-columns:1fr;padding:60px 20px}.ia-demo-panel h2{font-size:36px}}

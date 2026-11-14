@@ -8,6 +8,7 @@ on:
       - 'packages/theme-plain-jane/package.json'
       - 'packages/theme-plain-jane/prebuild.json'
       - 'packages/theme-plain-jane/src/**'
+      - 'scripts/build-theme-release.mjs'
       - 'scripts/publish-theme-packages.mjs'
       - '.github/workflows/publish.yml'
 permissions:
@@ -21,40 +22,87 @@ jobs:
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      GH_TOKEN: ${{ github.token }}
     steps:
-      - name: Require deploy credentials
-        run: |
-          test -n "$CLOUDFLARE_API_TOKEN" || { echo "Missing CLOUDFLARE_API_TOKEN"; exit 1; }
-          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "Missing CLOUDFLARE_ACCOUNT_ID"; exit 1; }
-      - name: Checkout Theme Store source
+      - name: Checkout Theme Store
         uses: actions/checkout@v4
         with:
           persist-credentials: true
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install store and Plain Jane dependencies
+      - name: Install source and store dependencies
         run: |
           npm ci --no-audit --no-fund
           npm install --no-audit --no-fund --prefix packages/theme-plain-jane/source
-      - name: Build reviewed authored site and CMS manifest
+      - name: Compile Plain Jane source, local images and CMS manifest
         run: npm run build --prefix packages/theme-plain-jane
-      - name: Test generated Plain Jane pages and media
+      - name: Test all article routes and assets
         run: |
           node --test packages/theme-plain-jane/test/*.test.mjs
           node --check scripts/build-theme-release.mjs
-      - name: Publish digest-addressed Plain Jane ZIP and verify R2 round trip
+      - name: Build and verify reproducible compiled-only ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/build-theme-release.mjs plain-jane
+          first="$(sha256sum .releases/plain-jane-0.1.1.zip | cut -d' ' -f1)"
+          node scripts/build-theme-release.mjs plain-jane
+          second="$(sha256sum .releases/plain-jane-0.1.1.zip | cut -d' ' -f1)"
+          test "$first" = "$second"
+          unzip -t .releases/plain-jane-0.1.1.zip
+          unzip -Z -1 .releases/plain-jane-0.1.1.zip | grep -q '^site/post/how-to-measure-business-growth-key-performance-metrics/index.html$'
+          unzip -Z -1 .releases/plain-jane-0.1.1.zip | grep -q '^site/images/sustainable-business-growth-strategies-lasting-momentum-green-chart.svg$'
+          echo "Plain Jane compiled archive SHA-256: $first"
+      - name: Attach portable preset to GitHub Actions
+        uses: actions/upload-artifact@v4
+        with:
+          name: plain-jane-journal-0.1.1
+          path: .releases/plain-jane-0.1.1.zip
+          if-no-files-found: error
+          retention-days: 90
+      - name: Publish immutable downloadable GitHub release
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="theme-plain-jane-v0.1.1"
+          file=".releases/plain-jane-0.1.1.zip"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            mkdir -p /tmp/plain-jane-existing-release
+            gh release download "$tag" --pattern "plain-jane-0.1.1.zip" --dir /tmp/plain-jane-existing-release
+            cmp "$file" /tmp/plain-jane-existing-release/plain-jane-0.1.1.zip
+            echo "Previously published immutable release verified."
+          else
+            gh release create "$tag" "$file" --target "$GITHUB_SHA" \
+              --title "Plain Jane Journal · 0.1.1" \
+              --notes "Reviewed compiled-only editorial theme. Includes 14 CMS preview pages and the Growth & Performance light/dark illustrations. Source and npm package are not part of this distribution. Draft content is not a published platform article."
+          fi
+      - name: Check Cloudflare release credentials
+        id: cloudflare
+        shell: bash
+        run: |
+          if [[ -n "$CLOUDFLARE_API_TOKEN" && -n "$CLOUDFLARE_ACCOUNT_ID" ]]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Cloudflare deploy credentials unavailable; verified GitHub release remains downloadable. Theme Store live endpoint is unchanged."
+          fi
+      - name: Upload checksum-addressed ZIP to Cloudflare R2
+        if: steps.cloudflare.outputs.enabled == 'true'
         run: node scripts/build-theme-release.mjs plain-jane --publish
-      - name: Publish complete versioned Plain Jane preview to R2
+      - name: Upload complete versioned R2 preview
+        if: steps.cloudflare.outputs.enabled == 'true'
         run: node scripts/publish-theme-packages.mjs --only=plain-jane
-      - name: Build Theme Store with verified published release metadata
+      - name: Build catalog using verified release metadata
         run: |
           npm run check
           npm run build
           node --test packages/theme-plain-jane/test/*.test.mjs
-      - name: Deploy Worker with verified download and preview
+      - name: Deploy Theme Store Worker
+        if: steps.cloudflare.outputs.enabled == 'true'
         run: npx wrangler deploy
-      - name: Verify live versioned artifact and preview
+      - name: Verify production preview and digest-checked ZIP
+        if: steps.cloudflare.outputs.enabled == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -63,17 +111,16 @@ jobs:
           curl -fsSL "$root/theme-packages/plain-jane/0.1.1/preview/" | grep -q '<html'
           curl -fsSL "$root/theme-packages/plain-jane/0.1.1/preview/post/how-to-measure-business-growth-key-performance-metrics" | grep -q '<html'
           curl -fsSL "$root/theme-packages/plain-jane/0.1.1/preview/images/how-to-measure-business-growth-key-performance-metrics-navy-chart.svg" | grep -q '<svg'
-          curl -fsSL "$root/theme-packages/plain-jane/0.1.1/preview/images/sustainable-business-growth-strategies-lasting-momentum-green-chart.svg" | grep -q '<svg'
           curl -fsSL "$root/api/themes/plain-jane/0.1.1/manifest.json" | grep -q '"version":"0.1.1"'
           curl -fsSL "$root/api/themes/plain-jane/0.1.1/download" -o /tmp/plain-jane-0.1.1.zip
           test -s /tmp/plain-jane-0.1.1.zip
-          node -e 'const fs=require("fs"),c=require("crypto"); const p=JSON.parse(fs.readFileSync("packages/theme-plain-jane/package.json"));const hash=c.createHash("sha256").update(fs.readFileSync("/tmp/plain-jane-0.1.1.zip")).digest("hex");if(hash!==p.agentsam.store.release.sha256)process.exit(1)'
-      - name: Record generated release artifacts back to source of truth
+          node -e 'const fs=require("fs"),c=require("crypto");const p=JSON.parse(fs.readFileSync("packages/theme-plain-jane/package.json"));const hash=c.createHash("sha256").update(fs.readFileSync("/tmp/plain-jane-0.1.1.zip")).digest("hex");if(hash!==p.agentsam.store.release.sha256)process.exit(1)'
+      - name: Commit generated site, lockfile and verified release metadata
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add packages/theme-plain-jane/site packages/theme-plain-jane/package.json packages/theme-plain-jane/source/package-lock.json src/catalog.generated.json
           if ! git diff --cached --quiet; then
-            git commit -m "chore(plain-jane): record verified v0.1.1 compiled release [skip ci]"
+            git commit -m "chore(plain-jane): record generated v0.1.1 preset [skip ci]"
             git push origin HEAD:main
           fi

@@ -6,6 +6,7 @@
 
 import { useEffect } from "react";
 import { cmsConfig } from "../../cms.config";
+import { previewEditorialPages, previewEditorialCards } from "./previewEditorial";
 
 export interface CMSAsset {
   id: string;
@@ -284,6 +285,18 @@ export const assetsStore: Record<string, CMSAsset> = {
     caption: "Low sun angles create prolonged golden transitions across natural surfaces.",
     width: 1200,
     height: 800,
+  },
+  "asset-growth-metrics-navy": {
+    id: "asset-growth-metrics-navy",
+    url: "/images/how-to-measure-business-growth-key-performance-metrics-navy-chart.svg",
+    alt_text: "Ascending blue performance bars and a sweeping upward arrow over a dark navy grid.",
+    width: 1536, height: 1024
+  },
+  "asset-growth-strategy-green": {
+    id: "asset-growth-strategy-green",
+    url: "/images/sustainable-business-growth-strategies-lasting-momentum-green-chart.svg",
+    alt_text: "Ascending green bars with a curved upward arrow on a white grid, illustrating business growth.",
+    width: 1536, height: 1024
   },
   "asset-og-default": {
     id: "asset-og-default",
@@ -1199,6 +1212,15 @@ const fixturePages: CMSPage[] = [
     ],
   },
 ];
+
+// Supplement the original nine-page fixture without changing its IDs.
+// Preview-only posts are not published platform content_items.
+fixturePages.push(...previewEditorialPages(cmsConfig.siteSlug));
+const homeEntries = fixturePages[0].sections.find(section => section.id === "sec-home-entries");
+if (homeEntries) {
+  homeEntries.blocks.unshift(...previewEditorialCards(homeEntries.id));
+  homeEntries.blocks.forEach((block, index) => { block.block_order = index + 1; });
+}
 
 // ----------------------------------------------------
 // Read-Only Data Fetchers

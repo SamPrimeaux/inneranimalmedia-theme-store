@@ -69,32 +69,46 @@
             "section_order": 2,
             "blocks": [
               {
-                "id": "blk-home-entry-1",
+                "id": "blk-home-growth-1",
                 "definition_key": "journal-article-card",
                 "version": "1.0.0",
                 "template_sku": "tpl-journal-article-card-standard",
                 "block_order": 1
               },
               {
-                "id": "blk-home-entry-2",
+                "id": "blk-home-growth-2",
                 "definition_key": "journal-article-card",
                 "version": "1.0.0",
                 "template_sku": "tpl-journal-article-card-standard",
                 "block_order": 2
               },
               {
-                "id": "blk-home-entry-3",
+                "id": "blk-home-entry-1",
                 "definition_key": "journal-article-card",
                 "version": "1.0.0",
                 "template_sku": "tpl-journal-article-card-standard",
                 "block_order": 3
               },
               {
-                "id": "blk-home-entry-4",
+                "id": "blk-home-entry-2",
                 "definition_key": "journal-article-card",
                 "version": "1.0.0",
                 "template_sku": "tpl-journal-article-card-standard",
                 "block_order": 4
+              },
+              {
+                "id": "blk-home-entry-3",
+                "definition_key": "journal-article-card",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-article-card-standard",
+                "block_order": 5
+              },
+              {
+                "id": "blk-home-entry-4",
+                "definition_key": "journal-article-card",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-article-card-standard",
+                "block_order": 6
               }
             ]
           }
@@ -150,12 +164,54 @@
           },
           "blocks": [
             {
-              "id": "blk-home-entry-1",
+              "id": "blk-home-growth-1",
               "section_id": "sec-home-entries",
               "definition_key": "journal-article-card",
               "version": "1.0.0",
               "template_sku": "tpl-journal-article-card-standard",
               "block_order": 1,
+              "status": "active",
+              "content_json": {
+                "slug": "how-to-measure-business-growth-key-performance-metrics",
+                "title": "How to Measure Business Growth: Key Performance Metrics",
+                "excerpt": "Learn how to measure business growth with meaningful performance metrics, track changes over time, and use data to guide better decisions.",
+                "date": "November 14, 2026",
+                "read_time": "4 min read",
+                "category": "Growth & Performance",
+                "cover_asset_id": "asset-growth-metrics-navy",
+                "author_name": "InnerAnimalMedia Editorial",
+                "author_avatar_asset_id": "asset-author-avatar",
+                "featured": false
+              }
+            },
+            {
+              "id": "blk-home-growth-2",
+              "section_id": "sec-home-entries",
+              "definition_key": "journal-article-card",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-article-card-standard",
+              "block_order": 2,
+              "status": "active",
+              "content_json": {
+                "slug": "sustainable-business-growth-strategies-lasting-momentum",
+                "title": "Sustainable Business Growth: Strategies for Lasting Momentum",
+                "excerpt": "Explore sustainable business growth strategies that build lasting momentum through clear priorities, scalable systems, and consistent execution.",
+                "date": "November 14, 2026",
+                "read_time": "4 min read",
+                "category": "Growth & Performance",
+                "cover_asset_id": "asset-growth-strategy-green",
+                "author_name": "InnerAnimalMedia Editorial",
+                "author_avatar_asset_id": "asset-author-avatar",
+                "featured": false
+              }
+            },
+            {
+              "id": "blk-home-entry-1",
+              "section_id": "sec-home-entries",
+              "definition_key": "journal-article-card",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-article-card-standard",
+              "block_order": 3,
               "status": "active",
               "content_json": {
                 "slug": "analog-photography-digital-age",
@@ -176,7 +232,7 @@
               "definition_key": "journal-article-card",
               "version": "1.0.0",
               "template_sku": "tpl-journal-article-card-standard",
-              "block_order": 2,
+              "block_order": 4,
               "status": "active",
               "content_json": {
                 "slug": "morning-rituals",
@@ -197,7 +253,7 @@
               "definition_key": "journal-article-card",
               "version": "1.0.0",
               "template_sku": "tpl-journal-article-card-standard",
-              "block_order": 3,
+              "block_order": 5,
               "status": "active",
               "content_json": {
                 "slug": "architecture-of-silence",
@@ -218,7 +274,7 @@
               "definition_key": "journal-article-card",
               "version": "1.0.0",
               "template_sku": "tpl-journal-article-card-standard",
-              "block_order": 4,
+              "block_order": 6,
               "status": "active",
               "content_json": {
                 "slug": "taste-of-memory",
@@ -1580,6 +1636,825 @@
             }
           ],
           "sort_order": 0,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "journal-how-to-measure-business-growth-key-performance-metrics",
+      "source_slug": "how-to-measure-business-growth-key-performance-metrics",
+      "title": "How to Measure Business Growth: Key Performance Metrics",
+      "page_type": "post",
+      "path": "post/how-to-measure-business-growth-key-performance-metrics",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "seo_json": {
+        "title": "How to Measure Business Growth: Key Performance Metrics — Plain Jane Journal",
+        "description": "Learn how to measure business growth with meaningful performance metrics, track changes over time, and use data to guide better decisions.",
+        "og_image_asset_id": "asset-growth-metrics-navy"
+      },
+      "og_image_asset_id": "asset-growth-metrics-navy",
+      "manifest": {
+        "page_id": "page-journal-post-how-to-measure-business-growth-key-performance-metrics",
+        "slug": "how-to-measure-business-growth-key-performance-metrics",
+        "title": "How to Measure Business Growth: Key Performance Metrics",
+        "page_type": "post",
+        "sections": [
+          {
+            "id": "sec-how-to-measure-business-growth-key-performance-metrics-hero",
+            "definition_key": "journal-post-hero",
+            "version": "1.0.0",
+            "template_sku": "tpl-journal-post-hero-default",
+            "section_order": 1,
+            "blocks": []
+          },
+          {
+            "id": "sec-how-to-measure-business-growth-key-performance-metrics-body",
+            "definition_key": "journal-post-body",
+            "version": "1.0.0",
+            "template_sku": "tpl-journal-post-body-default",
+            "section_order": 2,
+            "blocks": [
+              {
+                "id": "blk-how-to-measure-business-growth-key-performance-metrics-1",
+                "definition_key": "journal-lead-paragraph",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-lead-paragraph-default",
+                "block_order": 1
+              },
+              {
+                "id": "blk-how-to-measure-business-growth-key-performance-metrics-2",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 2
+              },
+              {
+                "id": "blk-how-to-measure-business-growth-key-performance-metrics-3",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 3
+              },
+              {
+                "id": "blk-how-to-measure-business-growth-key-performance-metrics-4",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 4
+              },
+              {
+                "id": "blk-how-to-measure-business-growth-key-performance-metrics-5",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 5
+              },
+              {
+                "id": "blk-how-to-measure-business-growth-key-performance-metrics-6",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 6
+              },
+              {
+                "id": "blk-how-to-measure-business-growth-key-performance-metrics-7",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 7
+              }
+            ]
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "sec-how-to-measure-business-growth-key-performance-metrics-hero",
+          "key": "sec-how-to-measure-business-growth-key-performance-metrics-hero",
+          "definition_key": "journal-post-hero",
+          "template_sku": "tpl-journal-post-hero-default",
+          "content": {},
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "sec-how-to-measure-business-growth-key-performance-metrics-body",
+          "key": "sec-how-to-measure-business-growth-key-performance-metrics-body",
+          "definition_key": "journal-post-body",
+          "template_sku": "tpl-journal-post-body-default",
+          "content": {
+            "prose_width": "max-w-3xl"
+          },
+          "blocks": [
+            {
+              "id": "blk-how-to-measure-business-growth-key-performance-metrics-1",
+              "section_id": "sec-how-to-measure-business-growth-key-performance-metrics-body",
+              "definition_key": "journal-lead-paragraph",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-lead-paragraph-default",
+              "block_order": 1,
+              "content_json": {
+                "text": "Learn how to measure business growth with meaningful performance metrics, track changes over time, and use data to guide better decisions."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-how-to-measure-business-growth-key-performance-metrics-2",
+              "section_id": "sec-how-to-measure-business-growth-key-performance-metrics-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 2,
+              "content_json": {
+                "text": "Business growth has more than one dimension. Revenue matters, but an isolated increase does not show whether that growth is repeatable, profitable, or helpful to customers. Begin by agreeing on the business outcome you want to improve, then select a small number of metrics that explain progress toward it."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-how-to-measure-business-growth-key-performance-metrics-3",
+              "section_id": "sec-how-to-measure-business-growth-key-performance-metrics-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 3,
+              "content_json": {
+                "text": "Revenue growth compares performance across consistent periods. For a more useful view, separate new customers, repeat purchases, and changes in average order value. Track gross margin alongside revenue so a rise in sales is not mistaken for stronger economics."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-how-to-measure-business-growth-key-performance-metrics-4",
+              "section_id": "sec-how-to-measure-business-growth-key-performance-metrics-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 4,
+              "content_json": {
+                "text": "Acquisition metrics answer how people find you and what it costs to convert interest into a customer. Conversion rates should be understood in context: measure the steps in the journey, not just the final purchase or sign-up."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-how-to-measure-business-growth-key-performance-metrics-5",
+              "section_id": "sec-how-to-measure-business-growth-key-performance-metrics-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 5,
+              "content_json": {
+                "text": "Retention and repeat engagement indicate whether the experience keeps creating value after the initial transaction. An expanding customer base with weak retention can obscure a product problem, so measure both acquisition and returning-customer activity."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-how-to-measure-business-growth-key-performance-metrics-6",
+              "section_id": "sec-how-to-measure-business-growth-key-performance-metrics-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 6,
+              "content_json": {
+                "text": "Use the same metric definitions and time windows each reporting period. Annotate unusual promotions, launches, and seasonal effects. A useful dashboard makes tradeoffs visible and helps a team decide what to change next."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-how-to-measure-business-growth-key-performance-metrics-7",
+              "section_id": "sec-how-to-measure-business-growth-key-performance-metrics-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 7,
+              "content_json": {
+                "text": "Start with a baseline, set a review cadence, and identify who owns each metric. Healthy measurement is not about displaying the most impressive chart: it is about making better decisions with evidence."
+              },
+              "status": "active"
+            }
+          ],
+          "sort_order": 1,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "journal-sustainable-business-growth-strategies-lasting-momentum",
+      "source_slug": "sustainable-business-growth-strategies-lasting-momentum",
+      "title": "Sustainable Business Growth: Strategies for Lasting Momentum",
+      "page_type": "post",
+      "path": "post/sustainable-business-growth-strategies-lasting-momentum",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "seo_json": {
+        "title": "Sustainable Business Growth: Strategies for Lasting Momentum — Plain Jane Journal",
+        "description": "Explore sustainable business growth strategies that build lasting momentum through clear priorities, scalable systems, and consistent execution.",
+        "og_image_asset_id": "asset-growth-strategy-green"
+      },
+      "og_image_asset_id": "asset-growth-strategy-green",
+      "manifest": {
+        "page_id": "page-journal-post-sustainable-business-growth-strategies-lasting-momentum",
+        "slug": "sustainable-business-growth-strategies-lasting-momentum",
+        "title": "Sustainable Business Growth: Strategies for Lasting Momentum",
+        "page_type": "post",
+        "sections": [
+          {
+            "id": "sec-sustainable-business-growth-strategies-lasting-momentum-hero",
+            "definition_key": "journal-post-hero",
+            "version": "1.0.0",
+            "template_sku": "tpl-journal-post-hero-default",
+            "section_order": 1,
+            "blocks": []
+          },
+          {
+            "id": "sec-sustainable-business-growth-strategies-lasting-momentum-body",
+            "definition_key": "journal-post-body",
+            "version": "1.0.0",
+            "template_sku": "tpl-journal-post-body-default",
+            "section_order": 2,
+            "blocks": [
+              {
+                "id": "blk-sustainable-business-growth-strategies-lasting-momentum-1",
+                "definition_key": "journal-lead-paragraph",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-lead-paragraph-default",
+                "block_order": 1
+              },
+              {
+                "id": "blk-sustainable-business-growth-strategies-lasting-momentum-2",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 2
+              },
+              {
+                "id": "blk-sustainable-business-growth-strategies-lasting-momentum-3",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 3
+              },
+              {
+                "id": "blk-sustainable-business-growth-strategies-lasting-momentum-4",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 4
+              },
+              {
+                "id": "blk-sustainable-business-growth-strategies-lasting-momentum-5",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 5
+              },
+              {
+                "id": "blk-sustainable-business-growth-strategies-lasting-momentum-6",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 6
+              },
+              {
+                "id": "blk-sustainable-business-growth-strategies-lasting-momentum-7",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 7
+              }
+            ]
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "sec-sustainable-business-growth-strategies-lasting-momentum-hero",
+          "key": "sec-sustainable-business-growth-strategies-lasting-momentum-hero",
+          "definition_key": "journal-post-hero",
+          "template_sku": "tpl-journal-post-hero-default",
+          "content": {},
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "sec-sustainable-business-growth-strategies-lasting-momentum-body",
+          "key": "sec-sustainable-business-growth-strategies-lasting-momentum-body",
+          "definition_key": "journal-post-body",
+          "template_sku": "tpl-journal-post-body-default",
+          "content": {
+            "prose_width": "max-w-3xl"
+          },
+          "blocks": [
+            {
+              "id": "blk-sustainable-business-growth-strategies-lasting-momentum-1",
+              "section_id": "sec-sustainable-business-growth-strategies-lasting-momentum-body",
+              "definition_key": "journal-lead-paragraph",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-lead-paragraph-default",
+              "block_order": 1,
+              "content_json": {
+                "text": "Explore sustainable business growth strategies that build lasting momentum through clear priorities, scalable systems, and consistent execution."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-sustainable-business-growth-strategies-lasting-momentum-2",
+              "section_id": "sec-sustainable-business-growth-strategies-lasting-momentum-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 2,
+              "content_json": {
+                "text": "Lasting growth is built through a sequence of deliberate improvements rather than a single dramatic campaign. The goal is to expand what works without creating a level of complexity that the business cannot support."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-sustainable-business-growth-strategies-lasting-momentum-3",
+              "section_id": "sec-sustainable-business-growth-strategies-lasting-momentum-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 3,
+              "content_json": {
+                "text": "Begin with clear priorities. Pick the customer problem, offer, and channel that deserve attention now. Keeping the number of active initiatives small makes progress easier to measure and frees teams to finish work rather than constantly start new work."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-sustainable-business-growth-strategies-lasting-momentum-4",
+              "section_id": "sec-sustainable-business-growth-strategies-lasting-momentum-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 4,
+              "content_json": {
+                "text": "Build reusable systems around the tasks that recur: content production, customer support, fulfillment, reporting, and quality checks. Document decisions and automate carefully, preserving a way for people to inspect and correct the result."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-sustainable-business-growth-strategies-lasting-momentum-5",
+              "section_id": "sec-sustainable-business-growth-strategies-lasting-momentum-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 5,
+              "content_json": {
+                "text": "Treat customer experience as part of the growth model. Understand the reasons customers return, where they encounter friction, and which improvements produce real value. Retention gives acquisition efforts a stronger foundation."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-sustainable-business-growth-strategies-lasting-momentum-6",
+              "section_id": "sec-sustainable-business-growth-strategies-lasting-momentum-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 6,
+              "content_json": {
+                "text": "Protect the fundamentals as you scale. Capacity, cash flow, quality, and team focus matter as much as the next opportunity. Growth that depends on constant emergency effort is difficult to sustain."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-sustainable-business-growth-strategies-lasting-momentum-7",
+              "section_id": "sec-sustainable-business-growth-strategies-lasting-momentum-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 7,
+              "content_json": {
+                "text": "Review results on a consistent cadence, keep what works, and retire what does not. Momentum becomes durable when strategy, operations, and customer value reinforce one another."
+              },
+              "status": "active"
+            }
+          ],
+          "sort_order": 1,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "journal-morning-rituals",
+      "source_slug": "morning-rituals",
+      "title": "Morning Rituals That Actually Work",
+      "page_type": "post",
+      "path": "post/morning-rituals",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "seo_json": {
+        "title": "Morning Rituals That Actually Work — Plain Jane Journal",
+        "description": "A gentle introduction to morning rituals and building a routine that fits your life.",
+        "og_image_asset_id": "asset-cover-morning"
+      },
+      "og_image_asset_id": "asset-cover-morning",
+      "manifest": {
+        "page_id": "page-journal-post-morning-rituals",
+        "slug": "morning-rituals",
+        "title": "Morning Rituals That Actually Work",
+        "page_type": "post",
+        "sections": [
+          {
+            "id": "sec-morning-rituals-hero",
+            "definition_key": "journal-post-hero",
+            "version": "1.0.0",
+            "template_sku": "tpl-journal-post-hero-default",
+            "section_order": 1,
+            "blocks": []
+          },
+          {
+            "id": "sec-morning-rituals-body",
+            "definition_key": "journal-post-body",
+            "version": "1.0.0",
+            "template_sku": "tpl-journal-post-body-default",
+            "section_order": 2,
+            "blocks": [
+              {
+                "id": "blk-morning-rituals-1",
+                "definition_key": "journal-lead-paragraph",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-lead-paragraph-default",
+                "block_order": 1
+              },
+              {
+                "id": "blk-morning-rituals-2",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 2
+              },
+              {
+                "id": "blk-morning-rituals-3",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 3
+              },
+              {
+                "id": "blk-morning-rituals-4",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 4
+              }
+            ]
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "sec-morning-rituals-hero",
+          "key": "sec-morning-rituals-hero",
+          "definition_key": "journal-post-hero",
+          "template_sku": "tpl-journal-post-hero-default",
+          "content": {},
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "sec-morning-rituals-body",
+          "key": "sec-morning-rituals-body",
+          "definition_key": "journal-post-body",
+          "template_sku": "tpl-journal-post-body-default",
+          "content": {
+            "prose_width": "max-w-3xl"
+          },
+          "blocks": [
+            {
+              "id": "blk-morning-rituals-1",
+              "section_id": "sec-morning-rituals-body",
+              "definition_key": "journal-lead-paragraph",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-lead-paragraph-default",
+              "block_order": 1,
+              "content_json": {
+                "text": "Beyond the 5 AM club: finding a morning routine that respects your natural rhythms rather than fighting them."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-morning-rituals-2",
+              "section_id": "sec-morning-rituals-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 2,
+              "content_json": {
+                "text": "The most useful morning ritual is one that works with the life you actually live. Start by noticing what helps you feel ready for the day, rather than copying an idealized schedule."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-morning-rituals-3",
+              "section_id": "sec-morning-rituals-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 3,
+              "content_json": {
+                "text": "A short routine can be enough: a calm moment, a clear priority, and space to begin without rushing. Keep it simple so you can adjust it over time."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-morning-rituals-4",
+              "section_id": "sec-morning-rituals-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 4,
+              "content_json": {
+                "text": "This is a sample article supplied with the theme preview. Replace it with your own writing before publishing."
+              },
+              "status": "active"
+            }
+          ],
+          "sort_order": 1,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "journal-architecture-of-silence",
+      "source_slug": "architecture-of-silence",
+      "title": "The Architecture of Silence",
+      "page_type": "post",
+      "path": "post/architecture-of-silence",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "seo_json": {
+        "title": "The Architecture of Silence — Plain Jane Journal",
+        "description": "A short editorial preview about quiet spaces and thoughtful architectural design.",
+        "og_image_asset_id": "asset-cover-silence"
+      },
+      "og_image_asset_id": "asset-cover-silence",
+      "manifest": {
+        "page_id": "page-journal-post-architecture-of-silence",
+        "slug": "architecture-of-silence",
+        "title": "The Architecture of Silence",
+        "page_type": "post",
+        "sections": [
+          {
+            "id": "sec-architecture-of-silence-hero",
+            "definition_key": "journal-post-hero",
+            "version": "1.0.0",
+            "template_sku": "tpl-journal-post-hero-default",
+            "section_order": 1,
+            "blocks": []
+          },
+          {
+            "id": "sec-architecture-of-silence-body",
+            "definition_key": "journal-post-body",
+            "version": "1.0.0",
+            "template_sku": "tpl-journal-post-body-default",
+            "section_order": 2,
+            "blocks": [
+              {
+                "id": "blk-architecture-of-silence-1",
+                "definition_key": "journal-lead-paragraph",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-lead-paragraph-default",
+                "block_order": 1
+              },
+              {
+                "id": "blk-architecture-of-silence-2",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 2
+              },
+              {
+                "id": "blk-architecture-of-silence-3",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 3
+              },
+              {
+                "id": "blk-architecture-of-silence-4",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 4
+              }
+            ]
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "sec-architecture-of-silence-hero",
+          "key": "sec-architecture-of-silence-hero",
+          "definition_key": "journal-post-hero",
+          "template_sku": "tpl-journal-post-hero-default",
+          "content": {},
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "sec-architecture-of-silence-body",
+          "key": "sec-architecture-of-silence-body",
+          "definition_key": "journal-post-body",
+          "template_sku": "tpl-journal-post-body-default",
+          "content": {
+            "prose_width": "max-w-3xl"
+          },
+          "blocks": [
+            {
+              "id": "blk-architecture-of-silence-1",
+              "section_id": "sec-architecture-of-silence-body",
+              "definition_key": "journal-lead-paragraph",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-lead-paragraph-default",
+              "block_order": 1,
+              "content_json": {
+                "text": "Exploring spaces designed specifically to cultivate quiet and reflection in modern cities."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-architecture-of-silence-2",
+              "section_id": "sec-architecture-of-silence-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 2,
+              "content_json": {
+                "text": "Quiet is not merely the absence of sound. Materials, proportions, light, and the distance between spaces can influence how a place feels."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-architecture-of-silence-3",
+              "section_id": "sec-architecture-of-silence-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 3,
+              "content_json": {
+                "text": "A thoughtful interior offers places to pause without demanding attention. The simplest spaces can leave the deepest impressions when each design choice serves a purpose."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-architecture-of-silence-4",
+              "section_id": "sec-architecture-of-silence-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 4,
+              "content_json": {
+                "text": "This is a sample article supplied with the theme preview. Replace it with your own writing before publishing."
+              },
+              "status": "active"
+            }
+          ],
+          "sort_order": 1,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "journal-taste-of-memory",
+      "source_slug": "taste-of-memory",
+      "title": "The Taste of Memory",
+      "page_type": "post",
+      "path": "post/taste-of-memory",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "seo_json": {
+        "title": "The Taste of Memory — Plain Jane Journal",
+        "description": "A short food-and-memory editorial preview for the Plain Jane Journal starter.",
+        "og_image_asset_id": "asset-cover-memory"
+      },
+      "og_image_asset_id": "asset-cover-memory",
+      "manifest": {
+        "page_id": "page-journal-post-taste-of-memory",
+        "slug": "taste-of-memory",
+        "title": "The Taste of Memory",
+        "page_type": "post",
+        "sections": [
+          {
+            "id": "sec-taste-of-memory-hero",
+            "definition_key": "journal-post-hero",
+            "version": "1.0.0",
+            "template_sku": "tpl-journal-post-hero-default",
+            "section_order": 1,
+            "blocks": []
+          },
+          {
+            "id": "sec-taste-of-memory-body",
+            "definition_key": "journal-post-body",
+            "version": "1.0.0",
+            "template_sku": "tpl-journal-post-body-default",
+            "section_order": 2,
+            "blocks": [
+              {
+                "id": "blk-taste-of-memory-1",
+                "definition_key": "journal-lead-paragraph",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-lead-paragraph-default",
+                "block_order": 1
+              },
+              {
+                "id": "blk-taste-of-memory-2",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 2
+              },
+              {
+                "id": "blk-taste-of-memory-3",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 3
+              },
+              {
+                "id": "blk-taste-of-memory-4",
+                "definition_key": "journal-text-block",
+                "version": "1.0.0",
+                "template_sku": "tpl-journal-text-block-default",
+                "block_order": 4
+              }
+            ]
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "sec-taste-of-memory-hero",
+          "key": "sec-taste-of-memory-hero",
+          "definition_key": "journal-post-hero",
+          "template_sku": "tpl-journal-post-hero-default",
+          "content": {},
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "sec-taste-of-memory-body",
+          "key": "sec-taste-of-memory-body",
+          "definition_key": "journal-post-body",
+          "template_sku": "tpl-journal-post-body-default",
+          "content": {
+            "prose_width": "max-w-3xl"
+          },
+          "blocks": [
+            {
+              "id": "blk-taste-of-memory-1",
+              "section_id": "sec-taste-of-memory-body",
+              "definition_key": "journal-lead-paragraph",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-lead-paragraph-default",
+              "block_order": 1,
+              "content_json": {
+                "text": "How a simple bowl of broth transported me back to a rainy afternoon in Kyoto."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-taste-of-memory-2",
+              "section_id": "sec-taste-of-memory-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 2,
+              "content_json": {
+                "text": "A familiar aroma can make a distant moment feel close again. Food often keeps a record of places, people, and small details that photographs cannot fully capture."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-taste-of-memory-3",
+              "section_id": "sec-taste-of-memory-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 3,
+              "content_json": {
+                "text": "The meaning of a meal is not always in its ingredients. It may be in the weather, the conversation, or simply having enough time to notice."
+              },
+              "status": "active"
+            },
+            {
+              "id": "blk-taste-of-memory-4",
+              "section_id": "sec-taste-of-memory-body",
+              "definition_key": "journal-text-block",
+              "version": "1.0.0",
+              "template_sku": "tpl-journal-text-block-default",
+              "block_order": 4,
+              "content_json": {
+                "text": "This is a sample article supplied with the theme preview. Replace it with your own writing before publishing."
+              },
+              "status": "active"
+            }
+          ],
+          "sort_order": 1,
           "status": "draft"
         }
       ]

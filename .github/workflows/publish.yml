@@ -119,7 +119,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add packages/theme-plain-jane/site packages/theme-plain-jane/package.json packages/theme-plain-jane/source/package-lock.json src/catalog.generated.json
+          git add packages/theme-plain-jane/site packages/theme-plain-jane/package.json packages/theme-plain-jane/source/package-lock.json
+          # catalog.generated.json is intentionally gitignored and rebuilt from package metadata.
           if ! git diff --cached --quiet; then
             git commit -m "chore(plain-jane): record generated v0.1.1 preset [skip ci]"
             git push origin HEAD:main

@@ -6,7 +6,7 @@ export { renderSignature } from './signature.js';
 import { runtimeConfig, shellDefaults } from './config.js';
 
 /** Runtime script order matters: core → toast → pack → header → footer → loader. */
-export const RUNTIME_SCRIPTS = Object.freeze(['core', 'toast', 'pack', 'header', 'footer', 'loader']);
+export const RUNTIME_SCRIPTS = Object.freeze(['core', 'toast', 'pack', 'header', 'footer', 'sections', 'loader']);
 
 /** JSON the browser runtime reads. `<` is escaped so config text can never close the tag. */
 export function renderRuntimeConfig(config = shellDefaults) {

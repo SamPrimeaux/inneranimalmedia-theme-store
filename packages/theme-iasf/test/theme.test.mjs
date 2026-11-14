@@ -106,3 +106,38 @@ test('materialized preview has shell, runtime, packaged media and no hotlinked h
   assert.ok(fs.existsSync(path.join(dir, 'runtime', 'loader.js')));
   assert.doesNotMatch(fs.readFileSync(path.join(dir, 'journal', 'index.html'), 'utf8'), /unsplash/);
 });
+
+test('header is a floating pill with a looping announcement marquee', () => {
+  const html = renderHeader(shellDefaults.header);
+  assert.match(html, /class="ia-header-pill"/);
+  assert.match(html, /data-iasf-dropbar/);
+  const sets = html.match(/class="ia-dropbar-set"/g) || [];
+  assert.equal(sets.length, 2); // duplicated set => seamless loop
+  assert.match(html, /aria-hidden="true"><li>/);
+  assert.match(html, /data-pack-open/);
+  // single-text fallback still renders
+  const one = renderHeader({ ...shellDefaults.header, dropbar: { enabled: true, text: 'HELLO', messages: [] } });
+  assert.match(one, /<li>HELLO<\/li>/);
+});
+
+test('home ships the Resolve-grade section set, mockup hero and transition hooks', () => {
+  const home = fs.readFileSync(path.join(here, '..', 'site', 'index.html'), 'utf8');
+  for (const hook of ['ia-hero--atlas', 'ia-glass-card', 'ia-cream-card', 'data-iasf-carousel', 'ia-cats', 'ia-tiles', 'ia-rings', 'data-iasf-shelf', 'data-quick-add', 'ia-world', 'ia-feature', 'ia-quote']) {
+    assert.ok(home.includes(hook), hook);
+  }
+  const css = readStorefrontCss();
+  assert.match(css, /@view-transition\{navigation:auto\}/);
+  assert.match(css, /view-transition-name:iasf-product/);
+  assert.match(css, /@keyframes iasf-marquee/);
+  const names = createIasfStarterPackSeed().pages.find((p) => p.slug === '/').sections.map((x) => x.name);
+  for (const n of ['Atlas hero', 'Category cards', 'Editorial tiles', 'Story rings', 'Product shelf', 'Brand world', 'Material feature', 'Quote']) assert.ok(names.includes(n), n);
+});
+
+test('materialized preview loads the sections runtime and has no leaked markers', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'iasf-sec-'));
+  materializePrebuild(dir, { basePath: '/p/iasf/' });
+  const home = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
+  assert.match(home, /src="\/p\/iasf\/runtime\/sections\.js"/);
+  assert.match(home, /href="\/p\/iasf\/products\/wolf-heavyweight-tee\/"/);
+  assert.ok(fs.existsSync(path.join(dir, 'runtime', 'sections.js')));
+});

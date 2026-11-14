@@ -56,7 +56,7 @@ export const products = Object.freeze([
     uses: ['Outdoor', 'Everyday'],
     color: 'Field Black',
     image:
-      'https://images.unsplash.com/photo-1506629905607-d9c297d8dc3c?auto=format&fit=crop&w=1400&q=85',
+      '/assets/iasf/elephant-skin-texture-card.webp',
     statement: 'Made to take the long way home.',
   },
 ]);

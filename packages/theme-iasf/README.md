@@ -40,3 +40,24 @@ section and the rendered storefront share one source of truth. Pages contain onl
 - **Loader**: globe splash once per session (`loader`), gated by an inline head script with a failsafe.
 
 Vendor bundles in `src/vendor` are built from `vendor-src`; stock media lives in `site/assets/iasf`.
+
+## Section library (2.6.16)
+
+The home page ships a complete, editable section set ported from the Resolve patterns and re-skinned with the IASF tokens (every color is derived from `--ia-*`, nothing is baked in):
+
+| Section | Hook | Notes |
+| --- | --- | --- |
+| Announcement marquee | `.ia-dropbar` | Loops forever; messages, speed and pause-on-hover live in `shellDefaults.header.dropbar`. Static + wrapped for reduced motion. |
+| Floating pill header | `.ia-header-pill` | Menu + nav left, logo centre, search / bag / CTA right; condenses, hides on scroll down, scroll-progress line. |
+| Atlas hero | `.ia-hero--atlas` | Full-bleed image, serif headline, glass tabbed card + cream milestone carousel (`data-iasf-tabs`, `data-iasf-carousel`). |
+| Category cards | `.ia-cats` | Snap-scrolling cards with hover lift. |
+| Editorial tiles | `.ia-tiles` | Image tiles plus a "Join the pack" invitation tile that opens the pack dialog. |
+| Story rings | `.ia-rings` | Circular archetype links. |
+| Tabbed product shelf | `data-iasf-shelf` | New / Best sellers / Archive tabs, arrows, quick add. |
+| Brand world, Feature split, Quote | `.ia-world`, `.ia-feature`, `.ia-quote` | Parallax image, material spec list, testimonial. |
+
+**Gallery → product transitions.** Cross-document View Transitions (`@view-transition { navigation: auto }`). `runtime/sections.js` names the product image that matches the page you are leaving (and returning from) `iasf-product`, so the browser morphs that exact image into the product hero and back. Browsers without support navigate normally.
+
+**Quick add.** Dispatches a cancelable `iasf:cart:add` event (`{ slug, size, name }`). Call `preventDefault()` to take over with a real cart; otherwise the preview cart is updated and a toast confirms.
+
+All copy, images (`/assets/iasf/*`) and milestone/quote text are stock placeholders — replace freely. The CMS starter seed exposes each section by name (`Atlas hero`, `Category cards`, `Editorial tiles`, `Story rings`, `Product shelf`, `Brand world`, `Material feature`, `Quote`).

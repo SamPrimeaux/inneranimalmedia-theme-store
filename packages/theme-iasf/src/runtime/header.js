@@ -15,7 +15,6 @@
     var nav = header.querySelector('#iasf-nav');
     var btn = header.querySelector('[data-iasf-menu]');
     var bar = header.querySelector('.ia-header-progress');
-    var dropbar = document.querySelector('[data-iasf-dropbar]');
 
     // Entrance: one frame after load so CSS transitions have a start state.
     requestAnimationFrame(function () { requestAnimationFrame(function () { header.classList.add('is-ready'); }); });
@@ -29,15 +28,7 @@
       if (match) { a.setAttribute('aria-current', 'page'); a.classList.add('is-active'); }
     });
 
-    // Dropbar: marquee only when the message can't fit.
-    function measureDropbar() {
-      if (!dropbar) return;
-      var track = dropbar.querySelector('.ia-dropbar-track');
-      dropbar.classList.remove('is-marquee');
-      if (track && track.scrollWidth > dropbar.clientWidth + 2 && !I.reducedMotion()) dropbar.classList.add('is-marquee');
-    }
-    measureDropbar();
-    root.addEventListener('resize', measureDropbar, { passive: true });
+    // Dropbar: pure-CSS marquee (reduced-motion users get a static, wrapped list).
 
     // Menu
     function setMenu(open) {

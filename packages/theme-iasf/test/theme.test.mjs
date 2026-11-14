@@ -148,3 +148,11 @@ test('loader gate never hides content from crawlers, automation or reduced-motio
   assert.match(gate, /navigator\.webdriver/);
   assert.match(gate, /prefers-reduced-motion/);
 });
+
+test('footer model is packaged with the theme (same origin, no CORS)', () => {
+  assert.equal(shellDefaults.footer.glb.url, 'assets/iasf/footer-glb.glb');
+  assert.ok(fs.existsSync(path.join(here, '..', 'site', 'assets', 'iasf', 'footer-glb.glb')));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'iasf-glb-'));
+  materializePrebuild(dir, { basePath: '/p/iasf/' });
+  assert.ok(fs.existsSync(path.join(dir, 'assets', 'iasf', 'footer-glb.glb')));
+});

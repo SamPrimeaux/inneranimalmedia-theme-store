@@ -93,8 +93,8 @@ export const shellDefaults = Object.freeze({
     },
     glb: {
       enabled: true,
-      // Stock model. Replace with any .glb URL, or set enabled:false.
-      url: 'https://assets.inneranimalmedia.com/glb/inneranimalmediafooterglb.glb',
+      // Stock model packaged with the theme (same origin, no CORS). Replace with any .glb URL, or set enabled:false.
+      url: 'assets/iasf/footer-glb.glb',
       tint: '', // empty = foreground token
       opacity: 0.92, // model material opacity
       canvasOpacity: 0.16, // how visible the whole canvas is behind the glass

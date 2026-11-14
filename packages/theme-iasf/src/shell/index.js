@@ -24,7 +24,8 @@ export function renderLoaderGate(loader = shellDefaults.loader) {
   const max = Math.max(1500, Number(loader.maxMs) || 6000) + 1000;
   const always = loader.mode === 'always';
   return (
-    '<script>(function(){try{var d=document.documentElement;' +
+    // Never gate crawlers/automation or reduced-motion users: content must be visible without waiting on the loader.
+    "<script>(function(){try{var d=document.documentElement;if(navigator.webdriver||(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))return;" +
     (always ? '' : "if(sessionStorage.getItem('iasf:loaded'))return;") +
     "d.classList.add('iasf-loading');setTimeout(function(){d.classList.remove('iasf-loading')}," + max + ');}catch(e){}})();</script>'
   );

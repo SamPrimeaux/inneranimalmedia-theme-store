@@ -11,10 +11,18 @@ const manifest=JSON.parse(fs.readFileSync(path.join(root,'site/journal-cms-manif
 test('The original journal is a portable compiled-site package with a CMS manifest',()=>{
  assert.equal(createTheme().slug,'plain-jane');
  assert.equal(createTheme().installable,true);
- assert.equal(manifest.pages.length,9);
+ assert.equal(manifest.pages.length,14);
  assert.equal(manifest.definitions.length,18);
  assert.ok(manifest.pages.every(p=>p.sections.length && p.sections.every(s=>s.id===s.key)));
  assert.ok(manifest.pages.some(p=>p.path==='post/the-art-of-slow-travel'));
+ for(const slug of ['how-to-measure-business-growth-key-performance-metrics','sustainable-business-growth-strategies-lasting-momentum','morning-rituals','architecture-of-silence','taste-of-memory']){
+  assert.ok(manifest.pages.some(p=>p.path==='post/'+slug),'missing article route: '+slug);
+ }
+ const home=manifest.pages.find(p=>p.source_slug==='home');
+ const cards=home.sections.flatMap(s=>s.blocks).filter(b=>b.definition_key==='journal-article-card');
+ for(const card of cards) assert.ok(manifest.pages.some(p=>p.source_slug===card.content_json.slug),'unlinked card: '+card.content_json.slug);
+ assert.ok(fs.existsSync(path.join(resolvePrebuildRoot(),'images/how-to-measure-business-growth-key-performance-metrics-navy-chart.svg')));
+ assert.ok(fs.existsSync(path.join(resolvePrebuildRoot(),'images/sustainable-business-growth-strategies-lasting-momentum-green-chart.svg')));
  assert.ok(fs.existsSync(path.join(resolvePrebuildRoot(),'images/cover-slow-travel.svg')));
  assert.match(fs.readFileSync(path.join(root,'site/index.html'),'utf8'),/index-.*\.js/);
 });
@@ -23,11 +31,11 @@ test('Materialization preserves original source and deep links and respects subd
  try{
   const install=materializePrebuild(path.join(target,'site'),{basePath:'/customer/blog'});
   assert.equal(install.basePath,'/customer/blog/');
-  assert.equal(install.pages,9);
+  assert.equal(install.pages,14);
   assert.throws(()=>materializePrebuild(path.join(target,'site')),/already exists/);
   const html=fs.readFileSync(path.join(target,'site/index.html'),'utf8');
   assert.match(html,/\/customer\/blog\/assets\//);
-  for(const route of ['about','photography','post/the-art-of-slow-travel','post/analog-photography-digital-age'])
+  for(const route of ['about','photography','post/the-art-of-slow-travel','post/analog-photography-digital-age','post/how-to-measure-business-growth-key-performance-metrics','post/sustainable-business-growth-strategies-lasting-momentum'])
    assert.ok(fs.existsSync(path.join(target,'site',route,'index.html')),route);
   assert.ok(fs.existsSync(path.join(resolvePrebuildRoot(),'journal-cms-manifest.json')));
   assert.throws(()=>materializePrebuild(null),/target/);
@@ -41,7 +49,7 @@ test('Only the compiled first-party release is authorized; npm source stays priv
  assert.equal(provenance.publishApproved,true);
  assert.equal(provenance.distributionScope,'compiled_site_and_cms_manifest_only');
  assert.equal(product.agentsam.installable,true);
- assert.match(product.agentsam.store.release.sha256, /^[0-9a-f]{64}$/);
- assert.equal(product.agentsam.store.release.status,'published');
+ if(product.agentsam.store.release.status==='published') assert.match(product.agentsam.store.release.sha256,/^[0-9a-f]{64}$/);
+ else {assert.equal(product.agentsam.store.release.status,'preview');assert.equal(product.agentsam.store.release.sha256,null);}
  assert.match(provenance.commit,/^[a-f0-9]{40}$/);
 });

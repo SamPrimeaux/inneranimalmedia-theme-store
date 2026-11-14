@@ -1,6 +1,6 @@
 {
   "name": "@inneranimalmedia/theme-plain-jane",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Plain Jane Journal — a source-driven, read-only editorial CMS starter",
   "private": true,
   "type": "module",
@@ -33,7 +33,7 @@
   "agentsam": {
     "store": {
       "name": "Plain Jane Journal",
-      "summary": "A clean editorial starter for thoughtful writing, photography and personal stories.",
+      "summary": "A self-contained editorial journal starter with photography, local illustrations, and Growth & Performance article previews.",
       "category": "Editorial",
       "tags": [
         "Blog",
@@ -52,7 +52,7 @@
       "colorway": "paper",
       "sortOrder": 8,
       "cardImage": "/previews/plain-jane.svg",
-      "previewBuild": "external",
+      "previewBuild": "package",
       "editorial": {
         "eyebrow": "An editorial home for original ideas",
         "headline": "A little more room for the story.",
@@ -60,15 +60,16 @@
         "notes": [
           "Editorial home and individual story layouts are designed to be read, not just glanced at.",
           "Photography pages and image galleries give visual work its own space.",
-          "Page metadata, original source assets and CMS section definitions are included in the source-backed preview archive."
+          "Page metadata, original source assets and CMS section definitions are included in the source-backed preview archive.",
+          "Includes two Growth & Performance editorial preview drafts and bundled light/dark chart artwork."
         ]
       },
       "priceUsd": 0,
       "delivery": "verified-package",
       "release": {
-        "status": "published",
-        "sha256": "c5a1c9c26050c706652d6aad2d1aa184c5b91350975dfc9fa3fe717c1ae90203",
-        "storageKey": "releases/plain-jane/0.1.0/c5a1c9c26050c706652d6aad2d1aa184c5b91350975dfc9fa3fe717c1ae90203.zip"
+        "status": "preview",
+        "sha256": null,
+        "storageKey": null
       }
     },
     "kind": "theme",

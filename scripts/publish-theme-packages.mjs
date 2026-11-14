@@ -13,13 +13,6 @@ import { createHash } from 'node:crypto';
 import { npmChildEnvironment } from './npm-child-environment.mjs';
 import { buildCatalog } from './build-catalog.mjs';
 
-const product = {
-  slug: 'plain-jane',
-  version: '0.1.0',
-  repo: 'https://github.com/SamPrimeaux/inneranimalmedia-blog-template.git',
-  commit: 'c0bb3267265d0c30ea502d451cb46610d4651c7c',
-};
-const prefix = '/theme-packages/' + product.slug + '/' + product.version + '/preview/';
 const wranglerConfig = JSON.parse(await readFile('wrangler.jsonc', 'utf8'));
 const bucket = wranglerConfig.r2_buckets?.find(entry => entry.binding === 'THEME_PACKAGES')?.bucket_name;
 if (!bucket) throw new Error('wrangler.jsonc has no THEME_PACKAGES R2 binding');
@@ -69,89 +62,12 @@ const mediaType = (name) => {
 };
 
 const root = await mkdtemp(join(tmpdir(), 'iam-theme-publish-'));
-const source = join(root, product.slug);
 try {
-  console.log('Fetching reviewed theme-package source:', product.slug, product.commit);
-  await run('git', ['init', '-q', source]);
-  await run('git', ['remote', 'add', 'origin', product.repo], source);
-  await run('git', ['fetch', '--depth', '1', 'origin', product.commit], source);
-  await run('git', ['checkout', '--detach', '-q', 'FETCH_HEAD'], source);
-  const actualCommit = await run('git', ['rev-parse', 'HEAD'], source, true);
-  if (actualCommit !== product.commit) throw new Error('Unexpected source commit, aborting');
-  await run('npm', ['ci', '--no-audit', '--no-fund'], source);
-  await run('npm', ['run', 'lint'], source);
-  await run('npm', ['run', 'build', '--', '--base', prefix], source);
-  const compiled = join(source, 'dist');
-  const indexFile = join(compiled, 'index.html');
-  const html = await readFile(indexFile, 'utf8');
-  if (!html.includes(prefix)) throw new Error('Compiled preview has wrong base URL');
-  await readFile(join(compiled, 'icons', 'app-logo.svg'));
-  await readFile(join(compiled, 'images', 'cover-slow-travel.svg'));
-
-  console.log('Verifying standalone Theme Store build');
-  await run('npm', ['run', 'build']);
-
-  const files = await walk(compiled);
-  if (files.length < 5) throw new Error('Built site is suspiciously incomplete');
-  const externalDigests = await Promise.all(files.map(async file => ({
-    path: relative(compiled, file).split(sep).join('/'),
-    sha256: sha256(await readFile(file)),
-  })));
-  externalDigests.sort((a,b)=>a.path.localeCompare(b.path));
-  const externalManifest = Buffer.from(JSON.stringify({
-    schema:'iam.theme-preview-files.v1', slug:product.slug, version:product.version,
-    files:externalDigests,
-  }, null, 2) + '\n');
-  const externalManifestKey = bucket + prefix + 'preview-files.json';
-  const externalManifestPath = join(root, 'manifest-' + product.slug + '.json');
-  let previousExternalManifest = null;
-  try {
-    await run('npx', ['wrangler', 'r2', 'object', 'get', externalManifestKey,
-      '--remote', '--file', externalManifestPath], process.cwd(), true);
-    previousExternalManifest = await readFile(externalManifestPath);
-  } catch { /* first complete manifest for this legacy preview */ }
-  if (previousExternalManifest && sha256(previousExternalManifest) !== sha256(externalManifest)) {
-    throw new Error('Immutable preview differs for ' + product.slug + '@' + product.version
-      + '; bump the pinned source and package version before publishing changed files');
-  }
-  if (previousExternalManifest) {
-    console.log('Verified unchanged manifest, skipping:', prefix);
-  } else {
-    console.log('Uploading ' + files.length + ' versioned preview files to R2');
-  }
-  if (!previousExternalManifest) for (const file of files) {
-    const path = relative(compiled, file).split(sep).join('/');
-    if (path.startsWith('../') || path.startsWith('/')) throw new Error('Invalid object path');
-    const key = bucket + prefix + path;
-    await run('npx', ['wrangler', 'r2', 'object', 'put', key, '--remote', '--file', file, '--content-type', mediaType(file)]);
-  }
-
-  const downloadedIndex = join(root, 'uploaded-index.html');
-  await run('npx', ['wrangler', 'r2', 'object', 'get', bucket + prefix + 'index.html', '--remote', '--file', downloadedIndex]);
-  const uploaded = await readFile(downloadedIndex);
-  if (createHash('sha256').update(uploaded).digest('hex') !== createHash('sha256').update(html).digest('hex')) {
-    throw new Error('R2 HTML round-trip SHA-256 mismatch');
-  }
-  console.log('Verified R2 preview index and path:', prefix);
-  if (!previousExternalManifest) {
-    await writeFile(externalManifestPath, externalManifest);
-    await run('npx', ['wrangler', 'r2', 'object', 'put', externalManifestKey,
-      '--remote', '--file', externalManifestPath, '--content-type', 'application/json']);
-    await run('npx', ['wrangler', 'r2', 'object', 'get', externalManifestKey,
-      '--remote', '--file', externalManifestPath], process.cwd(), true);
-    if (sha256(await readFile(externalManifestPath)) !== sha256(externalManifest)) {
-      throw new Error('R2 external preview manifest round-trip mismatch');
-    }
-    console.log('Verified complete immutable R2 preview:', prefix);
-  }
-
-  // Every other theme publishes its own preview from its own package: each package
-  // ships materializePrebuild(target, {basePath}). Versioned keys are immutable, so a
-  // preview whose index.html already matches in R2 is skipped. Any failure aborts the
-  // run before deploy, leaving the live store untouched.
+  // All previews, including Plain Jane, materialize from their own package.
+  // Never fetch an older external snapshot for the downloadable product.
   const catalog = await buildCatalog(join(process.cwd(), 'packages'));
   for (const theme of catalog) {
-    if (onlyPlainJane || theme.previewBuild === 'external') continue; // built from its own source repo above
+    if ((onlyPlainJane && theme.slug !== 'plain-jane') || theme.previewBuild === 'external') continue;
     const themePrefix = '/theme-packages/' + theme.slug + '/' + theme.version + '/preview/';
     const entry = await import(pathToFileURL(join(process.cwd(), 'packages', 'theme-' + theme.slug, 'src', 'node.js')).href);
     const out = join(root, 'pkg-' + theme.slug);

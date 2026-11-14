@@ -19,7 +19,7 @@
     "javascript"
   ],
   "name": "@inneranimalmedia/theme-plain-jane",
-  "purpose": "Read-only editorial journal and photography CMS starter with externally editable manifest.",
+  "purpose": "Read-only editorial journal and photography starter with self-contained Growth & Performance CMS preview drafts.",
   "registry": {
     "kind": "local-package",
     "name": "@inneranimalmedia/theme-plain-jane",
@@ -41,5 +41,5 @@
   "use_when": [
     "Review a source-driven editorial journal and photography starter."
   ],
-  "version": "0.1.0"
+  "version": "0.1.1"
 }

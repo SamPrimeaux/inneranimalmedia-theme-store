@@ -10,7 +10,7 @@
  */
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { mkdtemp, mkdir, readdir, lstat, readFile, writeFile, rm, rename } from 'node:fs/promises';
+import { mkdtemp, mkdir, readdir, lstat, readFile, writeFile, rm, rename, utimes } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve, dirname, relative } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
@@ -66,6 +66,11 @@ try {
     permissionNotice:'First-party compiled package. Source package is not licensed for republishing or resale.',
   };
   await writeFile(join(stage,'theme-package.json'),JSON.stringify(manifest,null,2)+'\n');
+  // ZIP stores file modification timestamps. Normalize them so the same source
+  // produces the same immutable SHA-256 across CI runs and machines.
+  const fixedTimestamp = new Date('1980-01-01T00:00:00.000Z');
+  for (const file of themeFiles) await utimes(file, fixedTimestamp, fixedTimestamp);
+  await utimes(join(stage,'theme-package.json'), fixedTimestamp, fixedTimestamp);
   const targetDir=join(ROOT,'.releases');
   await mkdir(targetDir,{recursive:true});
   const tempZip=join(targetDir,slug+'-'+pkg.version+'.zip');

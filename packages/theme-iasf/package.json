@@ -1,7 +1,7 @@
 {
   "name": "@inneranimalmedia/theme-iasf",
   "version": "2.6.18",
-  "description": "IASF \u2014 stock Inner Animal Storefront theme pack (normalized from studio-cms-editor harvest).",
+  "description": "IASF — stock Inner Animal Storefront theme pack (normalized from studio-cms-editor harvest).",
   "type": "module",
   "main": "./src/index.js",
   "exports": {
@@ -85,7 +85,12 @@
       "cardImage": "/previews/iasf.svg",
       "sortOrder": 8,
       "priceUsd": 0,
-      "previewBuild": "package"
+      "previewBuild": "package",
+      "release": {
+        "status": "published",
+        "sha256": "1bfd7f72f9a15f0a59f91b00c17249cdfe0a49782569baf7a505c54fdf307ce6",
+        "storageKey": "releases/iasf/2.6.18/1bfd7f72f9a15f0a59f91b00c17249cdfe0a49782569baf7a505c54fdf307ce6.zip"
+      }
     }
   },
   "repository": {

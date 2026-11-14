@@ -1,7 +1,7 @@
 /** Canonical package product metadata. Site and manifest remain read-only. */
 export const THEME = Object.freeze({
   id:'theme.plain-jane',slug:'plain-jane',displayName:'Plain Jane Journal',
-  kind:'prebuild',family:'editorial-blog',version:'0.1.0',
+  kind:'prebuild',family:'editorial-blog',version:'0.1.1',
   package:'@inneranimalmedia/theme-plain-jane',category:'Editorial / Blog',
   description:'A considered, minimal journal with articles, photography, editorial layouts and an external-CMS component manifest.',
   industries:['Publishing','Creator','Portfolio'],

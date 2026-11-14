@@ -9,10 +9,13 @@
     "BrowserRouter basename honors Vite base URL",
     "AppLogo asset URL honors Vite base URL",
     "CMS fixture resolveAsset honors Vite base URL",
-    "Vite client type declaration"
+    "Vite client type declaration",
+    "Theme Store 0.1.1: packaged Growth & Performance editorial preview drafts and local charts",
+    "Theme Store 0.1.1: replace external placeholder image URLs and complete missing sample article routes"
   ],
   "status": "first_party_compiled_release_authorized",
   "publishApproved": true,
   "distributionScope": "compiled_site_and_cms_manifest_only",
-  "approvalContext": "Owner-requested Theme Store release; original source and private npm package remain unredistributed"
+  "approvalContext": "Owner-requested Theme Store release; original source and private npm package remain unredistributed",
+  "lastLocalEditorialUpdate": "2026-11-14"
 }

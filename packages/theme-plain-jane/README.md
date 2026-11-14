@@ -1,7 +1,7 @@
 # Plain Jane Journal — SDK product staging
 
-Source of truth: https://github.com/SamPrimeaux/inneranimalmedia-blog-template
-at the pinned commit in provenance.json. The authored React/TypeScript site
+Original source snapshot: https://github.com/SamPrimeaux/inneranimalmedia-blog-template
+at the pinned commit in provenance.json. Theme Store editorial additions are maintained here. The authored React/TypeScript site
 lives under source/, generated storefront under site/, and SDK package contract
 under src/ and prebuild.json. Never hand-edit the bundled output.
 
@@ -10,9 +10,9 @@ under src/ and prebuild.json. Never hand-edit the bundled output.
 The SDK demo server serves the actual build at /themes/plain-jane/demo/ and the
 CMS manifest at /themes/plain-jane/demo/journal-cms-manifest.json.
 
-The source has nine seed pages and 18 component definitions. Real routes:
+The source has fourteen preview pages (nine original, five added article routes) and 18 component definitions. Real routes:
 home, about, photography, two journal posts, contact, privacy, terms, 404.
-All artwork in the authored repository is local; the original Google Fonts
+All artwork in the authored repository is local, including two Growth & Performance chart scenes; the original Google Fonts
 import still requires network access and has fallback fonts.
 
 For local dev:
@@ -42,7 +42,7 @@ and \`/download\` endpoints serve that immutable release.
 The compiled site materializes independently with deep routes and the
 \`journal-cms-manifest.json\` used for future site-scoped authoring. This is a
 **real downloadable package**, not yet a verified AgentSam CMS draft install.
-The Theme Store must never imply that the customer editor save/publish flow is
+Release 0.1.0 remains immutable. The enhanced 0.1.1 artifact must be generated, uploaded and digest-verified before its download link is promoted. The Theme Store must never imply that the customer editor save/publish flow is
 complete until the authenticated install receipt and isolation tests pass.
 
 Do NOT run seed/plain-jane-journal.sql against customer D1 databases without

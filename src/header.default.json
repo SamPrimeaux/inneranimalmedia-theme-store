@@ -62,12 +62,6 @@
         "label": "How it works",
         "href": "/#how-it-works",
         "type": "link"
-      },
-      {
-        "key": "agentsam-sites",
-        "label": "AgentSam Sites",
-        "href": "https://agentsam.inneranimalmedia.com/sites",
-        "type": "external"
       }
     ]
   }

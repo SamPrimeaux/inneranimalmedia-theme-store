@@ -1,6 +1,10 @@
 {
   "schema": "iam.theme-store-site.v1",
-  "brand": { "monogram": "IA", "label": "THEME STORE", "ariaLabel": "InnerAnimalMedia Themes home" },
+  "brand": {
+    "monogram": "IA",
+    "label": "Theme Store",
+    "ariaLabel": "InnerAnimalMedia Themes home"
+  },
   "nav": {
     "discover": "Discover",
     "howItWorks": "How it works",
@@ -13,19 +17,55 @@
     "headlineLead": "Find the right",
     "headlineEm": "starting point.",
     "body": "Real, responsive website experiences built to become your own. Explore the design first; add it to AgentSam only when it feels right.",
-    "points": ["Original theme designs", "Make every detail your own", "Preview before install"]
+    "points": [
+      "Original theme designs",
+      "Make every detail your own",
+      "Preview before install"
+    ],
+    "imageHref": "https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/f119bc11-2ba4-4656-47f1-4a0ad51a8b00/hero",
+    "featuredLabel": "Recommended for you"
   },
-  "library": { "eyebrow": "Curated library", "title": "Browse themes", "browseLabel": "Browse themes", "filters": { "prices": "Price", "industries": "Industry", "catalogSizes": "Catalog size", "features": "Features" } },
+  "library": {
+    "eyebrow": "Curated library",
+    "title": "Browse themes",
+    "browseLabel": "Browse themes",
+    "filters": {
+      "prices": "Price",
+      "industries": "Industry",
+      "catalogSizes": "Catalog size",
+      "features": "Features"
+    }
+  },
   "howItWorks": {
     "eyebrow": "Designed to get out of your way",
     "title": "Choose. Add. Make it yours.",
-    "body": "Preview a theme, add it to your drafts, and make it your own. Publish when you’re ready.",
+    "body": "Preview a theme, add it to your drafts, and make it your own. Publish when you\u2019re ready.",
     "steps": [
-      { "title": "Explore", "body": "Browse the themes and explore a complete responsive site." },
-      { "title": "Add to drafts", "body": "Add an editable copy to your site’s drafts." },
-      { "title": "Customize", "body": "Make the layout, colors, images and content your own." }
+      {
+        "title": "Explore",
+        "body": "Browse the themes and explore a complete responsive site."
+      },
+      {
+        "title": "Add to drafts",
+        "body": "Add an editable copy to your site\u2019s drafts."
+      },
+      {
+        "title": "Customize",
+        "body": "Make the layout, colors, images and content your own."
+      }
     ]
   },
-  "categoryLabels": { "All themes": "All themes", "Commerce": "Commerce / fashion", "Nonprofit": "Nonprofit & campaigns", "Editorial": "Editorial / journal" },
-  "tokens": { "accent": "#9a77ed", "accentDark": "#8b69d9", "accentDeep": "#7256b2", "ink": "#151620", "inkAlt": "#191720" }
+  "categoryLabels": {
+    "All themes": "All themes",
+    "Commerce": "Commerce / fashion",
+    "Nonprofit": "Nonprofit & campaigns",
+    "Editorial": "Editorial / journal"
+  },
+  "tokens": {
+    "accent": "#9a77ed",
+    "accentDark": "#8b69d9",
+    "accentDeep": "#7256b2",
+    "ink": "#151620",
+    "inkAlt": "#191720"
+  }
 }

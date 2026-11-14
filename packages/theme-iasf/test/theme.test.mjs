@@ -56,6 +56,7 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { shellDefaults, mergeShellConfig, renderHeader, renderFooter, media } from '../src/index.js';
 import { materializePrebuild } from '../src/node.js';
+import { renderLoaderGate } from '../src/shell/index.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const runtimeDir = path.join(here, '..', 'src', 'runtime');
@@ -140,4 +141,10 @@ test('materialized preview loads the sections runtime and has no leaked markers'
   assert.match(home, /src="\/p\/iasf\/runtime\/sections\.js"/);
   assert.match(home, /href="\/p\/iasf\/products\/wolf-heavyweight-tee\/"/);
   assert.ok(fs.existsSync(path.join(dir, 'runtime', 'sections.js')));
+});
+
+test('loader gate never hides content from crawlers, automation or reduced-motion users', () => {
+  const gate = renderLoaderGate({ enabled: true, mode: 'session', maxMs: 6000 });
+  assert.match(gate, /navigator\.webdriver/);
+  assert.match(gate, /prefers-reduced-motion/);
 });

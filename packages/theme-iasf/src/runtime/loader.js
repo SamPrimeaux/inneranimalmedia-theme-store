@@ -125,7 +125,7 @@
     if (!cfg.enabled || cfg.mode === 'off') { html.classList.remove('iasf-loading'); return; }
     var first = true;
     try { first = cfg.mode === 'always' || !sessionStorage.getItem('iasf:loaded'); } catch (e) { first = true; }
-    if (!first) { html.classList.remove('iasf-loading'); return; }
+    if (!first || navigator.webdriver) { html.classList.remove('iasf-loading'); return; }
     show();
     var release = function () { hide(); };
     if (document.readyState === 'complete') release(); else root.addEventListener('load', release, { once: true });

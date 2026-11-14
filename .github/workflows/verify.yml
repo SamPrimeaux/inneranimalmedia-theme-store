@@ -13,11 +13,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm install --no-audit --no-fund
-      - run: npm run check
-      - run: npm run build
-      - run: node --check bin/iam-theme.mjs
-      - run: node --check scripts/publish-theme-packages.mjs
-      - run: node --test tests/npm-child-environment.test.mjs
-      - name: Test imported theme source packages
-        run: find packages -path '*/test/*.test.mjs' -type f -print0 | xargs -0 node --test
+      - name: Install Theme Store dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install Plain Jane authored source dependencies
+        working-directory: packages/theme-plain-jane/source
+        run: npm ci --no-audit --no-fund
+      - name: Rebuild Plain Jane compiled site and CMS manifest
+        working-directory: packages/theme-plain-jane
+        run: npm run build
+      - name: Check catalog and build Theme Store
+        run: |
+          npm run check
+          npm run build
+          node --check bin/iam-theme.mjs
+          node --check scripts/publish-theme-packages.mjs
+      - name: Test repo packages and compiled Plain Jane content
+        run: |
+          npm test
+          find packages -path '*/test/*.test.mjs' -type f -print0 | xargs -0 node --test

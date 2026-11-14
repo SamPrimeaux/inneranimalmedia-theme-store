@@ -26,7 +26,7 @@ const THEME = Object.freeze({
   slug: 'iasf',
   lineage: 'iasf',
   family: 'editorial-commerce',
-  displayName: 'IASF Storefront',
+  displayName: 'Evolution',
   version: PACKAGE_VERSION,
   kind: 'stock-theme',
   icon: 'theme',
@@ -118,7 +118,7 @@ export function createIasfStarterPackSeed() {
   const cssVars = themeToCssVars();
   return {
     id: 'iasf',
-    name: 'IASF Storefront',
+    name: 'Evolution',
     version: 1,
     description:
       'Stock Inner Animal Storefront — home, shop, archetypes, journal, and story routes.',

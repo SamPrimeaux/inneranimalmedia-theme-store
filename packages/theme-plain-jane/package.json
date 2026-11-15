@@ -108,6 +108,7 @@
     "prebuildRoot": "site",
     "canonicalId": "plain-jane",
     "normalization": "awaiting_editor_compatibility_acceptance",
-    "sourceRepository": "SamPrimeaux/iapj"
+    "sourceRepository": "SamPrimeaux/inneranimalmedia-theme-store",
+    "sourceSeed": "SamPrimeaux/iapj"
   }
 }

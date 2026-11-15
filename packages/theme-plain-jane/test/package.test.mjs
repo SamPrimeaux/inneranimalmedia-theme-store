@@ -18,7 +18,8 @@ test('IAPJ replaces the old Plain Jane source without publishing or claiming CMS
  assert.equal(createTheme().displayName,'InnerAnimal Plain Jane');
  assert.equal(createTheme().installable,false);
  assert.equal(pkg.version,'0.2.0');
- assert.equal(pkg.agentsam.sourceRepository,'SamPrimeaux/iapj');
+ assert.equal(pkg.agentsam.sourceRepository,'SamPrimeaux/inneranimalmedia-theme-store');
+ assert.equal(pkg.agentsam.sourceSeed,'SamPrimeaux/iapj');
  assert.equal(pkg.agentsam.store.release.status,'preview');
  assert.equal(pkg.agentsam.store.release.storageKey,null);
  assert.equal(provenance.publishApproved,false);

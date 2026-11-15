@@ -32,6 +32,9 @@ const strictSlug = /^[a-z0-9-]+$/;
 
 // A theme is previewable only when its versioned preview is actually in R2.
 async function resolvePreview(env: Env, origin: string, theme: { slug: string; version: string }): Promise<string | null> {
+  // IAPJ's public preview is bundled from the canonical Theme Store package.
+  // Customer CMS installation remains separately gated by the R2 install index.
+  if (theme.slug === 'plain-jane') return origin + '/iapj/';
   const root = 'theme-packages/' + theme.slug + '/' + theme.version + '/preview/';
   try {
     if (await env.THEME_PACKAGES.head(root + 'index.html')) return publicDemoUrl(origin, theme.slug);
@@ -58,6 +61,26 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
     const method = request.method.toUpperCase();
+    // Existing Plain Jane demo links remain valid, but the canonical IAPJ URL
+    // uses one short path instead of nested package / preset / demo segments.
+    const legacyIapj = /^\/themes\/plain-jane\/presets\/(?:plain-jane|default)\/demo\/?(.*)$/.exec(url.pathname);
+    if (legacyIapj) {
+      if (method !== 'GET' && method !== 'HEAD') return missing('method_not_allowed', 405);
+      const remaining = legacyIapj[1];
+      if (remaining.split('/').some(segment => segment === '..' || segment.startsWith('.'))) return missing('invalid_preview_path', 400);
+      return Response.redirect(new URL('/iapj/' + remaining + url.search, url.origin), 302);
+    }
+    if (url.pathname === '/iapj') return Response.redirect(new URL('/iapj/', url.origin), 302);
+    if (url.pathname.startsWith('/iapj/')) {
+      if (method !== 'GET' && method !== 'HEAD') return missing('method_not_allowed', 405);
+      const segments = url.pathname.slice('/iapj/'.length).split('/').filter(Boolean);
+      if (segments.some(segment => segment === '..' || segment.startsWith('.'))) return missing('invalid_preview_path', 400);
+      // The authored IAPJ is a React Router app. Serve its own HTML for
+      // deep links, never the Theme Store's SPA fallback.
+      const isFile = segments.at(-1)?.includes('.') ?? false;
+      const target = isFile ? request : new Request(new URL('/iapj/index.html', url), request);
+      return env.ASSETS.fetch(target);
+    }
     if (url.pathname.startsWith('/fonts/')) return serveFontAssets(request, env);
     if (url.pathname.startsWith('/api/ui-themes/')) return serveUiThemePackage(request,env);
     // The old store-owned Studio has been retired. Keep this explicit 404
@@ -180,6 +203,9 @@ export default {
             const approved=new Map<string,any>(catalog.items.filter((x:any)=>typeof x.slug==='string').map((x:any)=>[x.slug,x]));
             const safe=(url:any)=>typeof url==='string'&&url.startsWith('https://themes.inneranimalmedia.com/site-media/')?url:null;
             for(const product of products){
+              // IAPJ is maintained here, not in the old beige CMS catalog
+              // snapshot. All other products retain the published CMS view.
+              if (product.slug === 'plain-jane') continue;
               const item=approved.get(product.slug);
               if(!item)continue;
               const cover=safe(item.cover_url);

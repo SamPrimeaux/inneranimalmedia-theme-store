@@ -21,7 +21,9 @@
       "/app-embeds/*",
       "/theme-packages/*",
       "/themes/*",
-      "/site-media/*"
+      "/site-media/*",
+      "/iapj",
+      "/iapj/*"
     ]
   },
   "d1_databases": [

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, ExternalLink, Maximize2, Minimize2, Monitor, Smartphone, Check, Layers } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Maximize2, Minimize2, Monitor, Smartphone, Check, Layers } from 'lucide-react';
 import type { ThemeRecord } from './catalog';
 import './theme-experience.css';
 import './collection-gallery.css';
@@ -63,7 +63,7 @@ export function ThemeExperience({ theme, onBack, onTry }: {
           <strong>{theme.name}</strong>{price && <span>{price}</span>}
         </div>
         <div className="experience-action-buttons">
-          {canDemo && <a href={theme.previewUrl!} rel="noopener noreferrer" target="_blank" className="experience-demo-button">View demo <ExternalLink size={15}/></a>}
+          {canDemo && <button type="button" onClick={fullscreen} className="experience-demo-button" aria-label={expanded ? 'Exit fullscreen preview' : 'Expand interactive preview'}>{expanded ? 'Exit fullscreen' : 'Fullscreen preview'} {expanded ? <Minimize2 size={15}/> : <Maximize2 size={15}/>}</button>}
           {ready && <button className="experience-try-button" onClick={onTry}>Add <ArrowRight size={15}/></button>}
         </div>
       </div>
@@ -95,7 +95,7 @@ export function ThemeExperience({ theme, onBack, onTry }: {
       </section>
       <div className="experience-bottom-cta">
         <strong>{theme.name}</strong>{price && <span>{price}</span>}
-        {canDemo && <a href={theme.previewUrl!} target="_blank" rel="noopener noreferrer">View demo <ExternalLink size={15}/></a>}
+        {canDemo && <button type="button" className="experience-preview-return" onClick={() => stage.current?.scrollIntoView({behavior:'smooth',block:'start'})}>Return to preview <ArrowLeft size={15}/></button>}
         {ready && <button onClick={onTry}>Add <ArrowRight size={15}/></button>}
       </div>
     </div>

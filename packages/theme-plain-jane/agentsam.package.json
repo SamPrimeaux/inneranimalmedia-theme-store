@@ -2,16 +2,16 @@
   "schema": "agentsam.package.v1",
   "id": "theme-plain-jane",
   "name": "@inneranimalmedia/theme-plain-jane",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "class": "theme",
-  "status": "preview",
-  "catalog_status": "preview",
+  "status": "published",
+  "catalog_status": "published",
   "registry": {
     "kind": "local-package",
     "name": "@inneranimalmedia/theme-plain-jane",
-    "public_claim": false
+    "public_claim": true
   },
-  "purpose": "IAPJ editorial blog and portfolio, with a compiled site and preflight CMS source manifest.",
+  "purpose": "A complete source-backed editable 31-page editorial website template with account-owned Theme Studio installation.",
   "languages": [
     "javascript",
     "typescript"
@@ -22,23 +22,15 @@
   ],
   "commands": [],
   "install": [],
-  "review_required": [
-    "visual-responsive-qa",
-    "cms-content-write-adapter",
-    "install-receipt",
-    "tenant-isolation",
-    "immutable-release-review"
-  ],
+  "review_required": [],
   "evidence": {
     "directory": "packages/theme-plain-jane",
     "purpose_source": "SamPrimeaux/iapj pinned GitHub source"
   },
   "use_when": [
-    "Preview a multi-page, source-driven editorial blog and portfolio"
+    "Install a complete editable editorial blog and portfolio into account-owned Theme Studio"
   ],
-  "avoid_when": [
-    "An authenticated production CMS draft installation or published release is required."
-  ],
+  "avoid_when": [],
   "topics": [
     "cms",
     "editorial",

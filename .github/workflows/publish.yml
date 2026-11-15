@@ -1,6 +1,12 @@
 name: Publish Theme Store
 on:
   workflow_dispatch:
+    inputs:
+      theme:
+        description: Theme package slug (owned by this repository)
+        required: true
+        default: plain-jane
+        type: string
 permissions:
   contents: write
 concurrency:
@@ -9,121 +15,127 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 35
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       GH_TOKEN: ${{ github.token }}
+      THEME_SLUG: ${{ inputs.theme }}
     steps:
-      - name: Checkout Theme Store
+      - name: Checkout canonical Theme Store source
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           persist-credentials: true
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Block IAPJ publication until explicit product approval
+      - name: Verify release credentials and editor contract
+        id: release
+        shell: bash
         run: |
+          set -euo pipefail
+          if [[ -z "$CLOUDFLARE_API_TOKEN" || -z "$CLOUDFLARE_ACCOUNT_ID" ]]; then
+            echo '::error::Cloudflare production credentials are not connected. Set CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID in repository Actions secrets. No release has been published.'
+            exit 1
+          fi
           node --input-type=module - <<'NODE'
-          import {readFileSync,existsSync} from 'node:fs';
-          const root='packages/theme-plain-jane/';
-          const pkg=JSON.parse(readFileSync(root+'package.json'));
-          const approval=JSON.parse(readFileSync(root+'provenance.json'));
-          if(approval.publishApproved!==true || pkg.agentsam.installable!==true ||
-             !existsSync(root+'install-project.json')) {
-            throw Error('iapj_release_not_approved: CMS project, source-backed install and owner acceptance must pass first');
+          import fs from 'node:fs';
+          const slug=process.env.THEME_SLUG;
+          if(!/^[a-z][a-z0-9-]{0,62}$/.test(slug)) throw Error('invalid_release_slug');
+          const dir='packages/theme-'+slug+'/';
+          const pkg=JSON.parse(fs.readFileSync(dir+'package.json'));
+          if(pkg.agentsam?.slug!==slug||pkg.agentsam?.installable!==true||!/^\d+\.\d+\.\d+$/.test(pkg.version))
+            throw Error('theme_not_source_owned_installable_release:'+slug);
+          if(fs.existsSync(dir+'provenance.json')){
+            const approval=JSON.parse(fs.readFileSync(dir+'provenance.json'));
+            if(approval.publishApproved!==true) throw Error('theme_source_release_not_reviewed:'+slug);
           }
+          if(!fs.existsSync(dir+'install-project.json')) throw Error('editable_theme_project_missing:'+slug);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,'version='+pkg.version+'\n');
+          console.log('Reviewed source',slug,pkg.version);
           NODE
-      - name: Install source and store dependencies
-        run: |
-          npm ci --no-audit --no-fund
-          npm install --no-audit --no-fund --prefix packages/theme-plain-jane/source
-      - name: Compile Plain Jane source, local images and CMS manifest
+      - name: Install Theme Store dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install IAPJ authored source dependencies
+        if: inputs.theme == 'plain-jane'
+        run: npm ci --no-audit --no-fund --prefix packages/theme-plain-jane/source
+      - name: Build IAPJ React site and its CMS route inventory
+        if: inputs.theme == 'plain-jane'
         run: npm run build --prefix packages/theme-plain-jane
-      - name: Test all article routes and assets
-        run: |
-          node --test packages/theme-plain-jane/test/*.test.mjs
-          node --check scripts/build-theme-release.mjs
-      - name: Build and verify reproducible compiled-only ZIP
-        shell: bash
-        run: |
-          set -euo pipefail
-          node scripts/build-theme-release.mjs plain-jane
-          first="$(sha256sum .releases/plain-jane-0.1.1.zip | cut -d' ' -f1)"
-          node scripts/build-theme-release.mjs plain-jane
-          second="$(sha256sum .releases/plain-jane-0.1.1.zip | cut -d' ' -f1)"
-          test "$first" = "$second"
-          unzip -t .releases/plain-jane-0.1.1.zip
-          unzip -Z -1 .releases/plain-jane-0.1.1.zip | grep -q '^site/post/how-to-measure-business-growth-key-performance-metrics/index.html$'
-          unzip -Z -1 .releases/plain-jane-0.1.1.zip | grep -q '^site/images/sustainable-business-growth-strategies-lasting-momentum-green-chart.svg$'
-          echo "Plain Jane compiled archive SHA-256: $first"
-      - name: Attach portable preset to GitHub Actions
-        uses: actions/upload-artifact@v4
+      - uses: actions/setup-python@v5
+        if: inputs.theme == 'plain-jane'
         with:
-          name: plain-jane-journal-0.1.1
-          path: .releases/plain-jane-0.1.1.zip
-          if-no-files-found: error
-          retention-days: 90
-      - name: Publish immutable downloadable GitHub release
-        shell: bash
+          python-version: '3.12'
+      - name: Install browser for native IAPJ CMS extraction
+        if: inputs.theme == 'plain-jane'
         run: |
-          set -euo pipefail
-          tag="theme-plain-jane-v0.1.1"
-          file=".releases/plain-jane-0.1.1.zip"
-          if gh release view "$tag" >/dev/null 2>&1; then
-            mkdir -p /tmp/plain-jane-existing-release
-            gh release download "$tag" --pattern "plain-jane-0.1.1.zip" --dir /tmp/plain-jane-existing-release
-            cmp "$file" /tmp/plain-jane-existing-release/plain-jane-0.1.1.zip
-            echo "Previously published immutable release verified."
-          else
-            gh release create "$tag" "$file" --target "$GITHUB_SHA" \
-              --title "Plain Jane Journal · 0.1.1" \
-              --notes "Reviewed compiled-only editorial theme. Includes 14 CMS preview pages and the Growth & Performance light/dark illustrations. Source and npm package are not part of this distribution. Draft content is not a published platform article."
-          fi
-      - name: Check Cloudflare release credentials
-        id: cloudflare
-        shell: bash
+          python -m pip install 'playwright==1.56.0'
+          python -m playwright install --with-deps chromium
+      - name: Generate IAPJ native 31-page editable project from the SDK editor contract
+        if: inputs.theme == 'plain-jane'
         run: |
-          if [[ -n "$CLOUDFLARE_API_TOKEN" && -n "$CLOUDFLARE_ACCOUNT_ID" ]]; then
-            echo "enabled=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "enabled=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::Cloudflare deploy credentials unavailable; verified GitHub release remains downloadable. Theme Store live endpoint is unchanged."
-          fi
-      - name: Upload checksum-addressed ZIP to Cloudflare R2
-        if: steps.cloudflare.outputs.enabled == 'true'
-        run: node scripts/build-theme-release.mjs plain-jane --publish
-      - name: Upload complete versioned R2 preview
-        if: steps.cloudflare.outputs.enabled == 'true'
-        run: node scripts/publish-theme-packages.mjs --only=plain-jane
-      - name: Build catalog using verified release metadata
+          # The source copy is used only for the generator; it does NOT become
+          # a baked-in SDK theme distribution or a separate CMS implementation.
+          curl -fsSL "https://raw.githubusercontent.com/SamPrimeaux/agentsam-sdk/main/apps/ecommerce-cms-agentsam/frontend/theme-editor/project.mjs" -o /tmp/agentsam-theme-editor-project.mjs
+          python packages/theme-plain-jane/scripts/export-install-project.py \
+            --contract /tmp/agentsam-theme-editor-project.mjs
+      - name: Verify source contracts and compile Theme Store
         run: |
           npm run check
           npm run build
-          node --test packages/theme-plain-jane/test/*.test.mjs
-      - name: Deploy Theme Store Worker
-        if: steps.cloudflare.outputs.enabled == 'true'
-        run: npx wrangler deploy
-      - name: Verify production preview and digest-checked ZIP
-        if: steps.cloudflare.outputs.enabled == 'true'
+          npm test
+          find packages -path '*/test/*.test.mjs' -type f -print0 | xargs -0 node --test
+      - name: Generate reproducible immutable ZIP and matching editable-project receipt
         shell: bash
         run: |
           set -euo pipefail
-          root="https://themes.inneranimalmedia.com"
-          curl -fsSL "$root/api/catalog" | grep -q 'plain-jane'
-          curl -fsSL "$root/theme-packages/plain-jane/0.1.1/preview/" | grep -q '<html'
-          curl -fsSL "$root/theme-packages/plain-jane/0.1.1/preview/post/how-to-measure-business-growth-key-performance-metrics" | grep -q '<html'
-          curl -fsSL "$root/theme-packages/plain-jane/0.1.1/preview/images/how-to-measure-business-growth-key-performance-metrics-navy-chart.svg" | grep -q '<svg'
-          curl -fsSL "$root/api/themes/plain-jane/0.1.1/manifest.json" | grep -q '"version":"0.1.1"'
-          curl -fsSL "$root/api/themes/plain-jane/0.1.1/download" -o /tmp/plain-jane-0.1.1.zip
-          test -s /tmp/plain-jane-0.1.1.zip
-          node -e 'const fs=require("fs"),c=require("crypto");const p=JSON.parse(fs.readFileSync("packages/theme-plain-jane/package.json"));const hash=c.createHash("sha256").update(fs.readFileSync("/tmp/plain-jane-0.1.1.zip")).digest("hex");if(hash!==p.agentsam.store.release.sha256)process.exit(1)'
-      - name: Commit generated site, lockfile and verified release metadata
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add packages/theme-plain-jane/site packages/theme-plain-jane/package.json packages/theme-plain-jane/source/package-lock.json
-          # catalog.generated.json is intentionally gitignored and rebuilt from package metadata.
-          if ! git diff --cached --quiet; then
-            git commit -m "chore(plain-jane): record generated v0.1.1 preset [skip ci]"
-            git push origin HEAD:main
+          node scripts/build-theme-release.mjs "$THEME_SLUG"
+          zip=".releases/${THEME_SLUG}-${{ steps.release.outputs.version }}.zip"
+          first=$(sha256sum "$zip" | cut -d' ' -f1)
+          node scripts/build-theme-release.mjs "$THEME_SLUG"
+          second=$(sha256sum "$zip" | cut -d' ' -f1)
+          test "$first" = "$second"
+          unzip -t "$zip" >/dev/null
+          if [[ "$THEME_SLUG" == 'plain-jane' ]]; then
+            node packages/theme-plain-jane/scripts/finalize-install-project.mjs
+            node --test packages/theme-plain-jane/test/*.test.mjs
           fi
+          echo "Reviewed ZIP digest: $first"
+      - name: Publish and round-trip verify immutable ZIP in Theme Store R2
+        run: node scripts/build-theme-release.mjs "$THEME_SLUG" --publish
+      - name: Register and round-trip verify native CMS install-project in Theme Store R2
+        run: node scripts/publish-install-projects.mjs "--only=$THEME_SLUG"
+      - name: Publish complete versioned preview to Theme Store R2
+        run: node scripts/publish-theme-packages.mjs "--only=$THEME_SLUG"
+      - name: Deploy Theme Store Worker and authoritative catalog
+        run: |
+          npm run build
+          npx wrangler deploy
+      - name: Verify public catalog, ZIP and editable project as one installable release
+        run: node scripts/verify-published-installations.mjs --min 11
+      - name: Publish verified download to GitHub Releases
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="theme-${THEME_SLUG}-v${{ steps.release.outputs.version }}"
+          file=".releases/${THEME_SLUG}-${{ steps.release.outputs.version }}.zip"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            mkdir -p /tmp/old-release
+            gh release download "$tag" --pattern "$(basename "$file")" --dir /tmp/old-release
+            cmp "$file" "/tmp/old-release/$(basename "$file")"
+          else
+            gh release create "$tag" "$file" --target "$GITHUB_SHA" \
+              --title "${THEME_SLUG} · ${{ steps.release.outputs.version }}" \
+              --notes 'Verified Theme Store source release. Installable via the authenticated account-owned Theme Studio without a CMS site. Editable CMS project is distributed via checksum-verified Theme Store R2.'
+          fi
+      - name: Commit verified release metadata back to Theme Store source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "packages/theme-${THEME_SLUG}/package.json" "packages/theme-${THEME_SLUG}/install-project.json"
+          git diff --cached --quiet && exit 0
+          git commit -m "release(${THEME_SLUG}): record verified R2 ZIP and editable project"
+          git push origin HEAD:main

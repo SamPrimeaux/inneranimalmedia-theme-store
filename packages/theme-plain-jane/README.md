@@ -1,43 +1,38 @@
-# InnerAnimal Plain Jane — IAPJ theme candidate
+# InnerAnimal Plain Jane (IAPJ) · v0.3.0
 
-The authored visual system, article library, editorial screens and source media are taken from
-[SamPrimeaux/iapj](https://github.com/SamPrimeaux/iapj), pinned to the commit in `provenance.json`.
+**Canonical distribution and source:** `SamPrimeaux/inneranimalmedia-theme-store/packages/theme-plain-jane`.
 
-This is a **whole-source replacement** of the deprecated beige Plain Jane Journal starter.
-The public Theme Store identity remains `plain-jane`, the package name remains
-`@inneranimalmedia/theme-plain-jane`, and this preview's proposed version is `0.2.0`.
+`SamPrimeaux/iapj` was the original source seed, **not** a second production distribution authority. The product keeps the public `plain-jane` slug, while its short demo URL is `/iapj/`.
 
-## Separation of responsibilities
-- `source/`: imported IAPJ React/Vite application (not legacy Plain Jane)
-- `site/`: derived static preview with original imagery, compiled JS/CSS and an exported preview CMS manifest
-- `src/node.js`: reproducible nested-base materializer and deep-link page stubs
-- `scripts/export-cms-manifest.mjs`: IAPJ source routes, logical media references and CMS definition keys
-- `agentsam.package.json`, `prebuild.json`, `package.json`: the existing Theme Store product interface
+## Product contract
 
-## Local preflight (no remote or cloud access)
-From the Theme Store root:
+- **Free stock theme:** usable without a purchase; **sign-in/sign-up is required** before creating or changing a private draft.
+- **No site required:** a verified account may install IAPJ directly into Theme Studio. It owns an independent project, pages, sections, tokens, revisions and media references. Its draft can become a site only after an explicit action.
+- **Full draft CRUD:** create/read/update/delete and duplicate as many independent account-owned canvases as desired. The shared master and other accounts are never mutated.
+- **Real source:** `source/` is the maintained IAPJ React/Vite code. `site/` is its distributable preview and original authored media. `install-project.json` is the native `agentsam.theme-project.v1` editable project generated from the actual rendered React pages using the existing SDK editor contract (no second CMS).
+- **Runtime:** 31 authored editorial pages, 132 editable source sections, thousands of text/media/link fields, original asset references and the optional platform system pages provided by the shared CMS.
+- **Distribution:** immutable ZIPs and verified install-project objects reside in the `theme-store` R2 bucket. The platform's `agentsam-sdk` Worker reads the registry and verifies signed content; it does not bundle IAPJ.
+
+## Local authoring and acceptance
+
 ```sh
 npm ci
 npm ci --prefix packages/theme-plain-jane/source
 npm run build --prefix packages/theme-plain-jane
-node --test packages/theme-plain-jane/test/*.test.mjs
-npm run check
-npm test
+python3 -m pip install playwright
+python3 -m playwright install chromium
+python3 packages/theme-plain-jane/scripts/export-install-project.py \
+  --contract ../agentsam-sdk/apps/ecommerce-cms-agentsam/frontend/theme-editor/project.mjs
 node scripts/build-theme-release.mjs plain-jane
+node packages/theme-plain-jane/scripts/finalize-install-project.mjs
+node --test packages/theme-plain-jane/test/*.test.mjs
+npm run check && npm test
 ```
 
-The site is **preview-only**. The exported CMS manifest identifies the authored pages but does
-not implement authenticated CMS editing, tenant-scoped save, revisions or install receipts.
-The previous `install-project.json` is intentionally removed; reusing the old beige renderer
-would misrepresent the replacement. No fixture SQL is imported.
+The exported project and the immutable ZIP are separate products of the same authored source. The CMS editor handles private draft save/revision, media and code editing; Auth/Identity and D1/R2 ownership are platform contracts. Do not copy CMS editor code or customer records into this theme package.
 
-## Release gates
-- Visual comparisons and real browser QA at desktop and mobile breakpoints
-- All static and nested routes, 404, light/dark, image and navigation QA
-- Native CMS section/block mapping from IAPJ source (not static placeholders)
-- Content authoring, saved drafts, tenant ownership and publish/rollback tests
-- Rebuilt `install-project.json` with verified editable source-rendered sections
-- Reproducible ZIP hash, provenance, package version and catalog verification
-- Explicit release approval for R2, downloadable artifact and public preview
+## Release contract
 
-**No cloud publish, CMS install or Theme Store promotion is approved by staging this branch.**
+A published release must have **both** a checksum-addressed source-owned ZIP and a checksum-verified editable install-project registered in the Theme Store's `install-index` R2 object. Catalog install readiness is derived from those exact artifacts, not a hidden boolean. Never label the product installed or publish-ready before the real installer is available. No site, domain, store, or checkout is a prerequisite for a private account-owned Theme Studio copy.
+
+Local source status is distinct from production: public `/iapj/` may still show the earlier release until R2 publication and worker rollout are separately verified.

@@ -70,7 +70,7 @@ try{
     // Complete only missing platform pages. Preserve the verified, authored
     // source pages in the immutable install document; no preview rewriting.
     const completion=completeInstallProject(project);
-    const bytes=Buffer.from(JSON.stringify(completion.project));
+    const bytes=Buffer.from(JSON.stringify(completion.project)+'\n');
     if(bytes.length>8*1024*1024)throw Error('oversized_completed_project:'+slug);
     const completedArtifact=join(temp,slug+'-complete.json');
     await writeFile(completedArtifact,bytes);
@@ -81,9 +81,21 @@ try{
     const fetched=join(temp,slug+'.json');
     run(['get','theme-store/'+key,'--remote','--file',fetched]);
     if(hash(await readFile(fetched))!==projectHash)throw Error('r2_project_digest_mismatch:'+slug);
-    result.push({slug,version,sha256:release.sha256,project_sha256:projectHash,
-      project_key:key,page_count:completion.project.pages.length,manifest_page_count:project.sourceManifestPageCount||project.pages.length});
-    console.log('VERIFIED PROJECT',slug,completion.project.pages.length);
+    const releaseRow={slug,version,sha256:release.sha256,project_sha256:projectHash,
+      project_key:key,page_count:completion.project.pages.length,manifest_page_count:project.sourceManifestPageCount||project.pages.length};
+    result.push(releaseRow);
+    // Each release has its own immutable install descriptor. The Worker reads
+    // this alongside the legacy shared index, so a new theme never needs to
+    // overwrite another release's registry to become available.
+    const releaseIndexKey='install-index/by-release/'+slug+'/'+version+'/'+release.sha256+'.json';
+    const releaseIndexBytes=Buffer.from(JSON.stringify({schema:'agentsam.website-theme-install-index.v1',packages:[releaseRow]},null,2)+'\n');
+    const releaseIndexFile=join(temp,slug+'-release-index.json');
+    await writeFile(releaseIndexFile,releaseIndexBytes);
+    run(['put','theme-store/'+releaseIndexKey,'--remote','--file',releaseIndexFile,'--content-type','application/json']);
+    const downloadedIndex=join(temp,slug+'-release-index-verified.json');
+    run(['get','theme-store/'+releaseIndexKey,'--remote','--file',downloadedIndex]);
+    if(hash(await readFile(downloadedIndex))!==hash(releaseIndexBytes))throw Error('release_descriptor_digest_mismatch:'+slug);
+    console.log('VERIFIED PROJECT',slug,completion.project.pages.length,'immutable-index',releaseIndexKey);
   }
   const schema='agentsam.website-theme-install-index.v1';
   let previous=[];

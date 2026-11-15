@@ -6,7 +6,7 @@ import { resolveDemoAlias, publicDemoUrl, normalizeReleaseAssetRelative } from '
 import { resolveSite, type SiteDocument } from './site.mjs';
 import { normalizeFooter, defaultFooter } from './footer.mjs';
 import { normalizeHeader, defaultHeader } from './header.mjs';
-import { verifiedInstallEntries, hasEditableInstallProject } from './install-index.mjs';
+import { verifiedInstallEntries, hasEditableInstallProject, releaseDescriptorKey } from './install-index.mjs';
 import { marketplaceRedirect, themeInstallerUrl } from './marketplace-redirect.mjs';
 import { publishedStoreSettings, publishedStoreGlobal } from './published-cms.mjs';
 import { serveUiThemePackage } from './ui-theme-packages.mjs';
@@ -34,7 +34,7 @@ const strictSlug = /^[a-z0-9-]+$/;
 async function resolvePreview(env: Env, origin: string, theme: { slug: string; version: string }): Promise<string | null> {
   // IAPJ's public preview is bundled from the canonical Theme Store package.
   // Customer CMS installation remains separately gated by the R2 install index.
-  if (theme.slug === 'plain-jane') return origin + '/iapj/';
+  if ('previewAlias' in theme && typeof theme.previewAlias === 'string') return origin + '/' + theme.previewAlias + '/';
   const root = 'theme-packages/' + theme.slug + '/' + theme.version + '/preview/';
   try {
     if (await env.THEME_PACKAGES.head(root + 'index.html')) return publicDemoUrl(origin, theme.slug);
@@ -45,11 +45,28 @@ const strictVersion = /^[0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.-]+)?$/;
 const digest = /^[0-9a-f]{64}$/;
 
 async function loadInstallIndex(env: Env) {
+  // Preserve all previously published themes from the shared legacy index.
+  // Immutable, package-versioned release descriptors complement it, so a
+  // newly published theme is installable without mutating an old R2 object.
+  let existing: ReturnType<typeof verifiedInstallEntries> = [];
   try {
-    const object = await env.THEME_PACKAGES.get('install-index/index.json');
-    if (!object || object.size > 256_000) return null;
-    return verifiedInstallEntries(await object.json(), themes);
-  } catch { return null; }
+    const legacy = await env.THEME_PACKAGES.get('install-index/index.json');
+    if (legacy && legacy.size <= 256_000)
+      existing = verifiedInstallEntries(await legacy.json(), themes);
+  } catch { /* A missing legacy index does not disable immutable releases. */ }
+  const present = new Set(existing.map(item => item.slug + '@' + item.version));
+  const outstanding = themes.filter(theme =>
+    !present.has(theme.slug + '@' + theme.version) && releaseDescriptorKey(theme));
+  const discovered = await Promise.all(outstanding.map(async theme => {
+    const key = releaseDescriptorKey(theme);
+    if (!key) return [];
+    try {
+      const object = await env.THEME_PACKAGES.get(key);
+      if (!object || object.size > 16_384) return [];
+      return verifiedInstallEntries(await object.json(), [theme]);
+    } catch { return []; }
+  }));
+  return [...existing,...discovered.flat()];
 }
 function publicInstallableTheme(theme: (typeof themes)[number], previewUrl: string | null, installed: Awaited<ReturnType<typeof loadInstallIndex>>) {
   const product = publicTheme(theme, previewUrl);

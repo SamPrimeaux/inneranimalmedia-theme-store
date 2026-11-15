@@ -97,11 +97,11 @@ const mediaCatalog=Object.fromEntries(Object.entries(manifest.mediaCatalog).map(
 }));
 const output={
  schema:'agentsam.cms-source-manifest.v1',theme:'plain-jane',sourceTheme:'iapj',
- site_slug:'iapj-editorial-preview',preview_only:true,requiresRuntimeAdapter:true,
- source:'SamPrimeaux/iapj',contentModel:'IAPJ React/TypeScript + Markdown',
+ editorScope:'account',editorProject:'install-project.json',sourceInventoryOnly:true,
+ source:'SamPrimeaux/inneranimalmedia-theme-store',sourceSeed:'SamPrimeaux/iapj',contentModel:'IAPJ React/TypeScript + Markdown',
  definitions,pages,
  mediaCatalog,
- notice:'Preview structure only. Native CMS edit/save/publish and authenticated installation are not yet verified.'
+ notice:'Source-route inventory; the separately generated install-project.json contains native editable HTML sections, fields and blocks.'
 };
 const out=path.join(root,'site','iapj-cms-manifest.json');
 fs.writeFileSync(out,JSON.stringify(output,null,2)+'\n');

@@ -21,7 +21,7 @@ if(!fs.existsSync(path.join(source,'index.html')) ||
 }
 const manifest=JSON.parse(fs.readFileSync(path.join(source,'iapj-cms-manifest.json'),'utf8'));
 if(manifest.theme!=='plain-jane' || manifest.sourceTheme!=='iapj' ||
-   manifest.preview_only!==true || manifest.pages.length<25) {
+   manifest.editorProject!=='install-project.json' || manifest.pages.length<25) {
   throw new Error('IAPJ manifest does not match reviewed authored source');
 }
 fs.rmSync(dest,{recursive:true,force:true});

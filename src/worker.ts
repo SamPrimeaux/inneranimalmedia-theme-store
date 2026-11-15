@@ -63,7 +63,7 @@ export default {
     const method = request.method.toUpperCase();
     // Existing Plain Jane demo links remain valid, but the canonical IAPJ URL
     // uses one short path instead of nested package / preset / demo segments.
-    const legacyIapj = /^\\/themes\\/plain-jane\\/presets\\/(?:plain-jane|default)\\/demo\\/?(.*)$/.exec(url.pathname);
+    const legacyIapj = /^\/themes\/plain-jane\/presets\/(?:plain-jane|default)\/demo\/?(.*)$/.exec(url.pathname);
     if (legacyIapj) {
       if (method !== 'GET' && method !== 'HEAD') return missing('method_not_allowed', 405);
       const remaining = legacyIapj[1];

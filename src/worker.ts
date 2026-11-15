@@ -78,7 +78,7 @@ export default {
       // The authored IAPJ is a React Router app. Serve its own HTML for
       // deep links, never the Theme Store's SPA fallback.
       const isFile = segments.at(-1)?.includes('.') ?? false;
-      const target = isFile ? request : new Request(new URL('/iapj/index.html', url), request);
+      const target = isFile ? request : new Request(new URL('/iapj/', url), request);
       return env.ASSETS.fetch(target);
     }
     if (url.pathname.startsWith('/fonts/')) return serveFontAssets(request, env);

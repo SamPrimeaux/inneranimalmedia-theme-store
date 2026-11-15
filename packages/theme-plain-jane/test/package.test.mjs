@@ -12,32 +12,41 @@ const fromRoot=p=>path.join(root,p);
 const pkg=JSON.parse(fs.readFileSync(fromRoot('package.json'),'utf8'));
 const provenance=JSON.parse(fs.readFileSync(fromRoot('provenance.json'),'utf8'));
 const manifest=JSON.parse(fs.readFileSync(fromRoot('site/iapj-cms-manifest.json'),'utf8'));
+const project=JSON.parse(fs.readFileSync(fromRoot('install-project.json'),'utf8'));
 
-test('IAPJ replaces the old Plain Jane source without publishing or claiming CMS installation',()=>{
+test('IAPJ ships a real standalone editable project owned by the Theme Store',()=>{
  assert.equal(createTheme().slug,'plain-jane');
  assert.equal(createTheme().displayName,'InnerAnimal Plain Jane');
- assert.equal(createTheme().installable,false);
- assert.equal(pkg.version,'0.2.0');
+ assert.equal(createTheme().installable,true);
+ assert.equal(pkg.version,'0.3.0');
  assert.equal(pkg.agentsam.sourceRepository,'SamPrimeaux/inneranimalmedia-theme-store');
  assert.equal(pkg.agentsam.sourceSeed,'SamPrimeaux/iapj');
- assert.equal(pkg.agentsam.store.release.status,'preview');
- assert.equal(pkg.agentsam.store.release.storageKey,null);
- assert.equal(provenance.publishApproved,false);
+ assert.ok(['preview','published'].includes(pkg.agentsam.store.release.status));
+ assert.equal(provenance.publishApproved,true);
+ if (pkg.agentsam.store.release.status === 'published') {
+   assert.match(pkg.agentsam.store.release.sha256,/^[0-9a-f]{64}$/);
+   assert.equal(pkg.agentsam.store.release.storageKey,
+     `releases/plain-jane/${pkg.version}/${pkg.agentsam.store.release.sha256}.zip`);
+   assert.equal(project.sourceReleaseSha256,pkg.agentsam.store.release.sha256);
+ } else {
+   assert.equal(pkg.agentsam.store.release.storageKey,null);
+ }
  assert.match(provenance.commit,/^[0-9a-f]{40}$/);
  assert.equal(provenance.upstream,'https://github.com/SamPrimeaux/iapj');
  assert.ok(fs.existsSync(fromRoot('source/src/components/BrandLogo.tsx')));
  assert.ok(fs.existsSync(fromRoot('source/src/components/FooterBackdrop3D.tsx')));
  assert.ok(fs.existsSync(fromRoot('source/src/content/site.manifest.json')));
  assert.ok(!fs.existsSync(fromRoot('source/seed/plain-jane-journal.sql')),'legacy CMS SQL must not be copied');
- assert.ok(!fs.existsSync(fromRoot('install-project.json')),'legacy beige CMS install project must not be shipped');
+ assert.ok(fs.existsSync(fromRoot('install-project.json')),'the authored editable project must accompany a stock theme');
 });
 
 test('IAPJ source-derived CMS manifest covers editorial pages, categories and all authored article routes',()=>{
  assert.equal(manifest.schema,'agentsam.cms-source-manifest.v1');
  assert.equal(manifest.theme,'plain-jane');
  assert.equal(manifest.sourceTheme,'iapj');
- assert.equal(manifest.preview_only,true);
- assert.equal(manifest.requiresRuntimeAdapter,true);
+ assert.equal(manifest.editorProject,'install-project.json');
+ assert.equal(manifest.editorScope,'account');
+ assert.equal(manifest.sourceInventoryOnly,true);
  assert.ok(manifest.pages.length>=25,'IAPJ article/markdown corpus must be exported');
  assert.ok(manifest.definitions.length>=10);
  const routes=manifest.pages.map(page=>page.path);
@@ -76,4 +85,41 @@ test('IAPJ materializes a self-contained multi-route preview at a nested path',(
    assert.throws(()=>materializePrebuild(null),/target/);
    assert.ok(fs.existsSync(path.join(resolvePrebuildRoot(),'iapj-cms-manifest.json')));
  }finally{fs.rmSync(directory,{recursive:true,force:true});}
+});
+
+test('every authored IAPJ route is a genuine editable CMS page, not a placeholder',()=>{
+ assert.equal(project.schema,'agentsam.theme-project.v1');
+ assert.equal(project.id,'theme_plain-jane');
+ assert.equal(project.sourcePackage,pkg.name);
+ assert.equal(project.sourcePackageVersion,pkg.version);
+ assert.equal(project.sourcePreviewUrl,'https://themes.inneranimalmedia.com/iapj/');
+ assert.match(project.sourceReleaseSha256,/^[0-9a-f]{64}$/);
+ assert.equal(project.sourceManifestPageCount,31);
+ assert.equal(project.pages.length,31);
+ assert.deepEqual(project.sourceRoutesNotRendered,[]);
+ assert.deepEqual(project.sourceAssetErrors,[]);
+ const routes=new Set(manifest.pages.map(p=>p.path));
+ const slugs=new Set();
+ let fieldCount=0;
+ for(const page of project.pages){
+   assert.ok(routes.has(page.sourceRoute),'original authored route missing from editor: '+page.slug);
+   assert.ok(!slugs.has(page.slug),'duplicate editable page '+page.slug);
+   slugs.add(page.slug);
+   assert.ok(!/<script\b/i.test(page.template),'React hydration would overwrite customer edits: '+page.slug);
+   assert.ok(page.template.includes('<!--theme-section:'),'source content was not extracted: '+page.slug);
+   assert.equal(page.route,'/'+(page.sourceRoute?page.sourceRoute+'/':''),'authored routes must resolve within the installed site');
+   assert.ok(!/<a\b[^>]*href="https:\/\/themes\.inneranimalmedia\.com\/iapj\/(?!assets\/)/.test(page.template+' '+page.sections.map(s=>s.html).join(' ')),'installed navigation must not bounce back to provider demo: '+page.slug);
+   assert.ok(page.sections.length>=3,'missing real header/body/footer: '+page.slug);
+   assert.ok(page.sections.some(s=>s.zone==='HEADER'),'missing header: '+page.slug);
+   assert.ok(page.sections.some(s=>s.zone==='BODY'),'missing body: '+page.slug);
+   assert.ok(page.sections.some(s=>s.zone==='FOOTER'),'missing footer: '+page.slug);
+   assert.ok(page.sections.some(s=>s.schema.fields.length>0),'no editable source fields: '+page.slug);
+   for(const section of page.sections){
+     assert.ok(page.template.includes('<!--theme-section:'+section.key+'-->'),'unbound source section: '+page.slug+' '+section.key);
+     assert.ok(section.html.length>50,'empty source section: '+page.slug+' '+section.key);
+     fieldCount+=(section.schema.fields||[]).length;
+   }
+ }
+ assert.ok(fieldCount>1000,'IAPJ section text/images/links were not extracted');
+ assert.ok(fs.statSync(fromRoot('install-project.json')).size < 8*1024*1024,'SDK save contract limit exceeded');
 });

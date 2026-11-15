@@ -1,7 +1,7 @@
 {
   "name": "@inneranimalmedia/theme-plain-jane",
-  "version": "0.2.0",
-  "description": "InnerAnimal Plain Jane (IAPJ) — a branded editorial blog, portfolio and publishing starter",
+  "version": "0.3.0",
+  "description": "InnerAnimal Plain Jane (IAPJ) \u2014 a branded editorial blog, portfolio and publishing starter",
   "private": true,
   "type": "module",
   "main": "./src/index.js",
@@ -33,7 +33,7 @@
   "agentsam": {
     "store": {
       "name": "InnerAnimal Plain Jane",
-      "summary": "A polished editorial blog and portfolio with a dark/light design system, article series, photography, search and expressive media.",
+      "summary": "An installable, fully editable editorial theme with 31 authored page templates, category indexes, photography, articles and design tokens.",
       "category": "Editorial",
       "tags": [
         "Editorial",
@@ -83,7 +83,6 @@
       "features": [
         "About",
         "Article",
-        "CMS starter manifest",
         "Editorial",
         "Home",
         "Journal",
@@ -97,17 +96,24 @@
         "Search",
         "Search panel",
         "Stories",
-        "Work"
-      ]
+        "Work",
+        "Native CMS editing",
+        "Private Theme Studio draft",
+        "Code editor",
+        "Editable sections",
+        "Versioned revisions"
+      ],
+      "previewAlias": "iapj",
+      "permissionNotice": "Recipients may create, read, edit, duplicate, delete, privately develop and publish their independently installed theme copies. Source distribution remains maintained by InnerAnimalMedia Theme Store."
     },
     "kind": "theme",
     "slug": "plain-jane",
     "family": "editorial-blog",
-    "installable": false,
+    "installable": true,
     "portable": true,
     "prebuildRoot": "site",
     "canonicalId": "plain-jane",
-    "normalization": "awaiting_editor_compatibility_acceptance",
+    "normalization": "native-editable-theme-project-v1",
     "sourceRepository": "SamPrimeaux/inneranimalmedia-theme-store",
     "sourceSeed": "SamPrimeaux/iapj"
   }

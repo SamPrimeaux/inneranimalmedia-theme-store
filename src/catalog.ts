@@ -14,6 +14,7 @@ export type ThemeRecord = {
   publisher: string; priceUsd: number | null; downloadReady?: boolean; installUrl?: string | null;
   /** Resolved at request time by the Worker: live R2 preview if published, else null. */
   previewUrl: string | null;
+  previewAlias?: string;
   cardImage: string;
   sortOrder: number;
   previewBuild: 'package' | 'external';

@@ -63,7 +63,7 @@ try {
     pages:pkg.agentsam.store.pages,
     siteRoot:'site/',
     mediaAssets:themeFiles.map(file=>relative(site,file).replaceAll('\\','/')),
-    permissionNotice:'First-party compiled package. Source package is not licensed for republishing or resale.',
+    permissionNotice:pkg.agentsam.store.permissionNotice || 'First-party compiled package. Source package is not licensed for republishing or resale.',
   };
   await writeFile(join(stage,'theme-package.json'),JSON.stringify(manifest,null,2)+'\n');
   // ZIP stores file modification timestamps. Normalize them so the same source

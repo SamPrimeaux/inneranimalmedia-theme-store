@@ -39,8 +39,8 @@ export function materializePrebuild(target,options={}){
       }
     }
     const manifest=JSON.parse(fs.readFileSync(path.join(staging,'iapj-cms-manifest.json'),'utf8'));
-    if(manifest.schema!=='agentsam.cms-source-manifest.v1'||manifest.theme!=='plain-jane'||!manifest.preview_only)
-      throw new Error('IAPJ preview-only CMS contract invalid');
+    if(manifest.schema!=='agentsam.cms-source-manifest.v1'||manifest.theme!=='plain-jane'||manifest.editorProject!=='install-project.json')
+      throw new Error('IAPJ editable theme source contract invalid');
     if(!Array.isArray(manifest.pages)||!manifest.pages.length)throw new Error('IAPJ page manifest missing');
     const index=fs.readFileSync(path.join(staging,'index.html'));
     const paths=new Set();

@@ -2,10 +2,11 @@
   "schema": "agentsam.cms-source-manifest.v1",
   "theme": "plain-jane",
   "sourceTheme": "iapj",
-  "site_slug": "iapj-editorial-preview",
-  "preview_only": true,
-  "requiresRuntimeAdapter": true,
-  "source": "SamPrimeaux/iapj",
+  "editorScope": "account",
+  "editorProject": "install-project.json",
+  "sourceInventoryOnly": true,
+  "source": "SamPrimeaux/inneranimalmedia-theme-store",
+  "sourceSeed": "SamPrimeaux/iapj",
   "contentModel": "IAPJ React/TypeScript + Markdown",
   "definitions": [
     "iapj-header",
@@ -2034,5 +2035,5 @@
       "height": 900
     }
   },
-  "notice": "Preview structure only. Native CMS edit/save/publish and authenticated installation are not yet verified."
+  "notice": "Source-route inventory; the separately generated install-project.json contains native editable HTML sections, fields and blocks."
 }

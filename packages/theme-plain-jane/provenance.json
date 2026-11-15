@@ -1,21 +1,16 @@
 {
   "schema": "agentsam.product-provenance.v1",
-  "upstream": "https://github.com/SamPrimeaux/inneranimalmedia-blog-template",
-  "commit": "9e4c0f867da45304b7e12f2639c1b01363417ad3",
-  "snapshotDate": "2026-10-28",
+  "upstream": "https://github.com/SamPrimeaux/iapj",
+  "commit": "a4fff5a875082154be615370556239911fa9b62b",
   "sourceRoot": "source",
   "generatedBuildRoot": "site",
-  "appliedIntegrationPatches": [
-    "BrowserRouter basename honors Vite base URL",
-    "AppLogo asset URL honors Vite base URL",
-    "CMS fixture resolveAsset honors Vite base URL",
-    "Vite client type declaration",
-    "Theme Store 0.1.1: packaged Growth & Performance editorial preview drafts and local charts",
-    "Theme Store 0.1.1: replace external placeholder image URLs and complete missing sample article routes"
-  ],
-  "status": "first_party_compiled_release_authorized",
-  "publishApproved": true,
+  "status": "iapj_replacement_under_review",
+  "publishApproved": false,
   "distributionScope": "compiled_site_and_cms_manifest_only",
-  "approvalContext": "Owner-requested Theme Store release; original source and private npm package remain unredistributed",
-  "lastLocalEditorialUpdate": "2026-11-14"
+  "approvalContext": "Staged side-by-side source replacement. No promotion until preflight acceptance.",
+  "replaces": "SamPrimeaux/inneranimalmedia-blog-template",
+  "notes": [
+    "New iapj source replaces all legacy Plain Jane UI, assets, editorial fixtures and CMS export.",
+    "Cloud preview, immutable ZIP publication and authenticated CMS install are separately gated."
+  ]
 }

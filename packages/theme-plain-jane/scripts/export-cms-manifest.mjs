@@ -84,12 +84,23 @@ for(const item of [...articles,...guides]){
  add('post-'+item.slug,item.title,item.canonicalPath||'/blog/'+item.slug,'post',
  item.contentSource?'iapj-rich-markdown':'iapj-article-body',item);
 }
+// Export the real Vite-emitted local image URLs, never /src/assets/ paths.
+const builtFiles=fs.readdirSync(path.join(root,'site','assets'));
+const mediaCatalog=Object.fromEntries(Object.entries(manifest.mediaCatalog).map(([key,entry])=>{
+  const src=entry.url||'';
+  const match=src.match(/^\\/src\\/assets\\/images\\/([^/]+)\\.(jpg|jpeg|png|webp)$/);
+  if(!match)return [key,{...entry}];
+  const [_,stem,ext]=match;
+  const candidates=builtFiles.filter(file=>file.startsWith(stem+'-')&&file.endsWith('.'+ext));
+  if(candidates.length!==1)throw Error('IAPJ media asset was not emitted exactly once: '+key+' '+src);
+  return [key,{...entry,url:'/themes/plain-jane/demo/assets/'+candidates[0]}];
+}));
 const output={
  schema:'agentsam.cms-source-manifest.v1',theme:'plain-jane',sourceTheme:'iapj',
  site_slug:'iapj-editorial-preview',preview_only:true,requiresRuntimeAdapter:true,
  source:'SamPrimeaux/iapj',contentModel:'IAPJ React/TypeScript + Markdown',
  definitions,pages,
- mediaCatalog:manifest.mediaCatalog,
+ mediaCatalog,
  notice:'Preview structure only. Native CMS edit/save/publish and authenticated installation are not yet verified.'
 };
 const out=path.join(root,'site','iapj-cms-manifest.json');

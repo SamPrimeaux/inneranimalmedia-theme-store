@@ -46,6 +46,11 @@ test('IAPJ source-derived CMS manifest covers editorial pages, categories and al
     'blog/structured-decisions','blog/infrastructure-cookbooks','blog/ux-guide']){
    assert.ok(routes.includes(route),'missing IAPJ route: '+route);
  }
+ for(const [key,media] of Object.entries(manifest.mediaCatalog)){
+   if(!media.url)continue;
+   assert.ok(media.url.startsWith('/themes/plain-jane/demo/assets/'),key+' source media leaked into manifest');
+   assert.ok(fs.existsSync(fromRoot('site/assets/'+path.basename(media.url))),key+' has no compiled media');
+ }
  for(const page of manifest.pages){
    assert.ok(page.sections.length>=3,page.slug+' must not be an empty editorial scaffold');
    assert.ok(page.sections.every(sec=>manifest.definitions.includes(sec.definition_key)));

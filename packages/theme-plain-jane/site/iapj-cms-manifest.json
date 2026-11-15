@@ -1,0 +1,2038 @@
+{
+  "schema": "agentsam.cms-source-manifest.v1",
+  "theme": "plain-jane",
+  "sourceTheme": "iapj",
+  "site_slug": "iapj-editorial-preview",
+  "preview_only": true,
+  "requiresRuntimeAdapter": true,
+  "source": "SamPrimeaux/iapj",
+  "contentModel": "IAPJ React/TypeScript + Markdown",
+  "definitions": [
+    "iapj-header",
+    "iapj-brand-logo",
+    "iapj-blog-index",
+    "iapj-category-grid",
+    "iapj-article-hero",
+    "iapj-article-body",
+    "iapj-rich-markdown",
+    "iapj-editorial-media",
+    "iapj-quote",
+    "iapj-gallery",
+    "iapj-work-gallery",
+    "iapj-about",
+    "iapj-search",
+    "iapj-footer",
+    "iapj-footer-backdrop"
+  ],
+  "pages": [
+    {
+      "slug": "home",
+      "source_slug": "home",
+      "title": "IAPJ editorial home",
+      "page_type": "blog",
+      "path": "",
+      "template_key": "plain-jane/blog",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/pages/BlogIndex.tsx",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-home-0",
+          "key": "iapj-home-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "IAPJ editorial home",
+            "route": "/",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-home-1",
+          "key": "iapj-home-1",
+          "definition_key": "iapj-blog-index",
+          "template_sku": "tpl-iapj-blog-index-default",
+          "content": {
+            "title": "IAPJ editorial home",
+            "route": "/",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-home-2",
+          "key": "iapj-home-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "IAPJ editorial home",
+            "route": "/",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "blog",
+      "source_slug": "blog",
+      "title": "Blog",
+      "page_type": "blog",
+      "path": "blog",
+      "template_key": "plain-jane/blog",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/pages/BlogIndex.tsx",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-blog-0",
+          "key": "iapj-blog-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "Blog",
+            "route": "/blog",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-blog-1",
+          "key": "iapj-blog-1",
+          "definition_key": "iapj-blog-index",
+          "template_sku": "tpl-iapj-blog-index-default",
+          "content": {
+            "title": "Blog",
+            "route": "/blog",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-blog-2",
+          "key": "iapj-blog-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "Blog",
+            "route": "/blog",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "about",
+      "source_slug": "about",
+      "title": "About",
+      "page_type": "about",
+      "path": "about",
+      "template_key": "plain-jane/about",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/pages/About.tsx",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-about-0",
+          "key": "iapj-about-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "About",
+            "route": "/about",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-about-1",
+          "key": "iapj-about-1",
+          "definition_key": "iapj-about",
+          "template_sku": "tpl-iapj-about-default",
+          "content": {
+            "title": "About",
+            "route": "/about",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-about-2",
+          "key": "iapj-about-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "About",
+            "route": "/about",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "work",
+      "source_slug": "work",
+      "title": "Work & Photography",
+      "page_type": "portfolio",
+      "path": "work",
+      "template_key": "plain-jane/portfolio",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/pages/Photography.tsx",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-work-0",
+          "key": "iapj-work-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "Work & Photography",
+            "route": "/work",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-work-1",
+          "key": "iapj-work-1",
+          "definition_key": "iapj-work-gallery",
+          "template_sku": "tpl-iapj-work-gallery-default",
+          "content": {
+            "title": "Work & Photography",
+            "route": "/work",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-work-2",
+          "key": "iapj-work-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "Work & Photography",
+            "route": "/work",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "photography",
+      "source_slug": "photography",
+      "title": "Photography",
+      "page_type": "portfolio",
+      "path": "photography",
+      "template_key": "plain-jane/portfolio",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/pages/Photography.tsx",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-photography-0",
+          "key": "iapj-photography-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "Photography",
+            "route": "/photography",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-photography-1",
+          "key": "iapj-photography-1",
+          "definition_key": "iapj-work-gallery",
+          "template_sku": "tpl-iapj-work-gallery-default",
+          "content": {
+            "title": "Photography",
+            "route": "/photography",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-photography-2",
+          "key": "iapj-photography-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "Photography",
+            "route": "/photography",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "search",
+      "source_slug": "search",
+      "title": "Search",
+      "page_type": "search",
+      "path": "search",
+      "template_key": "plain-jane/search",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/pages/Search.tsx",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-search-0",
+          "key": "iapj-search-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "Search",
+            "route": "/search",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-search-1",
+          "key": "iapj-search-1",
+          "definition_key": "iapj-search",
+          "template_sku": "tpl-iapj-search-default",
+          "content": {
+            "title": "Search",
+            "route": "/search",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-search-2",
+          "key": "iapj-search-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "Search",
+            "route": "/search",
+            "category": null,
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "category-ai",
+      "source_slug": "category-ai",
+      "title": "AI",
+      "page_type": "category",
+      "path": "blog/category/ai",
+      "template_key": "plain-jane/category",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/pages/BlogCategory.tsx",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-category-ai-0",
+          "key": "iapj-category-ai-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "AI",
+            "route": "/blog/category/ai",
+            "category": "ai",
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-category-ai-1",
+          "key": "iapj-category-ai-1",
+          "definition_key": "iapj-category-grid",
+          "template_sku": "tpl-iapj-category-grid-default",
+          "content": {
+            "title": "AI",
+            "route": "/blog/category/ai",
+            "category": "ai",
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-category-ai-2",
+          "key": "iapj-category-ai-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "AI",
+            "route": "/blog/category/ai",
+            "category": "ai",
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "category-runtime",
+      "source_slug": "category-runtime",
+      "title": "Edge & Runtime",
+      "page_type": "category",
+      "path": "blog/category/runtime",
+      "template_key": "plain-jane/category",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/pages/BlogCategory.tsx",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-category-runtime-0",
+          "key": "iapj-category-runtime-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "Edge & Runtime",
+            "route": "/blog/category/runtime",
+            "category": "runtime",
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-category-runtime-1",
+          "key": "iapj-category-runtime-1",
+          "definition_key": "iapj-category-grid",
+          "template_sku": "tpl-iapj-category-grid-default",
+          "content": {
+            "title": "Edge & Runtime",
+            "route": "/blog/category/runtime",
+            "category": "runtime",
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-category-runtime-2",
+          "key": "iapj-category-runtime-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "Edge & Runtime",
+            "route": "/blog/category/runtime",
+            "category": "runtime",
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "category-ui-ux",
+      "source_slug": "category-ui-ux",
+      "title": "UI/UX Guides",
+      "page_type": "category",
+      "path": "blog/category/ui-ux",
+      "template_key": "plain-jane/category",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/pages/BlogCategory.tsx",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-category-ui-ux-0",
+          "key": "iapj-category-ui-ux-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "UI/UX Guides",
+            "route": "/blog/category/ui-ux",
+            "category": "ui-ux",
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-category-ui-ux-1",
+          "key": "iapj-category-ui-ux-1",
+          "definition_key": "iapj-category-grid",
+          "template_sku": "tpl-iapj-category-grid-default",
+          "content": {
+            "title": "UI/UX Guides",
+            "route": "/blog/category/ui-ux",
+            "category": "ui-ux",
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-category-ui-ux-2",
+          "key": "iapj-category-ui-ux-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "UI/UX Guides",
+            "route": "/blog/category/ui-ux",
+            "category": "ui-ux",
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "category-design-systems",
+      "source_slug": "category-design-systems",
+      "title": "Design Systems",
+      "page_type": "category",
+      "path": "blog/category/design-systems",
+      "template_key": "plain-jane/category",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/pages/BlogCategory.tsx",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-category-design-systems-0",
+          "key": "iapj-category-design-systems-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "Design Systems",
+            "route": "/blog/category/design-systems",
+            "category": "design-systems",
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-category-design-systems-1",
+          "key": "iapj-category-design-systems-1",
+          "definition_key": "iapj-category-grid",
+          "template_sku": "tpl-iapj-category-grid-default",
+          "content": {
+            "title": "Design Systems",
+            "route": "/blog/category/design-systems",
+            "category": "design-systems",
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-category-design-systems-2",
+          "key": "iapj-category-design-systems-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "Design Systems",
+            "route": "/blog/category/design-systems",
+            "category": "design-systems",
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "category-platform",
+      "source_slug": "category-platform",
+      "title": "CMS & Themes",
+      "page_type": "category",
+      "path": "blog/category/platform",
+      "template_key": "plain-jane/category",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/pages/BlogCategory.tsx",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-category-platform-0",
+          "key": "iapj-category-platform-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "CMS & Themes",
+            "route": "/blog/category/platform",
+            "category": "platform",
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-category-platform-1",
+          "key": "iapj-category-platform-1",
+          "definition_key": "iapj-category-grid",
+          "template_sku": "tpl-iapj-category-grid-default",
+          "content": {
+            "title": "CMS & Themes",
+            "route": "/blog/category/platform",
+            "category": "platform",
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-category-platform-2",
+          "key": "iapj-category-platform-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "CMS & Themes",
+            "route": "/blog/category/platform",
+            "category": "platform",
+            "excerpt": "",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-structured-decisions",
+      "source_slug": "post-structured-decisions",
+      "title": "Stop Making LLMs Improvise Everything: How AgentSam Uses Typed Decision Primitives",
+      "page_type": "post",
+      "path": "blog/structured-decisions",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/data/articles.ts",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-structured-decisions-0",
+          "key": "iapj-post-structured-decisions-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "Stop Making LLMs Improvise Everything: How AgentSam Uses Typed Decision Primitives",
+            "route": "/blog/structured-decisions",
+            "category": "ai",
+            "excerpt": "Pairing generative AI with Systematic Autonomous Machinery (SAM)—a fast, deterministic, typed decision layer for routing, scoring, confidence checks, and policy gates.",
+            "mediaRef": "media://cover-structured-decisions"
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-structured-decisions-1",
+          "key": "iapj-post-structured-decisions-1",
+          "definition_key": "iapj-article-body",
+          "template_sku": "tpl-iapj-article-body-default",
+          "content": {
+            "title": "Stop Making LLMs Improvise Everything: How AgentSam Uses Typed Decision Primitives",
+            "route": "/blog/structured-decisions",
+            "category": "ai",
+            "excerpt": "Pairing generative AI with Systematic Autonomous Machinery (SAM)—a fast, deterministic, typed decision layer for routing, scoring, confidence checks, and policy gates.",
+            "mediaRef": "media://cover-structured-decisions"
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-structured-decisions-2",
+          "key": "iapj-post-structured-decisions-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "Stop Making LLMs Improvise Everything: How AgentSam Uses Typed Decision Primitives",
+            "route": "/blog/structured-decisions",
+            "category": "ai",
+            "excerpt": "Pairing generative AI with Systematic Autonomous Machinery (SAM)—a fast, deterministic, typed decision layer for routing, scoring, confidence checks, and policy gates.",
+            "mediaRef": "media://cover-structured-decisions"
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-infrastructure-cookbooks",
+      "source_slug": "post-infrastructure-cookbooks",
+      "title": "Beyond Brute-Force Prompting: 9 Engineering Drills to Prove Your Agent Understands Large Codebases",
+      "page_type": "post",
+      "path": "blog/infrastructure-cookbooks",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/data/articles.ts",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-infrastructure-cookbooks-0",
+          "key": "iapj-post-infrastructure-cookbooks-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "Beyond Brute-Force Prompting: 9 Engineering Drills to Prove Your Agent Understands Large Codebases",
+            "route": "/blog/infrastructure-cookbooks",
+            "category": "ai",
+            "excerpt": "A command exiting with code 0 does not prove an autonomous coding agent did good work. Nine hands-on drills and a 10-point scorecard to benchmark precision and restraint.",
+            "mediaRef": "media://cover-infra-cookbooks"
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-infrastructure-cookbooks-1",
+          "key": "iapj-post-infrastructure-cookbooks-1",
+          "definition_key": "iapj-article-body",
+          "template_sku": "tpl-iapj-article-body-default",
+          "content": {
+            "title": "Beyond Brute-Force Prompting: 9 Engineering Drills to Prove Your Agent Understands Large Codebases",
+            "route": "/blog/infrastructure-cookbooks",
+            "category": "ai",
+            "excerpt": "A command exiting with code 0 does not prove an autonomous coding agent did good work. Nine hands-on drills and a 10-point scorecard to benchmark precision and restraint.",
+            "mediaRef": "media://cover-infra-cookbooks"
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-infrastructure-cookbooks-2",
+          "key": "iapj-post-infrastructure-cookbooks-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "Beyond Brute-Force Prompting: 9 Engineering Drills to Prove Your Agent Understands Large Codebases",
+            "route": "/blog/infrastructure-cookbooks",
+            "category": "ai",
+            "excerpt": "A command exiting with code 0 does not prove an autonomous coding agent did good work. Nine hands-on drills and a 10-point scorecard to benchmark precision and restraint.",
+            "mediaRef": "media://cover-infra-cookbooks"
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-native-runtime",
+      "source_slug": "post-native-runtime",
+      "title": "Go Where Machine Work Benefits From Go: Inside AgentSam’s Hybrid Edge-to-Local Runtime",
+      "page_type": "post",
+      "path": "blog/native-runtime",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/data/articles.ts",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-native-runtime-0",
+          "key": "iapj-post-native-runtime-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "Go Where Machine Work Benefits From Go: Inside AgentSam’s Hybrid Edge-to-Local Runtime",
+            "route": "/blog/native-runtime",
+            "category": "runtime",
+            "excerpt": "TypeScript remains the single protocol contract authority while a native Go runtime executes high-frequency SHA-256 hashing, static inspections, and persistent daemon work.",
+            "mediaRef": "media://cover-native-runtime"
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-native-runtime-1",
+          "key": "iapj-post-native-runtime-1",
+          "definition_key": "iapj-article-body",
+          "template_sku": "tpl-iapj-article-body-default",
+          "content": {
+            "title": "Go Where Machine Work Benefits From Go: Inside AgentSam’s Hybrid Edge-to-Local Runtime",
+            "route": "/blog/native-runtime",
+            "category": "runtime",
+            "excerpt": "TypeScript remains the single protocol contract authority while a native Go runtime executes high-frequency SHA-256 hashing, static inspections, and persistent daemon work.",
+            "mediaRef": "media://cover-native-runtime"
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-native-runtime-2",
+          "key": "iapj-post-native-runtime-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "Go Where Machine Work Benefits From Go: Inside AgentSam’s Hybrid Edge-to-Local Runtime",
+            "route": "/blog/native-runtime",
+            "category": "runtime",
+            "excerpt": "TypeScript remains the single protocol contract authority while a native Go runtime executes high-frequency SHA-256 hashing, static inspections, and persistent daemon work.",
+            "mediaRef": "media://cover-native-runtime"
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-essential-ux-design-principles",
+      "source_slug": "post-essential-ux-design-principles",
+      "title": "The 7 Essential UX Design Principles: A Master Guide for Developers & Designers",
+      "page_type": "post",
+      "path": "blog/essential-ux-design-principles",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/data/articles.ts",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-essential-ux-design-principles-0",
+          "key": "iapj-post-essential-ux-design-principles-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "The 7 Essential UX Design Principles: A Master Guide for Developers & Designers",
+            "route": "/blog/essential-ux-design-principles",
+            "category": "ui-ux",
+            "excerpt": "A canonical reference covering User-Centricity, Consistency, Hierarchy, Context, User Control, Accessibility, and Usability—plus the editorial structure for dual human and AI audiences.",
+            "mediaRef": "media://cover-ux-principles"
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-essential-ux-design-principles-1",
+          "key": "iapj-post-essential-ux-design-principles-1",
+          "definition_key": "iapj-article-body",
+          "template_sku": "tpl-iapj-article-body-default",
+          "content": {
+            "title": "The 7 Essential UX Design Principles: A Master Guide for Developers & Designers",
+            "route": "/blog/essential-ux-design-principles",
+            "category": "ui-ux",
+            "excerpt": "A canonical reference covering User-Centricity, Consistency, Hierarchy, Context, User Control, Accessibility, and Usability—plus the editorial structure for dual human and AI audiences.",
+            "mediaRef": "media://cover-ux-principles"
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-essential-ux-design-principles-2",
+          "key": "iapj-post-essential-ux-design-principles-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "The 7 Essential UX Design Principles: A Master Guide for Developers & Designers",
+            "route": "/blog/essential-ux-design-principles",
+            "category": "ui-ux",
+            "excerpt": "A canonical reference covering User-Centricity, Consistency, Hierarchy, Context, User Control, Accessibility, and Usability—plus the editorial structure for dual human and AI audiences.",
+            "mediaRef": "media://cover-ux-principles"
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-asbd-design-system",
+      "source_slug": "post-asbd-design-system",
+      "title": "ASBD Dual-Mode Color Spec & AgentSam Learn Hero Architecture",
+      "page_type": "post",
+      "path": "blog/asbd-design-system",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/data/articles.ts",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-asbd-design-system-0",
+          "key": "iapj-post-asbd-design-system-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "ASBD Dual-Mode Color Spec & AgentSam Learn Hero Architecture",
+            "route": "/blog/asbd-design-system",
+            "category": "design-systems",
+            "excerpt": "Calibrating WCAG AA-compliant violet accents across light and dark surfaces, syncing user appearance preferences with zero flash, and composing an asymmetric split media hero.",
+            "mediaRef": "media://cover-asbd-hero"
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-asbd-design-system-1",
+          "key": "iapj-post-asbd-design-system-1",
+          "definition_key": "iapj-article-body",
+          "template_sku": "tpl-iapj-article-body-default",
+          "content": {
+            "title": "ASBD Dual-Mode Color Spec & AgentSam Learn Hero Architecture",
+            "route": "/blog/asbd-design-system",
+            "category": "design-systems",
+            "excerpt": "Calibrating WCAG AA-compliant violet accents across light and dark surfaces, syncing user appearance preferences with zero flash, and composing an asymmetric split media hero.",
+            "mediaRef": "media://cover-asbd-hero"
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-asbd-design-system-2",
+          "key": "iapj-post-asbd-design-system-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "ASBD Dual-Mode Color Spec & AgentSam Learn Hero Architecture",
+            "route": "/blog/asbd-design-system",
+            "category": "design-systems",
+            "excerpt": "Calibrating WCAG AA-compliant violet accents across light and dark surfaces, syncing user appearance preferences with zero flash, and composing an asymmetric split media hero.",
+            "mediaRef": "media://cover-asbd-hero"
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-cms-footer-and-asset-architecture",
+      "source_slug": "post-cms-footer-and-asset-architecture",
+      "title": "Multi-Domain CMS Sections: Separating Platform Chrome from Merchant Themes",
+      "page_type": "post",
+      "path": "blog/cms-footer-and-asset-architecture",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/data/articles.ts",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-cms-footer-and-asset-architecture-0",
+          "key": "iapj-post-cms-footer-and-asset-architecture-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "Multi-Domain CMS Sections: Separating Platform Chrome from Merchant Themes",
+            "route": "/blog/cms-footer-and-asset-architecture",
+            "category": "platform",
+            "excerpt": "Don't standardize HTML layouts across themes—standardize the CMS data contract and logical media_asset IDs so every domain can re-theme freely with zero hardcoded URLs.",
+            "mediaRef": "media://cover-cms-platform"
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-cms-footer-and-asset-architecture-1",
+          "key": "iapj-post-cms-footer-and-asset-architecture-1",
+          "definition_key": "iapj-article-body",
+          "template_sku": "tpl-iapj-article-body-default",
+          "content": {
+            "title": "Multi-Domain CMS Sections: Separating Platform Chrome from Merchant Themes",
+            "route": "/blog/cms-footer-and-asset-architecture",
+            "category": "platform",
+            "excerpt": "Don't standardize HTML layouts across themes—standardize the CMS data contract and logical media_asset IDs so every domain can re-theme freely with zero hardcoded URLs.",
+            "mediaRef": "media://cover-cms-platform"
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-cms-footer-and-asset-architecture-2",
+          "key": "iapj-post-cms-footer-and-asset-architecture-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "Multi-Domain CMS Sections: Separating Platform Chrome from Merchant Themes",
+            "route": "/blog/cms-footer-and-asset-architecture",
+            "category": "platform",
+            "excerpt": "Don't standardize HTML layouts across themes—standardize the CMS data contract and logical media_asset IDs so every domain can re-theme freely with zero hardcoded URLs.",
+            "mediaRef": "media://cover-cms-platform"
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-customer-journey-map",
+      "source_slug": "post-customer-journey-map",
+      "title": "Customer Journey Mapping Without the Wall of Sticky Notes",
+      "page_type": "post",
+      "path": "blog/ux-guide/customer-journey-map",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/content/ux-guide/customer-journey-map.md",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-customer-journey-map-0",
+          "key": "iapj-post-customer-journey-map-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "Customer Journey Mapping Without the Wall of Sticky Notes",
+            "route": "/blog/ux-guide/customer-journey-map",
+            "category": "ui-ux",
+            "excerpt": "What a journey map is for, which parts matter, how to build one from evidence, and how to keep it alive after the workshop.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-customer-journey-map-1",
+          "key": "iapj-post-customer-journey-map-1",
+          "definition_key": "iapj-rich-markdown",
+          "template_sku": "tpl-iapj-rich-markdown-default",
+          "content": {
+            "title": "Customer Journey Mapping Without the Wall of Sticky Notes",
+            "route": "/blog/ux-guide/customer-journey-map",
+            "category": "ui-ux",
+            "excerpt": "What a journey map is for, which parts matter, how to build one from evidence, and how to keep it alive after the workshop.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-customer-journey-map-2",
+          "key": "iapj-post-customer-journey-map-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "Customer Journey Mapping Without the Wall of Sticky Notes",
+            "route": "/blog/ux-guide/customer-journey-map",
+            "category": "ui-ux",
+            "excerpt": "What a journey map is for, which parts matter, how to build one from evidence, and how to keep it alive after the workshop.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-future-of-ux-design",
+      "source_slug": "post-future-of-ux-design",
+      "title": "Where UX Is Heading: Agents, Generative Interfaces and the Durable Parts",
+      "page_type": "post",
+      "path": "blog/ux-guide/future-of-ux-design",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/content/ux-guide/future-of-ux-design.md",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-future-of-ux-design-0",
+          "key": "iapj-post-future-of-ux-design-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "Where UX Is Heading: Agents, Generative Interfaces and the Durable Parts",
+            "route": "/blog/ux-guide/future-of-ux-design",
+            "category": "ui-ux",
+            "excerpt": "Separating the shifts that will last from the ones that are merely loud: agentic interfaces, generative UI, multimodal input, and what stays the same.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-future-of-ux-design-1",
+          "key": "iapj-post-future-of-ux-design-1",
+          "definition_key": "iapj-rich-markdown",
+          "template_sku": "tpl-iapj-rich-markdown-default",
+          "content": {
+            "title": "Where UX Is Heading: Agents, Generative Interfaces and the Durable Parts",
+            "route": "/blog/ux-guide/future-of-ux-design",
+            "category": "ui-ux",
+            "excerpt": "Separating the shifts that will last from the ones that are merely loud: agentic interfaces, generative UI, multimodal input, and what stays the same.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-future-of-ux-design-2",
+          "key": "iapj-post-future-of-ux-design-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "Where UX Is Heading: Agents, Generative Interfaces and the Durable Parts",
+            "route": "/blog/ux-guide/future-of-ux-design",
+            "category": "ui-ux",
+            "excerpt": "Separating the shifts that will last from the ones that are merely loud: agentic interfaces, generative UI, multimodal input, and what stays the same.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-interaction-designer",
+      "source_slug": "post-interaction-designer",
+      "title": "What an Interaction Designer Actually Does",
+      "page_type": "post",
+      "path": "blog/ux-guide/interaction-designer",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/content/ux-guide/interaction-designer.md",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-interaction-designer-0",
+          "key": "iapj-post-interaction-designer-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "What an Interaction Designer Actually Does",
+            "route": "/blog/ux-guide/interaction-designer",
+            "category": "ui-ux",
+            "excerpt": "The behavior layer of design: states, transitions, timing, feedback and the edge cases that decide whether an interface feels trustworthy.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-interaction-designer-1",
+          "key": "iapj-post-interaction-designer-1",
+          "definition_key": "iapj-rich-markdown",
+          "template_sku": "tpl-iapj-rich-markdown-default",
+          "content": {
+            "title": "What an Interaction Designer Actually Does",
+            "route": "/blog/ux-guide/interaction-designer",
+            "category": "ui-ux",
+            "excerpt": "The behavior layer of design: states, transitions, timing, feedback and the edge cases that decide whether an interface feels trustworthy.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-interaction-designer-2",
+          "key": "iapj-post-interaction-designer-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "What an Interaction Designer Actually Does",
+            "route": "/blog/ux-guide/interaction-designer",
+            "category": "ui-ux",
+            "excerpt": "The behavior layer of design: states, transitions, timing, feedback and the edge cases that decide whether an interface feels trustworthy.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-product-designer",
+      "source_slug": "post-product-designer",
+      "title": "What a Product Designer Actually Does",
+      "page_type": "post",
+      "path": "blog/ux-guide/product-designer",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/content/ux-guide/product-designer.md",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-product-designer-0",
+          "key": "iapj-post-product-designer-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "What a Product Designer Actually Does",
+            "route": "/blog/ux-guide/product-designer",
+            "category": "ui-ux",
+            "excerpt": "The role that owns the outcome, not just the screens: how product designers frame problems, work with product and engineering, and are judged by results.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-product-designer-1",
+          "key": "iapj-post-product-designer-1",
+          "definition_key": "iapj-rich-markdown",
+          "template_sku": "tpl-iapj-rich-markdown-default",
+          "content": {
+            "title": "What a Product Designer Actually Does",
+            "route": "/blog/ux-guide/product-designer",
+            "category": "ui-ux",
+            "excerpt": "The role that owns the outcome, not just the screens: how product designers frame problems, work with product and engineering, and are judged by results.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-product-designer-2",
+          "key": "iapj-post-product-designer-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "What a Product Designer Actually Does",
+            "route": "/blog/ux-guide/product-designer",
+            "category": "ui-ux",
+            "excerpt": "The role that owns the outcome, not just the screens: how product designers frame problems, work with product and engineering, and are judged by results.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-product-roadmap",
+      "source_slug": "post-product-roadmap",
+      "title": "Product Roadmaps for Small Teams: Now, Next, Later",
+      "page_type": "post",
+      "path": "blog/ux-guide/product-roadmap",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/content/ux-guide/product-roadmap.md",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-product-roadmap-0",
+          "key": "iapj-post-product-roadmap-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "Product Roadmaps for Small Teams: Now, Next, Later",
+            "route": "/blog/ux-guide/product-roadmap",
+            "category": "ui-ux",
+            "excerpt": "How to build a roadmap that communicates direction instead of promising dates, frames work as outcomes, and survives contact with a small team.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-product-roadmap-1",
+          "key": "iapj-post-product-roadmap-1",
+          "definition_key": "iapj-rich-markdown",
+          "template_sku": "tpl-iapj-rich-markdown-default",
+          "content": {
+            "title": "Product Roadmaps for Small Teams: Now, Next, Later",
+            "route": "/blog/ux-guide/product-roadmap",
+            "category": "ui-ux",
+            "excerpt": "How to build a roadmap that communicates direction instead of promising dates, frames work as outcomes, and survives contact with a small team.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-product-roadmap-2",
+          "key": "iapj-post-product-roadmap-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "Product Roadmaps for Small Teams: Now, Next, Later",
+            "route": "/blog/ux-guide/product-roadmap",
+            "category": "ui-ux",
+            "excerpt": "How to build a roadmap that communicates direction instead of promising dates, frames work as outcomes, and survives contact with a small team.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-roadmap-to-becoming-uiux-designer",
+      "source_slug": "post-roadmap-to-becoming-uiux-designer",
+      "title": "Becoming a UI/UX Designer: A Realistic 12-Month Roadmap",
+      "page_type": "post",
+      "path": "blog/ux-guide/roadmap-to-becoming-uiux-designer",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/content/ux-guide/roadmap-to-becoming-uiux-designer.md",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-roadmap-to-becoming-uiux-designer-0",
+          "key": "iapj-post-roadmap-to-becoming-uiux-designer-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "Becoming a UI/UX Designer: A Realistic 12-Month Roadmap",
+            "route": "/blog/ux-guide/roadmap-to-becoming-uiux-designer",
+            "category": "ui-ux",
+            "excerpt": "A month-by-month path for getting good at UI/UX from almost any starting point, including self-taught, with projects to build and habits that compound.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-roadmap-to-becoming-uiux-designer-1",
+          "key": "iapj-post-roadmap-to-becoming-uiux-designer-1",
+          "definition_key": "iapj-rich-markdown",
+          "template_sku": "tpl-iapj-rich-markdown-default",
+          "content": {
+            "title": "Becoming a UI/UX Designer: A Realistic 12-Month Roadmap",
+            "route": "/blog/ux-guide/roadmap-to-becoming-uiux-designer",
+            "category": "ui-ux",
+            "excerpt": "A month-by-month path for getting good at UI/UX from almost any starting point, including self-taught, with projects to build and habits that compound.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-roadmap-to-becoming-uiux-designer-2",
+          "key": "iapj-post-roadmap-to-becoming-uiux-designer-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "Becoming a UI/UX Designer: A Realistic 12-Month Roadmap",
+            "route": "/blog/ux-guide/roadmap-to-becoming-uiux-designer",
+            "category": "ui-ux",
+            "excerpt": "A month-by-month path for getting good at UI/UX from almost any starting point, including self-taught, with projects to build and habits that compound.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-user-behavior-data",
+      "source_slug": "post-user-behavior-data",
+      "title": "Reading User Behavior Data Without Fooling Yourself",
+      "page_type": "post",
+      "path": "blog/ux-guide/user-behavior-data",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/content/ux-guide/user-behavior-data.md",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-user-behavior-data-0",
+          "key": "iapj-post-user-behavior-data-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "Reading User Behavior Data Without Fooling Yourself",
+            "route": "/blog/ux-guide/user-behavior-data",
+            "category": "ui-ux",
+            "excerpt": "What behavior data can and cannot tell you, how to instrument a product so the numbers mean something, and the traps that turn charts into false confidence.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-user-behavior-data-1",
+          "key": "iapj-post-user-behavior-data-1",
+          "definition_key": "iapj-rich-markdown",
+          "template_sku": "tpl-iapj-rich-markdown-default",
+          "content": {
+            "title": "Reading User Behavior Data Without Fooling Yourself",
+            "route": "/blog/ux-guide/user-behavior-data",
+            "category": "ui-ux",
+            "excerpt": "What behavior data can and cannot tell you, how to instrument a product so the numbers mean something, and the traps that turn charts into false confidence.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-user-behavior-data-2",
+          "key": "iapj-post-user-behavior-data-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "Reading User Behavior Data Without Fooling Yourself",
+            "route": "/blog/ux-guide/user-behavior-data",
+            "category": "ui-ux",
+            "excerpt": "What behavior data can and cannot tell you, how to instrument a product so the numbers mean something, and the traps that turn charts into false confidence.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-user-personas",
+      "source_slug": "post-user-personas",
+      "title": "User Personas That Actually Change Decisions",
+      "page_type": "post",
+      "path": "blog/ux-guide/user-personas",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/content/ux-guide/user-personas.md",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-user-personas-0",
+          "key": "iapj-post-user-personas-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "User Personas That Actually Change Decisions",
+            "route": "/blog/ux-guide/user-personas",
+            "category": "ui-ux",
+            "excerpt": "Why most personas are decoration, what a useful one contains, how to build it from research, and when to use jobs instead.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-user-personas-1",
+          "key": "iapj-post-user-personas-1",
+          "definition_key": "iapj-rich-markdown",
+          "template_sku": "tpl-iapj-rich-markdown-default",
+          "content": {
+            "title": "User Personas That Actually Change Decisions",
+            "route": "/blog/ux-guide/user-personas",
+            "category": "ui-ux",
+            "excerpt": "Why most personas are decoration, what a useful one contains, how to build it from research, and when to use jobs instead.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-user-personas-2",
+          "key": "iapj-post-user-personas-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "User Personas That Actually Change Decisions",
+            "route": "/blog/ux-guide/user-personas",
+            "category": "ui-ux",
+            "excerpt": "Why most personas are decoration, what a useful one contains, how to build it from research, and when to use jobs instead.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-user-testing",
+      "source_slug": "post-user-testing",
+      "title": "User Testing: Methods, Sample Sizes and Session Craft",
+      "page_type": "post",
+      "path": "blog/ux-guide/user-testing",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/content/ux-guide/user-testing.md",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-user-testing-0",
+          "key": "iapj-post-user-testing-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "User Testing: Methods, Sample Sizes and Session Craft",
+            "route": "/blog/ux-guide/user-testing",
+            "category": "ui-ux",
+            "excerpt": "Choosing the right test for the question, recruiting the right people, writing tasks that don't lead, and turning what you watched into fixes.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-user-testing-1",
+          "key": "iapj-post-user-testing-1",
+          "definition_key": "iapj-rich-markdown",
+          "template_sku": "tpl-iapj-rich-markdown-default",
+          "content": {
+            "title": "User Testing: Methods, Sample Sizes and Session Craft",
+            "route": "/blog/ux-guide/user-testing",
+            "category": "ui-ux",
+            "excerpt": "Choosing the right test for the question, recruiting the right people, writing tasks that don't lead, and turning what you watched into fixes.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-user-testing-2",
+          "key": "iapj-post-user-testing-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "User Testing: Methods, Sample Sizes and Session Craft",
+            "route": "/blog/ux-guide/user-testing",
+            "category": "ui-ux",
+            "excerpt": "Choosing the right test for the question, recruiting the right people, writing tasks that don't lead, and turning what you watched into fixes.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-ux-books",
+      "source_slug": "post-ux-books",
+      "title": "The UX Reading List: What to Read and Why",
+      "page_type": "post",
+      "path": "blog/ux-guide/ux-books",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/content/ux-guide/ux-books.md",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-ux-books-0",
+          "key": "iapj-post-ux-books-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "The UX Reading List: What to Read and Why",
+            "route": "/blog/ux-guide/ux-books",
+            "category": "ui-ux",
+            "excerpt": "An annotated reading list grouped by the problem each book solves, with honest notes on who each one is for and what to skip.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-ux-books-1",
+          "key": "iapj-post-ux-books-1",
+          "definition_key": "iapj-rich-markdown",
+          "template_sku": "tpl-iapj-rich-markdown-default",
+          "content": {
+            "title": "The UX Reading List: What to Read and Why",
+            "route": "/blog/ux-guide/ux-books",
+            "category": "ui-ux",
+            "excerpt": "An annotated reading list grouped by the problem each book solves, with honest notes on who each one is for and what to skip.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-ux-books-2",
+          "key": "iapj-post-ux-books-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "The UX Reading List: What to Read and Why",
+            "route": "/blog/ux-guide/ux-books",
+            "category": "ui-ux",
+            "excerpt": "An annotated reading list grouped by the problem each book solves, with honest notes on who each one is for and what to skip.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-ux-disciplines",
+      "source_slug": "post-ux-disciplines",
+      "title": "The Disciplines Inside UX, and How They Fit Together",
+      "page_type": "post",
+      "path": "blog/ux-guide/ux-disciplines",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/content/ux-guide/ux-disciplines.md",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-ux-disciplines-0",
+          "key": "iapj-post-ux-disciplines-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "The Disciplines Inside UX, and How They Fit Together",
+            "route": "/blog/ux-guide/ux-disciplines",
+            "category": "ui-ux",
+            "excerpt": "UX is a family of crafts. A tour of the major disciplines, what each one owns, how they hand off, and how a small team covers them without a headcount for each.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-ux-disciplines-1",
+          "key": "iapj-post-ux-disciplines-1",
+          "definition_key": "iapj-rich-markdown",
+          "template_sku": "tpl-iapj-rich-markdown-default",
+          "content": {
+            "title": "The Disciplines Inside UX, and How They Fit Together",
+            "route": "/blog/ux-guide/ux-disciplines",
+            "category": "ui-ux",
+            "excerpt": "UX is a family of crafts. A tour of the major disciplines, what each one owns, how they hand off, and how a small team covers them without a headcount for each.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-ux-disciplines-2",
+          "key": "iapj-post-ux-disciplines-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "The Disciplines Inside UX, and How They Fit Together",
+            "route": "/blog/ux-guide/ux-disciplines",
+            "category": "ui-ux",
+            "excerpt": "UX is a family of crafts. A tour of the major disciplines, what each one owns, how they hand off, and how a small team covers them without a headcount for each.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-ux-guide",
+      "source_slug": "post-ux-guide",
+      "title": "The Working UI/UX Design Guide for 2026",
+      "page_type": "post",
+      "path": "blog/ux-guide",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/content/ux-guide/ux-guide.md",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-ux-guide-0",
+          "key": "iapj-post-ux-guide-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "The Working UI/UX Design Guide for 2026",
+            "route": "/blog/ux-guide",
+            "category": "ui-ux",
+            "excerpt": "How we approach UX when the product is an agent platform, a CMS and a theme editor: the process, the deliverables, the methods and the roles, with the reasoning shown.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-ux-guide-1",
+          "key": "iapj-post-ux-guide-1",
+          "definition_key": "iapj-rich-markdown",
+          "template_sku": "tpl-iapj-rich-markdown-default",
+          "content": {
+            "title": "The Working UI/UX Design Guide for 2026",
+            "route": "/blog/ux-guide",
+            "category": "ui-ux",
+            "excerpt": "How we approach UX when the product is an agent platform, a CMS and a theme editor: the process, the deliverables, the methods and the roles, with the reasoning shown.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-ux-guide-2",
+          "key": "iapj-post-ux-guide-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "The Working UI/UX Design Guide for 2026",
+            "route": "/blog/ux-guide",
+            "category": "ui-ux",
+            "excerpt": "How we approach UX when the product is an agent platform, a CMS and a theme editor: the process, the deliverables, the methods and the roles, with the reasoning shown.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-ux-myths",
+      "source_slug": "post-ux-myths",
+      "title": "UX Myths Worth Retiring",
+      "page_type": "post",
+      "path": "blog/ux-guide/ux-myths",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/content/ux-guide/ux-myths.md",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-ux-myths-0",
+          "key": "iapj-post-ux-myths-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "UX Myths Worth Retiring",
+            "route": "/blog/ux-guide/ux-myths",
+            "category": "ui-ux",
+            "excerpt": "Twelve persistent beliefs about UX that quietly shape bad decisions, what the evidence says instead, and what to do about each.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-ux-myths-1",
+          "key": "iapj-post-ux-myths-1",
+          "definition_key": "iapj-rich-markdown",
+          "template_sku": "tpl-iapj-rich-markdown-default",
+          "content": {
+            "title": "UX Myths Worth Retiring",
+            "route": "/blog/ux-guide/ux-myths",
+            "category": "ui-ux",
+            "excerpt": "Twelve persistent beliefs about UX that quietly shape bad decisions, what the evidence says instead, and what to do about each.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-ux-myths-2",
+          "key": "iapj-post-ux-myths-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "UX Myths Worth Retiring",
+            "route": "/blog/ux-guide/ux-myths",
+            "category": "ui-ux",
+            "excerpt": "Twelve persistent beliefs about UX that quietly shape bad decisions, what the evidence says instead, and what to do about each.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    },
+    {
+      "slug": "post-ux-task-analysis",
+      "source_slug": "post-ux-task-analysis",
+      "title": "Task Analysis: Breaking Work Into Steps You Can Design For",
+      "page_type": "post",
+      "path": "blog/ux-guide/ux-task-analysis",
+      "template_key": "plain-jane/post",
+      "status": "draft",
+      "sourceOrigin": "iapj-authored-source",
+      "source": "src/content/ux-guide/ux-task-analysis.md",
+      "requiresRuntimeAdapter": true,
+      "sections": [
+        {
+          "id": "iapj-post-ux-task-analysis-0",
+          "key": "iapj-post-ux-task-analysis-0",
+          "definition_key": "iapj-header",
+          "template_sku": "tpl-iapj-header-default",
+          "content": {
+            "title": "Task Analysis: Breaking Work Into Steps You Can Design For",
+            "route": "/blog/ux-guide/ux-task-analysis",
+            "category": "ui-ux",
+            "excerpt": "How to decompose a goal into tasks, decisions and knowledge, spot where the design opportunities hide, and use the result to simplify real workflows.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 0,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-ux-task-analysis-1",
+          "key": "iapj-post-ux-task-analysis-1",
+          "definition_key": "iapj-rich-markdown",
+          "template_sku": "tpl-iapj-rich-markdown-default",
+          "content": {
+            "title": "Task Analysis: Breaking Work Into Steps You Can Design For",
+            "route": "/blog/ux-guide/ux-task-analysis",
+            "category": "ui-ux",
+            "excerpt": "How to decompose a goal into tasks, decisions and knowledge, spot where the design opportunities hide, and use the result to simplify real workflows.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 1,
+          "status": "draft"
+        },
+        {
+          "id": "iapj-post-ux-task-analysis-2",
+          "key": "iapj-post-ux-task-analysis-2",
+          "definition_key": "iapj-footer",
+          "template_sku": "tpl-iapj-footer-default",
+          "content": {
+            "title": "Task Analysis: Breaking Work Into Steps You Can Design For",
+            "route": "/blog/ux-guide/ux-task-analysis",
+            "category": "ui-ux",
+            "excerpt": "How to decompose a goal into tasks, decisions and knowledge, spot where the design opportunities hide, and use the result to simplify real workflows.",
+            "mediaRef": null
+          },
+          "blocks": [],
+          "sort_order": 2,
+          "status": "draft"
+        }
+      ]
+    }
+  ],
+  "mediaCatalog": {
+    "media://brand-icon": {
+      "provider": "theme-default",
+      "url": "",
+      "alt": "Brand icon mark",
+      "width": 64,
+      "height": 64
+    },
+    "media://brand-icon-dark": {
+      "provider": "theme-default",
+      "url": "",
+      "alt": "Brand icon mark (dark surface)",
+      "width": 64,
+      "height": 64
+    },
+    "media://brand-logo-light": {
+      "provider": "theme-default",
+      "url": "",
+      "alt": "Full horizontal brand logo (light surface)",
+      "width": 320,
+      "height": 64
+    },
+    "media://brand-logo-dark": {
+      "provider": "theme-default",
+      "url": "",
+      "alt": "Full horizontal brand logo (dark surface)",
+      "width": 320,
+      "height": 64
+    },
+    "media://author-portrait": {
+      "provider": "studio-generated",
+      "url": "/src/assets/images/author_studio_portrait_1794695293041.jpg",
+      "alt": "Editorial studio portrait at a minimalist drafting desk",
+      "caption": "Studio Drafting Desk — InnerAnimalMedia",
+      "width": 900,
+      "height": 1200
+    },
+    "media://cover-structured-decisions": {
+      "provider": "studio-generated",
+      "url": "/src/assets/images/cover_structured_decisions_1794695289898.jpg",
+      "alt": "Brushed black anodized aluminum routing switchboard with muted violet pins",
+      "caption": "Typed Decision Switchboard — Deterministic Routing Study",
+      "width": 1600,
+      "height": 900
+    },
+    "media://cover-infra-cookbooks": {
+      "provider": "studio-generated",
+      "url": "/src/assets/images/cover_infra_cookbooks_1794695290006.jpg",
+      "alt": "Architectural grid blueprints, steel calipers, and matte dark keyboard on concrete",
+      "caption": "Infrastructure Blueprints & Caliper Inspection Bench",
+      "width": 1600,
+      "height": 900
+    },
+    "media://cover-native-runtime": {
+      "provider": "studio-generated",
+      "url": "/src/assets/images/cover_native_runtime_1794695290674.jpg",
+      "alt": "Matte obsidian and machined titanium edge compute module on travertine stone",
+      "caption": "Hybrid Edge-to-Local Compute Enclosure",
+      "width": 1600,
+      "height": 900
+    },
+    "media://cover-ux-principles": {
+      "provider": "studio-generated",
+      "url": "/src/assets/images/cover_ux_principles_1794695290502.jpg",
+      "alt": "Grid paper, matte black pen, brass ruler, and modular cards on alabaster",
+      "caption": "Modular Layout Grid & Editorial Hierarchy Specimen",
+      "width": 1600,
+      "height": 900
+    },
+    "media://cover-asbd-hero": {
+      "provider": "studio-generated",
+      "url": "/src/assets/images/cover_asbd_hero_1794695346470.jpg",
+      "alt": "Exploded 3D mechanical assembly rendered in brushed steel and dark slate",
+      "caption": "AgentSam Learn — Asymmetric Exploded Mechanical Assembly",
+      "width": 1600,
+      "height": 900
+    },
+    "media://cover-cms-platform": {
+      "provider": "studio-generated",
+      "url": "/src/assets/images/cover_cms_platform_1794695291502.jpg",
+      "alt": "Modular concrete and glass architectural pavilions under overcast light",
+      "caption": "Modular Concrete Pavilions — Multi-Domain Section Study",
+      "width": 1200,
+      "height": 900
+    }
+  },
+  "notice": "Preview structure only. Native CMS edit/save/publish and authenticated installation are not yet verified."
+}

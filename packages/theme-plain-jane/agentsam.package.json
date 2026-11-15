@@ -1,45 +1,50 @@
 {
-  "avoid_when": [
-    "A licensed production storefront or a verified CMS installation is required."
-  ],
-  "catalog_status": "package-ready",
-  "class": "theme",
-  "commands": [],
-  "evidence": {
-    "directory": "packages/theme-plain-jane",
-    "purpose_source": "source snapshot"
-  },
-  "execution_domains": [
-    "node",
-    "browser"
-  ],
+  "schema": "agentsam.package.v1",
   "id": "theme-plain-jane",
-  "install": [],
-  "languages": [
-    "javascript"
-  ],
   "name": "@inneranimalmedia/theme-plain-jane",
-  "purpose": "Read-only editorial journal and photography starter with self-contained Growth & Performance CMS preview drafts.",
+  "version": "0.2.0",
+  "class": "theme",
+  "status": "preview",
+  "catalog_status": "preview",
   "registry": {
     "kind": "local-package",
     "name": "@inneranimalmedia/theme-plain-jane",
     "public_claim": false
   },
-  "review_required": [
-    "production-cms-adapter",
-    "install-receipt",
-    "tenant-isolation"
+  "purpose": "IAPJ editorial blog and portfolio, with a compiled site and preflight CMS source manifest.",
+  "languages": [
+    "javascript",
+    "typescript"
   ],
-  "schema": "agentsam.package.v1",
-  "status": "package-ready",
+  "execution_domains": [
+    "browser",
+    "node"
+  ],
+  "commands": [],
+  "install": [],
+  "review_required": [
+    "visual-responsive-qa",
+    "cms-content-write-adapter",
+    "install-receipt",
+    "tenant-isolation",
+    "immutable-release-review"
+  ],
+  "evidence": {
+    "directory": "packages/theme-plain-jane",
+    "purpose_source": "SamPrimeaux/iapj pinned GitHub source"
+  },
+  "use_when": [
+    "Preview a multi-page, source-driven editorial blog and portfolio"
+  ],
+  "avoid_when": [
+    "An authenticated production CMS draft installation or published release is required."
+  ],
   "topics": [
     "cms",
     "editorial",
+    "blog",
+    "portfolio",
     "photography",
     "theme"
-  ],
-  "use_when": [
-    "Review a source-driven editorial journal and photography starter."
-  ],
-  "version": "0.1.1"
+  ]
 }

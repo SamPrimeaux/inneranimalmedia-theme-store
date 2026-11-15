@@ -1,16 +1,6 @@
 name: Publish Theme Store
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'packages/theme-plain-jane/source/**'
-      - 'packages/theme-plain-jane/package.json'
-      - 'packages/theme-plain-jane/prebuild.json'
-      - 'packages/theme-plain-jane/src/**'
-      - 'scripts/build-theme-release.mjs'
-      - 'scripts/publish-theme-packages.mjs'
-      - '.github/workflows/publish.yml'
 permissions:
   contents: write
 concurrency:

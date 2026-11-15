@@ -88,7 +88,7 @@ for(const item of [...articles,...guides]){
 const builtFiles=fs.readdirSync(path.join(root,'site','assets'));
 const mediaCatalog=Object.fromEntries(Object.entries(manifest.mediaCatalog).map(([key,entry])=>{
   const src=entry.url||'';
-  const match=src.match(/^\\/src\\/assets\\/images\\/([^/]+)\\.(jpg|jpeg|png|webp)$/);
+  const match=src.match(/^\/src\/assets\/images\/([^/]+)\.(jpg|jpeg|png|webp)$/);
   if(!match)return [key,{...entry}];
   const [_,stem,ext]=match;
   const candidates=builtFiles.filter(file=>file.startsWith(stem+'-')&&file.endsWith('.'+ext));

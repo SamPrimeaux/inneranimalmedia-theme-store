@@ -30,7 +30,9 @@
     "publish:collections": "node scripts/publish-collections.mjs",
     "media:add": "node scripts/add-product-media.mjs",
     "publish:install-projects": "node scripts/publish-install-projects.mjs",
-    "fonts:publish": "node scripts/publish-fontsource-families.mjs"
+    "fonts:publish": "node scripts/publish-fontsource-families.mjs",
+    "registry:sync": "node scripts/register-product-releases.mjs --publish",
+    "registry:check": "node scripts/register-product-releases.mjs --dry-run"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

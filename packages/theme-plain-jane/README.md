@@ -1,52 +1,43 @@
-# Plain Jane Journal — SDK product staging
+# InnerAnimal Plain Jane — IAPJ theme candidate
 
-Original source snapshot: https://github.com/SamPrimeaux/inneranimalmedia-blog-template
-at the pinned commit in provenance.json. Theme Store editorial additions are maintained here. The authored React/TypeScript site
-lives under source/, generated storefront under site/, and SDK package contract
-under src/ and prebuild.json. Never hand-edit the bundled output.
+The authored visual system, article library, editorial screens and source media are taken from
+[SamPrimeaux/iapj](https://github.com/SamPrimeaux/iapj), pinned to the commit in `provenance.json`.
 
-## Local verification
+This is a **whole-source replacement** of the deprecated beige Plain Jane Journal starter.
+The public Theme Store identity remains `plain-jane`, the package name remains
+`@inneranimalmedia/theme-plain-jane`, and this preview's proposed version is `0.2.0`.
 
-The SDK demo server serves the actual build at /themes/plain-jane/demo/ and the
-CMS manifest at /themes/plain-jane/demo/journal-cms-manifest.json.
+## Separation of responsibilities
+- `source/`: imported IAPJ React/Vite application (not legacy Plain Jane)
+- `site/`: derived static preview with original imagery, compiled JS/CSS and an exported preview CMS manifest
+- `src/node.js`: reproducible nested-base materializer and deep-link page stubs
+- `scripts/export-cms-manifest.mjs`: IAPJ source routes, logical media references and CMS definition keys
+- `agentsam.package.json`, `prebuild.json`, `package.json`: the existing Theme Store product interface
 
-The source has fourteen preview pages (nine original, five added article routes) and 18 component definitions. Real routes:
-home, about, photography, two journal posts, contact, privacy, terms, 404.
-All artwork in the authored repository is local, including two Growth & Performance chart scenes; the original Google Fonts
-import still requires network access and has fallback fonts.
+## Local preflight (no remote or cloud access)
+From the Theme Store root:
+```sh
+npm ci
+npm ci --prefix packages/theme-plain-jane/source
+npm run build --prefix packages/theme-plain-jane
+node --test packages/theme-plain-jane/test/*.test.mjs
+npm run check
+npm test
+node scripts/build-theme-release.mjs plain-jane
+```
 
-For local dev:
-1. Run npm ci and npm run lint from source/.
-2. Run the package build script from the theme-plain-jane root.
-3. Run node --test packages/theme-plain-jane/test/*.test.mjs from SDK root.
-4. Optional: node packages/theme-plain-jane/scripts/export-preview-zip.mjs
-5. Open /admin/store and Browse Templates, then Plain Jane Journal.
+The site is **preview-only**. The exported CMS manifest identifies the authored pages but does
+not implement authenticated CMS editing, tenant-scoped save, revisions or install receipts.
+The previous `install-project.json` is intentionally removed; reusing the old beige renderer
+would misrepresent the replacement. No fixture SQL is imported.
 
-The UI is read-only. The external CMS needs to own all writes, revisions,
-transactions and permissions. The exported manifest retains original section
-and block IDs, definition keys, version and template SKU.
+## Release gates
+- Visual comparisons and real browser QA at desktop and mobile breakpoints
+- All static and nested routes, 404, light/dark, image and navigation QA
+- Native CMS section/block mapping from IAPJ source (not static placeholders)
+- Content authoring, saved drafts, tenant ownership and publish/rollback tests
+- Rebuilt `install-project.json` with verified editable source-rendered sections
+- Reproducible ZIP hash, provenance, package version and catalog verification
+- Explicit release approval for R2, downloadable artifact and public preview
 
-## First-party compiled Theme Store release
-
-The publisher has approved distribution of the **compiled** Plain Jane site and
-its CMS component manifest through Theme Store. Its package source and npm
-package stay private (UNLICENSED). Public distribution does not grant source
-resale, open-source relicensing, or derivative sublicensing.
-
-To build a reviewed release: run \`node scripts/build-theme-release.mjs plain-jane\`
-at the Theme Store repository root. Publishing uses \`--publish\`, uploads the
-zip to its SHA-256-addressed R2 key, verifies it by downloading it, and records
-the hash on the package manifest. The public \`/api/themes/plain-jane/0.1.0/manifest.json\`
-and \`/download\` endpoints serve that immutable release.
-
-The compiled site materializes independently with deep routes and the
-\`journal-cms-manifest.json\` used for future site-scoped authoring. This is a
-**real downloadable package**, not yet a verified AgentSam CMS draft install.
-Release 0.1.0 remains immutable. The enhanced 0.1.1 artifact must be generated, uploaded and digest-verified before its download link is promoted. The Theme Store must never imply that the customer editor save/publish flow is
-complete until the authenticated install receipt and isolation tests pass.
-
-Do NOT run seed/plain-jane-journal.sql against customer D1 databases without
-a matching schema, ownership checks, validated parameters, backup and
-transaction tests. Audit the existing CMS database before adding tables.
-
-See docs/architecture/AGENTSAM-PRODUCT-CATALOG-RELEASES-20261028.md.
+**No cloud publish, CMS install or Theme Store promotion is approved by staging this branch.**

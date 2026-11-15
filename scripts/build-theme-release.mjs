@@ -26,7 +26,7 @@ if (pkg.agentsam?.slug !== slug || !pkg.agentsam?.store || !/^\d+\.\d+\.\d+$/.te
 const provenancePath = join(pkgDir, 'provenance.json');
 let provenance = {};
 try { provenance = JSON.parse(await readFile(provenancePath, 'utf8')); } catch {}
-if (pkg.private && !provenance.publishApproved) throw new Error('source_owner_release_approval_required');
+if (publish && pkg.private && !provenance.publishApproved) throw new Error('source_owner_release_approval_required');
 
 function call(bin, args, cwd=ROOT) {
   const r = spawnSync(bin, args, { cwd, encoding: 'utf8', maxBuffer: 8_000_000 });

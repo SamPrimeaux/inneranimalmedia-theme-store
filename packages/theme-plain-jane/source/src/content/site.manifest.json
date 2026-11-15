@@ -1,0 +1,229 @@
+{
+  "schema": "inneranimal.site.v1",
+  "theme": "iapj",
+  "brand": {
+    "title": "inneranimal",
+    "blogTitle": "Blog",
+    "blogSubtitle": "Field manuals, agent architecture, and design systems by InnerAnimalMedia",
+    "tagline": "Field manuals, Systematic Autonomous Machinery (SAM) architecture, and editorial design systems from InnerAnimalMedia.",
+    "copyrightHolder": "InnerAnimalMedia",
+    "logo": {
+      "mode": "lockup",
+      "href": "/blog",
+      "wordmark": "inneranimal",
+      "wordmarkCase": "lowercase",
+      "showIcon": true,
+      "showWordmark": true,
+      "icon": {
+        "mediaRef": "media://brand-icon",
+        "darkMediaRef": "media://brand-icon-dark",
+        "svgPath": "M12 2a10 10 0 1 0 0 20V2z",
+        "svgViewBox": "0 0 24 24",
+        "sizePx": 20
+      },
+      "fullLogo": {
+        "mediaRef": "media://brand-logo-light",
+        "darkMediaRef": "media://brand-logo-dark",
+        "alt": "inneranimal logo",
+        "heightPx": 24
+      }
+    },
+    "attribution": {
+      "prefix": "Built on the",
+      "sourceLabel": "IAPJ Theme Package",
+      "sourceRef": "internal://about"
+    }
+  },
+  "contact": {
+    "heading": "Let's Talk",
+    "email": "hey@inneranimalmedia.com",
+    "emailRef": "social://email",
+    "secondaryLine": "Remote-first · Systems & Design Studio",
+    "socials": [
+      {
+        "id": "github",
+        "label": "GitHub",
+        "handle": "inneranimal",
+        "urlRef": "social://github"
+      },
+      {
+        "id": "twitter",
+        "label": "X",
+        "handle": "@inneranimal",
+        "urlRef": "social://twitter"
+      },
+      {
+        "id": "linkedin",
+        "label": "LinkedIn",
+        "handle": "inneranimalmedia",
+        "urlRef": "social://linkedin"
+      },
+      {
+        "id": "substack",
+        "label": "Dispatches",
+        "handle": "InnerAnimalMedia",
+        "urlRef": "social://substack"
+      }
+    ]
+  },
+  "author": {
+    "name": "InnerAnimalMedia",
+    "avatarRef": "media://author-portrait",
+    "portraitRef": "media://author-portrait",
+    "bio": "Architecting Systematic Autonomous Machinery (SAM), hybrid edge-to-local Go runtimes, and multi-domain editorial systems.",
+    "aboutHeading": "About InnerAnimalMedia",
+    "aboutParagraphs": [
+      "InnerAnimalMedia builds developer tooling, autonomous agent infrastructure, and multi-domain publishing systems designed around clarity, determinism, and editorial restraint.",
+      "Across the AgentSam runtime, the ASBD design system, and the IAPJ theme package, every layer shares one rule: keep contracts explicit, eliminate fragile runtime assumptions, and pair generative capability with verifiable engineering discipline.",
+      "This platform serves as both our public engineering blog and a reusable portfolio and theme template for multi-domain publishing."
+    ]
+  },
+  "navigation": {
+    "topBar": [
+      { "label": "Work", "path": "/work" },
+      { "label": "AI", "path": "/blog/category/ai" },
+      { "label": "Design", "path": "/blog/category/design-systems" },
+      { "label": "About", "path": "/about" },
+      { "label": "Blog", "path": "/blog" }
+    ],
+    "headerCta": {
+      "label": "Contact",
+      "path": "/about"
+    },
+    "categories": [
+      { "slug": "all", "label": "All Posts", "path": "/blog", "description": "Every field manual, engineering note, and design system guide." },
+      { "slug": "ai", "label": "AI", "path": "/blog/category/ai", "description": "Typed decision primitives, benchmarking drills, and deterministic agent control." },
+      { "slug": "runtime", "label": "Edge & Runtime", "path": "/blog/category/runtime", "description": "Hybrid TypeScript protocol layers paired with native Go containers and local daemons." },
+      { "slug": "ui-ux", "label": "UI/UX Guides", "path": "/blog/category/ui-ux", "description": "The 14-chapter Working UI/UX Design Guide for 2026: process, research methods, roles, and enduring design principles." },
+      { "slug": "design-systems", "label": "Design Systems", "path": "/blog/category/design-systems", "description": "Dual-mode color tokens, split media heroes, and zero-flash appearance sync." },
+      { "slug": "platform", "label": "CMS & Themes", "path": "/blog/category/platform", "description": "Multi-domain section schemas, logical media IDs, and reusable theme architecture." }
+    ],
+    "overlayMenu": [
+      { "label": "Blog", "path": "/blog" },
+      { "label": "Work & Plates", "path": "/work" },
+      { "label": "AI Architecture", "path": "/blog/category/ai" },
+      { "label": "Design Systems", "path": "/blog/category/design-systems" },
+      { "label": "About", "path": "/about" },
+      { "label": "Search", "path": "/search" }
+    ],
+    "footerPrimary": [
+      { "label": "Blog", "path": "/blog" },
+      { "label": "Work", "path": "/work" },
+      { "label": "About", "path": "/about" },
+      { "label": "Search", "path": "/search" }
+    ],
+    "footerSecondary": [
+      { "label": "AI Architecture", "path": "/blog/category/ai" },
+      { "label": "Edge & Runtime", "path": "/blog/category/runtime" },
+      { "label": "UI/UX Guides", "path": "/blog/category/ui-ux" },
+      { "label": "Design Systems", "path": "/blog/category/design-systems" }
+    ],
+    "footerPillars": [
+      { "title": "AgentSam Core", "line1": "Typed Decision Primitives", "line2": "State · Choice · Score · Gate", "path": "/blog/structured-decisions" },
+      { "title": "SAM Cookbooks", "line1": "9 Infrastructure Drills", "line2": "Merkle & AST Verification", "path": "/blog/infrastructure-cookbooks" },
+      { "title": "Native Go Runtime", "line1": "Cloudflare Edge Adapter", "line2": "Local agentsamd Core", "path": "/blog/native-runtime" },
+      { "title": "UX Working Guide", "line1": "14-Chapter Field Manual", "line2": "Process · Research · Roles", "path": "/blog/ux-guide" },
+      { "title": "ASBD Tokens", "line1": "Dual-Mode Light & Dark", "line2": "Split Media Hero Spec", "path": "/blog/asbd-design-system" },
+      { "title": "CMS Architecture", "line1": "Section & Block Schemas", "line2": "Zero Hardcoded URLs", "path": "/blog/cms-footer-and-asset-architecture" }
+    ],
+    "legalLinks": [
+      { "label": "About", "path": "/about" },
+      { "label": "Archive", "path": "/blog" },
+      { "label": "Sitemap", "path": "/search" }
+    ]
+  },
+  "linkCatalog": {
+    "internal://about": "/about",
+    "social://github": "https://github.com/inneranimal",
+    "social://twitter": "https://x.com/inneranimal",
+    "social://linkedin": "https://linkedin.com",
+    "social://substack": "https://inneranimalmedia.com",
+    "social://email": "mailto:hey@inneranimalmedia.com"
+  },
+  "mediaCatalog": {
+    "media://brand-icon": {
+      "provider": "theme-default",
+      "url": "",
+      "alt": "Brand icon mark",
+      "width": 64,
+      "height": 64
+    },
+    "media://brand-icon-dark": {
+      "provider": "theme-default",
+      "url": "",
+      "alt": "Brand icon mark (dark surface)",
+      "width": 64,
+      "height": 64
+    },
+    "media://brand-logo-light": {
+      "provider": "theme-default",
+      "url": "",
+      "alt": "Full horizontal brand logo (light surface)",
+      "width": 320,
+      "height": 64
+    },
+    "media://brand-logo-dark": {
+      "provider": "theme-default",
+      "url": "",
+      "alt": "Full horizontal brand logo (dark surface)",
+      "width": 320,
+      "height": 64
+    },
+    "media://author-portrait": {
+      "provider": "studio-generated",
+      "url": "/src/assets/images/author_studio_portrait_1794695293041.jpg",
+      "alt": "Editorial studio portrait at a minimalist drafting desk",
+      "caption": "Studio Drafting Desk — InnerAnimalMedia",
+      "width": 900,
+      "height": 1200
+    },
+    "media://cover-structured-decisions": {
+      "provider": "studio-generated",
+      "url": "/src/assets/images/cover_structured_decisions_1794695289898.jpg",
+      "alt": "Brushed black anodized aluminum routing switchboard with muted violet pins",
+      "caption": "Typed Decision Switchboard — Deterministic Routing Study",
+      "width": 1600,
+      "height": 900
+    },
+    "media://cover-infra-cookbooks": {
+      "provider": "studio-generated",
+      "url": "/src/assets/images/cover_infra_cookbooks_1794695290006.jpg",
+      "alt": "Architectural grid blueprints, steel calipers, and matte dark keyboard on concrete",
+      "caption": "Infrastructure Blueprints & Caliper Inspection Bench",
+      "width": 1600,
+      "height": 900
+    },
+    "media://cover-native-runtime": {
+      "provider": "studio-generated",
+      "url": "/src/assets/images/cover_native_runtime_1794695290674.jpg",
+      "alt": "Matte obsidian and machined titanium edge compute module on travertine stone",
+      "caption": "Hybrid Edge-to-Local Compute Enclosure",
+      "width": 1600,
+      "height": 900
+    },
+    "media://cover-ux-principles": {
+      "provider": "studio-generated",
+      "url": "/src/assets/images/cover_ux_principles_1794695290502.jpg",
+      "alt": "Grid paper, matte black pen, brass ruler, and modular cards on alabaster",
+      "caption": "Modular Layout Grid & Editorial Hierarchy Specimen",
+      "width": 1600,
+      "height": 900
+    },
+    "media://cover-asbd-hero": {
+      "provider": "studio-generated",
+      "url": "/src/assets/images/cover_asbd_hero_1794695346470.jpg",
+      "alt": "Exploded 3D mechanical assembly rendered in brushed steel and dark slate",
+      "caption": "AgentSam Learn — Asymmetric Exploded Mechanical Assembly",
+      "width": 1600,
+      "height": 900
+    },
+    "media://cover-cms-platform": {
+      "provider": "studio-generated",
+      "url": "/src/assets/images/cover_cms_platform_1794695291502.jpg",
+      "alt": "Modular concrete and glass architectural pavilions under overcast light",
+      "caption": "Modular Concrete Pavilions — Multi-Domain Section Study",
+      "width": 1200,
+      "height": 900
+    }
+  }
+}

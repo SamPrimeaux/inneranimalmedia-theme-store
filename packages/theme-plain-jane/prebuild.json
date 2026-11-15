@@ -2,7 +2,7 @@
   "schema": "agentsam.prebuild.v1",
   "id": "plain-jane",
   "package": "@inneranimalmedia/theme-plain-jane",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "siteRoot": "site",
   "entrypoint": "index.html",
   "rootDeployable": true,
@@ -16,12 +16,11 @@
     "canonicalOrigin": "https://example.com/",
     "apiBasePath": "/api/cms"
   },
-  "cmsManifest": "journal-cms-manifest.json",
+  "cmsManifest": "iapj-cms-manifest.json",
   "category": "Editorial / Blog",
-  "description": "Self-contained Plain Jane editorial starter with original journal pages and Growth & Performance previews.",
+  "description": "IAPJ: source-driven editorial blog and portfolio with real local imagery, responsive design and structured page manifests.",
   "notes": [
-    "The embedded front end is read-only. Content writes are the host CMS responsibility.",
-    "The local showcase uses preview fixtures, not a real tenant account.",
-    "Product release/license and authorized installation require a separate promotion review."
+    "Preview only until the source CMS adapter, editability, install receipt and isolation gates pass.",
+    "No cloud publishing, D1 writes or customer installation is approved by this staged source change."
   ]
 }

@@ -1,16 +1,6 @@
 name: Publish Theme Store
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'packages/theme-plain-jane/source/**'
-      - 'packages/theme-plain-jane/package.json'
-      - 'packages/theme-plain-jane/prebuild.json'
-      - 'packages/theme-plain-jane/src/**'
-      - 'scripts/build-theme-release.mjs'
-      - 'scripts/publish-theme-packages.mjs'
-      - '.github/workflows/publish.yml'
 permissions:
   contents: write
 concurrency:
@@ -31,6 +21,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Block IAPJ publication until explicit product approval
+        run: |
+          node --input-type=module - <<'NODE'
+          import {readFileSync,existsSync} from 'node:fs';
+          const root='packages/theme-plain-jane/';
+          const pkg=JSON.parse(readFileSync(root+'package.json'));
+          const approval=JSON.parse(readFileSync(root+'provenance.json'));
+          if(approval.publishApproved!==true || pkg.agentsam.installable!==true ||
+             !existsSync(root+'install-project.json')) {
+            throw Error('iapj_release_not_approved: CMS project, source-backed install and owner acceptance must pass first');
+          }
+          NODE
       - name: Install source and store dependencies
         run: |
           npm ci --no-audit --no-fund

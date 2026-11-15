@@ -11,9 +11,15 @@ test('all published install projects acquire editable, source-aware system basel
   const directories=(await readdir(packages,{withFileTypes:true})).filter(dir=>dir.isDirectory()&&dir.name.startsWith('theme-'));
   let checked=0;
   for(const dir of directories) {
+    const pkg=JSON.parse(await readFile(join(packages,dir.name,'package.json'),'utf8'));
+    const published=pkg.agentsam?.store?.release?.status==='published';
     let original;
     try{original=JSON.parse(await readFile(join(packages,dir.name,'install-project.json'),'utf8'));}
-    catch(error){if(error?.code==='ENOENT')continue;throw error;}
+    catch(error){
+      if(error?.code==='ENOENT' && !published)continue;
+      if(error?.code==='ENOENT')throw Error(dir.name+' published theme is missing its editable CMS project');
+      throw error;
+    }
     checked++;
     const source=structuredClone(original);
     const {project,added}=completeInstallProject(source);
@@ -41,7 +47,7 @@ test('all published install projects acquire editable, source-aware system basel
     assert.deepEqual(completeInstallProject(project).added,[],dir.name+' completion is not idempotent');
     assert.deepEqual(completeInstallProject(project).project,project,dir.name+' second completion modified project');
   }
-  assert.equal(checked,11,'expected all eleven source-verified install projects');
+  assert.ok(checked>=10,'existing published themes must retain their source-backed editable projects');
 });
 
 test('author-defined 404 pages and alternate not-found routes are not replaced',()=>{

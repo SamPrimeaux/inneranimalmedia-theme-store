@@ -16,7 +16,7 @@ export function ImageEmbed({ src, alt, caption, size = "default" }: ImageEmbedPr
 
   return (
     <>
-      <motion.figure 
+      <motion.figure
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -28,26 +28,26 @@ export function ImageEmbed({ src, alt, caption, size = "default" }: ImageEmbedPr
           size === "full" && "w-full max-w-none"
         )}
       >
-        <button 
+        <button
+          type="button"
           onClick={() => setIsLightboxOpen(true)}
-          className="w-full overflow-hidden rounded-sm bg-ink/5 cursor-zoom-in group"
+          className="block w-full overflow-hidden bg-[var(--iapj-surface-subtle)] cursor-zoom-in group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--iapj-accent)]"
         >
-          <FadeImage 
-            src={src} 
-            alt={alt} 
-            referrerPolicy="no-referrer"
-            className="w-full h-auto object-cover group-hover:scale-[1.02]"
+          <FadeImage
+            src={src}
+            alt={alt}
+            className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
             loading="lazy"
           />
         </button>
         {caption && (
-          <figcaption className="mt-4 text-center text-sm italic text-ink-light max-w-2xl mx-auto px-4">
+          <figcaption className="mt-4 text-center text-sm italic text-[var(--iapj-text-muted)] max-w-2xl mx-auto px-4">
             {caption}
           </figcaption>
         )}
       </motion.figure>
 
-      <Lightbox 
+      <Lightbox
         isOpen={isLightboxOpen}
         onClose={() => setIsLightboxOpen(false)}
         src={src}

@@ -1,73 +1,124 @@
 #!/usr/bin/env node
-/** Register reviewed Theme Store packages in the existing product/release spine.
- * The metadata source is R2's verified install index, not a second registry.
- * --stage marks the batch reviewed but not public; --publish promotes only
- * when AgentSam can consume its remote immutable project URLs.
+/**
+ * Sync verified, published Theme Store releases to AgentSam's EXISTING product
+ * registry. Source authority: Theme Store public catalog and R2 install index.
+ * Use --dry-run to inspect; --publish to write D1. No staged JSON snapshot.
  */
-import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { join } from 'node:path';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { fileURLToPath } from 'node:url';
-const root=fileURLToPath(new URL('../',import.meta.url));
-const action=process.argv.includes('--publish')?'published':'staged';
-const only=process.argv.find(arg=>arg.startsWith('--only='))?.slice(7);
-if(only!==undefined&&!/^[a-z][a-z0-9-]{0,63}$/.test(only))throw Error('invalid_theme_slug');
-const staged=JSON.parse(await readFile(join(root,'.releases/staged-releases.json'),'utf8'));
-function run(bin,args) {
- const r=spawnSync(bin,args,{cwd:root,encoding:'utf8',maxBuffer:10_000_000});
- if(r.status!==0)throw Error((r.stderr||r.stdout||'command failed')+' for '+bin+' '+args.join(' '));
- return r.stdout;
+import { join } from 'node:path';
+import { selectVerifiedThemeReleases, planProductReleaseSql } from './product-release-registry.mjs';
+
+const STORE = 'https://themes.inneranimalmedia.com';
+const only = process.argv.find(x => x.startsWith('--only='))?.slice(7);
+const output = process.argv.find(x => x.startsWith('--sql-output='))?.slice(13);
+const publish = process.argv.includes('--publish');
+if (process.argv.slice(2).some(x => !['--publish','--dry-run'].includes(x) &&
+  !x.startsWith('--only=') && !x.startsWith('--sql-output=')))
+  throw Error('unknown_registry_argument');
+if (publish && process.argv.includes('--dry-run')) throw Error('conflicting_registry_mode');
+const sha = data => createHash('sha256').update(data).digest('hex');
+
+// Some published Theme Store releases are entitlement-gated for shopper
+// downloads. Publisher access is different from customer access: verify the
+// immutable R2 ZIP using authorized Wrangler, never open a public bypass.
+async function verifiedReleaseZip(entry) {
+  const path = '/api/themes/' + entry.slug + '/' + entry.version + '/download';
+  const res = await fetch(STORE + path, {signal: AbortSignal.timeout(30000)});
+  if (res.status !== 403) {
+    if (!res.ok || new URL(res.url).origin !== STORE) throw Error('release_zip_unavailable:' + entry.slug);
+    if (Number(res.headers.get('content-length') || 0) > 64 * 1024 * 1024)
+      throw Error('oversized_release:' + entry.slug);
+    const bytes = Buffer.from(await res.arrayBuffer());
+    if (bytes.length > 64 * 1024 * 1024) throw Error('oversized_release:' + entry.slug);
+    return bytes;
+  }
+  const error = await res.json().catch(() => ({}));
+  if (error.error !== 'release_requires_entitlement')
+    throw Error('release_zip_denied:' + entry.slug);
+  const dir = await mkdtemp(join(tmpdir(), 'iam-entitled-release-'));
+  try {
+    const file = join(dir, 'release.zip');
+    const result = spawnSync('npx',['wrangler','r2','object','get',
+      'theme-store/' + entry.storageKey,'--remote','--file',file],
+      {encoding:'utf8',maxBuffer:10_000_000});
+    if (result.status !== 0) throw Error('publisher_r2_read_required:' + entry.slug);
+    const bytes = await readFile(file);
+    if (bytes.length > 64 * 1024 * 1024) throw Error('oversized_release:' + entry.slug);
+    return bytes;
+  } finally { await rm(dir,{recursive:true,force:true}); }
 }
-const tmp=await mkdtemp(join(tmpdir(),'iam-product-release-'));
-const raw=join(tmp,'install-index.json');
-try {
- run('npx',['wrangler','r2','object','get','theme-store/install-index/index.json','--remote','--file',raw]);
- const idx=JSON.parse(await readFile(raw,'utf8'));
- const selected=only?staged.products.filter(item=>item.slug===only):staged.products;
- if(idx.schema!=='agentsam.website-theme-install-index.v1'||!Array.isArray(idx.packages)||
-    selected.length!==(only?1:11))throw Error('invalid_release_batch');
- const q=v=>"'"+String(v).replaceAll("'","''")+"'";
- const safe=p=>/^[a-z][a-z0-9-]{0,63}$/.test(p.slug)&&/^\d+\.\d+\.\d+$/.test(p.version)&&/^[a-f0-9]{64}$/.test(p.sha256);
- const sql=['PRAGMA foreign_keys=ON;'];
- for (const item of selected) {
-   const published=idx.packages.find(p=>p.slug===item.slug&&p.version===item.version&&p.sha256===item.sha256);
-   if(!safe(item)||!published||!/^[a-f0-9]{64}$/.test(published.project_sha256||'')||
-       published.project_key!=='install-projects/'+item.slug+'/'+item.version+'/'+published.project_sha256+'.json')
-     throw Error('unverified_installer_release:'+item.slug);
-   const productMetadata={
-     themeStore:true,source:'theme-store',category:'website-theme',version:item.version,
-     releaseSha256:item.sha256,projectSha256:published.project_sha256,
-     editablePageCount:published.page_count,previewUrl:'https://themes.inneranimalmedia.com/theme-packages/'+item.slug+'/'+item.version+'/preview/',
-   };
-   const releaseId='release_theme_'+item.slug.replaceAll('-','_')+'_'+item.version.replaceAll('.','_');
-   // A legitimate existing product retains its identity, especially IASF.
-   sql.push(`UPDATE agentsam_products SET version=${q(item.version)},
-    source_type='theme-store-package',source_id=${q(item.slug)},
-    package_name=${q('@inneranimalmedia/theme-'+item.slug)},
-    metadata=json_patch(metadata,${q(JSON.stringify(productMetadata))}),
-    updated_at=unixepoch()${action==='published'?",status='production',catalog_visibility='public'":''}
-    WHERE slug=${q(item.slug)} AND kind='theme';`);
-   const releaseMeta=JSON.stringify({installer_schema:'agentsam.theme-project.v1',
-     project_r2_key:published.project_key,project_sha256:published.project_sha256,
-     editable_page_count:published.page_count,manifest_page_count:published.manifest_page_count});
-   sql.push(`INSERT INTO agentsam_product_releases
-     (id,product_id,product_slug,sku,version,channel,release_status,review_status,artifact_kind,
-      r2_bucket,r2_key,sha256,byte_size,package_name,preview_url,compatible_schema_version,
-      metadata_json,published_at_unix)
-     SELECT ${q(releaseId)},id,${q(item.slug)},${q('iam.theme.'+item.slug)},${q(item.version)},
-      'release',${q(action)},'approved','theme_zip','theme-store',${q(item.storageKey)},
-      ${q(item.sha256)},${item.bytes},${q('@inneranimalmedia/theme-'+item.slug)},
-      ${q('https://themes.inneranimalmedia.com/theme-packages/'+item.slug+'/'+item.version+'/preview/')},
-      '2',${q(releaseMeta)},${action==='published'?'unixepoch()':'NULL'}
-     FROM agentsam_products WHERE slug=${q(item.slug)} AND kind='theme'
-     ON CONFLICT(id) DO UPDATE SET
-      release_status=CASE WHEN agentsam_product_releases.sha256=excluded.sha256 THEN excluded.release_status ELSE agentsam_product_releases.release_status END,
-      published_at_unix=CASE WHEN agentsam_product_releases.sha256=excluded.sha256 THEN excluded.published_at_unix ELSE agentsam_product_releases.published_at_unix END;`);
- }
- const file=join(tmp,'releases.sql');
- await writeFile(file,sql.join('\n')+'\n');
- console.log('REGISTER',action,selected.length);
- if(process.argv.includes('--dry-run')){console.log(sql.join('\n').slice(0,1000));process.exit(0);}
- console.log(run('npx',['wrangler','d1','execute','inneranimalmedia-business','--remote','--file',file]).slice(-6000));
-}finally{await rm(tmp,{recursive:true,force:true});}
+
+async function fetchBytes(path, limit = 64 * 1024 * 1024) {
+  const url = STORE + path;
+  const res = await fetch(url, { headers: { accept: '*/*' }, signal: AbortSignal.timeout(30000) });
+  if (!res.ok || new URL(res.url).origin !== STORE) throw Error('release_endpoint_unavailable:' + path);
+  if (Number(res.headers.get('content-length') || 0) > limit) throw Error('oversized_release:' + path);
+  const bytes = Buffer.from(await res.arrayBuffer());
+  if (bytes.length > limit) throw Error('oversized_release:' + path);
+  return bytes;
+}
+const [indexBytes, catalogBytes] = await Promise.all([
+  fetchBytes('/api/install-index', 2 * 1024 * 1024),
+  fetchBytes('/api/catalog', 2 * 1024 * 1024),
+]);
+const releases = selectVerifiedThemeReleases(
+  JSON.parse(indexBytes.toString('utf8')), JSON.parse(catalogBytes.toString('utf8')), { only });
+for (const entry of releases) {
+  const path = '/api/themes/' + entry.slug + '/' + entry.version;
+  const [manifestBytes, projectBytes, zipBytes] = await Promise.all([
+    fetchBytes(path + '/manifest.json', 1024 * 1024),
+    fetchBytes(path + '/project', 8 * 1024 * 1024),
+    verifiedReleaseZip(entry),
+  ]);
+  const manifest = JSON.parse(manifestBytes.toString('utf8'));
+  const project = JSON.parse(projectBytes.toString('utf8'));
+  if (manifest.schema !== 'iam.theme-release.v1' ||
+    manifest.slug !== entry.slug || manifest.version !== entry.version ||
+    manifest.sha256 !== entry.sha256 ||
+    manifest.downloadUrl !== path + '/download' ||
+    sha(projectBytes) !== entry.projectHash ||
+    project.schema !== 'agentsam.theme-project.v1' ||
+    project.sourceThemeId !== entry.slug ||
+    project.sourcePackageVersion !== entry.version ||
+    project.sourceReleaseSha256 !== entry.sha256 ||
+    !Array.isArray(project.pages) || project.pages.length !== entry.pageCount ||
+    sha(zipBytes) !== entry.sha256) throw Error('published_theme_bytes_mismatch:' + entry.slug);
+  entry.byteSize = zipBytes.length;
+  console.log('VERIFIED',entry.slug,entry.version,entry.pageCount,'pages',entry.byteSize,'bytes');
+}
+const sql = planProductReleaseSql(releases);
+if (output) await writeFile(output, sql);
+if (!publish) {
+  console.log('DRY RUN: '+releases.length+' verified releases; no database mutation.');
+  if (!output) console.log(sql);
+} else {
+  const dir = await mkdtemp(join(tmpdir(),'iam-release-registry-'));
+  try {
+    const file = join(dir,'release-registry.sql');
+    await writeFile(file,sql);
+    const child = spawnSync('npx',['wrangler','d1','execute','inneranimalmedia-business','--remote','--file',file],
+      {encoding:'utf8',maxBuffer:10_000_000});
+    if(child.status !== 0) throw Error('registry_d1_write_failed: '+(child.stderr || child.stdout));
+    const list = releases.map(entry => "'" + entry.slug + "'").join(',');
+    const verifySql = `SELECT p.slug, p.version AS product_version, r.version AS release_version,
+      r.release_status, r.sha256, r.r2_key, r.byte_size
+      FROM agentsam_products p JOIN agentsam_product_releases r ON r.product_id=p.id
+      WHERE p.kind='theme' AND p.slug IN (${list}) AND r.version=p.version;`;
+    const checked = spawnSync('npx',['wrangler','d1','execute','inneranimalmedia-business','--remote',
+      '--command',verifySql,'--json'],{encoding:'utf8',maxBuffer:10_000_000});
+    if (checked.status !== 0) throw Error('registry_d1_readback_failed:'+(checked.stderr||checked.stdout));
+    const response = JSON.parse(checked.stdout);
+    const rows = (Array.isArray(response) ? response : [response]).flatMap(entry => entry.results || []);
+    for (const entry of releases) {
+      const matches = rows.filter(row => row.slug===entry.slug &&
+        row.product_version===entry.version && row.release_version===entry.version &&
+        row.release_status==='published' && row.sha256===entry.sha256 &&
+        row.r2_key===entry.storageKey && Number(row.byte_size)===entry.byteSize);
+      if (matches.length !== 1) throw Error('registry_d1_readback_mismatch:'+entry.slug);
+    }
+    console.log('SYNCED AND VERIFIED',releases.length,'releases to agentsam_product_releases');
+  } finally { await rm(dir,{recursive:true,force:true}); }
+}

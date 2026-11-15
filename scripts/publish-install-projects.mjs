@@ -115,4 +115,14 @@ try{
   run(['get','theme-store/install-index/index.json','--remote','--file',checked]);
   if(hash(await readFile(checked))!==hash(content))throw Error('install_index_remote_digest_mismatch');
   console.log('VERIFIED BATCH',result.length,'projects and index',hash(content));
+  // The same release must be visible in AgentSam's existing product spine.
+  // The registrar independently validates the public ZIP + project digests
+  // against this R2-backed index before making any D1 write.
+  // Failure is not a successful publish: the R2 artifact remains immutable,
+  // and rerunning this command safely resumes the idempotent D1 sync.
+  const args = [join(root, 'scripts/register-product-releases.mjs'), '--publish'];
+  if (only) args.push('--only=' + only);
+  const synced = spawnSync(process.execPath, args, { cwd: root, encoding: 'utf8', maxBuffer: 10_000_000 });
+  if (synced.status !== 0) throw Error('theme_registry_sync_failed: ' + (synced.stderr || synced.stdout || 'unknown'));
+  console.log(synced.stdout.trim());
 }finally{await rm(temp,{recursive:true,force:true});}

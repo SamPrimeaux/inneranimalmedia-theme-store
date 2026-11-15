@@ -1,0 +1,80 @@
+name: Stage IAPJ replacement (no publish)
+
+on:
+  push:
+    branches:
+      - stage/iapj-plain-jane-replacement
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: iapj-preflight
+  cancel-in-progress: false
+
+jobs:
+  source-and-build:
+    if: github.actor != 'github-actions[bot]'
+    name: Import IAPJ, validate and commit generated source
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout Theme Store staging branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Checkout pinned IAPJ upstream source
+        uses: actions/checkout@v4
+        with:
+          repository: SamPrimeaux/iapj
+          ref: a4fff5a875082154be615370556239911fa9b62b
+          path: .iapj-source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Replace legacy Plain Jane source wholesale
+        run: |
+          test -f .iapj-source/src/content/site.manifest.json
+          test -f .iapj-source/src/components/FooterBackdrop3D.tsx
+          test -f .iapj-source/src/components/BrandLogo.tsx
+          rsync -a --delete \
+            --exclude=.git --exclude=.github --exclude=node_modules --exclude=dist \
+            .iapj-source/ packages/theme-plain-jane/source/
+          test ! -d packages/theme-plain-jane/source/seed
+          test ! -e packages/theme-plain-jane/install-project.json
+          grep -q 'basename={import.meta.env.BASE_URL}' packages/theme-plain-jane/source/src/App.tsx
+          rm -rf .iapj-source
+      - name: Install Theme Store dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install authored IAPJ dependencies (frozen)
+        run: npm ci --no-audit --no-fund --prefix packages/theme-plain-jane/source
+      - name: Build IAPJ site and export CMS preview manifest
+        run: npm run build --prefix packages/theme-plain-jane
+      - name: Verify source replacement and portable preview
+        run: |
+          node --test packages/theme-plain-jane/test/*.test.mjs
+          npm run check
+          npm test
+      - name: Produce local ZIP preflight only
+        run: |
+          node scripts/build-theme-release.mjs plain-jane
+          unzip -t .releases/plain-jane-0.2.0.zip
+          unzip -Z -1 .releases/plain-jane-0.2.0.zip | grep -q '^site/blog/structured-decisions/index.html$'
+          unzip -Z -1 .releases/plain-jane-0.2.0.zip | grep -q '^site/iapj-cms-manifest.json$'
+      - name: Commit imported source and compiled preview to staging branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- packages/theme-plain-jane/source packages/theme-plain-jane/site
+          if git diff --cached --name-only | grep -E '(^|/)node_modules/|(^|/)[.]env$'; then
+            echo "Refusing to stage dependencies or secrets"
+            exit 1
+          fi
+          if git diff --cached --quiet; then
+            echo "Imported IAPJ source and build already up-to-date"
+          else
+            git commit -m "chore(iapj): vendor pinned source and compiled preflight preview"
+            git push origin HEAD:stage/iapj-plain-jane-replacement
+          fi

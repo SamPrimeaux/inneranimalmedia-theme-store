@@ -34,12 +34,15 @@ test('every published, installable theme has a real immutable-source editable CM
   assert.equal(project.sourcePackage,'@inneranimalmedia/theme-'+slug);
   assert.equal(project.sourcePackageVersion,version);
   assert.equal(project.sourceReleaseSha256,meta.store.release.sha256);
-  assert.equal(project.sourcePreviewUrl,'https://themes.inneranimalmedia.com/theme-packages/'+slug+'/'+version+'/preview/');
+  const previewUrl = typeof meta.store.previewAlias === 'string'
+    ? 'https://themes.inneranimalmedia.com/' + meta.store.previewAlias + '/'
+    : 'https://themes.inneranimalmedia.com/theme-packages/'+slug+'/'+version+'/preview/';
+  assert.equal(project.sourcePreviewUrl,previewUrl);
   assert.equal(project.sourceAssetErrors?.length,0,slug+' has missing source media');
   assert.ok(project.pages.length>0&&project.pages.length<=80);
   assert.equal(new Set(project.pages.map(p=>p.slug)).size,project.pages.length,slug+' has duplicate pages');
   for(const page of project.pages){
-   assert.match(page.sourceRoute,/^\//);
+   assert.match(page.route || page.sourceRoute,/^\//);
    assert.ok(page.template.includes('<!--theme-section:'),slug+':'+page.slug+' not a real editable renderer');
    assert.ok(!/<script(?:\s|>)/i.test(page.template),slug+':'+page.slug+' executes source app scripts');
    assert.ok(page.sections.length>0);

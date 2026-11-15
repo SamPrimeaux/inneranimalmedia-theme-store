@@ -3,3 +3,4 @@ export interface InstallIndexEntry {slug:string;version:string;sha256:string;pro
 export function verifiedInstallEntries(raw: unknown, themes: ThemeReleaseRef[]): InstallIndexEntry[];
 
 export function hasEditableInstallProject(theme: ThemeReleaseRef, entries: InstallIndexEntry[] | null): boolean;
+export function releaseDescriptorKey(theme: ThemeReleaseRef): string | null;

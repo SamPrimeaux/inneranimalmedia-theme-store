@@ -35,3 +35,15 @@ export function hasEditableInstallProject(theme, entries) {
     theme?.release?.status === 'published' &&
     Number.isSafeInteger(entry.page_count) && entry.page_count > 0);
 }
+
+/** Immutable per-release index descriptors avoid rewriting a shared registry.
+ * Both ZIP and native edit project hashes are always matched to package
+ * metadata by verifiedInstallEntries() after the descriptor is fetched.
+ */
+export function releaseDescriptorKey(theme) {
+  const slug=theme?.slug,version=theme?.version,release=theme?.release;
+  if(!SLUG.test(slug||'')||!VERSION.test(version||'')||
+     release?.status!=='published'||!HASH.test(release.sha256||'')||
+     release.storageKey!=='releases/'+slug+'/'+version+'/'+release.sha256+'.zip')return null;
+  return 'install-index/by-release/'+slug+'/'+version+'/'+release.sha256+'.json';
+}

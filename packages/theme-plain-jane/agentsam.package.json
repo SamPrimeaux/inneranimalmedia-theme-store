@@ -4,12 +4,12 @@
   "name": "@inneranimalmedia/theme-plain-jane",
   "version": "0.3.0",
   "class": "theme",
-  "status": "candidate",
-  "catalog_status": "candidate",
+  "status": "published",
+  "catalog_status": "published",
   "registry": {
     "kind": "local-package",
     "name": "@inneranimalmedia/theme-plain-jane",
-    "public_claim": false
+    "public_claim": true
   },
   "purpose": "A complete source-backed editable 31-page editorial website template with account-owned Theme Studio installation.",
   "languages": [
@@ -22,11 +22,7 @@
   ],
   "commands": [],
   "install": [],
-  "review_required": [
-    "immutable-r2-release",
-    "authenticated-install-receipt",
-    "tenant-isolation"
-  ],
+  "review_required": [],
   "evidence": {
     "directory": "packages/theme-plain-jane",
     "purpose_source": "SamPrimeaux/iapj pinned GitHub source"

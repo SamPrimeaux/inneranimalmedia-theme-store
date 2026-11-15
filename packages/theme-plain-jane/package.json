@@ -70,9 +70,9 @@
       "priceUsd": 0,
       "delivery": "verified-package",
       "release": {
-        "status": "preview",
-        "sha256": null,
-        "storageKey": null
+        "status": "published",
+        "sha256": "5866a01a344e30c96721d90d1275dd8ab30d229db4a7e010eb11403880497943",
+        "storageKey": "releases/plain-jane/0.3.0/5866a01a344e30c96721d90d1275dd8ab30d229db4a7e010eb11403880497943.zip"
       },
       "industries": [
         "Editorial",

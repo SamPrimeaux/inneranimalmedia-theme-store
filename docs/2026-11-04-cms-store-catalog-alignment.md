@@ -1,5 +1,7 @@
 # Theme Store → AgentSam CMS alignment audit
 
+> **Superseded architecture note (2026-11-18):** Theme availability and release distribution are owned exclusively by `inneranimalmedia-theme-store` through its R2-backed `/api/catalog` and `/api/install-index`. Do not require `agentsam_products` or `agentsam_product_releases` rows for theme discovery or installation. This document records the historical 2026-11-04 proposal, not the current release contract.
+
 **Date:** 2026-11-04
 **Repositories:** `SamPrimeaux/inneranimalmedia-theme-store` and `SamPrimeaux/agentsam-sdk`
 **Live:** `https://themes.inneranimalmedia.com/` (`inneranimalmedia-theme-store` Worker)

@@ -1,38 +1,52 @@
-# InnerAnimal Plain Jane (IAPJ) · v0.3.0
+# Plain Jane Journal — SDK product staging
 
-**Canonical distribution and source:** `SamPrimeaux/inneranimalmedia-theme-store/packages/theme-plain-jane`.
+Source of truth: https://github.com/SamPrimeaux/inneranimalmedia-blog-template
+at the pinned commit in provenance.json. The authored React/TypeScript site
+lives under source/, generated storefront under site/, and SDK package contract
+under src/ and prebuild.json. Never hand-edit the bundled output.
 
-`SamPrimeaux/iapj` was the original source seed, **not** a second production distribution authority. The product keeps the public `plain-jane` slug, while its short demo URL is `/iapj/`.
+## Local verification
 
-## Product contract
+The SDK demo server serves the actual build at /themes/plain-jane/demo/ and the
+CMS manifest at /themes/plain-jane/demo/journal-cms-manifest.json.
 
-- **Free stock theme:** usable without a purchase; **sign-in/sign-up is required** before creating or changing a private draft.
-- **No site required:** a verified account may install IAPJ directly into Theme Studio. It owns an independent project, pages, sections, tokens, revisions and media references. Its draft can become a site only after an explicit action.
-- **Full draft CRUD:** create/read/update/delete and duplicate as many independent account-owned canvases as desired. The shared master and other accounts are never mutated.
-- **Real source:** `source/` is the maintained IAPJ React/Vite code. `site/` is its distributable preview and original authored media. `install-project.json` is the native `agentsam.theme-project.v1` editable project generated from the actual rendered React pages using the existing SDK editor contract (no second CMS).
-- **Runtime:** 31 authored editorial pages, 132 editable source sections, thousands of text/media/link fields, original asset references and the optional platform system pages provided by the shared CMS.
-- **Distribution:** immutable ZIPs and verified install-project objects reside in the `theme-store` R2 bucket. The platform's `agentsam-sdk` Worker reads the registry and verifies signed content; it does not bundle IAPJ.
+The source has nine seed pages and 18 component definitions. Real routes:
+home, about, photography, two journal posts, contact, privacy, terms, 404.
+All artwork in the authored repository is local; the original Google Fonts
+import still requires network access and has fallback fonts.
 
-## Local authoring and acceptance
+For local dev:
+1. Run npm ci and npm run lint from source/.
+2. Run the package build script from the theme-plain-jane root.
+3. Run node --test packages/theme-plain-jane/test/*.test.mjs from SDK root.
+4. Optional: node packages/theme-plain-jane/scripts/export-preview-zip.mjs
+5. Open /admin/store and Browse Templates, then Plain Jane Journal.
 
-```sh
-npm ci
-npm ci --prefix packages/theme-plain-jane/source
-npm run build --prefix packages/theme-plain-jane
-python3 -m pip install playwright
-python3 -m playwright install chromium
-python3 packages/theme-plain-jane/scripts/export-install-project.py \
-  --contract ../agentsam-sdk/apps/ecommerce-cms-agentsam/frontend/theme-editor/project.mjs
-node scripts/build-theme-release.mjs plain-jane
-node packages/theme-plain-jane/scripts/finalize-install-project.mjs
-node --test packages/theme-plain-jane/test/*.test.mjs
-npm run check && npm test
-```
+The UI is read-only. The external CMS needs to own all writes, revisions,
+transactions and permissions. The exported manifest retains original section
+and block IDs, definition keys, version and template SKU.
 
-The exported project and the immutable ZIP are separate products of the same authored source. The CMS editor handles private draft save/revision, media and code editing; Auth/Identity and D1/R2 ownership are platform contracts. Do not copy CMS editor code or customer records into this theme package.
+## First-party compiled Theme Store release
 
-## Release contract
+The publisher has approved distribution of the **compiled** Plain Jane site and
+its CMS component manifest through Theme Store. Its package source and npm
+package stay private (UNLICENSED). Public distribution does not grant source
+resale, open-source relicensing, or derivative sublicensing.
 
-A published release must have **both** a checksum-addressed source-owned ZIP and a checksum-verified editable install-project registered in the Theme Store's `install-index` R2 object. Catalog install readiness is derived from those exact artifacts, not a hidden boolean. Never label the product installed or publish-ready before the real installer is available. No site, domain, store, or checkout is a prerequisite for a private account-owned Theme Studio copy.
+To build a reviewed release: run \`node scripts/build-theme-release.mjs plain-jane\`
+at the Theme Store repository root. Publishing uses \`--publish\`, uploads the
+zip to its SHA-256-addressed R2 key, verifies it by downloading it, and records
+the hash on the package manifest. The public \`/api/themes/plain-jane/0.1.0/manifest.json\`
+and \`/download\` endpoints serve that immutable release.
 
-Local source status is distinct from production: public `/iapj/` may still show the earlier release until R2 publication and worker rollout are separately verified.
+The compiled site materializes independently with deep routes and the
+\`journal-cms-manifest.json\` used for future site-scoped authoring. This is a
+**real downloadable package**, not yet a verified AgentSam CMS draft install.
+The Theme Store must never imply that the customer editor save/publish flow is
+complete until the authenticated install receipt and isolation tests pass.
+
+Do NOT run seed/plain-jane-journal.sql against customer D1 databases without
+a matching schema, ownership checks, validated parameters, backup and
+transaction tests. Audit the existing CMS database before adding tables.
+
+See docs/architecture/AGENTSAM-PRODUCT-CATALOG-RELEASES-20261028.md.

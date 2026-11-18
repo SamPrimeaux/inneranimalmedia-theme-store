@@ -6,7 +6,7 @@ The section extraction and renderer contract come from the SDK, not a fork of
 its visual editor. This is a release-time authoring step, not a runtime dependency.
 
 Usage:
-  python3 packages/theme-plain-jane/scripts/export-install-project.py \
+  python3 packages/theme-iapj/scripts/export-install-project.py \
     --contract /path/to/agentsam-sdk/apps/ecommerce-cms-agentsam/frontend/theme-editor/project.mjs
 
 Requires `pip install playwright` and `python -m playwright install chromium`.
@@ -24,7 +24,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / 'site'
 CANONICAL = 'https://themes.inneranimalmedia.com/iapj/'
-ORIGINAL = '/themes/plain-jane/demo/'
+ORIGINAL = '/themes/iapj/demo/'
 
 class SiteServer(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
@@ -52,7 +52,7 @@ def export(contract: Path):
     runtime = re.sub(r'^export\s+', '', source, flags=re.MULTILINE)
     manifest = json.loads((SITE / 'iapj-cms-manifest.json').read_text())
     package = json.loads((ROOT / 'package.json').read_text())
-    if manifest['theme'] != 'plain-jane' or manifest['sourceTheme'] != 'iapj' or len(manifest['pages']) != 31:
+    if manifest['theme'] != 'iapj' or manifest['sourceTheme'] != 'iapj' or len(manifest['pages']) != 31:
         raise RuntimeError('unexpected IAPJ source manifest; do not create a partial release')
     server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), SiteServer)
     threading.Thread(target=server.serve_forever, daemon=True).start()
@@ -122,12 +122,12 @@ def export(contract: Path):
         server.shutdown()
     project = {
         'schema': 'agentsam.theme-project.v1',
-        'id': 'theme_plain-jane',
+        'id': 'theme_iapj',
         'name': 'InnerAnimal Plain Jane',
         'version': '0.1.0',
         'revision': 0,
-        'sourceThemeId': 'plain-jane',
-        'sourcePackage': '@inneranimalmedia/theme-plain-jane',
+        'sourceThemeId': 'iapj',
+        'sourcePackage': '@inneranimalmedia/theme-iapj',
         'sourcePackageVersion': package['version'],
         'sourcePreviewUrl': CANONICAL,
         # Immutable ZIP digest is independently filled by the release script;

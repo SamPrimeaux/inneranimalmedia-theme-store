@@ -55,7 +55,7 @@ function add(slug,title,pathValue,type,body,detail={}){
  seen.add(clean);
  const keys=['iapj-header',body,'iapj-footer'];
  pages.push({
-  slug,source_slug:slug,title,page_type:type,path:clean,template_key:'plain-jane/'+type,
+  slug,source_slug:slug,title,page_type:type,path:clean,template_key:'iapj/'+type,
   status:'draft',sourceOrigin:'iapj-authored-source',
   source:detail.contentSource||'src/data/articles.ts',
   requiresRuntimeAdapter:true,
@@ -93,10 +93,10 @@ const mediaCatalog=Object.fromEntries(Object.entries(manifest.mediaCatalog).map(
   const [_,stem,ext]=match;
   const candidates=builtFiles.filter(file=>file.startsWith(stem+'-')&&file.endsWith('.'+ext));
   if(candidates.length!==1)throw Error('IAPJ media asset was not emitted exactly once: '+key+' '+src);
-  return [key,{...entry,url:'/themes/plain-jane/demo/assets/'+candidates[0]}];
+  return [key,{...entry,url:'/themes/iapj/demo/assets/'+candidates[0]}];
 }));
 const output={
- schema:'agentsam.cms-source-manifest.v1',theme:'plain-jane',sourceTheme:'iapj',
+ schema:'agentsam.cms-source-manifest.v1',theme:'iapj',sourceTheme:'iapj',
  editorScope:'account',editorProject:'install-project.json',sourceInventoryOnly:true,
  source:'SamPrimeaux/inneranimalmedia-theme-store',sourceSeed:'SamPrimeaux/iapj',contentModel:'IAPJ React/TypeScript + Markdown',
  definitions,pages,

@@ -9,9 +9,9 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const source=path.join(root,'packages/theme-plain-jane/site');
+const source=path.join(root,'packages/theme-iapj/site');
 const dest=path.join(root,'dist/iapj');
-const oldBase='/themes/plain-jane/demo/';
+const oldBase='/themes/iapj/demo/';
 const newBase='/iapj/';
 const editable=new Set(['.html','.js','.css','.json','.svg','.webmanifest','.md','.txt']);
 
@@ -20,7 +20,7 @@ if(!fs.existsSync(path.join(source,'index.html')) ||
   throw new Error('IAPJ canonical compiled site missing; refuse to ship the legacy Plain Jane preview');
 }
 const manifest=JSON.parse(fs.readFileSync(path.join(source,'iapj-cms-manifest.json'),'utf8'));
-if(manifest.theme!=='plain-jane' || manifest.sourceTheme!=='iapj' ||
+if(manifest.theme!=='iapj' || manifest.sourceTheme!=='iapj' ||
    manifest.editorProject!=='install-project.json' || manifest.pages.length<25) {
   throw new Error('IAPJ manifest does not match reviewed authored source');
 }

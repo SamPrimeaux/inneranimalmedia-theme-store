@@ -1,0 +1,28 @@
+{
+  "schema": "agentsam.prebuild.v1",
+  "id": "iapj",
+  "package": "@inneranimalmedia/theme-iapj",
+  "version": "0.3.0",
+  "siteRoot": "site",
+  "entrypoint": "index.html",
+  "rootDeployable": true,
+  "portable": true,
+  "materializer": {
+    "export": "@inneranimalmedia/theme-iapj/node",
+    "function": "materializePrebuild"
+  },
+  "defaults": {
+    "basePath": "/",
+    "canonicalOrigin": "https://example.com/",
+    "apiBasePath": "/api/cms"
+  },
+  "cmsManifest": "iapj-cms-manifest.json",
+  "category": "Editorial / Blog",
+  "description": "IAPJ source-driven editorial blog with 31 native editable page/section templates and full media assets.",
+  "notes": [
+    "Theme Store is the sole source for this distributable theme and editable CMS project.",
+    "Authenticated users may create private Theme Studio drafts without creating a website.",
+    "Public publishing remains a separate explicit action."
+  ],
+  "installProject": "install-project.json"
+}

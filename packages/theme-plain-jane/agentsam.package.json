@@ -1,42 +1,45 @@
 {
-  "schema": "agentsam.package.v1",
-  "id": "theme-plain-jane",
-  "name": "@inneranimalmedia/theme-plain-jane",
-  "version": "0.3.0",
+  "avoid_when": [
+    "A licensed production storefront or a verified CMS installation is required."
+  ],
+  "catalog_status": "package-ready",
   "class": "theme",
-  "status": "published",
-  "catalog_status": "published",
+  "commands": [],
+  "evidence": {
+    "directory": "packages/theme-plain-jane",
+    "purpose_source": "source snapshot"
+  },
+  "execution_domains": [
+    "node",
+    "browser"
+  ],
+  "id": "theme-plain-jane",
+  "install": [],
+  "languages": [
+    "javascript"
+  ],
+  "name": "@inneranimalmedia/theme-plain-jane",
+  "purpose": "Read-only editorial journal and photography CMS starter with externally editable manifest.",
   "registry": {
     "kind": "local-package",
     "name": "@inneranimalmedia/theme-plain-jane",
-    "public_claim": true
+    "public_claim": false
   },
-  "purpose": "A complete source-backed editable 31-page editorial website template with account-owned Theme Studio installation.",
-  "languages": [
-    "javascript",
-    "typescript"
+  "review_required": [
+    "production-cms-adapter",
+    "install-receipt",
+    "tenant-isolation"
   ],
-  "execution_domains": [
-    "browser",
-    "node"
-  ],
-  "commands": [],
-  "install": [],
-  "review_required": [],
-  "evidence": {
-    "directory": "packages/theme-plain-jane",
-    "purpose_source": "SamPrimeaux/iapj pinned GitHub source"
-  },
-  "use_when": [
-    "Install a complete editable editorial blog and portfolio into account-owned Theme Studio"
-  ],
-  "avoid_when": [],
+  "schema": "agentsam.package.v1",
+  "status": "package-ready",
   "topics": [
     "cms",
     "editorial",
-    "blog",
-    "portfolio",
     "photography",
     "theme"
-  ]
+  ],
+  "use_when": [
+    "Review a source-driven editorial journal and photography starter."
+  ],
+  "version": "0.1.0"
 }

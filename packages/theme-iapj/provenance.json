@@ -1,0 +1,17 @@
+{
+  "schema": "agentsam.product-provenance.v1",
+  "upstream": "https://github.com/SamPrimeaux/iapj",
+  "commit": "a4fff5a875082154be615370556239911fa9b62b",
+  "sourceRoot": "source",
+  "generatedBuildRoot": "site",
+  "status": "editable_candidate_under_release_review",
+  "publishApproved": true,
+  "distributionScope": "compiled_site_and_native_editable_theme_project",
+  "approvalContext": "Owner requested fully installable free Theme Studio CRUD distribution; product generation and ownership acceptance verified. Production publication remains contingent on credential-backed R2 round-trip and public installer verification.",
+  "notes": [
+    "Theme Store exclusively owns and maintains the IAPJ distribution.",
+    "IAPJ is a distinct package identity; Plain Jane Classic remains a separate package and existing customer project.",
+    "Preview URL is stable; immutable release and editable install project are separate versioned artifacts.",
+    "Authenticated users own independent Theme Studio CRUD drafts without requiring a CMS site."
+  ]
+}

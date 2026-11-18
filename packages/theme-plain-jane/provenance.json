@@ -1,17 +1,18 @@
 {
   "schema": "agentsam.product-provenance.v1",
-  "upstream": "https://github.com/SamPrimeaux/iapj",
-  "commit": "a4fff5a875082154be615370556239911fa9b62b",
+  "upstream": "https://github.com/SamPrimeaux/inneranimalmedia-blog-template",
+  "commit": "9e4c0f867da45304b7e12f2639c1b01363417ad3",
+  "snapshotDate": "2026-10-28",
   "sourceRoot": "source",
   "generatedBuildRoot": "site",
-  "status": "editable_candidate_under_release_review",
+  "appliedIntegrationPatches": [
+    "BrowserRouter basename honors Vite base URL",
+    "AppLogo asset URL honors Vite base URL",
+    "CMS fixture resolveAsset honors Vite base URL",
+    "Vite client type declaration"
+  ],
+  "status": "first_party_compiled_release_authorized",
   "publishApproved": true,
-  "distributionScope": "compiled_site_and_native_editable_theme_project",
-  "approvalContext": "Owner requested fully installable free Theme Studio CRUD distribution; product generation and ownership acceptance verified. Production publication remains contingent on credential-backed R2 round-trip and public installer verification.",
-  "replaces": "SamPrimeaux/inneranimalmedia-blog-template",
-  "notes": [
-    "Theme Store exclusively owns and maintains the IAPJ distribution.",
-    "Preview URL is stable; immutable release and editable install project are separate versioned artifacts.",
-    "Authenticated users own independent Theme Studio CRUD drafts without requiring a CMS site."
-  ]
+  "distributionScope": "compiled_site_and_cms_manifest_only",
+  "approvalContext": "Owner-requested Theme Store release; original source and private npm package remain unredistributed"
 }

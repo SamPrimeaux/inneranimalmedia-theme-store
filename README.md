@@ -84,6 +84,12 @@ Only copy and the five color tokens are editable data; layout stays code. Themes
 (`agentsam.store` in its package.json) and the catalog regenerates.
 
 
+### Plain Jane Classic and IAPJ are separate packages
+
+- packages/theme-plain-jane is the original slim Plain Jane Classic release (plain-jane@0.1.0), retaining the theme_plain-jane CMS project and its verified release ZIP.
+- packages/theme-iapj is the full InnerAnimal Plain Jane editorial experience (iapj@0.3.0), with its own theme_iapj CMS project and the public /iapj/ preview alias.
+- A preview alias is never a package slug. Never reuse a published theme slug or CMS project ID for a materially different theme. Existing customer drafts remain attached to their original project identity.
+
 ### CMS install projects
 
 Reviewed editable CMS starter projects live beside their theme package as `install-project.json`. Publish them with `npm run publish:install-projects`. The publisher reads only this repository, validates project identity and release hashes, uploads content-addressed JSON to the private `theme-store` R2 bucket, verifies the downloaded bytes, then updates `install-index/index.json` last. Publishing a theme ZIP does not by itself make a theme installer-ready; a project is listed only after its reviewed project artifact is present. The publisher then verifies and synchronizes the current released version into the existing AgentSam product/release inventory; any failed sync is a failed publication, not a silent success. See [Release registry synchronization](docs/RELEASE_REGISTRY_SYNC.md) for validation, reconciliation and entitlement-protected artifact handling. AgentSam remains responsible for user authentication, site ownership, draft creation and CMS writes.

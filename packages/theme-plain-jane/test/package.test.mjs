@@ -6,120 +6,42 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createTheme} from '../src/index.js';
 import {materializePrebuild,resolvePrebuildRoot} from '../src/node.js';
-
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const fromRoot=p=>path.join(root,p);
-const pkg=JSON.parse(fs.readFileSync(fromRoot('package.json'),'utf8'));
-const provenance=JSON.parse(fs.readFileSync(fromRoot('provenance.json'),'utf8'));
-const manifest=JSON.parse(fs.readFileSync(fromRoot('site/iapj-cms-manifest.json'),'utf8'));
-const project=JSON.parse(fs.readFileSync(fromRoot('install-project.json'),'utf8'));
-
-test('IAPJ ships a real standalone editable project owned by the Theme Store',()=>{
+const manifest=JSON.parse(fs.readFileSync(path.join(root,'site/journal-cms-manifest.json'),'utf8'));
+test('The original journal is a portable compiled-site package with a CMS manifest',()=>{
  assert.equal(createTheme().slug,'plain-jane');
- assert.equal(createTheme().displayName,'InnerAnimal Plain Jane');
  assert.equal(createTheme().installable,true);
- assert.equal(pkg.version,'0.3.0');
- assert.equal(pkg.agentsam.sourceRepository,'SamPrimeaux/inneranimalmedia-theme-store');
- assert.equal(pkg.agentsam.sourceSeed,'SamPrimeaux/iapj');
- assert.ok(['preview','published'].includes(pkg.agentsam.store.release.status));
- assert.equal(provenance.publishApproved,true);
- if (pkg.agentsam.store.release.status === 'published') {
-   assert.match(pkg.agentsam.store.release.sha256,/^[0-9a-f]{64}$/);
-   assert.equal(pkg.agentsam.store.release.storageKey,
-     `releases/plain-jane/${pkg.version}/${pkg.agentsam.store.release.sha256}.zip`);
-   assert.equal(project.sourceReleaseSha256,pkg.agentsam.store.release.sha256);
- } else {
-   assert.equal(pkg.agentsam.store.release.storageKey,null);
- }
- assert.match(provenance.commit,/^[0-9a-f]{40}$/);
- assert.equal(provenance.upstream,'https://github.com/SamPrimeaux/iapj');
- assert.ok(fs.existsSync(fromRoot('source/src/components/BrandLogo.tsx')));
- assert.ok(fs.existsSync(fromRoot('source/src/components/FooterBackdrop3D.tsx')));
- assert.ok(fs.existsSync(fromRoot('source/src/content/site.manifest.json')));
- assert.ok(!fs.existsSync(fromRoot('source/seed/plain-jane-journal.sql')),'legacy CMS SQL must not be copied');
- assert.ok(fs.existsSync(fromRoot('install-project.json')),'the authored editable project must accompany a stock theme');
+ assert.equal(manifest.pages.length,9);
+ assert.equal(manifest.definitions.length,18);
+ assert.ok(manifest.pages.every(p=>p.sections.length && p.sections.every(s=>s.id===s.key)));
+ assert.ok(manifest.pages.some(p=>p.path==='post/the-art-of-slow-travel'));
+ assert.ok(fs.existsSync(path.join(resolvePrebuildRoot(),'images/cover-slow-travel.svg')));
+ assert.match(fs.readFileSync(path.join(root,'site/index.html'),'utf8'),/index-.*\.js/);
 });
-
-test('IAPJ source-derived CMS manifest covers editorial pages, categories and all authored article routes',()=>{
- assert.equal(manifest.schema,'agentsam.cms-source-manifest.v1');
- assert.equal(manifest.theme,'plain-jane');
- assert.equal(manifest.sourceTheme,'iapj');
- assert.equal(manifest.editorProject,'install-project.json');
- assert.equal(manifest.editorScope,'account');
- assert.equal(manifest.sourceInventoryOnly,true);
- assert.ok(manifest.pages.length>=25,'IAPJ article/markdown corpus must be exported');
- assert.ok(manifest.definitions.length>=10);
- const routes=manifest.pages.map(page=>page.path);
- assert.equal(new Set(routes).size,routes.length);
- for(const route of ['', 'blog','about','work','photography','search',
-    'blog/category/ai','blog/category/runtime','blog/category/ui-ux',
-    'blog/structured-decisions','blog/infrastructure-cookbooks','blog/ux-guide']){
-   assert.ok(routes.includes(route),'missing IAPJ route: '+route);
- }
- for(const [key,media] of Object.entries(manifest.mediaCatalog)){
-   if(!media.url)continue;
-   assert.ok(media.url.startsWith('/themes/plain-jane/demo/assets/'),key+' source media leaked into manifest');
-   assert.ok(fs.existsSync(fromRoot('site/assets/'+path.basename(media.url))),key+' has no compiled media');
- }
- for(const page of manifest.pages){
-   assert.ok(page.sections.length>=3,page.slug+' must not be an empty editorial scaffold');
-   assert.ok(page.sections.every(sec=>manifest.definitions.includes(sec.definition_key)));
- }
- const old=fs.readFileSync(fromRoot('site/index.html'),'utf8');
- assert.match(old,/assets\/index-/);
- assert.ok(!fs.existsSync(fromRoot('site/images/cover-slow-travel.svg')),'old beige journal artwork leaked into IAPJ');
-});
-
-test('IAPJ materializes a self-contained multi-route preview at a nested path',()=>{
- const directory=fs.mkdtempSync(path.join(os.tmpdir(),'iapj-preflight-'));
+test('Materialization preserves original source and deep links and respects subdirectory base path',()=>{
+ const target=fs.mkdtempSync(path.join(os.tmpdir(),'agentsam-journal-test-'));
  try{
-   const target=path.join(directory,'theme');
-   const result=materializePrebuild(target,{basePath:'/test/customer/blog'});
-   assert.equal(result.pages,manifest.pages.length);
-   assert.equal(result.basePath,'/test/customer/blog/');
-   assert.match(fs.readFileSync(path.join(target,'index.html'),'utf8'),/\/test\/customer\/blog\/assets\//);
-   for(const route of ['about','work','photography','blog/structured-decisions','blog/category/ui-ux','blog/ux-guide']){
-     assert.ok(fs.existsSync(path.join(target,route,'index.html')),'deep link missing '+route);
-   }
-   assert.throws(()=>materializePrebuild(target),/already exists/);
-   assert.throws(()=>materializePrebuild(null),/target/);
-   assert.ok(fs.existsSync(path.join(resolvePrebuildRoot(),'iapj-cms-manifest.json')));
- }finally{fs.rmSync(directory,{recursive:true,force:true});}
+  const install=materializePrebuild(path.join(target,'site'),{basePath:'/customer/blog'});
+  assert.equal(install.basePath,'/customer/blog/');
+  assert.equal(install.pages,9);
+  assert.throws(()=>materializePrebuild(path.join(target,'site')),/already exists/);
+  const html=fs.readFileSync(path.join(target,'site/index.html'),'utf8');
+  assert.match(html,/\/customer\/blog\/assets\//);
+  for(const route of ['about','photography','post/the-art-of-slow-travel','post/analog-photography-digital-age'])
+   assert.ok(fs.existsSync(path.join(target,'site',route,'index.html')),route);
+  assert.ok(fs.existsSync(path.join(resolvePrebuildRoot(),'journal-cms-manifest.json')));
+  assert.throws(()=>materializePrebuild(null),/target/);
+ }finally{fs.rmSync(target,{recursive:true,force:true});}
 });
-
-test('every authored IAPJ route is a genuine editable CMS page, not a placeholder',()=>{
- assert.equal(project.schema,'agentsam.theme-project.v1');
- assert.equal(project.id,'theme_plain-jane');
- assert.equal(project.sourcePackage,pkg.name);
- assert.equal(project.sourcePackageVersion,pkg.version);
- assert.equal(project.sourcePreviewUrl,'https://themes.inneranimalmedia.com/iapj/');
- assert.match(project.sourceReleaseSha256,/^[0-9a-f]{64}$/);
- assert.equal(project.sourceManifestPageCount,31);
- assert.equal(project.pages.length,31);
- assert.deepEqual(project.sourceRoutesNotRendered,[]);
- assert.deepEqual(project.sourceAssetErrors,[]);
- const routes=new Set(manifest.pages.map(p=>p.path));
- const slugs=new Set();
- let fieldCount=0;
- for(const page of project.pages){
-   assert.ok(routes.has(page.sourceRoute),'original authored route missing from editor: '+page.slug);
-   assert.ok(!slugs.has(page.slug),'duplicate editable page '+page.slug);
-   slugs.add(page.slug);
-   assert.ok(!/<script\b/i.test(page.template),'React hydration would overwrite customer edits: '+page.slug);
-   assert.ok(page.template.includes('<!--theme-section:'),'source content was not extracted: '+page.slug);
-   assert.equal(page.route,'/'+(page.sourceRoute?page.sourceRoute+'/':''),'authored routes must resolve within the installed site');
-   assert.ok(!/<a\b[^>]*href="https:\/\/themes\.inneranimalmedia\.com\/iapj\/(?!assets\/)/.test(page.template+' '+page.sections.map(s=>s.html).join(' ')),'installed navigation must not bounce back to provider demo: '+page.slug);
-   assert.ok(page.sections.length>=3,'missing real header/body/footer: '+page.slug);
-   assert.ok(page.sections.some(s=>s.zone==='HEADER'),'missing header: '+page.slug);
-   assert.ok(page.sections.some(s=>s.zone==='BODY'),'missing body: '+page.slug);
-   assert.ok(page.sections.some(s=>s.zone==='FOOTER'),'missing footer: '+page.slug);
-   assert.ok(page.sections.some(s=>s.schema.fields.length>0),'no editable source fields: '+page.slug);
-   for(const section of page.sections){
-     assert.ok(page.template.includes('<!--theme-section:'+section.key+'-->'),'unbound source section: '+page.slug+' '+section.key);
-     assert.ok(section.html.length>50,'empty source section: '+page.slug+' '+section.key);
-     fieldCount+=(section.schema.fields||[]).length;
-   }
- }
- assert.ok(fieldCount>1000,'IAPJ section text/images/links were not extracted');
- assert.ok(fs.statSync(fromRoot('install-project.json')).size < 8*1024*1024,'SDK save contract limit exceeded');
+test('Only the compiled first-party release is authorized; npm source stays private',()=>{
+ const product=JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8'));
+ const provenance=JSON.parse(fs.readFileSync(path.join(root,'provenance.json'),'utf8'));
+ assert.equal(product.private,true);
+ assert.equal(product.license,'UNLICENSED');
+ assert.equal(provenance.publishApproved,true);
+ assert.equal(provenance.distributionScope,'compiled_site_and_cms_manifest_only');
+ assert.equal(product.agentsam.installable,true);
+ assert.match(product.agentsam.store.release.sha256, /^[0-9a-f]{64}$/);
+ assert.equal(product.agentsam.store.release.status,'published');
+ assert.match(provenance.commit,/^[a-f0-9]{40}$/);
 });

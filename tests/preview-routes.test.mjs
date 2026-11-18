@@ -21,3 +21,19 @@ test('repairs nested own-release asset paths without crossing theme boundaries',
   assert.equal(normalizeReleaseAssetRelative('portal/theme-packages/other/2.6.13/preview/assets/photo.webp','resolve','2.6.13'),'portal/theme-packages/other/2.6.13/preview/assets/photo.webp');
   assert.equal(normalizeReleaseAssetRelative('portal/cart/index.html','resolve','2.6.13'),'portal/cart/index.html');
 });
+
+
+test('Plain Jane Classic and IAPJ resolve to their own versioned preview packages', () => {
+  const editorial = [
+    {slug:'plain-jane',version:'0.1.0'},
+    {slug:'iapj',version:'0.3.0'},
+  ];
+  assert.equal(
+    resolveDemoAlias('/themes/plain-jane/presets/plain-jane/demo/', editorial),
+    '/theme-packages/plain-jane/0.1.0/preview/'
+  );
+  assert.equal(
+    resolveDemoAlias('/themes/iapj/presets/iapj/demo/', editorial),
+    '/theme-packages/iapj/0.3.0/preview/'
+  );
+});

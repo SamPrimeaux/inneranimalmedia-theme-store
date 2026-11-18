@@ -1,7 +1,7 @@
 import { findTheme, publicTheme, themes } from './catalog';
 import siteDefaults from './site.default.json';
 import { normalizePreviewHtml, normalizePreviewManifest } from './preview-html.mjs';
-import { previewFileHeaders } from './preview-headers.mjs';
+import { previewFileHeaders, withPublicAssetCors } from './preview-headers.mjs';
 import { resolveDemoAlias, publicDemoUrl, normalizeReleaseAssetRelative } from './preview-routes.mjs';
 import { resolveSite, type SiteDocument } from './site.mjs';
 import { normalizeFooter, defaultFooter } from './footer.mjs';

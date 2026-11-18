@@ -16,6 +16,17 @@ test('Theme Store has one in-place interactive demo, with fullscreen and Add', (
   assert.doesNotMatch(src, /View demo/);
 });
 
+test('published Add eligibility is never held in a stale browser catalog cache',()=>{
+  const worker=readFileSync(new URL('../src/worker.ts',import.meta.url),'utf8');
+  const app=readFileSync(new URL('../src/main.tsx',import.meta.url),'utf8');
+  assert.match(worker,/function response\(data: unknown, status = 200, cacheControl = 'public, max-age=120'\)/);
+  assert.match(worker,/iam\.theme-catalog\.v1', products \}, 200, 'no-store'\)/);
+  assert.match(worker,/agentsam\.website-theme-install-index\.v1',[^\n]+200, 'no-store'\)/);
+  assert.match(app,/fetch\('\/api\/catalog', \{ cache: 'no-store' \}\)/);
+  assert.match(app,/window\.addEventListener\('focus', refreshCatalog\)/);
+  assert.match(app,/document\.addEventListener\('visibilitychange', onVisibilityChange\)/);
+});
+
 test('old IASF direct-demo URLs still resolve to the same versioned R2 preview',()=>{
   const themes=[{slug:'iasf',version:'2.6.19'}];
   assert.equal(resolveDemoAlias('/themes/iasf/presets/iasf/demo/',themes),

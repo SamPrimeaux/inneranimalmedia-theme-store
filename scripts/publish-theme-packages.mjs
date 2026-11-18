@@ -68,7 +68,7 @@ try {
   // Never fetch an older external snapshot for the downloadable product.
   const catalog = await buildCatalog(join(process.cwd(), 'packages'));
   for (const theme of catalog) {
-    if ((onlyPlainJane && theme.slug !== 'plain-jane') || theme.previewBuild === 'external') continue;
+    if ((only && theme.slug !== only) || theme.previewBuild === 'external') continue;
     const themePrefix = '/theme-packages/' + theme.slug + '/' + theme.version + '/preview/';
     const entry = await import(pathToFileURL(join(process.cwd(), 'packages', 'theme-' + theme.slug, 'src', 'node.js')).href);
     const out = join(root, 'pkg-' + theme.slug);

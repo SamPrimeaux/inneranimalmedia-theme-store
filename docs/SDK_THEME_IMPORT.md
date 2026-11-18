@@ -17,7 +17,7 @@ Package paths intentionally retain their original `packages/...` layout for sour
 - Do not publish the copied websites, downloadable ZIPs or customer-facing "Install" statuses without tests, manifests, license review and CMS v2 integration.
 - Several package versions can disagree with their `prebuild.json` and `src/index.js` embedded version values (notably Violet); normalize versions before publishing.
 - Installable themes must not require unversioned SDK URLs, dev services or customer-specific source data; validate all relative/absolute assets and supported API bindings.
-- Theme Store's existing Plain Jane source-backed, pinned-commit preview publisher remains unchanged. It may be generalized later; do not introduce a second preview authority.
+- Theme Store publishes and verifies versioned preview packages. SDK-local preview tooling may cache those provider artifacts, but must not pin theme slugs or own a parallel preview catalog.
 - Public source files can be developed here, but no theme is marked as installed or promoted simply because its source exists.
 
 ## Next work: one vertical slice

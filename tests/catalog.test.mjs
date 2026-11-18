@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, writeFile, rm, access } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, rm, access, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { buildCatalog } from '../scripts/build-catalog.mjs';
@@ -76,6 +76,14 @@ test('Plain Jane Classic and IAPJ remain distinct catalog and install identities
   assert.equal(classic.release.status, 'published');
   assert.equal(iapj.version, '0.3.0');
   assert.equal(iapj.previewAlias, 'iapj');
+  // Publishing changes the canonical package metadata, not just a local
+  // deployment artifact. A fresh CI rebuild must NEVER unpublish IAPJ.
+  assert.equal(iapj.release.status, 'published');
+  const sourceProject=JSON.parse(await readFile(new URL('../packages/theme-iapj/install-project.json',import.meta.url),'utf8'));
+  assert.equal(iapj.release.sha256,sourceProject.sourceReleaseSha256);
+  assert.equal(iapj.release.storageKey,
+    'releases/iapj/0.3.0/'+iapj.release.sha256+'.zip');
+  assert.equal(sourceProject.id,'theme_iapj');
   assert.equal(classic.sku, 'iam.theme.plain-jane');
   assert.equal(iapj.sku, 'iam.theme.iapj');
   assert.notEqual(classic.sku, iapj.sku);

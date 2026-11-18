@@ -13,7 +13,7 @@ Package paths intentionally retain their original `packages/...` layout for sour
 ## Important limitations
 
 - Source import is **not** equivalent to an approved theme release, live R2 preview or CMS installation.
-- The original Theme Store catalog uses hard-coded products and AgentSam-hosted preview URLs for eight themes; migrate to compiled R2 previews and D1 release records before claiming independence.
+- Theme Store owns the canonical catalog and versioned preview/install artifacts in its own R2-backed API; no AgentSam product-registry record is required for a theme to be discoverable or installable.
 - Do not publish the copied websites, downloadable ZIPs or customer-facing "Install" statuses without tests, manifests, license review and CMS v2 integration.
 - Several package versions can disagree with their `prebuild.json` and `src/index.js` embedded version values (notably Violet); normalize versions before publishing.
 - Installable themes must not require unversioned SDK URLs, dev services or customer-specific source data; validate all relative/absolute assets and supported API bindings.

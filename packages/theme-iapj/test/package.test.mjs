@@ -106,6 +106,9 @@ test('every authored IAPJ route is a genuine editable CMS page, not a placeholde
  assert.equal(project.sourcePackage,pkg.name);
  assert.equal(project.sourcePackageVersion,pkg.version);
  assert.equal(project.sourcePreviewUrl,'https://themes.inneranimalmedia.com/iapj/');
+ const immutableAssetBase=`https://themes.inneranimalmedia.com/theme-packages/iapj/${pkg.version}/preview/`;
+ assert.ok(project.pages.every(page=>page.assetBase===immutableAssetBase),
+   'CMS editor assets must use the immutable, version-pinned package route');
  assert.match(project.sourceReleaseSha256,/^[0-9a-f]{64}$/);
  assert.equal(project.sourceManifestPageCount,31);
  assert.equal(project.pages.length,31);

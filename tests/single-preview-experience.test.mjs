@@ -27,6 +27,13 @@ test('published Add eligibility is never held in a stale browser catalog cache',
   assert.match(app,/document\.addEventListener\('visibilitychange', onVisibilityChange\)/);
 });
 
+test('IAPJ has one canonical Add page, with immutable iframe preview and no recursive redirect',()=>{
+  const worker=readFileSync(new URL('../src/worker.ts',import.meta.url),'utf8');
+  assert.match(worker,/url\.pathname === '\/iapj' \|\| url\.pathname === '\/iapj\/'/);
+  assert.match(worker,/new URL\('\/themes\/iapj\/', url\.origin\)/);
+  assert.match(worker,/return origin \+ '\/theme-packages\/' \+ theme\.slug \+ '\/' \+ theme\.version \+ '\/preview\/'/);
+});
+
 test('old IASF direct-demo URLs still resolve to the same versioned R2 preview',()=>{
   const themes=[{slug:'iasf',version:'2.6.19'}];
   assert.equal(resolveDemoAlias('/themes/iasf/presets/iasf/demo/',themes),

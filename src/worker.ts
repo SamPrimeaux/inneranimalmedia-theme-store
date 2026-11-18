@@ -233,7 +233,7 @@ export default {
     if (url.pathname === '/api/install-index') {
       if (method !== 'GET') return missing('method_not_allowed', 405);
       const packages = await loadInstallIndex(env);
-      return response({ ok:true, schema:'agentsam.website-theme-install-index.v1', packages: packages ?? [] });
+      return response({ ok:true, schema:'agentsam.website-theme-install-index.v1', packages: packages ?? [] }, 200, 'no-store');
     }
     // Editable source projects are public immutable *starter* packages. Private
     // customer drafts/revisions are only in the authenticated AgentSam CMS.

@@ -123,6 +123,11 @@ test('every authored IAPJ route is a genuine editable CMS page, not a placeholde
    slugs.add(page.slug);
    assert.ok(!/<script\b/i.test(page.template),'React hydration would overwrite customer edits: '+page.slug);
    assert.ok(page.template.includes('<!--theme-section:'),'source content was not extracted: '+page.slug);
+   const editorMarkup=page.template+' '+page.sections.map(section=>section.html).join(' ');
+   assert.ok(editorMarkup.includes(immutableAssetBase+'assets/index-'),
+     'the embedded editor preview must load its stylesheet from the immutable release: '+page.slug);
+   assert.ok(!editorMarkup.includes('https://themes.inneranimalmedia.com/iapj/assets/'),
+     'the mutable public alias must not supply cross-origin editor assets: '+page.slug);
    assert.equal(page.route,'/'+(page.sourceRoute?page.sourceRoute+'/':''),'authored routes must resolve within the installed site');
    assert.ok(!/<a\b[^>]*href="https:\/\/themes\.inneranimalmedia\.com\/iapj\/(?!assets\/)/.test(page.template+' '+page.sections.map(s=>s.html).join(' ')),'installed navigation must not bounce back to provider demo: '+page.slug);
    assert.ok(page.sections.length>=3,'missing real header/body/footer: '+page.slug);

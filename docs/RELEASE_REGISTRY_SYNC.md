@@ -1,49 +1,37 @@
-# Theme Store → AgentSam release registry
+# Theme Store release authority
 
-**Authority:** This repository publishes verified theme ZIPs and editable projects to
-`theme-store` R2. Its public `/api/catalog` and `/api/install-index` describe
-releases; `agentsam_products` and `agentsam_product_releases` are the existing
-platform discovery/entitlement inventory, **not a second Theme Store**.
+**Current architecture (2026-11-18):** `inneranimalmedia-theme-store` is the sole authority for website-theme availability and distribution.
 
-## Connected pipeline
+## Canonical ownership
 
-`npm run publish:install-projects -- --only=plain-jane` uploads the immutable
-source-backed editable project, verifies its hash after reading back from R2,
-updates the install index, **then runs registry sync** for that SKU. The
-registry sync verifies the current public catalog, install-project bytes, release
-manifest and ZIP SHA-256 before changing the production D1 product/release
-spine. The publisher fails if it cannot verify or persist the registry entry;
-R2 objects remain immutable, so rerunning safely resumes.
+- `GET /api/catalog` publishes the Theme Store's product metadata and published status.
+- `GET /api/install-index` publishes the immutable, installer-ready release list.
+- `theme-store` R2 owns release ZIPs, editable install-project JSON, versioned preview files and their checksums.
+- The Theme Store Worker validates and serves the public catalog, release index, preview aliases and project artifacts.
+- AgentSam SDK is a generic authenticated consumer. It reads the provider's catalog/index, verifies the selected release and project, then creates an account-owned CMS draft.
 
-Use the publisher with Cloudflare credentials that permit **R2 reads/writes and
-D1 writes**. The live Worker must already serve the new release through both
-catalog and install-project routes. If the Worker deployment lags the R2 index,
-complete the deployment and rerun the sync. This intentionally fails closed
-rather than promoting a release that customers cannot yet install.
+## Explicit non-dependency
 
-## Reconcile an already-live release
+Theme publication does **not** create, update or require rows in AgentSam's `agentsam_products` or `agentsam_product_releases` tables. Those are not the Theme Store catalog, install index, or release authority. A theme is installable when the Theme Store's own published catalog and checksum-verified install index agree.
 
-```sh
-node scripts/register-product-releases.mjs --dry-run --only=plain-jane
-node scripts/register-product-releases.mjs --publish --only=plain-jane
-```
+Existing historical rows in the platform product registry are not authoritative and are not read by the website-theme installer. Do not add a product row or SDK-side slug allowlist to release a new theme.
 
-Omit `--only` to reconcile all current published catalog products. Some paid/
-entitled theme ZIPs deliberately return HTTP 403 to public visitors. In an
-authorized publisher run, the registrar uses Wrangler to verify these ZIPs
-**directly from R2** instead; it never bypasses storefront entitlements.
+## Release sequence
 
-Reconciliation retains historical release rows and refuses to alter the
-checksum or object key of an existing version. The production writer reads back
-and confirms the exact release before reporting success. Source metadata comes
-from the live published assets, **not** the obsolete
-`.releases/staged-releases.json` file. No account-specific theme or customer
-data is embedded in the source registry.
+1. Build the theme's immutable ZIP and compute its SHA-256.
+2. Export the editable CMS project against the shared SDK project contract and bind it to the ZIP digest.
+3. Publish the ZIP and editable project to Theme Store R2, then read them back and verify their digests.
+4. Publish the versioned preview files and preview manifest to Theme Store R2.
+5. Publish the combined `/api/install-index` and deploy the Theme Store Worker/catalog.
+6. Verify the public catalog, install index, ZIP and editable project endpoints.
 
-## Checks
+The Theme Store publisher is responsible for these steps. It does not need AgentSam product-D1 write permissions. The SDK must not be modified when a theme is added.
+
+## Verification
 
 ```sh
-npm test
 npm run check
-node --test tests/product-release-registry.test.mjs
+npm run build
+npm test
+node scripts/verify-published-installations.mjs --min 12
 ```

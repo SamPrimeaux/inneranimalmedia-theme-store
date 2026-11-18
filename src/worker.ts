@@ -19,9 +19,9 @@ type Env = {
   THEME_INSTALLER_URL?: string;
 };
 
-function response(data: unknown, status = 200): Response {
+function response(data: unknown, status = 200, cacheControl = 'public, max-age=120'): Response {
   return Response.json(data, { status, headers: {
-    'cache-control': 'public, max-age=120',
+    'cache-control': cacheControl,
     'x-content-type-options': 'nosniff',
   } });
 }
@@ -34,7 +34,8 @@ const strictSlug = /^[a-z0-9-]+$/;
 async function resolvePreview(env: Env, origin: string, theme: { slug: string; version: string }): Promise<string | null> {
   // IAPJ's public preview is bundled from the canonical Theme Store package.
   // Customer CMS installation remains separately gated by the R2 install index.
-  if ('previewAlias' in theme && typeof theme.previewAlias === 'string') return origin + '/' + theme.previewAlias + '/';
+  if ('previewAlias' in theme && typeof theme.previewAlias === 'string')
+    return origin + '/theme-packages/' + theme.slug + '/' + theme.version + '/preview/';
   const root = 'theme-packages/' + theme.slug + '/' + theme.version + '/preview/';
   try {
     if (await env.THEME_PACKAGES.head(root + 'index.html')) return publicDemoUrl(origin, theme.slug);
@@ -80,7 +81,15 @@ export default {
     const method = request.method.toUpperCase();
     // IAPJ and Plain Jane Classic are separate packages. The former uses
     // /iapj/ as its short preview alias; the latter keeps its versioned demo route.
-    if (url.pathname === '/iapj') return Response.redirect(new URL('/iapj/', url.origin), 302);
+    // One public product experience: direct /iapj visits open the canonical
+    // Theme Store details with its Add control. The iframe uses the immutable
+    // versioned preview URL, so this redirect cannot recurse inside the iframe.
+    if (url.pathname === '/iapj' || url.pathname === '/iapj/') {
+      const canonical = new URL('/themes/iapj/', url.origin);
+      return new Response(null, {status:302,headers:{
+        location:canonical.href,'cache-control':'no-store',
+      }});
+    }
     if (url.pathname.startsWith('/iapj/')) {
       if (method !== 'GET' && method !== 'HEAD') return missing('method_not_allowed', 405);
       const segments = url.pathname.slice('/iapj/'.length).split('/').filter(Boolean);
@@ -228,12 +237,12 @@ export default {
           }
         }
       } catch { /* Installed theme metadata still comes from its verified package. */ }
-      return response({ ok: true, schema: 'iam.theme-catalog.v1', products });
+      return response({ ok: true, schema: 'iam.theme-catalog.v1', products }, 200, 'no-store');
     }
     if (url.pathname === '/api/install-index') {
       if (method !== 'GET') return missing('method_not_allowed', 405);
       const packages = await loadInstallIndex(env);
-      return response({ ok:true, schema:'agentsam.website-theme-install-index.v1', packages: packages ?? [] });
+      return response({ ok:true, schema:'agentsam.website-theme-install-index.v1', packages: packages ?? [] }, 200, 'no-store');
     }
     // Editable source projects are public immutable *starter* packages. Private
     // customer drafts/revisions are only in the authenticated AgentSam CMS.

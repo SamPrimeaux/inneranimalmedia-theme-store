@@ -6,7 +6,7 @@
   "preview_urls": false,
   "compatibility_date": "2026-10-28",
   "vars": {
-    "THEME_INSTALLER_URL": "https://agentsam.inneranimalmedia.com/sites"
+    "THEME_INSTALLER_URL": "https://agentsam.inneranimalmedia.com/admin/sites"
   },
   "assets": {
     "directory": "./dist",

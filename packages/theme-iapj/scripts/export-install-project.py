@@ -96,7 +96,7 @@ def export(contract: Path):
                       link.setAttribute('href','/' + raw.slice(prefix.length));
                   }
                 }""", ORIGINAL)
-                html = tab.content().replace(ORIGINAL, CANONICAL)
+                html = tab.content().replace(ORIGINAL, asset_base)
                 # Presets remain templates. Their links resolve inside an
                 # installed site, not back into the provider's public demo.
                 tab.add_script_tag(content=runtime)

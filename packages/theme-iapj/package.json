@@ -70,9 +70,9 @@
       "priceUsd": 0,
       "delivery": "verified-package",
       "release": {
-        "status": "preview",
-        "sha256": null,
-        "storageKey": null
+        "status": "published",
+        "sha256": "1238b434f1c304100198b40f357c32cfe104db1262445bf95cf2fb5bb75f5aa1",
+        "storageKey": "releases/iapj/0.3.0/1238b434f1c304100198b40f357c32cfe104db1262445bf95cf2fb5bb75f5aa1.zip"
       },
       "industries": [
         "Editorial",

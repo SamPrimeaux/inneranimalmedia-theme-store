@@ -19,9 +19,9 @@ type Env = {
   THEME_INSTALLER_URL?: string;
 };
 
-function response(data: unknown, status = 200): Response {
+function response(data: unknown, status = 200, cacheControl = 'public, max-age=120'): Response {
   return Response.json(data, { status, headers: {
-    'cache-control': 'public, max-age=120',
+    'cache-control': cacheControl,
     'x-content-type-options': 'nosniff',
   } });
 }

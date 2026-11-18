@@ -228,7 +228,7 @@ export default {
           }
         }
       } catch { /* Installed theme metadata still comes from its verified package. */ }
-      return response({ ok: true, schema: 'iam.theme-catalog.v1', products });
+      return response({ ok: true, schema: 'iam.theme-catalog.v1', products }, 200, 'no-store');
     }
     if (url.pathname === '/api/install-index') {
       if (method !== 'GET') return missing('method_not_allowed', 405);

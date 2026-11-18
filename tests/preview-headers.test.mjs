@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { previewFileHeaders } from '../src/preview-headers.mjs';
+import { previewFileHeaders, withPublicAssetCors } from '../src/preview-headers.mjs';
 
 const types = {
   html: 'text/html; charset=utf-8',

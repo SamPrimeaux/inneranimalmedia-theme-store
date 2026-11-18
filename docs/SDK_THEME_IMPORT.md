@@ -25,5 +25,5 @@ Package paths intentionally retain their original `packages/...` layout for sour
 1. Define one canonical theme package contract (reconcile duplicate SDK `theme-contract` packages).
 2. Build a generalized artifact/preview pipeline with version consistency and relative-path checks.
 3. Prove Violet (or another source-complete candidate) preview and installation on a fresh authorized CMS v2 site.
-4. Record products and releases in `agentsam_products` / `agentsam_product_releases`, with private immutable R2 files and checksum verification.
+4. Publish the immutable ZIP, editable project and preview files to Theme Store R2; publish and verify the Theme Store install index. Do not mirror theme availability into AgentSam product D1.
 5. Add upgrade/rollback paths, migrate remaining previews and deprecate SDK-hosted files only after verification.

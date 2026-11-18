@@ -98,7 +98,7 @@ export default {
       // deep links, never the Theme Store's SPA fallback.
       const isFile = segments.at(-1)?.includes('.') ?? false;
       const target = isFile ? request : new Request(new URL('/iapj/', url), request);
-      return env.ASSETS.fetch(target);
+      return withPublicAssetCors(await env.ASSETS.fetch(target));
     }
     if (url.pathname.startsWith('/fonts/')) return serveFontAssets(request, env);
     if (url.pathname.startsWith('/api/ui-themes/')) return serveUiThemePackage(request,env);

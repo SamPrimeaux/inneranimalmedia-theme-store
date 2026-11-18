@@ -34,7 +34,8 @@ const strictSlug = /^[a-z0-9-]+$/;
 async function resolvePreview(env: Env, origin: string, theme: { slug: string; version: string }): Promise<string | null> {
   // IAPJ's public preview is bundled from the canonical Theme Store package.
   // Customer CMS installation remains separately gated by the R2 install index.
-  if ('previewAlias' in theme && typeof theme.previewAlias === 'string') return origin + '/' + theme.previewAlias + '/';
+  if ('previewAlias' in theme && typeof theme.previewAlias === 'string')
+    return origin + '/theme-packages/' + theme.slug + '/' + theme.version + '/preview/';
   const root = 'theme-packages/' + theme.slug + '/' + theme.version + '/preview/';
   try {
     if (await env.THEME_PACKAGES.head(root + 'index.html')) return publicDemoUrl(origin, theme.slug);

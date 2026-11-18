@@ -2,7 +2,6 @@
 /** Publish reviewed, source-controlled CMS install projects as immutable R2 artifacts. */
 import { readFile, writeFile, mkdtemp, rm, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';

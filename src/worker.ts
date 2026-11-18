@@ -81,7 +81,15 @@ export default {
     const method = request.method.toUpperCase();
     // IAPJ and Plain Jane Classic are separate packages. The former uses
     // /iapj/ as its short preview alias; the latter keeps its versioned demo route.
-    if (url.pathname === '/iapj') return Response.redirect(new URL('/iapj/', url.origin), 302);
+    // One public product experience: direct /iapj visits open the canonical
+    // Theme Store details with its Add control. The iframe uses the immutable
+    // versioned preview URL, so this redirect cannot recurse inside the iframe.
+    if (url.pathname === '/iapj' || url.pathname === '/iapj/') {
+      const canonical = new URL('/themes/iapj/', url.origin);
+      return new Response(null, {status:302,headers:{
+        location:canonical.href,'cache-control':'no-store',
+      }});
+    }
     if (url.pathname.startsWith('/iapj/')) {
       if (method !== 'GET' && method !== 'HEAD') return missing('method_not_allowed', 405);
       const segments = url.pathname.slice('/iapj/'.length).split('/').filter(Boolean);

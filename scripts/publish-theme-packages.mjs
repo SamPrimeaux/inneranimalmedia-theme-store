@@ -22,7 +22,8 @@ async function pool(items, size, task) {
   await Promise.all(Array.from({length: size}, async () => { while (queue.length) await task(queue.shift()); }));
 }
 const deploy = process.argv.includes('--deploy');
-const onlyPlainJane = process.argv.includes('--only=plain-jane');
+const only = process.argv.find(arg => arg.startsWith('--only='))?.slice(7);
+if (only !== undefined && !/^[a-z][a-z0-9-]{0,62}$/.test(only)) throw new Error('invalid_theme_slug');
 
 function run(bin, args, cwd = process.cwd(), capture = false) {
   return new Promise((resolve, reject) => {

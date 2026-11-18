@@ -175,8 +175,29 @@ function Root() {
   const [data, setData] = useState<{ themes: ThemeRecord[]; site: SiteDocument; footer: FooterData; header: HeaderData } | null>(null);
   const [error, setError] = useState(false);
   React.useEffect(() => {
+    const fetchCatalog = () => fetch('/api/catalog', { cache: 'no-store' })
+      .then(r => {
+        if (!r.ok) throw new Error('catalog unavailable');
+        return r.json() as Promise<{ products?: ThemeRecord[] }>;
+      });
+
+    // A tab can stay open while a package is published. Refresh release
+    // eligibility whenever the visitor returns instead of retaining an old
+    // preview-only CTA in React state.
+    const refreshCatalog = () => {
+      void fetchCatalog().then(catalog => {
+        if (!catalog.products) return;
+        setData(current => current ? { ...current, themes: catalog.products! } : current);
+      }).catch(() => { /* Keep the last good catalog during transient outages. */ });
+    };
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') refreshCatalog();
+    };
+    window.addEventListener('focus', refreshCatalog);
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
     Promise.all([
-      fetch('/api/catalog').then(r => r.json() as Promise<{ products?: ThemeRecord[] }>),
+      fetchCatalog(),
       fetch('/api/site').then(r => r.json() as Promise<{ site?: SiteDocument }>),
       fetch('/api/footer').then(r => r.ok ? r.json() as Promise<{ footer?: FooterData }> : { footer: defaultFooter }).catch(() => ({ footer: defaultFooter })),
       fetch('/api/header').then(r => r.ok ? r.json() as Promise<{ header?: HeaderData }> : { header: defaultHeader }).catch(() => ({ header: defaultHeader })),
@@ -185,6 +206,11 @@ function Root() {
       for (const [name, value] of Object.entries(siteRes.site.tokens)) document.documentElement.style.setProperty('--ts-' + name, value);
       setData({ themes: catalog.products, site: siteRes.site, footer: footerRes.footer || defaultFooter, header: headerRes.header || defaultHeader });
     }).catch(() => setError(true));
+
+    return () => {
+      window.removeEventListener('focus', refreshCatalog);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    };
   }, []);
   if (error) return <main className="shell no-results"><h1>Catalog unavailable</h1><button onClick={() => location.reload()}>Try again</button></main>;
   if (!data) return <main className="shell no-results"><p>Loading themes…</p></main>;

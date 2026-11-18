@@ -52,6 +52,10 @@ def export(contract: Path):
     runtime = re.sub(r'^export\s+', '', source, flags=re.MULTILINE)
     manifest = json.loads((SITE / 'iapj-cms-manifest.json').read_text())
     package = json.loads((ROOT / 'package.json').read_text())
+    # Editor previews run inside an embedded document. Pin CSS, fonts and media
+    # to the immutable release route, whose asset responses explicitly allow
+    # cross-origin loading. Keep sourcePreviewUrl on the human-facing alias.
+    asset_base = f'https://themes.inneranimalmedia.com/theme-packages/iapj/{package["version"]}/preview/'
     if manifest['theme'] != 'iapj' or manifest['sourceTheme'] != 'iapj' or len(manifest['pages']) != 31:
         raise RuntimeError('unexpected IAPJ source manifest; do not create a partial release')
     server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), SiteServer)
@@ -92,7 +96,7 @@ def export(contract: Path):
                       link.setAttribute('href','/' + raw.slice(prefix.length));
                   }
                 }""", ORIGINAL)
-                html = tab.content().replace(ORIGINAL, CANONICAL)
+                html = tab.content().replace(ORIGINAL, asset_base)
                 # Presets remain templates. Their links resolve inside an
                 # installed site, not back into the provider's public demo.
                 tab.add_script_tag(content=runtime)
@@ -101,7 +105,7 @@ def export(contract: Path):
                   const actual = renderThemePage(page,{}, {baseUrl:base});
                   if(!actual.includes('<!DOCTYPE html>'))throw Error('cms_page_render_failed');
                   return {page,renderedLength:actual.length};
-                }''', [html, entry['slug'], entry['title'], CANONICAL])
+                }''', [html, entry['slug'], entry['title'], asset_base])
                 page = out['page']
                 # Editor navigation maps the same authored route as a user
                 # published site. No shared Theme Store link is baked in.

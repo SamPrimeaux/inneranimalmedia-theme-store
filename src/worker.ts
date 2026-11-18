@@ -1,7 +1,7 @@
 import { findTheme, publicTheme, themes } from './catalog';
 import siteDefaults from './site.default.json';
 import { normalizePreviewHtml, normalizePreviewManifest } from './preview-html.mjs';
-import { previewFileHeaders } from './preview-headers.mjs';
+import { previewFileHeaders, withPublicAssetCors } from './preview-headers.mjs';
 import { resolveDemoAlias, publicDemoUrl, normalizeReleaseAssetRelative } from './preview-routes.mjs';
 import { resolveSite, type SiteDocument } from './site.mjs';
 import { normalizeFooter, defaultFooter } from './footer.mjs';
@@ -98,7 +98,7 @@ export default {
       // deep links, never the Theme Store's SPA fallback.
       const isFile = segments.at(-1)?.includes('.') ?? false;
       const target = isFile ? request : new Request(new URL('/iapj/', url), request);
-      return env.ASSETS.fetch(target);
+      return withPublicAssetCors(await env.ASSETS.fetch(target));
     }
     if (url.pathname.startsWith('/fonts/')) return serveFontAssets(request, env);
     if (url.pathname.startsWith('/api/ui-themes/')) return serveUiThemePackage(request,env);

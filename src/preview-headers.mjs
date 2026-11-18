@@ -20,3 +20,19 @@ export function previewFileHeaders(ext, types = {}) {
   }
   return headers;
 }
+
+/** Public static preview aliases may also be loaded by a cross-origin CMS
+ * editor. Preserve the asset response and grant CORS only to non-HTML files;
+ * the document itself must not become a broadly readable cross-origin page.
+ */
+export function withPublicAssetCors(response) {
+  const contentType = response.headers.get('content-type') || '';
+  if (!response.ok || /^text\/html(?:;|$)/i.test(contentType)) return response;
+  const headers = new Headers(response.headers);
+  headers.set('access-control-allow-origin', '*');
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}

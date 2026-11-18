@@ -106,6 +106,9 @@ test('every authored IAPJ route is a genuine editable CMS page, not a placeholde
  assert.equal(project.sourcePackage,pkg.name);
  assert.equal(project.sourcePackageVersion,pkg.version);
  assert.equal(project.sourcePreviewUrl,'https://themes.inneranimalmedia.com/iapj/');
+ const immutableAssetBase=`https://themes.inneranimalmedia.com/theme-packages/iapj/${pkg.version}/preview/`;
+ assert.ok(project.pages.every(page=>page.assetBase===immutableAssetBase),
+   'CMS editor assets must use the immutable, version-pinned package route');
  assert.match(project.sourceReleaseSha256,/^[0-9a-f]{64}$/);
  assert.equal(project.sourceManifestPageCount,31);
  assert.equal(project.pages.length,31);
@@ -120,6 +123,11 @@ test('every authored IAPJ route is a genuine editable CMS page, not a placeholde
    slugs.add(page.slug);
    assert.ok(!/<script\b/i.test(page.template),'React hydration would overwrite customer edits: '+page.slug);
    assert.ok(page.template.includes('<!--theme-section:'),'source content was not extracted: '+page.slug);
+   const editorMarkup=page.template+' '+page.sections.map(section=>section.html).join(' ');
+   assert.ok(editorMarkup.includes(immutableAssetBase+'assets/index-'),
+     'the embedded editor preview must load its stylesheet from the immutable release: '+page.slug);
+   assert.ok(!editorMarkup.includes('https://themes.inneranimalmedia.com/iapj/assets/'),
+     'the mutable public alias must not supply cross-origin editor assets: '+page.slug);
    assert.equal(page.route,'/'+(page.sourceRoute?page.sourceRoute+'/':''),'authored routes must resolve within the installed site');
    assert.ok(!/<a\b[^>]*href="https:\/\/themes\.inneranimalmedia\.com\/iapj\/(?!assets\/)/.test(page.template+' '+page.sections.map(s=>s.html).join(' ')),'installed navigation must not bounce back to provider demo: '+page.slug);
    assert.ok(page.sections.length>=3,'missing real header/body/footer: '+page.slug);

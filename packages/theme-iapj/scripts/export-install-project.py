@@ -52,6 +52,10 @@ def export(contract: Path):
     runtime = re.sub(r'^export\s+', '', source, flags=re.MULTILINE)
     manifest = json.loads((SITE / 'iapj-cms-manifest.json').read_text())
     package = json.loads((ROOT / 'package.json').read_text())
+    # Editor previews run inside an embedded document. Pin CSS, fonts and media
+    # to the immutable release route, whose asset responses explicitly allow
+    # cross-origin loading. Keep sourcePreviewUrl on the human-facing alias.
+    asset_base = f'https://themes.inneranimalmedia.com/theme-packages/iapj/{package["version"]}/preview/'
     if manifest['theme'] != 'iapj' or manifest['sourceTheme'] != 'iapj' or len(manifest['pages']) != 31:
         raise RuntimeError('unexpected IAPJ source manifest; do not create a partial release')
     server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), SiteServer)

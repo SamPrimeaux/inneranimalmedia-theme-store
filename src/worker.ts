@@ -78,15 +78,8 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
     const method = request.method.toUpperCase();
-    // Existing Plain Jane demo links remain valid, but the canonical IAPJ URL
-    // uses one short path instead of nested package / preset / demo segments.
-    const legacyIapj = /^\/themes\/plain-jane\/presets\/(?:plain-jane|default)\/demo\/?(.*)$/.exec(url.pathname);
-    if (legacyIapj) {
-      if (method !== 'GET' && method !== 'HEAD') return missing('method_not_allowed', 405);
-      const remaining = legacyIapj[1];
-      if (remaining.split('/').some(segment => segment === '..' || segment.startsWith('.'))) return missing('invalid_preview_path', 400);
-      return Response.redirect(new URL('/iapj/' + remaining + url.search, url.origin), 302);
-    }
+    // IAPJ and Plain Jane Classic are separate packages. The former uses
+    // /iapj/ as its short preview alias; the latter keeps its versioned demo route.
     if (url.pathname === '/iapj') return Response.redirect(new URL('/iapj/', url.origin), 302);
     if (url.pathname.startsWith('/iapj/')) {
       if (method !== 'GET' && method !== 'HEAD') return missing('method_not_allowed', 405);

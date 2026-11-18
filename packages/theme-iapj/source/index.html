@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INNERANIMAL — Engineering Journal &amp; Design Systems</title>
+    <meta
+      name="description"
+      content="Field manuals, Systematic Autonomous Machinery (SAM) architecture, and UI/UX design systems from InnerAnimalMedia."
+    />
+    <meta property="og:title" content="INNERANIMAL — Engineering Journal &amp; Design Systems" />
+    <meta
+      property="og:description"
+      content="Field manuals, Systematic Autonomous Machinery (SAM) architecture, and UI/UX design systems from InnerAnimalMedia."
+    />
+    <meta property="og:type" content="website" />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("ia.appearance.colorMode");
+          if (saved === "light" || saved === "dark") {
+            document.documentElement.setAttribute("data-theme", saved);
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

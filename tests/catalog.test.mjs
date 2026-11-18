@@ -64,3 +64,19 @@ test('every listed package in this repo is publishable', async () => {
     assert.equal(typeof mod.materializePrebuild, 'function', record.slug + ' must export materializePrebuild');
   }
 });
+
+
+test('Plain Jane Classic and IAPJ remain distinct catalog and install identities', async () => {
+  const records = await buildCatalog(new URL('../packages', import.meta.url).pathname);
+  const classic = records.find(record => record.slug === 'plain-jane');
+  const iapj = records.find(record => record.slug === 'iapj');
+  assert.ok(classic, 'Plain Jane Classic must remain in the catalog');
+  assert.ok(iapj, 'IAPJ must be a separate catalog package');
+  assert.equal(classic.version, '0.1.0');
+  assert.equal(classic.release.status, 'published');
+  assert.equal(iapj.version, '0.3.0');
+  assert.equal(iapj.previewAlias, 'iapj');
+  assert.equal(classic.sku, 'iam.theme.plain-jane');
+  assert.equal(iapj.sku, 'iam.theme.iapj');
+  assert.notEqual(classic.sku, iapj.sku);
+});

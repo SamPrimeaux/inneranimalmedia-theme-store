@@ -1,7 +1,7 @@
 {
   "name": "@inneranimalmedia/theme-plain-jane",
-  "version": "0.3.0",
-  "description": "InnerAnimal Plain Jane (IAPJ) \u2014 a branded editorial blog, portfolio and publishing starter",
+  "version": "0.1.0",
+  "description": "Plain Jane Journal — a source-driven, read-only editorial CMS starter",
   "private": true,
   "type": "module",
   "main": "./src/index.js",
@@ -22,7 +22,7 @@
     "provenance.json"
   ],
   "scripts": {
-    "build": "npm --prefix source run lint && npm --prefix source run build -- --base /themes/plain-jane/demo/ --outDir ../site --emptyOutDir && node scripts/export-cms-manifest.mjs",
+    "build": "cd source && npm run lint && npx vite build --base /themes/plain-jane/demo/ --outDir ../site --emptyOutDir && npx tsx ../scripts/export-cms-manifest.mts",
     "test": "node --test test/*.test.mjs",
     "pack:check": "npm pack --dry-run --json"
   },
@@ -32,79 +32,44 @@
   "license": "UNLICENSED",
   "agentsam": {
     "store": {
-      "name": "InnerAnimal Plain Jane",
-      "summary": "An installable, fully editable editorial theme with 31 authored page templates, category indexes, photography, articles and design tokens.",
+      "name": "Plain Jane Classic",
+      "summary": "The original slim editorial journal and blog starter, retained as a separate classic package.",
       "category": "Editorial",
       "tags": [
         "Editorial",
         "Blog",
-        "Portfolio",
-        "Photography",
-        "Publishing",
-        "IAPJ"
+        "Journal",
+        "Classic"
       ],
       "pages": [
-        "Home",
         "Journal",
         "Article",
         "About",
         "Photography",
-        "Work",
-        "Search"
+        "Contact",
+        "404"
       ],
       "colorway": "paper",
       "sortOrder": 8,
-      "cardImage": "/previews/iapj.webp",
-      "previewBuild": "package",
+      "cardImage": "/previews/plain-jane.svg",
+      "previewBuild": "external",
       "editorial": {
-        "eyebrow": "An editorial studio with room for ideas",
-        "headline": "Publishing with clarity and character.",
-        "body": "IAPJ brings a modern portfolio, deeply structured articles, category navigation, visual essays and a multi-mode design system into one cohesive blog starter.",
+        "eyebrow": "An editorial home for original ideas",
+        "headline": "A little more room for the story.",
+        "body": "Plain Jane Journal is built around generous typography, thoughtful pacing and quiet details. The original starter includes an essay index, article layouts, photography gallery and the essential supporting pages. It is the same source-led template previously hosted at this domain, now treated as a standalone product rather than the Theme Store itself.",
         "notes": [
-          "Editorial index, story collections and UX guide chapters",
-          "Dedicated work, photography, search and about pages",
-          "Light/dark design tokens and responsive navigation",
-          "Logical media references and first-party image assets"
+          "Editorial home and individual story layouts are designed to be read, not just glanced at.",
+          "Photography pages and image galleries give visual work its own space.",
+          "Page metadata, original source assets and CMS section definitions are included in the source-backed preview archive."
         ]
       },
       "priceUsd": 0,
       "delivery": "verified-package",
       "release": {
         "status": "published",
-        "sha256": "5866a01a344e30c96721d90d1275dd8ab30d229db4a7e010eb11403880497943",
-        "storageKey": "releases/plain-jane/0.3.0/5866a01a344e30c96721d90d1275dd8ab30d229db4a7e010eb11403880497943.zip"
-      },
-      "industries": [
-        "Editorial",
-        "Portfolio",
-        "Services"
-      ],
-      "catalogSizes": [],
-      "features": [
-        "About",
-        "Article",
-        "Editorial",
-        "Home",
-        "Journal",
-        "Mobile layouts",
-        "Multipage",
-        "Navigation overlays",
-        "Our work",
-        "Photography",
-        "Project",
-        "Projects",
-        "Search",
-        "Search panel",
-        "Stories",
-        "Work",
-        "Native CMS editing",
-        "Private Theme Studio draft",
-        "Code editor",
-        "Editable sections",
-        "Versioned revisions"
-      ],
-      "previewAlias": "iapj",
-      "permissionNotice": "Recipients may create, read, edit, duplicate, delete, privately develop and publish their independently installed theme copies. Source distribution remains maintained by InnerAnimalMedia Theme Store."
+        "sha256": "c5a1c9c26050c706652d6aad2d1aa184c5b91350975dfc9fa3fe717c1ae90203",
+        "storageKey": "releases/plain-jane/0.1.0/c5a1c9c26050c706652d6aad2d1aa184c5b91350975dfc9fa3fe717c1ae90203.zip"
+      }
     },
     "kind": "theme",
     "slug": "plain-jane",
@@ -113,8 +78,7 @@
     "portable": true,
     "prebuildRoot": "site",
     "canonicalId": "plain-jane",
-    "normalization": "native-editable-theme-project-v1",
-    "sourceRepository": "SamPrimeaux/inneranimalmedia-theme-store",
-    "sourceSeed": "SamPrimeaux/iapj"
+    "normalization": "site_package_available",
+    "sourceRepository": "SamPrimeaux/inneranimalmedia-blog-template"
   }
 }

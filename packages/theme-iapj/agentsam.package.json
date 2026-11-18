@@ -1,0 +1,42 @@
+{
+  "schema": "agentsam.package.v1",
+  "id": "theme-iapj",
+  "name": "@inneranimalmedia/theme-iapj",
+  "version": "0.3.0",
+  "class": "theme",
+  "status": "published",
+  "catalog_status": "published",
+  "registry": {
+    "kind": "local-package",
+    "name": "@inneranimalmedia/theme-iapj",
+    "public_claim": true
+  },
+  "purpose": "A complete source-backed editable 31-page editorial website template with account-owned Theme Studio installation.",
+  "languages": [
+    "javascript",
+    "typescript"
+  ],
+  "execution_domains": [
+    "browser",
+    "node"
+  ],
+  "commands": [],
+  "install": [],
+  "review_required": [],
+  "evidence": {
+    "directory": "packages/theme-iapj",
+    "purpose_source": "SamPrimeaux/iapj pinned GitHub source"
+  },
+  "use_when": [
+    "Install a complete editable editorial blog and portfolio into account-owned Theme Studio"
+  ],
+  "avoid_when": [],
+  "topics": [
+    "cms",
+    "editorial",
+    "blog",
+    "portfolio",
+    "photography",
+    "theme"
+  ]
+}

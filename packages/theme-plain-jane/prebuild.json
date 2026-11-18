@@ -2,27 +2,19 @@
   "schema": "agentsam.prebuild.v1",
   "id": "plain-jane",
   "package": "@inneranimalmedia/theme-plain-jane",
-  "version": "0.3.0",
+  "version": "0.1.0",
   "siteRoot": "site",
   "entrypoint": "index.html",
   "rootDeployable": true,
   "portable": true,
-  "materializer": {
-    "export": "@inneranimalmedia/theme-plain-jane/node",
-    "function": "materializePrebuild"
-  },
-  "defaults": {
-    "basePath": "/",
-    "canonicalOrigin": "https://example.com/",
-    "apiBasePath": "/api/cms"
-  },
-  "cmsManifest": "iapj-cms-manifest.json",
+  "materializer": {"export": "@inneranimalmedia/theme-plain-jane/node", "function": "materializePrebuild"},
+  "defaults": {"basePath": "/", "canonicalOrigin": "https://example.com/", "apiBasePath": "/api/cms"},
+  "cmsManifest": "journal-cms-manifest.json",
   "category": "Editorial / Blog",
-  "description": "IAPJ source-driven editorial blog with 31 native editable page/section templates and full media assets.",
+  "description": "Original Plain Jane Journal pages, articles, photography and CMS manifest.",
   "notes": [
-    "Theme Store is the sole source for this distributable theme and editable CMS project.",
-    "Authenticated users may create private Theme Studio drafts without creating a website.",
-    "Public publishing remains a separate explicit action."
-  ],
-  "installProject": "install-project.json"
+    "The embedded front end is read-only. Content writes are the host CMS responsibility.",
+    "The local showcase uses preview fixtures, not a real tenant account.",
+    "Product release/license and authorized installation require a separate promotion review."
+  ]
 }

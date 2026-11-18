@@ -15,33 +15,33 @@ export function Gallery({ images }: GalleryProps) {
       <figure className="my-16 w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
           {images.map((img, idx) => (
-            <motion.button
-              type="button"
+            <motion.button 
               key={idx}
               onClick={() => setSelectedIndex(idx)}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className={`overflow-hidden bg-[var(--iapj-surface-subtle)] cursor-zoom-in group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--iapj-accent)] ${idx === 0 ? "sm:col-span-2 sm:row-span-2" : ""}`}
+              className={`overflow-hidden rounded-sm bg-ink/5 cursor-zoom-in group ${idx === 0 ? 'sm:col-span-2 sm:row-span-2' : ''}`}
             >
-              <FadeImage
-                src={img.src}
-                alt={img.alt}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                style={{ minHeight: idx === 0 ? "100%" : "300px" }}
+              <FadeImage 
+                src={img.src} 
+                alt={img.alt} 
+                referrerPolicy="no-referrer"
+                className="h-full w-full object-cover group-hover:scale-105"
+                style={{ minHeight: idx === 0 ? '100%' : '300px' }}
               />
             </motion.button>
           ))}
         </div>
-        {images.some((img) => img.caption) && (
-          <figcaption className="mt-4 text-center text-sm italic text-[var(--iapj-text-muted)]">
-            {images.find((img) => img.caption)?.caption}
+        {images.some(img => img.caption) && (
+          <figcaption className="mt-4 text-center text-sm italic text-ink-light">
+            {images.find(img => img.caption)?.caption}
           </figcaption>
         )}
       </figure>
 
-      <Lightbox
+      <Lightbox 
         isOpen={selectedIndex !== null}
         onClose={() => setSelectedIndex(null)}
         src={selectedIndex !== null ? images[selectedIndex].src : ""}

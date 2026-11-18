@@ -1,222 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* ==========================================================================
-   IAPJ Theme Package Tokens — Blended Light/Dark, Glassmorphic & Claymorphic
-   ========================================================================== */
-
 :root {
-  color-scheme: light dark;
-
-  /* Core Surfaces */
-  --iapj-bg: #ffffff;
-  --iapj-surface-subtle: #f5f5f7;
-  --iapj-surface-elevated: #ffffff;
-  --iapj-surface-contrast: #121216;
-  --iapj-surface-contrast-ink: #f7f7fa;
-  --iapj-surface-contrast-muted: #9b9ba6;
-
-  /* Glassmorphic Header & Overlays */
-  --iapj-glass-bg: rgba(255, 255, 255, 0.78);
-  --iapj-glass-border: rgba(20, 20, 22, 0.08);
-  --iapj-overlay-scrim: rgba(12, 12, 16, 0.76);
-
-  /* Claymorphic Soft Depth */
-  --iapj-clay-shadow:
-    0 18px 40px -24px rgba(16, 16, 22, 0.16),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  --iapj-clay-shadow-hover:
-    0 24px 48px -20px rgba(16, 16, 22, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-
-  /* Ink & Borders */
-  --iapj-text-primary: #141416;
-  --iapj-text-body: #3e3e44;
-  --iapj-text-muted: #707078;
-  --iapj-border: #e6e6eb;
-  --iapj-border-strong: #141416;
-
-  /* Interactive Accents */
-  --iapj-accent: #141416;
-  --iapj-accent-contrast: #ffffff;
-  --iapj-link-hover: #52525c;
-
-  /* Opposing Global Footer Tokens (Light Page -> Deep Dark Footer + Light 3D GLB) */
-  --iapj-footer-bg: #0e0e12;
-  --iapj-footer-text: #f6f6f9;
-  --iapj-footer-muted: #9898a3;
-  --iapj-footer-border: rgba(255, 255, 255, 0.11);
-
-  /* Fullscreen Menu Overlay (Deep Obsidian Glass) */
-  --iapj-menu-bg: #111115;
-  --iapj-menu-text: #ffffff;
-  --iapj-menu-muted: #9b9ba6;
-  --iapj-menu-border: rgba(255, 255, 255, 0.12);
-
-  /* Invariant Media Scrim Tokens */
-  --iapj-media-backdrop: #0e0e12;
-  --iapj-media-ink: #f6f6f9;
-  --iapj-media-ink-muted: rgba(246, 246, 249, 0.78);
-
-  /* Typography (2+1 Rule: Plus Jakarta Sans + Playfair Display + JetBrains Mono) */
-  --iapj-font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --iapj-font-serif: "Playfair Display", ui-serif, Georgia, serif;
-  --iapj-font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --iapj-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-
-  /* Layout & Rhythm */
-  --iapj-container-max: 1240px;
-  --iapj-prose-max: 68ch;
-  --iapj-radius-card: 16px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --iapj-bg: #0d0d11;
-    --iapj-surface-subtle: #16161c;
-    --iapj-surface-elevated: #1b1b22;
-    --iapj-surface-contrast: #16161d;
-    --iapj-surface-contrast-ink: #f6f6f9;
-    --iapj-surface-contrast-muted: #9b9ba6;
-
-    --iapj-glass-bg: rgba(15, 15, 20, 0.78);
-    --iapj-glass-border: rgba(255, 255, 255, 0.1);
-    --iapj-overlay-scrim: rgba(0, 0, 0, 0.8);
-
-    --iapj-clay-shadow:
-      0 18px 40px -22px rgba(0, 0, 0, 0.65),
-      inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    --iapj-clay-shadow-hover:
-      0 26px 52px -18px rgba(0, 0, 0, 0.8),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-
-    --iapj-text-primary: #f6f6f9;
-    --iapj-text-body: #c9c9d1;
-    --iapj-text-muted: #8e8e99;
-    --iapj-border: rgba(255, 255, 255, 0.1);
-    --iapj-border-strong: #f6f6f9;
-
-    --iapj-accent: #f6f6f9;
-    --iapj-accent-contrast: #0d0d11;
-    --iapj-link-hover: #b8b8c2;
-
-    /* Opposing Global Footer Tokens (Dark Page -> Crisp Light Footer + Dark 3D GLB) */
-    --iapj-footer-bg: #f3f3f6;
-    --iapj-footer-text: #121216;
-    --iapj-footer-muted: #5d5d66;
-    --iapj-footer-border: rgba(18, 18, 22, 0.12);
-  }
-}
-
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --iapj-bg: #0d0d11;
-  --iapj-surface-subtle: #16161c;
-  --iapj-surface-elevated: #1b1b22;
-  --iapj-surface-contrast: #16161d;
-  --iapj-surface-contrast-ink: #f6f6f9;
-  --iapj-surface-contrast-muted: #9b9ba6;
-
-  --iapj-glass-bg: rgba(15, 15, 20, 0.78);
-  --iapj-glass-border: rgba(255, 255, 255, 0.1);
-  --iapj-overlay-scrim: rgba(0, 0, 0, 0.8);
-
-  --iapj-clay-shadow:
-    0 18px 40px -22px rgba(0, 0, 0, 0.65),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  --iapj-clay-shadow-hover:
-    0 26px 52px -18px rgba(0, 0, 0, 0.8),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-
-  --iapj-text-primary: #f6f6f9;
-  --iapj-text-body: #c9c9d1;
-  --iapj-text-muted: #8e8e99;
-  --iapj-border: rgba(255, 255, 255, 0.1);
-  --iapj-border-strong: #f6f6f9;
-
-  --iapj-accent: #f6f6f9;
-  --iapj-accent-contrast: #0d0d11;
-  --iapj-link-hover: #b8b8c2;
-
-  --iapj-footer-bg: #f3f3f6;
-  --iapj-footer-text: #121216;
-  --iapj-footer-muted: #5d5d66;
-  --iapj-footer-border: rgba(18, 18, 22, 0.12);
-}
-
-:root[data-theme="light"] {
-  color-scheme: light;
+  --bg: #F9F8F6;
+  --text: #1A1A1A;
+  --text-muted: #4A4A4A;
+  --accent: #D96C4A;
+  --border-subtle: rgba(26, 26, 26, 0.05);
+  --border-divider: rgba(26, 26, 26, 0.10);
+  --border-input: rgba(26, 26, 26, 0.20);
+  --overlay-scrim: rgba(26, 26, 26, 0.60);
+  --hero-gradient: rgba(26, 26, 26, 0.80);
+  --lightbox-bg: rgba(26, 26, 26, 0.95);
+  --selection-bg: rgba(217, 108, 74, 0.20);
 }
 
 @theme {
-  --font-sans: var(--iapj-font-sans);
-  --font-serif: var(--iapj-font-serif);
-  --font-mono: var(--iapj-font-mono);
-
-  --color-paper: var(--iapj-bg);
-  --color-surface-subtle: var(--iapj-surface-subtle);
-  --color-surface-elevated: var(--iapj-surface-elevated);
-  --color-ink: var(--iapj-text-primary);
-  --color-ink-body: var(--iapj-text-body);
-  --color-ink-light: var(--iapj-text-muted);
-  --color-hairline: var(--iapj-border);
-  --color-accent: var(--iapj-accent);
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  
+  --color-paper: var(--bg);
+  --color-ink: var(--text);
+  --color-ink-light: var(--text-muted);
+  --color-accent: var(--accent);
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
   body {
-    background-color: var(--iapj-bg);
-    color: var(--iapj-text-primary);
-    font-family: var(--iapj-font-sans);
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
-
+  
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--iapj-font-display);
+    font-family: var(--font-serif);
     letter-spacing: -0.025em;
-    text-wrap: balance;
   }
 
   ::selection {
-    background-color: var(--iapj-border);
-    color: var(--iapj-text-primary);
+    background-color: var(--selection-bg);
+    color: var(--text);
   }
-}
-
-.iapj-clay-card {
-  background-color: var(--iapj-surface-subtle);
-  border: 1px solid var(--iapj-border);
-  box-shadow: var(--iapj-clay-shadow);
-  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.iapj-clay-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--iapj-clay-shadow-hover);
-}
-
-.iapj-glass-header {
-  background-color: var(--iapj-glass-bg);
-  border-bottom: 1px solid var(--iapj-glass-border);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-}
-
-.iapj-prose {
-  --tw-prose-body: var(--iapj-text-body);
-  --tw-prose-headings: var(--iapj-text-primary);
-  --tw-prose-lead: var(--iapj-text-primary);
-  --tw-prose-links: var(--iapj-text-primary);
-  --tw-prose-bold: var(--iapj-text-primary);
-  --tw-prose-quotes: var(--iapj-text-primary);
-  --tw-prose-quote-borders: var(--iapj-border);
-  --tw-prose-captions: var(--iapj-text-muted);
-  --tw-prose-hr: var(--iapj-border);
-  max-width: var(--iapj-prose-max);
 }

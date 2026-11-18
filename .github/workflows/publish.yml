@@ -5,7 +5,7 @@ on:
       theme:
         description: Theme package slug (owned by this repository)
         required: true
-        default: plain-jane
+        default: iapj
         type: string
 permissions:
   contents: write
@@ -58,27 +58,27 @@ jobs:
       - name: Install Theme Store dependencies
         run: npm ci --no-audit --no-fund
       - name: Install IAPJ authored source dependencies
-        if: inputs.theme == 'plain-jane'
-        run: npm ci --no-audit --no-fund --prefix packages/theme-plain-jane/source
+        if: inputs.theme == 'iapj'
+        run: npm ci --no-audit --no-fund --prefix packages/theme-iapj/source
       - name: Build IAPJ React site and its CMS route inventory
-        if: inputs.theme == 'plain-jane'
-        run: npm run build --prefix packages/theme-plain-jane
+        if: inputs.theme == 'iapj'
+        run: npm run build --prefix packages/theme-iapj
       - uses: actions/setup-python@v5
-        if: inputs.theme == 'plain-jane'
+        if: inputs.theme == 'iapj'
         with:
           python-version: '3.12'
       - name: Install browser for native IAPJ CMS extraction
-        if: inputs.theme == 'plain-jane'
+        if: inputs.theme == 'iapj'
         run: |
           python -m pip install 'playwright==1.56.0'
           python -m playwright install --with-deps chromium
       - name: Generate IAPJ native 31-page editable project from the SDK editor contract
-        if: inputs.theme == 'plain-jane'
+        if: inputs.theme == 'iapj'
         run: |
           # The source copy is used only for the generator; it does NOT become
           # a baked-in SDK theme distribution or a separate CMS implementation.
           curl -fsSL "https://raw.githubusercontent.com/SamPrimeaux/agentsam-sdk/main/apps/ecommerce-cms-agentsam/frontend/theme-editor/project.mjs" -o /tmp/agentsam-theme-editor-project.mjs
-          python packages/theme-plain-jane/scripts/export-install-project.py \
+          python packages/theme-iapj/scripts/export-install-project.py \
             --contract /tmp/agentsam-theme-editor-project.mjs
       - name: Verify source contracts and compile Theme Store
         run: |
@@ -97,15 +97,15 @@ jobs:
           second=$(sha256sum "$zip" | cut -d' ' -f1)
           test "$first" = "$second"
           unzip -t "$zip" >/dev/null
-          if [[ "$THEME_SLUG" == 'plain-jane' ]]; then
-            node packages/theme-plain-jane/scripts/finalize-install-project.mjs
-            node --test packages/theme-plain-jane/test/*.test.mjs
+          if [[ "$THEME_SLUG" == 'iapj' ]]; then
+            node packages/theme-iapj/scripts/finalize-install-project.mjs
+            node --test packages/theme-iapj/test/*.test.mjs
           fi
           echo "Reviewed ZIP digest: $first"
       - name: Publish and round-trip verify immutable ZIP in Theme Store R2
         run: node scripts/build-theme-release.mjs "$THEME_SLUG" --publish
       - name: Register and round-trip verify native CMS install-project in Theme Store R2
-        run: node scripts/publish-install-projects.mjs "--only=$THEME_SLUG"
+        run: node scripts/publish-install-projects.mjs
       - name: Publish complete versioned preview to Theme Store R2
         run: node scripts/publish-theme-packages.mjs "--only=$THEME_SLUG"
       - name: Deploy Theme Store Worker and authoritative catalog

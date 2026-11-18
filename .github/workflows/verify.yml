@@ -15,11 +15,11 @@ jobs:
           node-version: '22'
       - name: Install Theme Store dependencies
         run: npm ci --no-audit --no-fund
-      - name: Install Plain Jane authored source dependencies
-        working-directory: packages/theme-plain-jane/source
+      - name: Install IAPJ authored source dependencies
+        working-directory: packages/theme-iapj/source
         run: npm ci --no-audit --no-fund
-      - name: Rebuild Plain Jane compiled site and CMS manifest
-        working-directory: packages/theme-plain-jane
+      - name: Rebuild IAPJ compiled site and CMS manifest
+        working-directory: packages/theme-iapj
         run: npm run build
       - name: Check catalog and build Theme Store
         run: |
@@ -27,7 +27,7 @@ jobs:
           npm run build
           node --check bin/iam-theme.mjs
           node --check scripts/publish-theme-packages.mjs
-      - name: Test repo packages and compiled Plain Jane content
+      - name: Test repo packages and compiled IAPJ content
         run: |
           npm test
           find packages -path '*/test/*.test.mjs' -type f -print0 | xargs -0 node --test

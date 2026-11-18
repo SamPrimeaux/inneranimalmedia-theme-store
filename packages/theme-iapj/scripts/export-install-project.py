@@ -105,7 +105,7 @@ def export(contract: Path):
                   const actual = renderThemePage(page,{}, {baseUrl:base});
                   if(!actual.includes('<!DOCTYPE html>'))throw Error('cms_page_render_failed');
                   return {page,renderedLength:actual.length};
-                }''', [html, entry['slug'], entry['title'], CANONICAL])
+                }''', [html, entry['slug'], entry['title'], asset_base])
                 page = out['page']
                 # Editor navigation maps the same authored route as a user
                 # published site. No shared Theme Store link is baked in.

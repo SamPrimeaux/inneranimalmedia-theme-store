@@ -207,7 +207,7 @@ export default {
       const installed = await loadInstallIndex(env);
       const products = await Promise.all(themes.map(async theme => {
         const product = publicInstallableTheme(theme, await resolvePreview(env, url.origin, theme), installed);
-        product.installUrl = product.downloadReady ? themeInstallerUrl(env.THEME_INSTALLER_URL, theme.sku, theme.version) : null;
+        product.installUrl = product.downloadReady ? themeInstallerUrl(theme.sku, theme.version) : null;
         return product;
       }));
       // Public CMS presentation is intentionally separate from signed theme releases.

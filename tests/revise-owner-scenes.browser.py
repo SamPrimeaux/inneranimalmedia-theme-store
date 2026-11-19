@@ -4,7 +4,7 @@ Run while local Theme Store serves port 4321; no production publishing.
 from playwright.sync_api import sync_playwright
 from pathlib import Path
 
-BASE = 'http://127.0.0.1:4321/theme-packages/revise/0.1.3/preview/'
+BASE = 'http://127.0.0.1:4321/theme-packages/revise/0.1.4/preview/'
 OUTPUT = Path('/tmp/revise-owner-visual-acceptance')
 OUTPUT.mkdir(parents=True,exist_ok=True)
 with sync_playwright() as p:

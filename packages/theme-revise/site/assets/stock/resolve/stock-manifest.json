@@ -1,0 +1,48 @@
+{
+  "schema": "iam.theme-stock-usage.v1",
+  "theme": "revise",
+  "collection": "resolve",
+  "usage": "Demo and scaffolding imagery. Merchant content and published catalog media must remain independently editable and replaceable.",
+  "assets": [
+    {
+      "id": "resolve/editorial-01",
+      "source": "packages/theme-resolve/site/assets/generated/media-216610d365.webp",
+      "path": "assets/stock/resolve/media-216610d365.webp",
+      "sha256": "97e02623cefc43b7b9f6803a6cbed18e021137795617a7e2c7d12fec34f9ee5e",
+      "width": 1536,
+      "height": 864
+    },
+    {
+      "id": "resolve/editorial-02",
+      "source": "packages/theme-resolve/site/assets/generated/media-a70660bfa9.webp",
+      "path": "assets/stock/resolve/media-a70660bfa9.webp",
+      "sha256": "11272968b8ab9432043425259343da5a8b15bf33676d121abcaea3ba1d0982c1",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "id": "resolve/editorial-03",
+      "source": "packages/theme-resolve/site/assets/generated/media-ced60fcecc.webp",
+      "path": "assets/stock/resolve/media-ced60fcecc.webp",
+      "sha256": "b8d1abc48b19088d5075158df4f09ee3d8ab82a3404c58d3a3b85b6eac67c775",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "id": "resolve/editorial-04",
+      "source": "packages/theme-resolve/site/assets/generated/media-2a9e0f623f.webp",
+      "path": "assets/stock/resolve/media-2a9e0f623f.webp",
+      "sha256": "a2b99df42b0824fe8861eae79ff39ea2f8a72decd52f1eedf4beb01929ba4609",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "id": "resolve/editorial-05",
+      "source": "packages/theme-resolve/site/assets/generated/media-bc1322e813.webp",
+      "path": "assets/stock/resolve/media-bc1322e813.webp",
+      "sha256": "3347919fbc2a6dec265b2f820800ca1996cd1e998a3e8e0238d7b4f7be108025",
+      "width": 1536,
+      "height": 1024
+    }
+  ]
+}

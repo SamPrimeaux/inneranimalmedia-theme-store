@@ -1,10 +1,16 @@
 # Revise — Editorial Commerce
 
-Revise 0.1.3 is an independent stock theme with a coherent Revise demonstration identity. It is not an InnerAnimalMedia company site or an extension of PrimeTech. The source of truth is this package; AgentSam's merchant CMS installs a site-scoped copy.
+Revise 0.1.4 is an independent stock theme with a coherent Revise demonstration identity. It is not an InnerAnimalMedia company site or an extension of PrimeTech. The source of truth is this package; AgentSam's merchant CMS installs a site-scoped copy.
 
 ## Storefront and CMS scope
 
 The stock project has **31 CMS page records across 22 page/template types**, **161 editable sections**, 1,416 field definitions and 80 configured repeatable blocks. These include Home, product catalog and four individual offering detail types (physical, digital, service and experience), collections, digital editions, services, experiences, gift cards, checkout layout, account templates, blog/article, search, content pages, password and 404. Global announcement/header/footer sections are shared.
+
+## Source-backed demo stock media
+
+Revise 0.1.4 vendors the five verified Resolve editorial WebP images through the shared Theme Store stock registry at `stock-media/catalog.json`, with checksummed originals still owned by `packages/theme-resolve`. The generic `scripts/sync-theme-stock-media.mjs` vendors a portable copy plus provenance manifest into `site/assets/stock/resolve/`. Example: `node scripts/sync-theme-stock-media.mjs --theme revise --collection resolve --check`.
+
+All 23 preview image slots (products, collections, journal and story chapters) now use verified source-backed WebP assets or original Revise brand photography. These are editable **demo seed images**, not merchant inventory claims. The generated CMS project preserves media fields for replacement when installed. Merchant storefronts must provide their own accurate product and service imagery.
 
 The visual system uses a full-viewport navigation, dark/light editorial compositions, responsive product and collection grids, independent product detail pages, a scroll-driven story, and a five-image source-backed Revise identity lookbook. The lookbook and hero media have CMS image/text fields. Original media should be retained as source masters; the committed WebP files are storefront derivatives.
 
@@ -22,7 +28,7 @@ The full creative-scene exploration is **not enabled in stock Revise**. For the 
 Use `node packages/theme-revise/scripts/sync-owner-scenes.mjs <absolute-showcase-dir>` to update this pack from the source. The script fails if the expected 11 scene stops or original assets are missing, so source changes cannot silently degrade the design. The source showcase remains authoritative; the scene pack is a derived owner presentation, not a second CAD/BIM project.
 
 On the local Theme Store development server, review it at:
-`/theme-packages/revise/0.1.3/preview/pages/world/?owner=1`.
+`/theme-packages/revise/0.1.4/preview/pages/world/?owner=1`.
 
 The regular portable theme deliberately **omits `owner-scenes/`**. Only `materializePrebuild(destination,{basePath,includeOwnerScenes:true})` includes the complete environment. Do not enable this option when distributing the default theme to other merchants. The owner experience is implemented for local review; importing those runtime-mounted scenes as merchant-editable live CMS sections still requires verifying the CMS scene renderer and source asset adapter.
 

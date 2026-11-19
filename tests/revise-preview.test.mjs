@@ -22,7 +22,9 @@ test('Revise materializes a portable storefront preview at a versioned base path
     assert.ok(script.includes(prefix));
     assert.ok(css.includes('.rr-menu[data-open="true"]'));
     assert.equal(existsSync(join(root, 'admin')), false, 'Theme release must not bundle admin CMS UI');
-    assert.equal(existsSync(join(root, 'assets')), false, 'Legacy bundled application assets must not ship');
+    assert.equal(existsSync(join(root, 'assets', 'index-Cain7XPB.css')), false, 'Legacy application bundles must not ship');
+    assert.equal(existsSync(join(root, 'assets', 'stock', 'resolve', 'media-216610d365.webp')), true, 'Portable stock media must materialize locally');
+    assert.equal(existsSync(join(root, 'assets', 'stock', 'resolve', 'stock-manifest.json')), true, 'Stock provenance must travel with the theme');
     assert.equal(existsSync(join(root, 'cms')), false, 'Legacy editor runtime must not ship in the storefront theme');
     assert.equal(existsSync(join(root, 'visual-01.svg')), true);
     assert.equal(existsSync(join(root, 'revise-hero.svg')), true);
@@ -108,7 +110,7 @@ test('Revise CMS project has independent templates for the full storefront journ
 
 test('Revise release metadata remains preview-only until explicitly published', () => {
   const pkg = require('../packages/theme-revise/package.json');
-  assert.equal(pkg.version, '0.1.3');
+  assert.equal(pkg.version, '0.1.4');
   assert.equal(pkg.agentsam.store.release.status, 'preview');
   assert.equal(pkg.agentsam.store.release.sha256, null);
   assert.equal(pkg.agentsam.store.release.storageKey, null);
@@ -142,4 +144,31 @@ test('Revise identity study and source scene assets remain verifiable', () => {
   const scene = require('../packages/theme-revise/site/owner-scenes/scenes/original-4341/original-4341.iamscene.json');
   assert.equal(scene.format, 'iamscene');
   assert.equal(scene.assets.length, 4);
+});
+
+
+test('Revise demo image references are real portable media, not geometric placeholder cards', () => {
+  const fixture = require('../packages/theme-revise/site/fixtures/revise-demo.json');
+  const site = join(process.cwd(), 'packages', 'theme-revise', 'site');
+  const groups = ['products', 'collections', 'stories', 'chapters'];
+  let checked = 0;
+  for (const group of groups) {
+    for (const item of fixture[group]) {
+      assert.match(item.image, /\.webp$/, group + ' image must use a real WebP derivative');
+      assert.ok(!item.image.includes('visual-'), group + ' must not use abstract placeholder SVGs');
+      assert.equal(existsSync(join(site, item.image)), true, 'Missing ' + group + ' media: ' + item.image);
+      checked++;
+    }
+  }
+  assert.equal(checked, 23);
+  const project = require('../packages/theme-revise/install-project.json');
+  const photoBlockSections = project.pages.flatMap(page => page.sections).filter(section => ['product_card', 'collection_card', 'story_card'].some(key => section.schema.blocks.some(block => block.key === key)));
+  assert.ok(photoBlockSections.length > 3);
+  for (const section of photoBlockSections) {
+    for (const value of Object.values(section.content)) {
+      if (value && typeof value === 'object' && typeof value.image === 'string') {
+        assert.ok(value.image.startsWith('https://themes.inneranimalmedia.com/theme-packages/revise/0.1.4/preview/'), section.key + ' image URL must use the package asset base');
+      }
+    }
+  }
 });

@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 
-const assetBase = 'https://themes.inneranimalmedia.com/theme-packages/revise/0.1.3/preview/';
+const assetBase = 'https://themes.inneranimalmedia.com/theme-packages/revise/0.1.4/preview/';
 const demo = JSON.parse(fs.readFileSync(new URL('../site/fixtures/revise-demo.json', import.meta.url), 'utf8'));
 const kindLabel = { physical: 'Physical object', digital: 'Digital edition', service: 'Service', experience: 'Experience' };
 const kindAction = { physical: 'Explore object', digital: 'Explore edition', service: 'Explore service', experience: 'Explore experience' };
@@ -8,17 +8,17 @@ const productItems = demo.products.map(product => ({
   id: product.id, title: product.title, category: product.type, kind: product.kind,
   price: product.priceLabel || `$${Number(product.price).toFixed(2)}`,
   description: product.shortDescription || product.description,
-  image: product.image, href: `/products/${product.id}/`, alt: `${product.title} artwork`,
+  image: new URL(product.image, assetBase).href, href: `/products/${product.id}/`, alt: `${product.title} artwork`,
   action: `${kindAction[product.kind] || 'Explore'} ↗`
 }));
 const collectionItems = demo.collections.map(collection => ({
   id: collection.id, title: collection.title, category: collection.kind,
-  description: collection.description, image: collection.image,
+  description: collection.description, image: new URL(collection.image, assetBase).href,
   href: `/collections/${collection.id}/`, alt: `${collection.title} collection artwork`
 }));
 const storyItems = demo.stories.map(story => ({
   id: story.id, title: story.title, category: story.category,
-  description: story.excerpt, image: story.image,
+  description: story.excerpt, image: new URL(story.image, assetBase).href,
   href: `/blogs/${story.id}/`, alt: `${story.title} journal artwork`
 }));
 const serviceItems = productItems.filter(item => item.kind === 'service');
@@ -45,17 +45,17 @@ const simpleBlockFields = [
 const productCardBlock = blockDef(
   'product_card', 'Product card', simpleBlockFields.concat([field('kind', 'Offering type'), field('price', 'Price'), field('action', 'Action label')]),
   productItems[0],
-  '<article class="rr-product-card" data-kind="physical"><a class="rr-product-card__image" href="/products/field-jacket/" data-theme-project-field="href"><img src="/visual-01.svg" alt="Product artwork" data-theme-project-field="image"><span class="rr-product-card__kind" data-theme-project-field="kind">Physical object</span></a><div class="rr-product-card__meta"><div><span data-theme-project-field="category">Outerwear</span><h3 data-theme-project-field="title">Field Jacket</h3><p data-theme-project-field="description">A useful layer, made to move.</p></div><strong data-theme-project-field="price">$148.00</strong></div><a data-theme-project-field="action" href="/products/field-jacket/">Explore object ↗</a></article>'
+  '<article class="rr-product-card" data-kind="physical"><a class="rr-product-card__image" href="/products/field-jacket/" data-theme-project-field="href"><img src="https://themes.inneranimalmedia.com/theme-packages/revise/0.1.4/preview/assets/stock/resolve/media-216610d365.webp" alt="Product artwork" data-theme-project-field="image"><span class="rr-product-card__kind" data-theme-project-field="kind">Physical object</span></a><div class="rr-product-card__meta"><div><span data-theme-project-field="category">Outerwear</span><h3 data-theme-project-field="title">Field Jacket</h3><p data-theme-project-field="description">A useful layer, made to move.</p></div><strong data-theme-project-field="price">$148.00</strong></div><a data-theme-project-field="action" href="/products/field-jacket/">Explore object ↗</a></article>'
 );
 const collectionCardBlock = blockDef(
   'collection_card', 'Collection card', simpleBlockFields,
   collectionItems[0],
-  '<article class="rr-collection-card"><a href="/collections/new-arrivals/" data-theme-project-field="title"><img src="/visual-07.svg" alt="New Arrivals" data-theme-project-field="image"></a><div><h2 data-theme-project-field="title">New Arrivals</h2><p data-theme-project-field="description">Fresh pieces. Familiar purpose.</p><a href="/collections/new-arrivals/" data-theme-project-field="title">Explore ↗</a></div></article>'
+  '<article class="rr-collection-card"><a href="/collections/new-arrivals/" data-theme-project-field="title"><img src="https://themes.inneranimalmedia.com/theme-packages/revise/0.1.4/preview/assets/stock/resolve/media-216610d365.webp" alt="New Arrivals" data-theme-project-field="image"></a><div><h2 data-theme-project-field="title">New Arrivals</h2><p data-theme-project-field="description">Fresh pieces. Familiar purpose.</p><a href="/collections/new-arrivals/" data-theme-project-field="title">Explore ↗</a></div></article>'
 );
 const storyCardBlock = blockDef(
   'story_card', 'Story card', simpleBlockFields,
   storyItems[0],
-  '<article class="rr-story-card"><a href="/blogs/field-notes/" data-theme-project-field="title"><img src="/visual-10.svg" alt="A slower kind of progress" data-theme-project-field="image"><span data-theme-project-field="category">Field notes</span><h2 data-theme-project-field="title">A slower kind of progress</h2><p data-theme-project-field="description">A few thoughts on making room for the work that matters.</p></a></article>'
+  '<article class="rr-story-card"><a href="/blogs/field-notes/" data-theme-project-field="title"><img src="https://themes.inneranimalmedia.com/theme-packages/revise/0.1.4/preview/assets/stock/resolve/media-a70660bfa9.webp" alt="A slower kind of progress" data-theme-project-field="image"><span data-theme-project-field="category">Field notes</span><h2 data-theme-project-field="title">A slower kind of progress</h2><p data-theme-project-field="description">A few thoughts on making room for the work that matters.</p></a></article>'
 );
 
 function section({ key, name, zone = 'BODY', sourceKind = 'theme-section', html, fields = [], values = {}, blocks = [], globalKey = null, capabilities = { reorder: true, duplicate: true, reusable: true } }) {
@@ -161,9 +161,9 @@ const identityGallery = () => section({
 });
 const productMain = () => section({
   key: 'product_main', name: 'Product information', sourceKind: 'commerce-product',
-  html: '<div class="rr-product-detail" data-commerce-binding="product.kind"><div class="rr-product-gallery"><img src="/visual-01.svg" alt="Product media" data-commerce-binding="product.media.primary"></div><div class="rr-product-info"><span data-commerce-binding="product.kind_label">PHYSICAL OBJECT</span><h1 data-commerce-binding="product.title">Product title</h1><strong data-commerce-binding="product.price">Price</strong><p data-commerce-binding="product.description">Product description</p><div class="rr-product-context" data-commerce-binding="product.purchase_context"></div><label data-commerce-binding="product.option_label">CHOOSE AN OPTION</label><select data-commerce-binding="product.options"><option>Choose an option</option></select><button type="button" data-commerce-action="add-to-cart" data-commerce-binding="product.primary_action">Add to bag</button><p data-commerce-binding="product.fulfillment">Fulfillment details</p></div></div>',
+  html: '<div class="rr-product-detail" data-commerce-binding="product.kind"><div class="rr-product-gallery"><img src="https://themes.inneranimalmedia.com/theme-packages/revise/0.1.4/preview/assets/stock/resolve/media-216610d365.webp" alt="Product media" data-commerce-binding="product.media.primary"></div><div class="rr-product-info"><span data-commerce-binding="product.kind_label">PHYSICAL OBJECT</span><h1 data-commerce-binding="product.title">Product title</h1><strong data-commerce-binding="product.price">Price</strong><p data-commerce-binding="product.description">Product description</p><div class="rr-product-context" data-commerce-binding="product.purchase_context"></div><label data-commerce-binding="product.option_label">CHOOSE AN OPTION</label><select data-commerce-binding="product.options"><option>Choose an option</option></select><button type="button" data-commerce-action="add-to-cart" data-commerce-binding="product.primary_action">Add to bag</button><p data-commerce-binding="product.fulfillment">Fulfillment details</p></div></div>',
   fields: [...mediaFields('image', 'Fallback product media'), ...textFields([['vendor', 'Vendor label'], ['add_label', 'Primary action label']]), field('option_label', 'Option label')],
-  values: { image: '/visual-01.svg', image_alt: 'Product media', vendor: 'REVISE', add_label: 'Add to bag', option_label: 'Choose an option' }
+  values: { image: 'https://themes.inneranimalmedia.com/theme-packages/revise/0.1.4/preview/assets/stock/resolve/media-216610d365.webp', image_alt: 'Product media', vendor: 'REVISE', add_label: 'Add to bag', option_label: 'Choose an option' }
 });
 const checkoutSection = (key, name, heading, body) => section({
   key, name, sourceKind: 'checkout-step',
@@ -179,9 +179,9 @@ const accountSection = (key, name, heading, body, sourceKind = 'customer-account
 const blogIntro = () => intro('blog_intro', 'Journal introduction', '03 / THE JOURNAL', 'Notes from the everyday.', 'A collection of ideas, observations and useful perspectives.');
 const articleHeader = () => section({
   key: 'article_header', name: 'Article header', sourceKind: 'cms-article-header',
-  html: '<header class="rr-article-header"><span data-theme-project-field="category">Field notes</span><h1 data-theme-project-field="title">A slower kind of progress</h1><p data-theme-project-field="excerpt">A few thoughts on making room for the work that matters.</p><img src="/visual-10.svg" alt="Article cover" data-theme-project-field="cover"></header>',
+  html: '<header class="rr-article-header"><span data-theme-project-field="category">Field notes</span><h1 data-theme-project-field="title">A slower kind of progress</h1><p data-theme-project-field="excerpt">A few thoughts on making room for the work that matters.</p><img src="https://themes.inneranimalmedia.com/theme-packages/revise/0.1.4/preview/assets/stock/resolve/media-a70660bfa9.webp" alt="Article cover" data-theme-project-field="cover"></header>',
   fields: [...textFields([['category', 'Category'], ['title', 'Article title'], ['excerpt', 'Excerpt']]), ...mediaFields('cover', 'Cover image')],
-  values: { category: 'Field notes', title: 'A slower kind of progress', excerpt: 'A few thoughts on making room for the work that matters.', cover: '/visual-10.svg', cover_alt: 'Article cover artwork' }
+  values: { category: 'Field notes', title: 'A slower kind of progress', excerpt: 'A few thoughts on making room for the work that matters.', cover: 'https://themes.inneranimalmedia.com/theme-packages/revise/0.1.4/preview/assets/stock/resolve/media-a70660bfa9.webp', cover_alt: 'Article cover artwork' }
 });
 
 const pageDefinitions = [
@@ -190,7 +190,7 @@ const pageDefinitions = [
   { slug: 'product-field-jacket', title: 'Product detail', route: '/products/field-jacket/', page_type: 'product', template_key: 'product', sections: [productMain(), pageBody('product_details', 'Product details', 'Details', 'Product-specific information, materials, care and delivery details.'), productGrid('product_recommendations', 'You may also like')] },
   { slug: 'collections', title: 'Collections list', route: '/collections/', page_type: 'collection_list', template_key: 'list-collections', sections: [intro('collections_intro', 'Collections introduction', '02 / THE INDEX', 'Collections, considered.', 'A few different ways into the same point of view.'), collectionGrid('collections_grid', 'All collections')] },
   { slug: 'collection-new-arrivals', title: 'Collection detail', route: '/collections/new-arrivals/', page_type: 'collection', template_key: 'collection', sections: [intro('collection_intro', 'Collection introduction', 'COLLECTION / NEW ARRIVALS', 'New Arrivals', 'Fresh pieces. Familiar purpose.'), productGrid('collection_products', 'Products in this collection')] },
-  { slug: 'gift-card', title: 'Gift card', route: '/gift-card/', page_type: 'gift_card', template_key: 'gift-card', sections: [section({ key: 'gift_card_main', name: 'Gift card', sourceKind: 'commerce-gift-card', html: '<div class="rr-gift-layout"><div><h1 data-theme-project-field="heading">A little room to choose.</h1><p data-theme-project-field="description">For the people who know what they like.</p><img src="/visual-18.svg" alt="Gift card artwork" data-theme-project-field="image"></div><div><h2 data-theme-project-field="options_heading">Choose an amount</h2><div data-theme-project-field="amounts">Gift card denominations</div><button type="button" data-commerce-action="add-gift-card" data-theme-project-field="button_label">Add gift card to bag</button></div></div>', fields: [...mediaFields('image', 'Gift card artwork'), ...textFields([['heading', 'Heading'], ['description', 'Description'], ['options_heading', 'Options heading'], ['amounts', 'Gift card values'], ['button_label', 'Button label']])], values: { image: '/visual-18.svg', image_alt: 'Gift card artwork', heading: 'A little room to choose.', description: 'For the people who know what they like.', options_heading: 'Choose an amount', amounts: '$50 · $100 · $150 · $200', button_label: 'Add gift card to bag' } })] },
+  { slug: 'gift-card', title: 'Gift card', route: '/gift-card/', page_type: 'gift_card', template_key: 'gift-card', sections: [section({ key: 'gift_card_main', name: 'Gift card', sourceKind: 'commerce-gift-card', html: '<div class="rr-gift-layout"><div><h1 data-theme-project-field="heading">A little room to choose.</h1><p data-theme-project-field="description">For the people who know what they like.</p><img src="https://themes.inneranimalmedia.com/theme-packages/revise/0.1.4/preview/revise-detail-paper.webp" alt="Gift card artwork" data-theme-project-field="image"></div><div><h2 data-theme-project-field="options_heading">Choose an amount</h2><div data-theme-project-field="amounts">Gift card denominations</div><button type="button" data-commerce-action="add-gift-card" data-theme-project-field="button_label">Add gift card to bag</button></div></div>', fields: [...mediaFields('image', 'Gift card artwork'), ...textFields([['heading', 'Heading'], ['description', 'Description'], ['options_heading', 'Options heading'], ['amounts', 'Gift card values'], ['button_label', 'Button label']])], values: { image: 'https://themes.inneranimalmedia.com/theme-packages/revise/0.1.4/preview/revise-detail-paper.webp', image_alt: 'Gift card artwork', heading: 'A little room to choose.', description: 'For the people who know what they like.', options_heading: 'Choose an amount', amounts: '$50 · $100 · $150 · $200', button_label: 'Add gift card to bag' } })] },
   { slug: 'cart', title: 'Cart', route: '/cart/', page_type: 'cart', template_key: 'cart', sections: [section({ key: 'cart_main', name: 'Cart', sourceKind: 'commerce-cart', html: '<div class="rr-cart-page"><h1 data-theme-project-field="heading">Your bag.</h1><div data-commerce-region="cart-items"></div><aside data-commerce-region="cart-summary"><span data-theme-project-field="summary_label">Order summary</span><strong data-commerce-binding="cart.total"></strong><a href="/checkout/" data-theme-project-field="checkout_label">Continue to checkout ↗</a></aside></div>', fields: textFields([['heading', 'Heading'], ['summary_label', 'Summary label'], ['checkout_label', 'Checkout button label']]), values: { heading: 'Your bag.', summary_label: 'Order summary', checkout_label: 'Continue to checkout ↗' } })] },
   { slug: 'checkout', title: 'Checkout', route: '/checkout/', page_type: 'checkout', template_key: 'checkout', sections: [checkoutSection('checkout_contact', 'Contact details', 'Contact', 'Customer email and sign-in options.'), checkoutSection('checkout_delivery', 'Delivery details', 'Delivery', 'Address, delivery method and contact details.'), checkoutSection('checkout_payment', 'Payment', 'Payment', 'Secure payment options supplied by the connected provider.'), checkoutSection('checkout_summary', 'Order summary', 'Order summary', 'Line items, discounts, shipping, tax and total.')] },
   { slug: 'account', title: 'Customer account', route: '/account/', page_type: 'customer_account', template_key: 'customers/account', sections: [accountSection('account_overview', 'Account overview', 'Your account', 'Order history, saved details and preferences are available after sign in.')] },
@@ -267,7 +267,7 @@ const project = {
   revision: 0,
   sourceThemeId: 'revise',
   sourcePackage: '@inneranimalmedia/theme-revise',
-  sourcePackageVersion: '0.1.3',
+  sourcePackageVersion: '0.1.4',
   sourcePreviewUrl: assetBase,
   sourceReleaseSha256: '0'.repeat(64),
   sourceCmsManifestSchema: 'iam.theme-package.v1',

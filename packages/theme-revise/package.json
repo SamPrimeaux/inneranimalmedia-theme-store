@@ -1,6 +1,6 @@
 {
   "name": "@inneranimalmedia/theme-revise",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Revise \u2014 portable editorial commerce theme with independent page templates, full-viewport navigation and a complete local storefront preview.",
   "type": "module",
   "exports": {

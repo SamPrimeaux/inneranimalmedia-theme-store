@@ -302,6 +302,19 @@ export default {
         if (!object) return missing('preview_asset_missing');
         const ext = contentFile.split('.').at(-1)?.toLowerCase() ?? '';
         const headers = previewFileHeaders(ext, types);
+        // An immutable installer needs the exact R2 bytes, not an HTML document
+        // transformed by Cloudflare Fonts, Bot Management or analytics injection.
+        // This is restricted to published preview assets and never serves drafts.
+        if (url.searchParams.get('raw') === '1' && contentFile !== 'preview-files.json') {
+          const rawHeaders = new Headers({
+            'content-type': 'application/octet-stream',
+            'content-disposition': 'attachment',
+            'cache-control': 'public, max-age=31536000, immutable, no-transform',
+            'x-content-type-options': 'nosniff',
+            'access-control-allow-origin': '*',
+          });
+          return new Response(method === 'HEAD' ? null : object.body, {status:200, headers:rawHeaders});
+        }
         if (contentFile === 'preview-files.json') {
           const manifest = await object.json<{schema:string;slug:string;version:string;files:Array<{path:string;sha256:string}>}>();
           const htmlByPath:Record<string,string> = {};

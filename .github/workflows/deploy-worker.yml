@@ -1,0 +1,55 @@
+name: Deploy Theme Store Worker (immutable preview delivery)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: theme-store-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Checkout canonical Theme Store source
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify Cloudflare deployment authority
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+      - name: Install and verify Worker
+        run: |
+          npm ci --no-audit --no-fund
+          npm run check
+          npm test
+          npm run build
+      - name: Deploy verified Theme Store Worker
+        run: npx wrangler deploy
+      - name: Verify immutable download endpoint against published digest
+        run: |
+          node --input-type=module - <<'NODE'
+          import {createHash} from 'node:crypto';
+          const url='https://themes.inneranimalmedia.com/theme-packages/cypress/2.6.13/preview/';
+          const manifestResponse=await fetch(url+'preview-files.json');
+          if(!manifestResponse.ok) throw Error('theme_preview_manifest_unavailable');
+          const manifest=await manifestResponse.json();
+          const entry=manifest.files.find(x=>x.path==='beliefs.html');
+          if(!entry) throw Error('theme_preview_fixture_not_published');
+          const response=await fetch(url+'beliefs.html?raw=1');
+          if(!response.ok || !(response.headers.get('content-type')||'').startsWith('application/octet-stream')) throw Error('immutable_preview_download_unavailable');
+          const bytes=Buffer.from(await response.arrayBuffer());
+          const digest=createHash('sha256').update(bytes).digest('hex');
+          if(digest!==entry.sha256) throw Error('immutable_preview_download_checksum_mismatch');
+          console.log('THEME_STORE_IMMUTABLE_PREVIEW_PASS',bytes.length,digest);
+          NODE

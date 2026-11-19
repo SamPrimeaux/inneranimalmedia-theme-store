@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const SOURCE = fileURLToPath(new URL('../site/', import.meta.url));
-const PACKAGED_BASE = '/theme-packages/revise/0.1.1/preview/';
+const PACKAGED_BASE = '/theme-packages/revise/0.1.3/preview/';
 const TEXT_EXT = new Set(['.html','.js','.css','.json','.svg']);
 function normalizeBasePath(input = '/') {
   let base = String(input || '/');
@@ -30,6 +30,8 @@ export function materializePrebuild(target,options={}){
   fs.rmSync(destination,{recursive:true,force:true});
   fs.mkdirSync(path.dirname(destination),{recursive:true});
   fs.cpSync(SOURCE,destination,{recursive:true});
+  // The source-authentic owner world is opt-in, never part of the stock theme.
+  if (!options.includeOwnerScenes) fs.rmSync(path.join(destination,'owner-scenes'),{recursive:true,force:true});
   for(const file of walk(destination)){
     if(!TEXT_EXT.has(path.extname(file)))continue;
     let source=fs.readFileSync(file,'utf8');

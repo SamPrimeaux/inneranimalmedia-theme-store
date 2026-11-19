@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { themeInstallerUrl } from '../src/marketplace-redirect.mjs';
 
 test('preserves package and version in the configured shared CMS handoff', () => {
-  const href = themeInstallerUrl('https://cms.example.test/sites', 'iam.theme.revise', '0.1.2');
+  const href = themeInstallerUrl('iam.theme.revise', '0.1.2');
   const target = new URL(href);
   assert.equal(target.origin, 'https://cms.example.test');
   assert.equal(target.pathname, '/sites');

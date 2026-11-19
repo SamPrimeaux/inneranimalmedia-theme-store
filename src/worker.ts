@@ -16,7 +16,6 @@ type Env = {
   ASSETS: Fetcher;
   THEME_PACKAGES: R2Bucket;
   DB?: D1Database;
-  THEME_INSTALLER_URL?: string;
 };
 
 function response(data: unknown, status = 200, cacheControl = 'public, max-age=120'): Response {

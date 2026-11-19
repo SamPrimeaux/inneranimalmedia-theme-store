@@ -12,11 +12,7 @@ test('preserves package and version in the configured shared CMS handoff', () =>
   });
 });
 
-test('rejects invalid package input and invalid installer configuration', () => {
-  const cms = 'https://cms.example.test/sites';
-  assert.equal(themeInstallerUrl(cms, 'iam.theme.revise&site_id=other', '0.1.2'), null);
-  assert.equal(themeInstallerUrl(cms, 'iam.theme.revise', 'latest'), null);
-  for (const url of [undefined, '//cms.example.test', 'http://cms.example.test', cms+'?site_id=x', cms+'#fragment', 'https://user@cms.example.test']) {
-    assert.equal(themeInstallerUrl(url, 'iam.theme.revise', '0.1.2'), null);
-  }
+test('rejects invalid package input', () => {
+  assert.equal(themeInstallerUrl('iam.theme.revise&site_id=other', '0.1.2'), null);
+  assert.equal(themeInstallerUrl('iam.theme.revise', 'latest'), null);
 });

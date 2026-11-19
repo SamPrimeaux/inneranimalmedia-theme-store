@@ -22,7 +22,8 @@ async function pool(items, size, task) {
   await Promise.all(Array.from({length: size}, async () => { while (queue.length) await task(queue.shift()); }));
 }
 const deploy = process.argv.includes('--deploy');
-const onlyPlainJane = process.argv.includes('--only=plain-jane');
+const only = process.argv.find(arg => arg.startsWith('--only='))?.slice(7);
+if (only !== undefined && !/^[a-z][a-z0-9-]{0,62}$/.test(only)) throw new Error('invalid_theme_slug');
 
 function run(bin, args, cwd = process.cwd(), capture = false) {
   return new Promise((resolve, reject) => {
@@ -67,7 +68,7 @@ try {
   // Never fetch an older external snapshot for the downloadable product.
   const catalog = await buildCatalog(join(process.cwd(), 'packages'));
   for (const theme of catalog) {
-    if ((onlyPlainJane && theme.slug !== 'plain-jane') || theme.previewBuild === 'external') continue;
+    if ((only && theme.slug !== only) || theme.previewBuild === 'external') continue;
     const themePrefix = '/theme-packages/' + theme.slug + '/' + theme.version + '/preview/';
     const entry = await import(pathToFileURL(join(process.cwd(), 'packages', 'theme-' + theme.slug, 'src', 'node.js')).href);
     const out = join(root, 'pkg-' + theme.slug);

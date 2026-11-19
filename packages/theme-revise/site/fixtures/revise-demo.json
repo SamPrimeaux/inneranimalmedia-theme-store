@@ -1,0 +1,429 @@
+{
+  "products": [
+    {
+      "id": "field-jacket",
+      "title": "Field Jacket",
+      "kind": "physical",
+      "type": "Outerwear",
+      "price": 148,
+      "compareAt": 178,
+      "priceLabel": "$148",
+      "image": "assets/stock/resolve/media-216610d365.webp",
+      "color": "Olive / Ink",
+      "description": "A dependable layer for days that begin before sunrise. Considered storage, a relaxed shape and room to move.",
+      "shortDescription": "A useful layer, made to move.",
+      "variants": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "optionLabel": "Choose your size",
+      "fulfillment": "Ships from the studio",
+      "details": [
+        "Structured cotton canvas",
+        "Adjustable cuffs and considered storage",
+        "Designed for everyday wear"
+      ],
+      "badge": "BESTSELLER"
+    },
+    {
+      "id": "canvas-weekender",
+      "title": "Canvas Weekender",
+      "kind": "physical",
+      "type": "Carry",
+      "price": 96,
+      "compareAt": null,
+      "priceLabel": "$96",
+      "image": "assets/stock/resolve/media-2a9e0f623f.webp",
+      "color": "Natural / Umber",
+      "description": "A generous everyday carry with a structured base, considered pockets and an easy weekend silhouette.",
+      "shortDescription": "Room for the things worth taking.",
+      "variants": [
+        "One size"
+      ],
+      "optionLabel": "Size",
+      "fulfillment": "Ships from the studio",
+      "details": [
+        "Heavyweight canvas",
+        "Structured base",
+        "Interior organization"
+      ]
+    },
+    {
+      "id": "everyday-cap",
+      "title": "Everyday Cap",
+      "kind": "physical",
+      "type": "Accessories",
+      "price": 34,
+      "compareAt": null,
+      "priceLabel": "$34",
+      "image": "revise-detail-cap.webp",
+      "color": "Washed black",
+      "description": "An uncomplicated six-panel cap with a soft profile and adjustable fit.",
+      "shortDescription": "A familiar form, carefully finished.",
+      "variants": [
+        "One size"
+      ],
+      "optionLabel": "Size",
+      "fulfillment": "Ships from the studio",
+      "details": [
+        "Soft-structured crown",
+        "Adjustable closure",
+        "Everyday cotton"
+      ]
+    },
+    {
+      "id": "trail-bottle",
+      "title": "Trail Bottle",
+      "kind": "physical",
+      "type": "Objects",
+      "price": 42,
+      "compareAt": null,
+      "priceLabel": "$42",
+      "image": "assets/stock/resolve/media-a70660bfa9.webp",
+      "color": "Slate / Chalk",
+      "description": "A durable bottle designed to stay close through long days and changing plans.",
+      "shortDescription": "Made to go wherever the day leads.",
+      "variants": [
+        "650 ml",
+        "900 ml"
+      ],
+      "optionLabel": "Choose a size",
+      "fulfillment": "Ships from the studio",
+      "details": [
+        "Double-wall construction",
+        "Leak-resistant lid",
+        "Two useful capacities"
+      ]
+    },
+    {
+      "id": "heavyweight-tee",
+      "title": "Heavyweight Tee",
+      "kind": "physical",
+      "type": "Apparel",
+      "price": 48,
+      "compareAt": null,
+      "priceLabel": "$48",
+      "image": "assets/stock/resolve/media-bc1322e813.webp",
+      "color": "Chalk / Charcoal",
+      "description": "A substantial cotton tee with a relaxed fit and a clean, everyday finish.",
+      "shortDescription": "The everyday piece, reconsidered.",
+      "variants": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "optionLabel": "Choose your size",
+      "fulfillment": "Ships from the studio",
+      "details": [
+        "Heavyweight cotton",
+        "Relaxed silhouette",
+        "Made for repeat wear"
+      ]
+    },
+    {
+      "id": "studio-tote",
+      "title": "Studio Tote",
+      "kind": "physical",
+      "type": "Carry",
+      "price": 38,
+      "compareAt": null,
+      "priceLabel": "$38",
+      "image": "revise-merch-details.webp",
+      "color": "Natural",
+      "description": "A simple carryall with useful capacity for the things that travel with you.",
+      "shortDescription": "An uncomplicated everyday carry.",
+      "variants": [
+        "One size"
+      ],
+      "optionLabel": "Size",
+      "fulfillment": "Ships from the studio",
+      "details": [
+        "Durable woven canvas",
+        "Reinforced handles",
+        "Generous everyday capacity"
+      ]
+    },
+    {
+      "id": "field-guide",
+      "title": "The Field Guide",
+      "kind": "digital",
+      "type": "Digital edition",
+      "price": 24,
+      "compareAt": null,
+      "priceLabel": "$24",
+      "image": "revise-detail-paper.webp",
+      "color": "Digital edition",
+      "description": "A practical guide to noticing what is working, questioning what is not and making the next version more useful.",
+      "shortDescription": "A useful guide for your next good idea.",
+      "variants": [
+        "Personal edition",
+        "Studio edition"
+      ],
+      "optionLabel": "Choose a license",
+      "fulfillment": "Digital delivery",
+      "format": "PDF · 48 pages",
+      "details": [
+        "Downloadable PDF",
+        "Practical prompts and working exercises",
+        "Available immediately after purchase"
+      ],
+      "badge": "INSTANT ACCESS"
+    },
+    {
+      "id": "design-toolkit",
+      "title": "The Working Toolkit",
+      "kind": "digital",
+      "type": "Digital tools",
+      "price": 68,
+      "compareAt": null,
+      "priceLabel": "$68",
+      "image": "revise-identity-card.webp",
+      "color": "Digital toolkit",
+      "description": "A considered set of editable working files, planning tools and reusable systems for bringing a project into focus.",
+      "shortDescription": "Tools to turn a good direction into good work.",
+      "variants": [
+        "Individual license",
+        "Studio license"
+      ],
+      "optionLabel": "Choose a license",
+      "fulfillment": "Digital delivery",
+      "format": "Editable files · Multi-format",
+      "details": [
+        "Editable working files",
+        "Reusable planning templates",
+        "License options for individuals and teams"
+      ]
+    },
+    {
+      "id": "brand-direction",
+      "title": "Brand Direction Intensive",
+      "kind": "service",
+      "type": "Strategy & direction",
+      "price": 850,
+      "compareAt": null,
+      "priceLabel": "From $850",
+      "image": "assets/stock/resolve/media-ced60fcecc.webp",
+      "color": "Remote or in studio",
+      "description": "A focused working engagement to examine the current brand, find the real opportunity and define a direction people can act on.",
+      "shortDescription": "Find the signal. Define the next move.",
+      "variants": [
+        "90-minute working session",
+        "Half-day intensive"
+      ],
+      "optionLabel": "Choose an engagement",
+      "fulfillment": "Scheduled with the studio",
+      "timeline": "1–2 weeks",
+      "details": [
+        "Pre-session discovery",
+        "Facilitated working session",
+        "Written direction and next steps"
+      ],
+      "badge": "SERVICE"
+    },
+    {
+      "id": "digital-experience",
+      "title": "Digital Experience Design",
+      "kind": "service",
+      "type": "Design & development",
+      "price": 4200,
+      "compareAt": null,
+      "priceLabel": "From $4,200",
+      "image": "revise-campaign-hero.webp",
+      "color": "Collaborative engagement",
+      "description": "A complete digital experience shaped around the people using it: strategy, structure, design and the engineering that makes it work.",
+      "shortDescription": "From first question to a finished experience.",
+      "variants": [
+        "Discovery & direction",
+        "Design & build"
+      ],
+      "optionLabel": "Choose a starting point",
+      "fulfillment": "Project-based engagement",
+      "timeline": "4–8 weeks",
+      "details": [
+        "Discovery and experience mapping",
+        "Responsive visual design",
+        "Implementation and handoff"
+      ],
+      "badge": "SERVICE"
+    },
+    {
+      "id": "studio-workshop",
+      "title": "The Studio Workshop",
+      "kind": "experience",
+      "type": "Small-group workshop",
+      "price": 125,
+      "compareAt": null,
+      "priceLabel": "$125 / person",
+      "image": "revise-detail-garment.webp",
+      "color": "In person",
+      "description": "A small-group working session for people who want to rethink a challenge, share perspectives and leave with a clearer next step.",
+      "shortDescription": "Good questions. Shared perspective. Useful momentum.",
+      "variants": [
+        "Saturday · 10:00 AM",
+        "Saturday · 2:00 PM"
+      ],
+      "optionLabel": "Choose a session",
+      "fulfillment": "Reserved place",
+      "venue": "The Studio",
+      "capacity": "12 places per session",
+      "details": [
+        "Guided group exercises",
+        "Facilitated discussion",
+        "A take-home working guide"
+      ],
+      "badge": "LIMITED PLACES"
+    },
+    {
+      "id": "field-session",
+      "title": "The Field Session",
+      "kind": "experience",
+      "type": "Guided experience",
+      "price": 85,
+      "compareAt": null,
+      "priceLabel": "$85 / person",
+      "image": "assets/stock/resolve/media-2a9e0f623f.webp",
+      "color": "Small group",
+      "description": "A guided session designed to change your point of view, make space for observation and bring fresh perspective back to the work.",
+      "shortDescription": "Step outside the usual way of seeing.",
+      "variants": [
+        "Sunday · 9:00 AM",
+        "Sunday · 1:00 PM"
+      ],
+      "optionLabel": "Choose a session",
+      "fulfillment": "Reserved place",
+      "venue": "A changing place, shared after booking",
+      "capacity": "Small-group experience",
+      "details": [
+        "Guided field prompts",
+        "A small-group format",
+        "A follow-up reflection guide"
+      ]
+    }
+  ],
+  "collections": [
+    {
+      "id": "new-arrivals",
+      "title": "The latest thinking",
+      "description": "New objects, digital editions and ways to work together.",
+      "image": "assets/stock/resolve/media-216610d365.webp",
+      "kind": "mixed",
+      "products": [
+        "field-jacket",
+        "field-guide",
+        "brand-direction",
+        "studio-workshop",
+        "canvas-weekender",
+        "design-toolkit"
+      ]
+    },
+    {
+      "id": "everyday-essentials",
+      "title": "Objects for everyday",
+      "description": "Useful things, considered from the first detail to the last.",
+      "image": "assets/stock/resolve/media-bc1322e813.webp",
+      "kind": "physical",
+      "products": [
+        "field-jacket",
+        "canvas-weekender",
+        "everyday-cap",
+        "trail-bottle",
+        "heavyweight-tee",
+        "studio-tote"
+      ]
+    },
+    {
+      "id": "digital-editions",
+      "title": "Digital editions",
+      "description": "Guides, tools and working files made to be used.",
+      "image": "revise-detail-paper.webp",
+      "kind": "digital",
+      "products": [
+        "field-guide",
+        "design-toolkit"
+      ]
+    },
+    {
+      "id": "services",
+      "title": "Work, together",
+      "description": "Focused services that turn questions into a clear direction and useful outcomes.",
+      "image": "revise-campaign-hero.webp",
+      "kind": "service",
+      "products": [
+        "brand-direction",
+        "digital-experience"
+      ]
+    },
+    {
+      "id": "experiences",
+      "title": "Experiences worth making time for",
+      "description": "Workshops and guided sessions designed to shift perspective.",
+      "image": "revise-detail-stitch.webp",
+      "kind": "experience",
+      "products": [
+        "studio-workshop",
+        "field-session"
+      ]
+    }
+  ],
+  "stories": [
+    {
+      "id": "look-again",
+      "title": "The value of looking again",
+      "category": "Perspective",
+      "date": "November 04, 2026",
+      "image": "assets/stock/resolve/media-a70660bfa9.webp",
+      "excerpt": "The first answer is rarely the only answer. A better question can change the entire direction."
+    },
+    {
+      "id": "objects-in-use",
+      "title": "Objects with a point of view",
+      "category": "The journal",
+      "date": "October 18, 2026",
+      "image": "revise-detail-garment.webp",
+      "excerpt": "Why the most useful things are often the ones that have been reconsidered."
+    },
+    {
+      "id": "work-between",
+      "title": "The work between the idea and the result",
+      "category": "Studio notes",
+      "date": "September 26, 2026",
+      "image": "assets/stock/resolve/media-ced60fcecc.webp",
+      "excerpt": "A look at the decisions, conversations and small refinements that shape the final experience."
+    }
+  ],
+  "chapters": [
+    {
+      "number": "01",
+      "eyebrow": "RE-EXAMINE",
+      "title": "Look closer.",
+      "body": "Every meaningful improvement starts by noticing what others have learned to overlook.",
+      "image": "assets/stock/resolve/media-2a9e0f623f.webp",
+      "cta": "Explore the services",
+      "href": "/services/"
+    },
+    {
+      "number": "02",
+      "eyebrow": "RECONSIDER",
+      "title": "See another way.",
+      "body": "Bring strategy, design, technology and the people using them into the same conversation.",
+      "image": "revise-identity-card.webp",
+      "cta": "Discover digital editions",
+      "href": "/digital/"
+    },
+    {
+      "number": "03",
+      "eyebrow": "MAKE IT BETTER",
+      "title": "Make the next version real.",
+      "body": "From physical objects to digital tools, focused services and shared experiences, the work should make life better in a tangible way.",
+      "image": "assets/stock/resolve/media-bc1322e813.webp",
+      "cta": "Explore experiences",
+      "href": "/experiences/"
+    }
+  ]
+}

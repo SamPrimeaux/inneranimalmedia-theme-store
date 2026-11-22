@@ -1,6 +1,11 @@
 import fs from 'node:fs';
 
-const assetBase = 'https://themes.inneranimalmedia.com/theme-packages/revise/0.1.4/preview/';
+const packageManifest = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
+const packageVersion = packageManifest.version;
+const release = packageManifest.agentsam?.store?.release || {};
+const releaseSha256 = release.status === 'published' ? String(release.sha256 || '') : '0'.repeat(64);
+if (!/^[a-f0-9]{64}$/.test(releaseSha256)) throw new Error('Revise published release SHA-256 missing or invalid');
+const assetBase = 'https://themes.inneranimalmedia.com/theme-packages/revise/' + packageVersion + '/preview/';
 const demo = JSON.parse(fs.readFileSync(new URL('../site/fixtures/revise-demo.json', import.meta.url), 'utf8'));
 const kindLabel = { physical: 'Physical object', digital: 'Digital edition', service: 'Service', experience: 'Experience' };
 const kindAction = { physical: 'Explore object', digital: 'Explore edition', service: 'Explore service', experience: 'Explore experience' };
@@ -267,9 +272,9 @@ const project = {
   revision: 0,
   sourceThemeId: 'revise',
   sourcePackage: '@inneranimalmedia/theme-revise',
-  sourcePackageVersion: '0.1.4',
+  sourcePackageVersion: packageVersion,
   sourcePreviewUrl: assetBase,
-  sourceReleaseSha256: '0'.repeat(64),
+  sourceReleaseSha256: releaseSha256,
   sourceCmsManifestSchema: 'iam.theme-package.v1',
   sourceManifestPageCount: pages.length,
   sourceRoutesNotRendered: [],

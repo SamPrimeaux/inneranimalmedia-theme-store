@@ -1,7 +1,7 @@
 {
   "name": "@inneranimalmedia/theme-revise",
   "version": "0.1.4",
-  "description": "Revise \u2014 portable editorial commerce theme with independent page templates, full-viewport navigation and a complete local storefront preview.",
+  "description": "Revise — portable editorial commerce theme with independent page templates, full-viewport navigation and a complete local storefront preview.",
   "type": "module",
   "exports": {
     ".": "./src/index.js",
@@ -22,7 +22,7 @@
     "installable": true,
     "stock": true,
     "store": {
-      "name": "Revise \u2014 Editorial Commerce",
+      "name": "Revise — Editorial Commerce",
       "summary": "A portable editorial commerce theme with dedicated home, product, collection, gift card, cart, checkout, customer account, journal and content page templates.",
       "category": "Commerce",
       "industries": [
@@ -85,9 +85,9 @@
       "priceUsd": 0,
       "previewBuild": "package",
       "release": {
-        "status": "preview",
-        "sha256": null,
-        "storageKey": null
+        "status": "published",
+        "sha256": "9815dcd7f106480c0cb48030ca9733d4e1a18a1e66ecdd1c923c1cfbff70c05f",
+        "storageKey": "releases/revise/0.1.4/9815dcd7f106480c0cb48030ca9733d4e1a18a1e66ecdd1c923c1cfbff70c05f.zip"
       }
     }
   }

@@ -39,7 +39,7 @@ The regular portable theme deliberately **omits `owner-scenes/`**. Only `materia
 - `python3 tests/revise-owner-scenes.browser.py` runs desktop and mobile browser acceptance against localhost:4321 (requires Playwright and Google Chrome on the review machine).
 - `npm test` runs the repository's broader tests.
 
-Revise remains `release.status: preview`, with no production release hash or R2 publication. A local preview is not proof of a deployed customer site. Do not publish to production without review and explicit authorization.
+Revise 0.1.4 is published as an immutable, SHA-256-verified R2 ZIP with a matching source-backed CMS install project. The stock storefront demo is not a real merchant catalog or a payment-enabled customer deployment. Owner-only creative scenes remain separate from the distributed merchant theme.
 
 ## Project separation
 

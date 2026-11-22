@@ -108,12 +108,16 @@ test('Revise CMS project has independent templates for the full storefront journ
   }
 });
 
-test('Revise release metadata remains preview-only until explicitly published', () => {
+test('Revise public release and editable CMS project point to the same immutable artifact', () => {
   const pkg = require('../packages/theme-revise/package.json');
+  const project = require('../packages/theme-revise/install-project.json');
+  const release = pkg.agentsam.store.release;
   assert.equal(pkg.version, '0.1.4');
-  assert.equal(pkg.agentsam.store.release.status, 'preview');
-  assert.equal(pkg.agentsam.store.release.sha256, null);
-  assert.equal(pkg.agentsam.store.release.storageKey, null);
+  assert.equal(release.status, 'published');
+  assert.match(release.sha256, /^[a-f0-9]{64}$/);
+  assert.equal(release.storageKey, 'releases/revise/' + pkg.version + '/' + release.sha256 + '.zip');
+  assert.equal(project.sourcePackageVersion, pkg.version);
+  assert.equal(project.sourceReleaseSha256, release.sha256);
 });
 
 test('Revise identity study and source scene assets remain verifiable', () => {

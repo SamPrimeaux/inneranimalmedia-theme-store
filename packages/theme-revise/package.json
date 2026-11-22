@@ -1,7 +1,7 @@
 {
   "name": "@inneranimalmedia/theme-revise",
-  "version": "0.1.2",
-  "description": "Revise — editorial commerce starter, with multipage Fuel & Free Time demonstration and reusable section library.",
+  "version": "0.1.4",
+  "description": "Revise — portable editorial commerce theme with independent page templates, full-viewport navigation and a complete local storefront preview.",
   "type": "module",
   "exports": {
     ".": "./src/index.js",
@@ -23,7 +23,7 @@
     "stock": true,
     "store": {
       "name": "Revise — Editorial Commerce",
-      "summary": "Dynamic editorial storefront with a five-page launch story, layered product displays, media galleries and campaign sections.",
+      "summary": "A portable editorial commerce theme with dedicated home, product, collection, gift card, cart, checkout, customer account, journal and content page templates.",
       "category": "Commerce",
       "industries": [
         "Retail",
@@ -44,17 +44,40 @@
       "pages": [
         "Home",
         "Products",
-        "Stories",
-        "Campaigns",
-        "Collections"
+        "Product detail",
+        "Collections list",
+        "Collection detail",
+        "Gift card",
+        "Cart",
+        "Checkout",
+        "Customer account",
+        "Customer sign in",
+        "Customer registration",
+        "Customer orders",
+        "Customer profile",
+        "Blog",
+        "Article",
+        "Search",
+        "Content page",
+        "Contact page",
+        "Shipping & returns",
+        "FAQ",
+        "404",
+        "Password"
       ],
       "features": [
-        "Multipage",
-        "Search panel",
-        "Section library",
-        "Product preview",
-        "Navigation overlays",
-        "Mobile layouts"
+        "Independent page templates",
+        "Full-viewport navigation",
+        "Dedicated product detail pages",
+        "Collection index and detail pages",
+        "Gift card page",
+        "Persistent preview cart",
+        "Checkout layout",
+        "Customer account templates",
+        "Journal and article templates",
+        "Responsive editorial layouts",
+        "Reusable CMS sections",
+        "Merchant-editable global header and footer"
       ],
       "colorway": "paper",
       "cardImage": "/previews/revise.svg",
@@ -63,8 +86,8 @@
       "previewBuild": "package",
       "release": {
         "status": "published",
-        "sha256": "19669693a6c91f80ebe02180b373b6121ea2b5020aeac615e8cebab08e082d00",
-        "storageKey": "releases/revise/0.1.2/19669693a6c91f80ebe02180b373b6121ea2b5020aeac615e8cebab08e082d00.zip"
+        "sha256": "9815dcd7f106480c0cb48030ca9733d4e1a18a1e66ecdd1c923c1cfbff70c05f",
+        "storageKey": "releases/revise/0.1.4/9815dcd7f106480c0cb48030ca9733d4e1a18a1e66ecdd1c923c1cfbff70c05f.zip"
       }
     }
   }

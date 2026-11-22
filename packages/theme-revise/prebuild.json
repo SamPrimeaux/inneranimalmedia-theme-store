@@ -2,7 +2,7 @@
   "schema": "agentsam.prebuild.v1",
   "id": "revise",
   "package": "@inneranimalmedia/theme-revise",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "siteRoot": "site",
   "entrypoint": "index.html",
   "rootDeployable": true,
@@ -15,7 +15,9 @@
     "basePath": "/"
   },
   "notes": [
-    "The compiled preview and the editable CMS project use the same stock Revise composition.",
-    "Merchant inventory, orders and authenticated storefront services are supplied by the host."
+    "The storefront preview and editable CMS project ship together as one portable Revise theme package.",
+    "The PrimeTech-owned immersive scene pack is opt-in and excluded from stock materialization; includeOwnerScenes must be explicitly enabled for the owner profile.",
+    "The theme provides page structure and presentation; inventory, customer identity, checkout, payments and fulfillment are connected by the merchant host.",
+    "The local cart and checkout screens are preview interactions only and do not create orders or collect payment."
   ]
 }

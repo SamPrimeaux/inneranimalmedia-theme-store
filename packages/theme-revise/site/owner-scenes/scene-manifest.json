@@ -1,0 +1,301 @@
+{
+  "schema": "revise.owner-scene-pack.v1",
+  "sourceRepository": "SamPrimeaux/agentsam-3d-studio-primetech",
+  "sourceExperience": "experiences/primetech-showcase-v1",
+  "ownerProfile": "primetech-inneranimalmedia",
+  "enabledByDefault": false,
+  "environment": {
+    "renderer": "Three.js",
+    "source": "src/main.js",
+    "runtime": "revise-world-runtime.mjs",
+    "cameraStops": 11
+  },
+  "scenes": [
+    {
+      "index": 0,
+      "id": "home",
+      "heading": "Our mission is to redefine impossible.",
+      "description": "We create complete software systems, dimensional tools, brands, merchandise and immersive experiences—all connected by one creative practice.",
+      "camera": {
+        "position": [
+          23,
+          15,
+          30
+        ],
+        "target": [
+          9,
+          1,
+          -8
+        ]
+      }
+    },
+    {
+      "index": 1,
+      "id": "design",
+      "heading": "Designed to see things differently.",
+      "description": "Imagination is a technical skill.",
+      "camera": {
+        "position": [
+          39,
+          18,
+          38
+        ],
+        "target": [
+          29,
+          0,
+          -7
+        ]
+      }
+    },
+    {
+      "index": 2,
+      "id": "engineering",
+      "heading": "Built to work together.",
+      "description": "Real-time scenes, native rendering and engineered interactions turn a static idea into something people can explore.",
+      "camera": {
+        "position": [
+          71,
+          21,
+          35
+        ],
+        "target": [
+          61,
+          0,
+          -6
+        ]
+      }
+    },
+    {
+      "index": 3,
+      "id": "principles",
+      "heading": "Technology with a reason to exist.",
+      "description": "What makes great work last",
+      "camera": {
+        "position": [
+          74,
+          27,
+          34
+        ],
+        "target": [
+          68,
+          0,
+          -5
+        ]
+      }
+    },
+    {
+      "index": 4,
+      "id": "capabilities",
+      "heading": "One world. More ways to create.",
+      "description": "Follow the disciplines across our world: the systems behind a business, the dimensions behind a product, the identity behind a brand, and the scenes behind an experience.",
+      "camera": {
+        "position": [
+          99,
+          24,
+          43
+        ],
+        "target": [
+          93,
+          1,
+          -4
+        ]
+      }
+    },
+    {
+      "index": 5,
+      "id": "cad",
+      "heading": "Ideas into dimensions.",
+      "description": "CAD Creator connects spatial ideas to real geometry. Beyond the Blueprint takes you through seven cinematic scenes and the source-backed DreamHouse architectural review.",
+      "camera": {
+        "position": [
+          119,
+          16,
+          31
+        ],
+        "target": [
+          109,
+          0,
+          -8
+        ]
+      }
+    },
+    {
+      "index": 6,
+      "id": "agentsam",
+      "heading": "Meet the creative co-worker.",
+      "description": "AgentSam connects context, tools and creative workflows so teams can move from research to decisions to finished work without losing the thread.",
+      "camera": {
+        "position": [
+          144,
+          21,
+          38
+        ],
+        "target": [
+          130,
+          2,
+          -8
+        ]
+      }
+    },
+    {
+      "index": 7,
+      "id": "creative",
+      "heading": "The next creative frontier.",
+      "description": "Our creative outlets bring together immersive scenes, voice, sculpting, video, branding and physical design. Each medium tells a different part of the same story.",
+      "camera": {
+        "position": [
+          169,
+          17,
+          31
+        ],
+        "target": [
+          154,
+          1,
+          -7
+        ]
+      }
+    },
+    {
+      "index": 8,
+      "id": "themes",
+      "heading": "Design that goes beyond the screen.",
+      "description": "From the geometry of an identity to a printed product, a storefront, a campaign and a memorable experience, a brand becomes a complete system.",
+      "camera": {
+        "position": [
+          185,
+          19,
+          35
+        ],
+        "target": [
+          172,
+          1,
+          -7
+        ]
+      }
+    },
+    {
+      "index": 9,
+      "id": "company",
+      "heading": "Imagination. Meet execution.",
+      "description": "PrimeTech is the engineering and creative practice within InnerAnimalMedia. We combine full software systems, CAD, brand and merchandise design, and interactive experiences in one connected studio.",
+      "camera": {
+        "position": [
+          106,
+          30,
+          39
+        ],
+        "target": [
+          104,
+          -1,
+          -4
+        ]
+      }
+    },
+    {
+      "index": 10,
+      "id": "contact",
+      "heading": "What should we build next?",
+      "description": "What do you want to make possible? From full-stack software and spatial design to brands, merchandise and creative worlds, we can connect the disciplines.",
+      "camera": {
+        "position": [
+          35,
+          30,
+          41
+        ],
+        "target": [
+          38,
+          -1,
+          -3
+        ]
+      }
+    }
+  ],
+  "nativeCircuit": {
+    "format": "iamscene",
+    "schemaUri": "https://schemas.inneranimalmedia.com/iamscene/v1/iamscene.schema.json",
+    "source": "src/original-circuit.js",
+    "runtime": "revise-circuit-runtime.mjs",
+    "document": "scenes/original-4341/original-4341.iamscene.json"
+  },
+  "footerModel": {
+    "format": "glb",
+    "path": "glb/inneranimalmediafooterglb.glb"
+  },
+  "files": [
+    {
+      "path": "glb/inneranimalmediafooterglb.glb",
+      "sha256": "94e79ee545bc349a21be601b6cc0cc4c9e8a77431484f9811c97a5cd29025d80",
+      "bytes": 118292
+    },
+    {
+      "path": "scenes/original-4341/original-4341.iamscene.json",
+      "sha256": "68d855395163a434f9cd36055787d33f32b3c993a6eb27c18c17e725fb7ef40f",
+      "bytes": 8726
+    },
+    {
+      "path": "scenes/original-4341/assets/battery-shell.gltf",
+      "sha256": "5f003f959d616d43103fcff5b5386c3aa599012adda37fa429e9a5024e11b1bf",
+      "bytes": 78231
+    },
+    {
+      "path": "scenes/original-4341/assets/lightning.gltf",
+      "sha256": "dfffced168ce19fc90cf7a4c5cf8a60eecaaa27c96da0bb017c375ba7f2151dc",
+      "bytes": 1504
+    },
+    {
+      "path": "scenes/original-4341/assets/circuit-traces.gltf",
+      "sha256": "a73db21960e5a57c942f1ba14d471dbe311a2ef33b60a7936f4f017daf116e2b",
+      "bytes": 620309
+    },
+    {
+      "path": "scenes/original-4341/assets/battery-core.gltf",
+      "sha256": "6176bb8d9941e2aca147aa8390c2ddc75b0ad9de8e49f465b6342c16695a4a9f",
+      "bytes": 78218
+    },
+    {
+      "path": "companions/geaux/avatars/geaux-portrait-256.png",
+      "sha256": "e9d95075230f2896b39ca3f34c09b3f0824c42033ec2b83aeacf8dc08eec5057",
+      "bytes": 22779
+    },
+    {
+      "path": "companions/meaux/avatars/meaux-portrait-256.png",
+      "sha256": "923080d789f4ee8faa4b783ea3a51c4ae24c0f7f2a1eb36f39b5153a01c86935",
+      "bytes": 20646
+    },
+    {
+      "path": "editorial/agentsam-studio.png",
+      "sha256": "0c3f1dc76292379e4dbdbe3958be204c2bfca060a6e27fa1f2a57380d8f76842",
+      "bytes": 68160
+    },
+    {
+      "path": "editorial/native-bim.jpg",
+      "sha256": "5471a7a43c3db44ce3a976c5963ea01ed48af59b8433153d0146efb09bccde8e",
+      "bytes": 177198
+    },
+    {
+      "path": "editorial/resolve.png",
+      "sha256": "9abf4ca3d532014bc3997b7616a38d0b08f15ac32e7a8a66a98ea39533dc958a",
+      "bytes": 135566
+    },
+    {
+      "path": "editorial/moviemode.jpg",
+      "sha256": "737be867502f64a42717e81132e72b99212b0627a29bea4223a1a2a41efe32fa",
+      "bytes": 101993
+    },
+    {
+      "path": "revise-world-runtime.mjs",
+      "sha256": "ac09903ab5eb85043d13b232d6eedb3fed08a6f83fe0bee4be3101e5e0aaeece",
+      "bytes": 568210
+    },
+    {
+      "path": "revise-circuit-runtime.mjs",
+      "sha256": "74e1339cc99629e89ccfccbb53633b2db70e1c64ce201bdfd4612a7369e9e27e",
+      "bytes": 995750
+    },
+    {
+      "path": "revise-footer-runtime.mjs",
+      "sha256": "a12eda18e4aa4746157ec7b178cf61acb881252cecab5cbe26df0ebdf8de175c",
+      "bytes": 622758
+    }
+  ]
+}

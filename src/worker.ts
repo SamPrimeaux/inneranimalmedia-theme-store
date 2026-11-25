@@ -1,4 +1,5 @@
-import { findTheme, publicTheme, themes } from './catalog';
+import { publicTheme, packageDescriptors } from './catalog';
+import { loadThemeCatalog } from './db-catalog.mjs';
 import siteDefaults from './site.default.json';
 import { normalizePreviewHtml, normalizePreviewManifest } from './preview-html.mjs';
 import { previewFileHeaders, withPublicAssetCors } from './preview-headers.mjs';
@@ -31,6 +32,7 @@ const strictSlug = /^[a-z0-9-]+$/;
 
 // A theme is previewable only when its versioned preview is actually in R2.
 async function resolvePreview(env: Env, origin: string, theme: { slug: string; version: string }): Promise<string | null> {
+  if (!theme.version) return null;
   // IAPJ's public preview is bundled from the canonical Theme Store package.
   // Customer CMS installation remains separately gated by the R2 install index.
   if ('previewAlias' in theme && typeof theme.previewAlias === 'string')
@@ -44,7 +46,7 @@ async function resolvePreview(env: Env, origin: string, theme: { slug: string; v
 const strictVersion = /^[0-9]+\.[0-9]+\.[0-9]+(?:-[a-zA-Z0-9.-]+)?$/;
 const digest = /^[0-9a-f]{64}$/;
 
-async function loadInstallIndex(env: Env) {
+async function loadInstallIndex(env: Env, themes: typeof packageDescriptors) {
   // Preserve all previously published themes from the shared legacy index.
   // Immutable, package-versioned release descriptors complement it, so a
   // newly published theme is installable without mutating an old R2 object.
@@ -68,7 +70,7 @@ async function loadInstallIndex(env: Env) {
   }));
   return [...existing,...discovered.flat()];
 }
-function publicInstallableTheme(theme: (typeof themes)[number], previewUrl: string | null, installed: Awaited<ReturnType<typeof loadInstallIndex>>) {
+function publicInstallableTheme(theme: (typeof packageDescriptors)[number], previewUrl: string | null, installed: Awaited<ReturnType<typeof loadInstallIndex>>) {
   const product = publicTheme(theme, previewUrl);
   product.downloadReady = hasEditableInstallProject(theme, installed);
   return product;
@@ -195,16 +197,28 @@ export default {
         const asset=await env.THEME_PACKAGES.get(key);
         if(!asset)return missing('media_not_found');
         const contentType=extension==='svg'?'image/svg+xml':extension==='webp'?'image/webp':extension==='png'?'image/png':'image/jpeg';
-        return new Response(method==='HEAD'?null:asset.body,{status:200,headers:{
+        return withPublicAssetCors(new Response(method==='HEAD'?null:asset.body,{status:200,headers:{
           'content-type':contentType,'cache-control':'public, max-age=31536000, immutable',
-          'x-content-type-options':'nosniff','cross-origin-resource-policy':'same-site',
+          'x-content-type-options':'nosniff',
           ...(extension==='svg'?{'content-security-policy':'sandbox'}:{})
-        }});
+        }}));
       }catch{return missing('media_unavailable',503);}
     }
+    // Load only for theme commerce and artifact routes. Other CMS/asset routes
+    // retain their existing independent publication contracts.
+    const needsCatalog = url.pathname === '/api/catalog' || url.pathname === '/api/install-index' ||
+      url.pathname.startsWith('/api/themes/') || url.pathname.startsWith('/theme-packages/') ||
+      (url.pathname.startsWith('/themes/') && url.pathname.includes('/presets/'));
+    let catalog: Awaited<ReturnType<typeof loadThemeCatalog>> = {themes:[],releases:[]};
+    if (needsCatalog) {
+      try { catalog = await loadThemeCatalog(env.DB, packageDescriptors); }
+      catch { return missing('theme_catalog_unavailable',503); }
+    }
+    const themes = catalog.themes;
+    const findTheme = (slug:string) => themes.find(theme=>theme.slug===slug);
     if (url.pathname === '/api/catalog') {
       if (method !== 'GET') return missing('method_not_allowed', 405);
-      const installed = await loadInstallIndex(env);
+      const installed = await loadInstallIndex(env, themes);
       const products = await Promise.all(themes.map(async theme => {
         const product = publicInstallableTheme(theme, await resolvePreview(env, url.origin, theme), installed);
         product.installUrl = product.downloadReady ? themeInstallerUrl(theme.sku, theme.version) : null;
@@ -221,17 +235,10 @@ export default {
             const approved=new Map<string,any>(catalog.items.filter((x:any)=>typeof x.slug==='string').map((x:any)=>[x.slug,x]));
             const safe=(url:any)=>typeof url==='string'&&url.startsWith('https://themes.inneranimalmedia.com/site-media/')?url:null;
             for(const product of products){
-              // IAPJ is maintained here, not in the old beige CMS catalog
-              // snapshot. All other products retain the published CMS view.
-              if (product.slug === 'plain-jane') continue;
               const item=approved.get(product.slug);
               if(!item)continue;
-              const cover=safe(item.cover_url);
-              product.cardImage=cover||product.cardImage;
               product.iconUrl=safe(item.icon_url);
               product.galleryUrls=Array.isArray(item.gallery)?item.gallery.slice(0,12).filter((x:any)=>safe(x.url)).map((x:any)=>({url:safe(x.url),alt:typeof x.alt==='string'?x.alt.slice(0,250):product.name})):[];
-              if(typeof item.name==='string'&&item.name.length<150)product.name=item.name;
-              if(typeof item.summary==='string'&&item.summary.length<1000&&item.summary)product.summary=item.summary;
             }
           }
         }
@@ -240,7 +247,7 @@ export default {
     }
     if (url.pathname === '/api/install-index') {
       if (method !== 'GET') return missing('method_not_allowed', 405);
-      const packages = await loadInstallIndex(env);
+      const packages = await loadInstallIndex(env, themes);
       return response({ ok:true, schema:'agentsam.website-theme-install-index.v1', packages: packages ?? [] }, 200, 'no-store');
     }
     // Editable source projects are public immutable *starter* packages. Private
@@ -249,8 +256,9 @@ export default {
     if (installProject) {
       if (method !== 'GET' && method !== 'HEAD') return missing('method_not_allowed',405);
       const [,slug,version] = installProject;
-      const installed = (await loadInstallIndex(env) ?? []).find(item=>item.slug===slug && item.version===version);
+      const installed = (await loadInstallIndex(env, themes) ?? []).find(item=>item.slug===slug && item.version===version);
       if (!installed) return missing('installer_not_published');
+      if (findTheme(slug)?.priceUsd !== 0) return missing('release_requires_entitlement',403);
       try {
         const project = await env.THEME_PACKAGES.get(installed.project_key);
         if (!project?.body || project.size > 8 * 1024 * 1024) return missing('installer_artifact_missing',503);
@@ -273,7 +281,7 @@ export default {
       const [, slug, version, relative] = demo;
       const theme = findTheme(slug);
       let approvedArchived = false;
-      if (theme && version !== theme.version) {
+      if (theme && version !== theme.version && catalog.releases.some(r=>r.slug===slug&&r.version===version)) {
         try { approvedArchived = !!(await env.THEME_PACKAGES.head('theme-packages/' + slug + '/' + version + '/preview/preview-files.json')); }
         catch { approvedArchived = false; }
       }
@@ -341,7 +349,7 @@ export default {
       if (!strictSlug.test(slug)) return missing('invalid_theme');
       const theme = findTheme(slug);
       if (!theme) return missing('theme_not_found');
-      if (!version || !operation) return response({ ok: true, product: publicInstallableTheme(theme, await resolvePreview(env, url.origin, theme), await loadInstallIndex(env)) });
+      if (!version || !operation) return response({ ok: true, product: publicInstallableTheme(theme, await resolvePreview(env, url.origin, theme), await loadInstallIndex(env, themes)) });
       if (!strictVersion.test(version) || version !== theme.version) return missing('release_not_found');
       if (
         theme.release.status !== 'published' ||

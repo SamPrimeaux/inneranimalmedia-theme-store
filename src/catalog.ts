@@ -3,9 +3,9 @@ import generated from './catalog.generated.json';
 /**
  * The catalog is GENERATED from `packages/*\/package.json#agentsam.store` by
  * `scripts/build-catalog.mjs`. Do not add themes here; add a package.
- * The catalog is a product listing, NOT a tenant, site, installation or CMS registry.
+ * This build inventory supplies package-specific technical descriptors only. Public commerce membership and release approval come from D1.
  */
-export type ThemeCategory = 'Commerce' | 'Nonprofit' | 'Editorial' | 'Services' | 'Portfolio';
+export type ThemeCategory = 'Commerce' | 'Nonprofit' | 'Editorial' | 'Services' | 'Portfolio' | 'Uncategorized';
 export type ReleaseState = 'preview' | 'published';
 export type ThemeRecord = {
   slug: string; sku: string; name: string; summary: string;
@@ -26,9 +26,8 @@ export type ThemeRecord = {
 };
 
 type SourceRecord = Omit<ThemeRecord, 'previewUrl'>;
-export const themes: SourceRecord[] = (generated as { themes: SourceRecord[] }).themes;
+export const packageDescriptors: SourceRecord[] = (generated as { themes: SourceRecord[] }).themes;
 
-export function findTheme(slug: string) { return themes.find(theme => theme.slug === slug); }
 export function publicTheme(theme: SourceRecord, previewUrl: string | null): ThemeRecord {
   return {
     ...theme,

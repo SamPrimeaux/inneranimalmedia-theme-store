@@ -30,6 +30,9 @@ export function withPublicAssetCors(response) {
   if (!response.ok || /^text\/html(?:;|$)/i.test(contentType)) return response;
   const headers = new Headers(response.headers);
   headers.set('access-control-allow-origin', '*');
+  // These immutable public assets are consumed by hosted subdomains and
+  // desktop WebViews whose app:// / tauri:// origins are necessarily cross-site.
+  headers.set('cross-origin-resource-policy', 'cross-origin');
   return new Response(response.body, {
     status: response.status,
     statusText: response.statusText,

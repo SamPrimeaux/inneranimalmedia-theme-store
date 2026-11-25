@@ -1,5 +1,5 @@
 // Public commerce membership and release approval come from D1, not the build inventory.
-// registry_id is the pre-consolidation compatibility link; no legacy table is queried.
+// legacy_product_id is the pre-consolidation compatibility link; no legacy table is queried.
 const SLUG=/^[a-z][a-z0-9-]{0,63}$/;
 const VERSION=/^\d+\.\d+\.\d+(?:-[A-Za-z0-9.-]+)?$/;
 const HASH=/^[a-f0-9]{64}$/;
@@ -10,7 +10,7 @@ export async function loadThemeCatalog(db, packageDescriptors=[]) {
       r.id AS release_id,r.sku,r.version,r.r2_key,r.sha256,r.compatible_schema_version
     FROM products p JOIN cms_sites s ON s.id=p.site_id
     LEFT JOIN agentsam_product_releases r ON r.product_slug=p.slug
-      AND (r.product_id=CAST(p.id AS TEXT) OR r.product_id=p.registry_id)
+      AND (r.product_id=CAST(p.id AS TEXT) OR r.product_id=p.legacy_product_id)
       AND r.artifact_kind='theme_zip' AND r.channel='release'
       AND r.release_status='published' AND r.review_status='approved' AND r.r2_bucket='theme-store'
     WHERE s.id=? AND s.status='active' AND p.status='active' AND p.product_kind='theme'

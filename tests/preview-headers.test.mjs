@@ -25,6 +25,7 @@ test('the public IAPJ alias grants CORS to static assets for embedded CMS previe
     headers: { 'content-type': 'text/css', 'cache-control': 'public, max-age=0' },
   }));
   assert.equal(asset.headers.get('access-control-allow-origin'), '*');
+  assert.equal(asset.headers.get('cross-origin-resource-policy'), 'cross-origin');
   assert.equal(asset.headers.get('content-type'), 'text/css');
   assert.equal(await asset.text(), 'body{color:white}');
 

@@ -7,7 +7,7 @@ function fixture(){
  const sql=new DatabaseSync(':memory:');
  sql.exec(`
  CREATE TABLE cms_sites(id TEXT,status TEXT);
- CREATE TABLE products(id INTEGER,slug TEXT,title TEXT,description TEXT,image_url TEXT,price_cents INTEGER,site_id TEXT,status TEXT,product_kind TEXT,registry_id TEXT);
+ CREATE TABLE products(id INTEGER,slug TEXT,title TEXT,description TEXT,image_url TEXT,price_cents INTEGER,site_id TEXT,status TEXT,product_kind TEXT,legacy_product_id TEXT);
  CREATE TABLE agentsam_product_releases(id TEXT,product_id TEXT,product_slug TEXT,sku TEXT,version TEXT,r2_key TEXT,sha256 TEXT,compatible_schema_version TEXT,artifact_kind TEXT,channel TEXT,release_status TEXT,review_status TEXT,r2_bucket TEXT,published_at_unix INTEGER,created_at_unix INTEGER);
  INSERT INTO cms_sites VALUES('theme-store','active'),('app-store','active');
  INSERT INTO products VALUES(1,'alpha','Database name','Database copy','/alpha.webp',100,'theme-store','active','theme','old-alpha'),
